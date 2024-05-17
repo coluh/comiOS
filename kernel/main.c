@@ -1,5 +1,5 @@
 
-__attribute__ ((aligned (16))) char stack0[4096];
+extern void debug_println(char *string);
 
 void main() {
 	debug_println("Welcome to this os!");

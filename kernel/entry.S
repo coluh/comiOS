@@ -1,4 +1,4 @@
-#include "memlayout.h"
+#include "basic_memlayout.h"
 
 .section .text
 .global _entry
@@ -18,7 +18,7 @@ debug_println:
 loop:
 	lbu t1, 0(a0)
 	beqz t1, end
-	sb t1, t0
+	sb t1, 0(t0)
 	addi a0, a0, 1
 	j loop
 end:

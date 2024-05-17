@@ -1,13 +1,13 @@
 /*
  * Copied from xv6
  * */
-#include "types.h"
-#include "param.h"
-#include "memlayout.h"
-#include "riscv.h"
-#include "defs.h"
+#include "basic_types.h"
+#include "basic_memlayout.h"
+#include "basic_riscv.h"
 
-void main();
+#define NCPU 1
+
+extern void main();
 void timerinit();
 
 // entry.S needs one stack per CPU.
@@ -17,7 +17,8 @@ __attribute__ ((aligned (16))) char stack0[4096 * NCPU];
 uint64 timer_scratch[NCPU][5];
 
 // assembly code in kernelvec.S for machine-mode timer interrupt.
-extern void timervec();
+/* extern void timervec(); */
+void timervec() {}
 
 // entry.S jumps here in machine mode on stack0.
 void
