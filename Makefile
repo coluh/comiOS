@@ -33,6 +33,6 @@ qemu-gdb:$K/kernel
 	$(QEMU) $(QEMU_FLAG) -kernel $K/kernel -s -S
 
 clean:
-	rm -f */*.d */*.o
+	rm -f */*.d */*.o */*.asm
 	rm -f kernel/kernel
 
