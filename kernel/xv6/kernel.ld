@@ -1,6 +1,3 @@
-/*
- * Copied from xv6
- * */
 OUTPUT_ARCH( "riscv" )
 ENTRY( _entry )
 
