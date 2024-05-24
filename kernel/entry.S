@@ -12,8 +12,7 @@ _entry:
 .global debug_print_char
 debug_print_char:
 	li t0, UART0
-	lbu t1, 0(a0)
-	sb t1, 0(t0)
+	sb a0, 0(t0)
 	ret
 
 # void debug_print(char *s);

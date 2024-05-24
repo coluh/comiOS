@@ -36,7 +36,7 @@ int debug_printf(char *fmt, ...) {
 			panic("printf: %x not support");
 			break;
 		case 's':
-			debug_print(va_arg(args, char*))
+			debug_print(va_arg(args, char*));
 			break;
 		case 'p':
 			panic("printf: %p not support");
@@ -55,7 +55,8 @@ int debug_printf(char *fmt, ...) {
 		}
 	}
 
-	va_end(args)
+	va_end(args);
+	return 0;
 }
 
 void panic(char *s) {

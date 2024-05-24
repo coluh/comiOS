@@ -36,9 +36,12 @@ QEMU_FLAG = -machine virt -bios none -smp 1 -m 128M -nographic
 qemu:	$(OBJ_DIR)/kernel
 	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel
 
-qemu-gdb:$(OBJ_DIR)/kernel
-	echo "run gdb..."
-	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel -s -S
+GDBPORT = 23333
+GDBOPTS = -S -gdb tcp::$(GDBPORT)
+
+qemu-gdb: $(OBJ_DIR)/kernel .gdbinit
+	@echo "run gdb-multiarch in this direntory..."
+	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel $(GDBOPTS)
 
 clean:
 	rm -f $(OBJ_DIR)/*

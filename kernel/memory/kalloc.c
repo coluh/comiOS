@@ -1,7 +1,5 @@
-#include "basic_memlayout.h"
-#include "basic_riscv.h"
-#include "basic_types.h"
-#include "util.h"
+#include "basic.h"
+#include "defs.h"
 
 // end of the kernel program memory
 extern char end[];
@@ -24,10 +22,10 @@ void *kalloc(void) {
 }
 
 void kfree(void *p_addr) {
-	if (((uint64)p_addr % PGSIZE) == 0) {
+	if (((uint64)p_addr % PGSIZE) != 0) {
 		panic("kfree: p_addr not aligned");
 	}
-	if((char *)pa < end || (uint64)pa >= PHYSTOP) {
+	if((char *)p_addr < end || (uint64)p_addr >= PHYSTOP) {
 		panic("kfree: p_addr out of range");
 	}
 	struct memory_unit *p = (struct memory_unit *)p_addr;
@@ -38,7 +36,7 @@ void kfree(void *p_addr) {
 void init_kernel_memory() {
 	// end ~ PHYSTOP
 	char *p = (char *)PGROUNDUP((uint64)end);
-	while (p <= PHYSTOP) {
+	while ((uint64)p < PHYSTOP) {
 		kfree(p);
 		p += PGSIZE;
 	}
