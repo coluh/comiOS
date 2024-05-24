@@ -15,7 +15,7 @@ struct {
 void *kalloc(void) {
 	struct memory_unit *p = (struct memory_unit *)free_memory.list;
 	if (p == NULL) {
-		panic("kernel memory used up");
+		panic("kalloc: kernel memory used up");
 	}
 	free_memory.list = free_memory.list->next;
 	return (void *)p;

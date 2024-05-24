@@ -27,7 +27,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(C_OBJ) $(S_OBJ))
 
 KERNEL_LD = $(shell find $K -name "kernel.ld")
 $(OBJ_DIR)/kernel: $(OBJS) $(KERNEL_LD)
-	$(LD) $(OBJ_DIR)/entry.o $(filter-out $(OBJ_DIR)/entry.o,$(OBJS)) -T $(KERNEL_LD) -o $(OBJ_DIR)/kernel
+	$(LD) $(OBJ_DIR)/_entry.o $(filter-out $(OBJ_DIR)/_entry.o,$(OBJS)) -T $(KERNEL_LD) -o $(OBJ_DIR)/kernel
 	@$(OBJDUMP) -S $@ > $(OBJ_DIR)/kernel.asm
 
 QEMU = qemu-system-riscv64

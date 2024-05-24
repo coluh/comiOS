@@ -67,3 +67,9 @@ void panic(char *s) {
 		;
 }
 
+void *memset(void *dst, char c, uint n) {
+	for(int i = 0; i < n; i++) {
+		((char *)dst)[i] = c;
+	}
+	return dst;
+}
