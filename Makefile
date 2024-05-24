@@ -16,13 +16,14 @@ LDFLAGS = -z max-page-size=4096
 
 C_SRC = $(shell find $K -name "*.c")
 S_SRC = $(shell find $K -name "*.S")
-C_OBJ = $(notdir $(patsubst %.c,%.o,$(C_SRC)))
-S_OBJ = $(notdir $(patsubst %.S,%.o,$(S_SRC)))
-OBJS = $(addprefix $(OBJ_DIR)/,$(C_OBJ) $(S_OBJ))
 
 $(OBJ_DIR)/%.o: $(C_SRC) $(S_SRC)
 	$(CC) $(CFLAGS) -c $(filter %$*.c %$*.S,$(C_SRC) $(S_SRC)) -o $@
 	@$(OBJDUMP) -S $@ > $(OBJ_DIR)/$*.asm
+
+C_OBJ = $(notdir $(patsubst %.c,%.o,$(C_SRC)))
+S_OBJ = $(notdir $(patsubst %.S,%.o,$(S_SRC)))
+OBJS = $(addprefix $(OBJ_DIR)/,$(C_OBJ) $(S_OBJ))
 
 KERNEL_LD = $(shell find $K -name "kernel.ld")
 $(OBJ_DIR)/kernel: $(OBJS) $(KERNEL_LD)
