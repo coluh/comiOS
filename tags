@@ -1,0 +1,411 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/coluh/coding/os/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+$(OBJ_DIR)/%.o	Makefile	/^$(OBJ_DIR)\/%.o: $(C_SRC) $(S_SRC)$/;"	t
+$(OBJ_DIR)/kernel	Makefile	/^$(OBJ_DIR)\/kernel: $(OBJS) $(KERNEL_LD)$/;"	t
+.bss	kernel/kernel.ld	/^  .bss : {$/;"	S
+.data	kernel/kernel.ld	/^  .data : {$/;"	S
+.rodata	kernel/kernel.ld	/^  .rodata : {$/;"	S
+.text	kernel/kernel.ld	/^  .text : {$/;"	S
+CC	Makefile	/^CC=riscv64-linux-gnu-gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2$/;"	m
+CLINT	kernel/include/basic_memlayout.h	/^#define CLINT /;"	d
+CLINT_MTIME	kernel/include/basic_memlayout.h	/^#define CLINT_MTIME /;"	d
+CLINT_MTIMECMP	kernel/include/basic_memlayout.h	/^#define CLINT_MTIMECMP(/;"	d
+C_OBJ	Makefile	/^C_OBJ = $(notdir $(patsubst %.c,%.o,$(C_SRC)))$/;"	m
+C_SRC	Makefile	/^C_SRC = $(shell find $K -name "*.c")$/;"	m
+Disassembly	obj/_entry.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kernel.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kerneltrap.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kernelvec.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kmemory.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kpagetable.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/main.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/plic.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/start.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/util.asm	/^Disassembly of section .text:$/;"	l
+GDBOPTS	Makefile	/^GDBOPTS = -S -gdb tcp::$(GDBPORT)$/;"	m
+GDBPORT	Makefile	/^GDBPORT = 23333$/;"	m
+K	Makefile	/^K=kernel$/;"	m
+KERNBASE	kernel/include/basic_memlayout.h	/^#define KERNBASE /;"	d
+KERNEL_LD	Makefile	/^KERNEL_LD = $(shell find $K -name "kernel.ld")$/;"	m
+KSTACK	kernel/include/basic_memlayout.h	/^#define KSTACK(/;"	d
+LD	Makefile	/^LD=riscv64-linux-gnu-ld$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = -z max-page-size=4096$/;"	m
+MAKE_SATP	kernel/include/basic_riscv.h	/^#define MAKE_SATP(/;"	d
+MAXVA	kernel/include/basic_riscv.h	/^#define MAXVA /;"	d
+MIE_MEIE	kernel/include/basic_riscv.h	/^#define MIE_MEIE /;"	d
+MIE_MSIE	kernel/include/basic_riscv.h	/^#define MIE_MSIE /;"	d
+MIE_MTIE	kernel/include/basic_riscv.h	/^#define MIE_MTIE /;"	d
+MSTATUS_MIE	kernel/include/basic_riscv.h	/^#define MSTATUS_MIE /;"	d
+MSTATUS_MPP_M	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_M /;"	d
+MSTATUS_MPP_MASK	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_MASK /;"	d
+MSTATUS_MPP_S	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_S /;"	d
+MSTATUS_MPP_U	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_U /;"	d
+NCPU	kernel/init/start.c	/^#define NCPU /;"	d	file:
+NULL	kernel/include/basic_types.h	/^#define NULL /;"	d
+OBJDUMP	Makefile	/^OBJDUMP=riscv64-linux-gnu-objdump$/;"	m
+OBJS	Makefile	/^OBJS = $(addprefix $(OBJ_DIR)\/,$(C_OBJ) $(S_OBJ))$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR = obj$/;"	m
+PA2PTE	kernel/include/basic_riscv.h	/^#define PA2PTE(/;"	d
+PGROUNDDOWN	kernel/include/basic_riscv.h	/^#define PGROUNDDOWN(/;"	d
+PGROUNDUP	kernel/include/basic_riscv.h	/^#define PGROUNDUP(/;"	d
+PGSHIFT	kernel/include/basic_riscv.h	/^#define PGSHIFT /;"	d
+PGSIZE	kernel/include/basic_riscv.h	/^#define PGSIZE /;"	d
+PHYSTOP	kernel/include/basic_memlayout.h	/^#define PHYSTOP /;"	d
+PLIC	kernel/include/basic_memlayout.h	/^#define PLIC /;"	d
+PLIC_MCLAIM	kernel/include/basic_memlayout.h	/^#define PLIC_MCLAIM(/;"	d
+PLIC_MENABLE	kernel/include/basic_memlayout.h	/^#define PLIC_MENABLE(/;"	d
+PLIC_MPRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_MPRIORITY(/;"	d
+PLIC_PENDING	kernel/include/basic_memlayout.h	/^#define PLIC_PENDING /;"	d
+PLIC_PRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_PRIORITY /;"	d
+PLIC_SCLAIM	kernel/include/basic_memlayout.h	/^#define PLIC_SCLAIM(/;"	d
+PLIC_SENABLE	kernel/include/basic_memlayout.h	/^#define PLIC_SENABLE(/;"	d
+PLIC_SPRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_SPRIORITY(/;"	d
+PTE2PA	kernel/include/basic_riscv.h	/^#define PTE2PA(/;"	d
+PTE_FLAGS	kernel/include/basic_riscv.h	/^#define PTE_FLAGS(/;"	d
+PTE_R	kernel/include/basic_riscv.h	/^#define PTE_R /;"	d
+PTE_U	kernel/include/basic_riscv.h	/^#define PTE_U /;"	d
+PTE_V	kernel/include/basic_riscv.h	/^#define PTE_V /;"	d
+PTE_W	kernel/include/basic_riscv.h	/^#define PTE_W /;"	d
+PTE_X	kernel/include/basic_riscv.h	/^#define PTE_X /;"	d
+PX	kernel/include/basic_riscv.h	/^#define PX(/;"	d
+PXMASK	kernel/include/basic_riscv.h	/^#define PXMASK /;"	d
+PXSHIFT	kernel/include/basic_riscv.h	/^#define PXSHIFT(/;"	d
+QEMU	Makefile	/^QEMU = qemu-system-riscv64$/;"	m
+QEMU_FLAG	Makefile	/^QEMU_FLAG = -machine virt -bios none -smp 1 -m 128M -nographic$/;"	m
+SATP_SV39	kernel/include/basic_riscv.h	/^#define SATP_SV39 /;"	d
+SIE_SEIE	kernel/include/basic_riscv.h	/^#define SIE_SEIE /;"	d
+SIE_SSIE	kernel/include/basic_riscv.h	/^#define SIE_SSIE /;"	d
+SIE_STIE	kernel/include/basic_riscv.h	/^#define SIE_STIE /;"	d
+SSTATUS_SIE	kernel/include/basic_riscv.h	/^#define SSTATUS_SIE /;"	d
+SSTATUS_SPIE	kernel/include/basic_riscv.h	/^#define SSTATUS_SPIE /;"	d
+SSTATUS_SPP	kernel/include/basic_riscv.h	/^#define SSTATUS_SPP /;"	d
+SSTATUS_UIE	kernel/include/basic_riscv.h	/^#define SSTATUS_UIE /;"	d
+SSTATUS_UPIE	kernel/include/basic_riscv.h	/^#define SSTATUS_UPIE /;"	d
+S_OBJ	Makefile	/^S_OBJ = $(notdir $(patsubst %.S,%.o,$(S_SRC)))$/;"	m
+S_SRC	Makefile	/^S_SRC = $(shell find $K -name "*.S")$/;"	m
+TRAMPOLINE	kernel/include/basic_memlayout.h	/^#define TRAMPOLINE /;"	d
+TRAPFRAME	kernel/include/basic_memlayout.h	/^#define TRAPFRAME /;"	d
+UART0	kernel/include/basic_memlayout.h	/^#define UART0 /;"	d
+UART0_IRQ	kernel/include/basic_memlayout.h	/^#define UART0_IRQ /;"	d
+VIRTIO0	kernel/include/basic_memlayout.h	/^#define VIRTIO0 /;"	d
+VIRTIO0_IRQ	kernel/include/basic_memlayout.h	/^#define VIRTIO0_IRQ /;"	d
+__TYPES_H__	kernel/include/basic_types.h	/^#define __TYPES_H__$/;"	d
+__anon9e7096f20108	kernel/memory/kmemory.c	/^struct {$/;"	s	file:
+_entry	kernel/init/_entry.S	/^_entry:$/;"	l
+_entry	obj/_entry.asm	/^_entry:$/;"	l
+_entry	obj/kernel.asm	/^_entry:$/;"	l
+_trampoline	kernel/kernel.ld	/^    _trampoline = .;$/;"	s	section:.text
+a	obj/_entry.asm	/^   a:	912a                	add	sp,sp,a0$/;"	l
+a	obj/kerneltrap.asm	/^   a:	00078793          	mv	a5,a5$/;"	l
+a	obj/kernelvec.asm	/^   a:	ec12                	sd	tp,24(sp)$/;"	l
+a	obj/kmemory.asm	/^   a:	00000497          	auipc	s1,0x0$/;"	l
+a	obj/kpagetable.asm	/^   a:	ec4e                	sd	s3,24(sp)$/;"	l
+a	obj/plic.asm	/^   a:	4705                	li	a4,1$/;"	l
+a	obj/start.asm	/^   a:	8082                	ret$/;"	l
+a	obj/util.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a0	obj/kmemory.asm	/^  a0:	000080e7          	jalr	ra # 9c <.L10+0x8>$/;"	l
+a0	obj/kpagetable.asm	/^  a0:	6121                	add	sp,sp,64$/;"	l
+a0	obj/start.asm	/^  a0:	00259693          	sll	a3,a1,0x2$/;"	l
+a0	obj/util.asm	/^  a0:	a001                	j	a0 <.L9>$/;"	l
+a2	obj/kpagetable.asm	/^  a2:	8082                	ret$/;"	l
+a2	obj/util.asm	/^  a2:	7175                	add	sp,sp,-144$/;"	l
+a4	obj/kmemory.asm	/^  a4:	bf4d                	j	56 <.L6>$/;"	l
+a4	obj/kpagetable.asm	/^  a4:	4501                	li	a0,0$/;"	l
+a4	obj/start.asm	/^  a4:	96ae                	add	a3,a3,a1$/;"	l
+a4	obj/util.asm	/^  a4:	e486                	sd	ra,72(sp)$/;"	l
+a6	obj/kmemory.asm	/^  a6:	7179                	add	sp,sp,-48$/;"	l
+a6	obj/kpagetable.asm	/^  a6:	b7ed                	j	90 <.L1>$/;"	l
+a6	obj/start.asm	/^  a6:	068e                	sll	a3,a3,0x3$/;"	l
+a6	obj/util.asm	/^  a6:	e0a2                	sd	s0,64(sp)$/;"	l
+a8	obj/kmemory.asm	/^  a8:	f406                	sd	ra,40(sp)$/;"	l
+a8	obj/kpagetable.asm	/^  a8:	711d                	add	sp,sp,-96$/;"	l
+a8	obj/start.asm	/^  a8:	00000717          	auipc	a4,0x0$/;"	l
+a8	obj/util.asm	/^  a8:	fc26                	sd	s1,56(sp)$/;"	l
+aa	obj/kmemory.asm	/^  aa:	f022                	sd	s0,32(sp)$/;"	l
+aa	obj/kpagetable.asm	/^  aa:	ec86                	sd	ra,88(sp)$/;"	l
+aa	obj/util.asm	/^  aa:	f84a                	sd	s2,48(sp)$/;"	l
+ac	obj/kmemory.asm	/^  ac:	ec26                	sd	s1,24(sp)$/;"	l
+ac	obj/kpagetable.asm	/^  ac:	e8a2                	sd	s0,80(sp)$/;"	l
+ac	obj/start.asm	/^  ac:	00070713          	mv	a4,a4$/;"	l
+ac	obj/util.asm	/^  ac:	f44e                	sd	s3,40(sp)$/;"	l
+ae	obj/kmemory.asm	/^  ae:	e84a                	sd	s2,16(sp)$/;"	l
+ae	obj/kpagetable.asm	/^  ae:	e4a6                	sd	s1,72(sp)$/;"	l
+ae	obj/util.asm	/^  ae:	f052                	sd	s4,32(sp)$/;"	l
+b0	obj/kmemory.asm	/^  b0:	e44e                	sd	s3,8(sp)$/;"	l
+b0	obj/kpagetable.asm	/^  b0:	e0ca                	sd	s2,64(sp)$/;"	l
+b0	obj/start.asm	/^  b0:	9736                	add	a4,a4,a3$/;"	l
+b0	obj/util.asm	/^  b0:	ec56                	sd	s5,24(sp)$/;"	l
+b2	obj/kmemory.asm	/^  b2:	1800                	add	s0,sp,48$/;"	l
+b2	obj/kpagetable.asm	/^  b2:	fc4e                	sd	s3,56(sp)$/;"	l
+b2	obj/start.asm	/^  b2:	ef1c                	sd	a5,24(a4)$/;"	l
+b2	obj/util.asm	/^  b2:	0880                	add	s0,sp,80$/;"	l
+b4	obj/kmemory.asm	/^  b4:	00000497          	auipc	s1,0x0$/;"	l
+b4	obj/kpagetable.asm	/^  b4:	f852                	sd	s4,48(sp)$/;"	l
+b4	obj/start.asm	/^  b4:	f310                	sd	a2,32(a4)$/;"	l
+b4	obj/util.asm	/^  b4:	892a                	mv	s2,a0$/;"	l
+b6	obj/kpagetable.asm	/^  b6:	f456                	sd	s5,40(sp)$/;"	l
+b6	obj/start.asm	/^  b6:	34071073          	csrw	mscratch,a4$/;"	l
+b6	obj/util.asm	/^  b6:	e40c                	sd	a1,8(s0)$/;"	l
+b8	obj/kmemory.asm	/^  b8:	00048493          	mv	s1,s1$/;"	l
+b8	obj/kpagetable.asm	/^  b8:	f05a                	sd	s6,32(sp)$/;"	l
+b8	obj/util.asm	/^  b8:	e810                	sd	a2,16(s0)$/;"	l
+ba	obj/kpagetable.asm	/^  ba:	ec5e                	sd	s7,24(sp)$/;"	l
+ba	obj/start.asm	/^  ba:	00000797          	auipc	a5,0x0$/;"	l
+ba	obj/util.asm	/^  ba:	ec14                	sd	a3,24(s0)$/;"	l
+bc	obj/kmemory.asm	/^  bc:	77fd                	lui	a5,0xfffff$/;"	l
+bc	obj/kpagetable.asm	/^  bc:	e862                	sd	s8,16(sp)$/;"	l
+bc	obj/util.asm	/^  bc:	f018                	sd	a4,32(s0)$/;"	l
+be	obj/kmemory.asm	/^  be:	8cfd                	and	s1,s1,a5$/;"	l
+be	obj/kpagetable.asm	/^  be:	e466                	sd	s9,8(sp)$/;"	l
+be	obj/start.asm	/^  be:	00078793          	mv	a5,a5$/;"	l
+be	obj/util.asm	/^  be:	f41c                	sd	a5,40(s0)$/;"	l
+c	obj/_entry.asm	/^   c:	00000097          	auipc	ra,0x0$/;"	l
+c	obj/kernelvec.asm	/^   c:	f016                	sd	t0,32(sp)$/;"	l
+c	obj/kpagetable.asm	/^   c:	e852                	sd	s4,16(sp)$/;"	l
+c	obj/main.asm	/^   c:	000080e7          	jalr	ra # 8 <.LCFI1>$/;"	l
+c	obj/plic.asm	/^   c:	d798                	sw	a4,40(a5)$/;"	l
+c	obj/start.asm	/^   c:	1141                	add	sp,sp,-16$/;"	l
+c	obj/util.asm	/^   c:	84aa                	mv	s1,a0$/;"	l
+c0	obj/kmemory.asm	/^  c0:	47c5                	li	a5,17$/;"	l
+c0	obj/kpagetable.asm	/^  c0:	1080                	add	s0,sp,96$/;"	l
+c0	obj/util.asm	/^  c0:	03043823          	sd	a6,48(s0)$/;"	l
+c2	obj/kmemory.asm	/^  c2:	07ee                	sll	a5,a5,0x1b$/;"	l
+c2	obj/kpagetable.asm	/^  c2:	8b2a                	mv	s6,a0$/;"	l
+c2	obj/start.asm	/^  c2:	30579073          	csrw	mtvec,a5$/;"	l
+c4	obj/kmemory.asm	/^  c4:	00f4fc63          	bgeu	s1,a5,dc <.L11>$/;"	l
+c4	obj/kpagetable.asm	/^  c4:	8a2e                	mv	s4,a1$/;"	l
+c4	obj/util.asm	/^  c4:	03143c23          	sd	a7,56(s0)$/;"	l
+c6	obj/kpagetable.asm	/^  c6:	8ab2                	mv	s5,a2$/;"	l
+c6	obj/start.asm	/^  c6:	300027f3          	csrr	a5,mstatus$/;"	l
+c8	obj/kmemory.asm	/^  c8:	6985                	lui	s3,0x1$/;"	l
+c8	obj/kpagetable.asm	/^  c8:	84b6                	mv	s1,a3$/;"	l
+c8	obj/util.asm	/^  c8:	00840793          	add	a5,s0,8$/;"	l
+ca	obj/kmemory.asm	/^  ca:	893e                	mv	s2,a5$/;"	l
+ca	obj/kpagetable.asm	/^  ca:	8bba                	mv	s7,a4$/;"	l
+ca	obj/start.asm	/^  ca:	0087e793          	or	a5,a5,8$/;"	l
+cc	obj/kmemory.asm	/^  cc:	8526                	mv	a0,s1$/;"	l
+cc	obj/kpagetable.asm	/^  cc:	c68d                	beqz	a3,f6 <.L19>$/;"	l
+cc	obj/util.asm	/^  cc:	faf43c23          	sd	a5,-72(s0)$/;"	l
+ce	obj/kmemory.asm	/^  ce:	00000097          	auipc	ra,0x0$/;"	l
+ce	obj/kpagetable.asm	/^  ce:	77fd                	lui	a5,0xfffff$/;"	l
+ce	obj/start.asm	/^  ce:	30079073          	csrw	mstatus,a5$/;"	l
+clean	Makefile	/^clean:$/;"	t
+cpuid	kernel/util.c	/^int cpuid() {$/;"	f	typeref:typename:int
+d0	obj/kpagetable.asm	/^  d0:	00fa7733          	and	a4,s4,a5$/;"	l
+d0	obj/util.asm	/^  d0:	00054503          	lbu	a0,0(a0) # 90 <.LVL14>$/;"	l
+d2	obj/kmemory.asm	/^  d2:	000080e7          	jalr	ra # ce <.L13+0x2>$/;"	l
+d2	obj/start.asm	/^  d2:	304027f3          	csrr	a5,mie$/;"	l
+d4	obj/kpagetable.asm	/^  d4:	00fafab3          	and	s5,s5,a5$/;"	l
+d4	obj/util.asm	/^  d4:	10050363          	beqz	a0,1da <.L12>$/;"	l
+d6	obj/kmemory.asm	/^  d6:	94ce                	add	s1,s1,s3$/;"	l
+d6	obj/start.asm	/^  d6:	0807e793          	or	a5,a5,128$/;"	l
+d8	obj/kmemory.asm	/^  d8:	ff24eae3          	bltu	s1,s2,cc <.L13>$/;"	l
+d8	obj/kpagetable.asm	/^  d8:	1a7d                	add	s4,s4,-1$/;"	l
+d8	obj/util.asm	/^  d8:	02500993          	li	s3,37$/;"	l
+da	obj/kpagetable.asm	/^  da:	9a26                	add	s4,s4,s1$/;"	l
+da	obj/start.asm	/^  da:	30479073          	csrw	mie,a5$/;"	l
+dc	obj/kmemory.asm	/^  dc:	70a2                	ld	ra,40(sp)$/;"	l
+dc	obj/kpagetable.asm	/^  dc:	00fa7a33          	and	s4,s4,a5$/;"	l
+dc	obj/util.asm	/^  dc:	4a51                	li	s4,20$/;"	l
+de	obj/kmemory.asm	/^  de:	7402                	ld	s0,32(sp)$/;"	l
+de	obj/start.asm	/^  de:	6422                	ld	s0,8(sp)$/;"	l
+de	obj/util.asm	/^  de:	00000a97          	auipc	s5,0x0$/;"	l
+debug_print	kernel/init/_entry.S	/^debug_print:$/;"	l
+debug_print	obj/_entry.asm	/^debug_print:$/;"	l
+debug_print	obj/kernel.asm	/^debug_print:$/;"	l
+debug_print_char	kernel/init/_entry.S	/^debug_print_char:$/;"	l
+debug_print_char	obj/_entry.asm	/^debug_print_char:$/;"	l
+debug_print_char	obj/kernel.asm	/^debug_print_char:$/;"	l
+debug_print_int	kernel/util.c	/^void debug_print_int(int d) {$/;"	f	typeref:typename:void
+debug_printf	kernel/util.c	/^int debug_printf(char *fmt, ...) {$/;"	f	typeref:typename:int
+debug_println	kernel/util.c	/^void debug_println(char *s) {$/;"	f	typeref:typename:void
+dpf1	kernel/defs.h	/^#define dpf1(/;"	d
+dpln	kernel/defs.h	/^#define dpln(/;"	d
+e	obj/kerneltrap.asm	/^   e:	10579073          	csrw	stvec,a5$/;"	l
+e	obj/kernelvec.asm	/^   e:	f41a                	sd	t1,40(sp)$/;"	l
+e	obj/kmemory.asm	/^   e:	0004b483          	ld	s1,0(s1) # a <.LCFI1>$/;"	l
+e	obj/kpagetable.asm	/^   e:	e456                	sd	s5,8(sp)$/;"	l
+e	obj/plic.asm	/^   e:	c3d8                	sw	a4,4(a5)$/;"	l
+e	obj/start.asm	/^   e:	e422                	sd	s0,8(sp)$/;"	l
+e	obj/util.asm	/^   e:	02054c63          	bltz	a0,46 <.L6>$/;"	l
+e0	obj/kmemory.asm	/^  e0:	64e2                	ld	s1,24(sp)$/;"	l
+e0	obj/kpagetable.asm	/^  e0:	06ea6263          	bltu	s4,a4,144 <.L14>$/;"	l
+e0	obj/start.asm	/^  e0:	0141                	add	sp,sp,16$/;"	l
+e2	obj/kmemory.asm	/^  e2:	6942                	ld	s2,16(sp)$/;"	l
+e2	obj/start.asm	/^  e2:	8082                	ret$/;"	l
+e2	obj/util.asm	/^  e2:	000a8a93          	mv	s5,s5$/;"	l
+e4	obj/kmemory.asm	/^  e4:	69a2                	ld	s3,8(sp)$/;"	l
+e4	obj/kpagetable.asm	/^  e4:	893a                	mv	s2,a4$/;"	l
+e6	obj/kmemory.asm	/^  e6:	6145                	add	sp,sp,48$/;"	l
+e6	obj/kpagetable.asm	/^  e6:	40ea8ab3          	sub	s5,s5,a4$/;"	l
+e6	obj/util.asm	/^  e6:	a819                	j	fc <.L24>$/;"	l
+e8	obj/kmemory.asm	/^  e8:	8082                	ret$/;"	l
+e8	obj/util.asm	/^  e8:	00000097          	auipc	ra,0x0$/;"	l
+ea	obj/kpagetable.asm	/^  ea:	00000c97          	auipc	s9,0x0$/;"	l
+ec	obj/util.asm	/^  ec:	000080e7          	jalr	ra # e8 <.L27>$/;"	l
+ee	obj/kpagetable.asm	/^  ee:	000c8c93          	mv	s9,s9$/;"	l
+end	kernel/kernel.ld	/^  PROVIDE(end = .);$/;"	s	assignment:provide
+etext	kernel/kernel.ld	/^    PROVIDE(etext = .);$/;"	s	section:.text	assignment:provide
+extern	obj/kernel.asm	/^extern char etext[];$/;"	l
+extern	obj/kernel.asm	/^extern char trampoline[];$/;"	l
+extern	obj/kernel.asm	/^extern void kernelvec();$/;"	l
+extern	obj/kerneltrap.asm	/^extern void kernelvec();$/;"	l
+extern	obj/kpagetable.asm	/^extern char etext[];$/;"	l
+extern	obj/kpagetable.asm	/^extern char trampoline[];$/;"	l
+f0	obj/util.asm	/^  f0:	84ca                	mv	s1,s2$/;"	l
+f2	obj/kpagetable.asm	/^  f2:	6c05                	lui	s8,0x1$/;"	l
+f2	obj/util.asm	/^  f2:	00148913          	add	s2,s1,1$/;"	l
+f4	obj/kpagetable.asm	/^  f4:	a02d                	j	11e <.L16>$/;"	l
+f6	obj/kpagetable.asm	/^  f6:	00000517          	auipc	a0,0x0$/;"	l
+f6	obj/util.asm	/^  f6:	0014c503          	lbu	a0,1(s1)$/;"	l
+fa	obj/kpagetable.asm	/^  fa:	00050513          	mv	a0,a0$/;"	l
+fa	obj/util.asm	/^  fa:	c165                	beqz	a0,1da <.L12>$/;"	l
+fc	obj/util.asm	/^  fc:	ff3516e3          	bne	a0,s3,e8 <.L27>$/;"	l
+fe	obj/kpagetable.asm	/^  fe:	00000097          	auipc	ra,0x0$/;"	l
+free_memory	kernel/memory/kmemory.c	/^} free_memory;$/;"	v	typeref:struct:__anon9e7096f20108
+init_kernel_memory	kernel/memory/kmemory.c	/^void init_kernel_memory() {$/;"	f	typeref:typename:void
+init_kernel_pagetable	kernel/memory/kpagetable.c	/^void init_kernel_pagetable() {$/;"	f	typeref:typename:void
+init_kernel_trap	kernel/interrupt/kerneltrap.c	/^void init_kernel_trap() {$/;"	f	typeref:typename:void
+int	obj/kernel.asm	/^int cpuid() {$/;"	l
+int	obj/kernel.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+int	obj/kernel.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
+int	obj/kernel.asm	/^int$/;"	l
+int	obj/kpagetable.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
+int	obj/plic.asm	/^int$/;"	l
+int	obj/util.asm	/^int cpuid() {$/;"	l
+int	obj/util.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+intr_get	kernel/include/basic_riscv.h	/^intr_get()$/;"	f	typeref:typename:int
+intr_off	kernel/include/basic_riscv.h	/^intr_off()$/;"	f	typeref:typename:void
+intr_on	kernel/include/basic_riscv.h	/^intr_on()$/;"	f	typeref:typename:void
+kalloc	kernel/memory/kmemory.c	/^void *kalloc(void) {$/;"	f	typeref:typename:void *
+kerneltrap	kernel/interrupt/kerneltrap.c	/^void kerneltrap() {$/;"	f	typeref:typename:void
+kernelvec	kernel/interrupt/kernelvec.S	/^kernelvec:$/;"	l
+kernelvec	obj/kernel.asm	/^kernelvec:$/;"	l
+kernelvec	obj/kernelvec.asm	/^kernelvec:$/;"	l
+kfree	kernel/memory/kmemory.c	/^void kfree(void *p_addr) {$/;"	f	typeref:typename:void
+kpt	obj/kernel.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
+kpt	obj/kpagetable.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
+list	kernel/memory/kmemory.c	/^	struct memory_unit *list;$/;"	m	struct:__anon9e7096f20108	typeref:struct:memory_unit *	file:
+loop	kernel/init/_entry.S	/^loop:$/;"	l
+loop	obj/_entry.asm	/^loop:$/;"	l
+loop	obj/kernel.asm	/^loop:$/;"	l
+main	kernel/main.c	/^void main() {$/;"	f	typeref:typename:void
+mappage	kernel/memory/kpagetable.c	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	f	typeref:typename:int
+memory_unit	kernel/memory/kmemory.c	/^struct memory_unit {$/;"	s	file:
+memset	kernel/util.c	/^void *memset(void *dst, char c, uint n) {$/;"	f	typeref:typename:void *
+next	kernel/memory/kmemory.c	/^	struct memory_unit *next;$/;"	m	struct:memory_unit	typeref:struct:memory_unit *	file:
+pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
+pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
+pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
+pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
+pagetable_t	kernel/include/basic_riscv.h	/^typedef uint64 *pagetable_t; \/\/ 512 PTEs$/;"	t	typeref:typename:uint64 *
+panic	kernel/util.c	/^void panic(char *s) {$/;"	f	typeref:typename:void
+plic_claim	kernel/interrupt/plic.c	/^plic_claim(void)$/;"	f	typeref:typename:int
+plic_complete	kernel/interrupt/plic.c	/^plic_complete(int irq)$/;"	f	typeref:typename:void
+plicinit	kernel/interrupt/plic.c	/^plicinit(void)$/;"	f	typeref:typename:void
+plicinithart	kernel/interrupt/plic.c	/^plicinithart(void)$/;"	f	typeref:typename:void
+pte_t	kernel/include/basic_riscv.h	/^typedef uint64 pte_t;$/;"	t	typeref:typename:uint64
+qemu	Makefile	/^qemu:	$(OBJ_DIR)\/kernel$/;"	t
+qemu-gdb	Makefile	/^qemu-gdb: $(OBJ_DIR)\/kernel .gdbinit$/;"	t
+r_mcounteren	kernel/include/basic_riscv.h	/^r_mcounteren()$/;"	f	typeref:typename:uint64
+r_medeleg	kernel/include/basic_riscv.h	/^r_medeleg()$/;"	f	typeref:typename:uint64
+r_mhartid	kernel/include/basic_riscv.h	/^r_mhartid()$/;"	f	typeref:typename:uint64
+r_mideleg	kernel/include/basic_riscv.h	/^r_mideleg()$/;"	f	typeref:typename:uint64
+r_mie	kernel/include/basic_riscv.h	/^r_mie()$/;"	f	typeref:typename:uint64
+r_mstatus	kernel/include/basic_riscv.h	/^r_mstatus()$/;"	f	typeref:typename:uint64
+r_ra	kernel/include/basic_riscv.h	/^r_ra()$/;"	f	typeref:typename:uint64
+r_satp	kernel/include/basic_riscv.h	/^r_satp()$/;"	f	typeref:typename:uint64
+r_scause	kernel/include/basic_riscv.h	/^r_scause()$/;"	f	typeref:typename:uint64
+r_sepc	kernel/include/basic_riscv.h	/^r_sepc()$/;"	f	typeref:typename:uint64
+r_sie	kernel/include/basic_riscv.h	/^r_sie()$/;"	f	typeref:typename:uint64
+r_sip	kernel/include/basic_riscv.h	/^r_sip()$/;"	f	typeref:typename:uint64
+r_sp	kernel/include/basic_riscv.h	/^r_sp()$/;"	f	typeref:typename:uint64
+r_sstatus	kernel/include/basic_riscv.h	/^r_sstatus()$/;"	f	typeref:typename:uint64
+r_stval	kernel/include/basic_riscv.h	/^r_stval()$/;"	f	typeref:typename:uint64
+r_stvec	kernel/include/basic_riscv.h	/^r_stvec()$/;"	f	typeref:typename:uint64
+r_time	kernel/include/basic_riscv.h	/^r_time()$/;"	f	typeref:typename:uint64
+r_tp	kernel/include/basic_riscv.h	/^r_tp()$/;"	f	typeref:typename:uint64
+sfence_vma	kernel/include/basic_riscv.h	/^sfence_vma()$/;"	f	typeref:typename:void
+stack0	kernel/init/start.c	/^__attribute__ ((aligned (16))) char stack0[4096 * NCPU];$/;"	v	typeref:typename:char[]
+start	kernel/init/start.c	/^start()$/;"	f	typeref:typename:void
+static	obj/kernel.asm	/^static inline uint64$/;"	l
+static	obj/kernel.asm	/^static inline void $/;"	l
+static	obj/kernel.asm	/^static inline void$/;"	l
+static	obj/kerneltrap.asm	/^static inline void $/;"	l
+static	obj/kpagetable.asm	/^static inline void$/;"	l
+static	obj/start.asm	/^static inline uint64$/;"	l
+static	obj/start.asm	/^static inline void $/;"	l
+static	obj/util.asm	/^static inline uint64$/;"	l
+tags	Makefile	/^tags:$/;"	t
+timer_scratch	kernel/init/start.c	/^uint64 timer_scratch[NCPU][5];$/;"	v	typeref:typename:uint64[][5]
+timerinit	kernel/init/start.c	/^timerinit()$/;"	f	typeref:typename:void
+timervec	kernel/init/start.c	/^void timervec() {}$/;"	f	typeref:typename:void
+trampoline	kernel/interrupt/trampoline.S	/^trampoline:$/;"	l
+uchar	kernel/include/basic_types.h	/^typedef unsigned char  uchar;$/;"	t	typeref:typename:unsigned char
+uint	kernel/include/basic_types.h	/^typedef unsigned int   uint;$/;"	t	typeref:typename:unsigned int
+uint16	kernel/include/basic_types.h	/^typedef unsigned short	uint16;$/;"	t	typeref:typename:unsigned short
+uint32	kernel/include/basic_types.h	/^typedef unsigned int	uint32;$/;"	t	typeref:typename:unsigned int
+uint64	kernel/include/basic_types.h	/^typedef unsigned long	uint64;$/;"	t	typeref:typename:unsigned long
+uint64	obj/kernel.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint64	obj/kpagetable.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/start.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint8	kernel/include/basic_types.h	/^typedef unsigned char	uint8;$/;"	t	typeref:typename:unsigned char
+userret	kernel/interrupt/trampoline.S	/^userret:$/;"	l
+uservec	kernel/interrupt/trampoline.S	/^uservec:    $/;"	l
+ushort	kernel/include/basic_types.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
+void	obj/kernel.asm	/^void *kalloc(void) {$/;"	l
+void	obj/kernel.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
+void	obj/kernel.asm	/^void debug_print_int(int d) {$/;"	l
+void	obj/kernel.asm	/^void debug_println(char *s) {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_memory() {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_pagetable() {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_trap() {$/;"	l
+void	obj/kernel.asm	/^void kerneltrap() {$/;"	l
+void	obj/kernel.asm	/^void kfree(void *p_addr) {$/;"	l
+void	obj/kernel.asm	/^void main() {$/;"	l
+void	obj/kernel.asm	/^void panic(char *s) {$/;"	l
+void	obj/kernel.asm	/^void timervec() {}$/;"	l
+void	obj/kernel.asm	/^void$/;"	l
+void	obj/kerneltrap.asm	/^void init_kernel_trap() {$/;"	l
+void	obj/kerneltrap.asm	/^void kerneltrap() {$/;"	l
+void	obj/kmemory.asm	/^void *kalloc(void) {$/;"	l
+void	obj/kmemory.asm	/^void init_kernel_memory() {$/;"	l
+void	obj/kmemory.asm	/^void kfree(void *p_addr) {$/;"	l
+void	obj/kpagetable.asm	/^void init_kernel_pagetable() {$/;"	l
+void	obj/main.asm	/^void main() {$/;"	l
+void	obj/plic.asm	/^void$/;"	l
+void	obj/start.asm	/^void timervec() {}$/;"	l
+void	obj/start.asm	/^void$/;"	l
+void	obj/util.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
+void	obj/util.asm	/^void debug_print_int(int d) {$/;"	l
+void	obj/util.asm	/^void debug_println(char *s) {$/;"	l
+void	obj/util.asm	/^void panic(char *s) {$/;"	l
+w_mcounteren	kernel/include/basic_riscv.h	/^w_mcounteren(uint64 x)$/;"	f	typeref:typename:void
+w_medeleg	kernel/include/basic_riscv.h	/^w_medeleg(uint64 x)$/;"	f	typeref:typename:void
+w_mepc	kernel/include/basic_riscv.h	/^w_mepc(uint64 x)$/;"	f	typeref:typename:void
+w_mideleg	kernel/include/basic_riscv.h	/^w_mideleg(uint64 x)$/;"	f	typeref:typename:void
+w_mie	kernel/include/basic_riscv.h	/^w_mie(uint64 x)$/;"	f	typeref:typename:void
+w_mscratch	kernel/include/basic_riscv.h	/^w_mscratch(uint64 x)$/;"	f	typeref:typename:void
+w_mstatus	kernel/include/basic_riscv.h	/^w_mstatus(uint64 x)$/;"	f	typeref:typename:void
+w_mtvec	kernel/include/basic_riscv.h	/^w_mtvec(uint64 x)$/;"	f	typeref:typename:void
+w_pmpaddr0	kernel/include/basic_riscv.h	/^w_pmpaddr0(uint64 x)$/;"	f	typeref:typename:void
+w_pmpcfg0	kernel/include/basic_riscv.h	/^w_pmpcfg0(uint64 x)$/;"	f	typeref:typename:void
+w_satp	kernel/include/basic_riscv.h	/^w_satp(uint64 x)$/;"	f	typeref:typename:void
+w_sepc	kernel/include/basic_riscv.h	/^w_sepc(uint64 x)$/;"	f	typeref:typename:void
+w_sie	kernel/include/basic_riscv.h	/^w_sie(uint64 x)$/;"	f	typeref:typename:void
+w_sip	kernel/include/basic_riscv.h	/^w_sip(uint64 x)$/;"	f	typeref:typename:void
+w_sstatus	kernel/include/basic_riscv.h	/^w_sstatus(uint64 x)$/;"	f	typeref:typename:void
+w_stvec	kernel/include/basic_riscv.h	/^w_stvec(uint64 x)$/;"	f	typeref:typename:void
+w_tp	kernel/include/basic_riscv.h	/^w_tp(uint64 x)$/;"	f	typeref:typename:void
+walk	kernel/memory/kpagetable.c	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	f	typeref:typename:uint64 *

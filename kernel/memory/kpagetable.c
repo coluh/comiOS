@@ -1,5 +1,6 @@
 #include "basic.h"
 #include "defs.h"
+#include "process.h"
 
 // return the PTE corresponding to virtual address
 // (of the third layer)
@@ -18,6 +19,7 @@ uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {
 			// alloc a new PTE
 			if (alloc == 0) {
 				// means not found
+				dpln("**walk didnt find the page you want**");
 				return NULL;
 			}
 			pagetable = (uint64 *)kalloc();
@@ -55,6 +57,10 @@ extern char etext[];
 // trampoline
 extern char trampoline[];
 
+void allocate_kernel_stacks(uint64 *pagetable);
+// make a pagetable
+// contain UART, VIRTIO, PLIC, TRAMPOLINE and all kernel text and data
+// and kernel stacks
 void init_kernel_pagetable() {
 	uint64 *kpt;// Kernel Page Table
 	kpt = (uint64 *)kalloc();
@@ -71,8 +77,21 @@ void init_kernel_pagetable() {
 	mappage(kpt, end_text, end_text, PHYSTOP-end_text,	PTE_R | PTE_W);
 	mappage(kpt, TRAMPOLINE, (uint64)trampoline, PGSIZE,	PTE_R | PTE_X);
 
+	// allocate and map kernel stacks
+	;
+
 	sfence_vma();
 	w_satp(MAKE_SATP(kpt));
 	sfence_vma();
+}
+
+extern struct proc processes[NPROC];
+void allocate_kernel_stacks(uint64 *kpt) {
+	struct proc *p = processes;
+	for (; p < &processes[NPROC]; p++) {
+		char *p_addr = (char *)kalloc();
+		uint64 v_addr = KSTACK((int)(p - processes));
+		mappage(kpt, v_addr, (uint64)p_addr, PGSIZE, PTE_R | PTE_W);
+	}
 }
 

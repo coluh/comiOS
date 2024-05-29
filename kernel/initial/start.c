@@ -30,10 +30,6 @@ start()
   x |= MSTATUS_MPP_S;
   w_mstatus(x);
 
-  // set M Exception Program Counter to main, for mret.
-  // requires gcc -mcmodel=medany
-  w_mepc((uint64)main);
-
   // disable paging for now.
   w_satp(0);
 
@@ -53,6 +49,10 @@ start()
   // keep each CPU's hartid in its tp register, for cpuid().
   int id = r_mhartid();
   w_tp(id);
+
+  // set M Exception Program Counter to main, for mret.
+  // requires gcc -mcmodel=medany
+  w_mepc((uint64)main);
 
   // switch to supervisor mode and jump to main().
   asm volatile("mret");

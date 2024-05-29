@@ -1,4 +1,5 @@
 #include "defs.h"
+#include "basic.h"
 #include <stdarg.h>
 
 void debug_print_int(int d) {
@@ -59,6 +60,11 @@ int debug_printf(char *fmt, ...) {
 	return 0;
 }
 
+
+void debug_println(char *s) {
+	debug_printf("%s\n", s);
+}
+
 void panic(char *s) {
 	debug_print("\npanic: ");
 	debug_print(s);
@@ -68,8 +74,20 @@ void panic(char *s) {
 }
 
 void *memset(void *dst, char c, uint n) {
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		((char *)dst)[i] = c;
 	}
 	return dst;
+}
+
+void *memcpy(void *dst, void *src, uint n) {
+	for (int i = 0; i < n; i++) {
+		((char *)dst)[i] = ((char *)src)[i];
+	}
+	return dst;
+}
+
+int cpuid() {
+	int id = r_tp();
+	return id;
 }

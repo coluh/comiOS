@@ -71,6 +71,9 @@ uservec:
         csrr t0, sscratch
         sd t0, 112(a0)
 
+	# save epc to p->trapframe->epc
+	sd sepc, 24(a0)
+
         # initialize kernel stack pointer, from p->trapframe->kernel_sp
         ld sp, 8(a0)
 
@@ -145,7 +148,10 @@ userret:
 
 	# restore user a0
         ld a0, 112(a0)
-        
+
+	# load epc from p->trapframe->epc
+	ld sepc, 24(a0)
+
         # return to user mode and user pc.
         # usertrapret() set up sstatus and sepc.
         sret

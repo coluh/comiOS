@@ -9,7 +9,7 @@ CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2
 CFLAGS += -mcmodel=medany
 CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax
 CFLAGS += -I./$K
-CFLAGS += -I./$K/xv6
+CFLAGS += -I./$K/include
 CFLAGS += -fno-stack-protector
 CFLAGS += -fno-pie -no-pie
 LDFLAGS = -z max-page-size=4096
@@ -42,6 +42,10 @@ GDBOPTS = -S -gdb tcp::$(GDBPORT)
 qemu-gdb: $(OBJ_DIR)/kernel .gdbinit
 	@echo "run gdb-multiarch in this direntory..."
 	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel $(GDBOPTS)
+
+.PHONY:tags
+tags:
+	ctags -R .
 
 clean:
 	rm -f $(OBJ_DIR)/*
