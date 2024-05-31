@@ -15,6 +15,14 @@ void debug_print_int(int d) {
 	debug_print_char('0' + d % 10);
 }
 
+void debug_print_hex(uint64 x) {
+	char l[] = "0123456789abcdef";
+	debug_print("0x");
+	for (int i = 64 - 4; i >= 0; i -= 4) {
+		debug_print_char(l[(x >> i) & 0xf]);
+	}
+}
+
 int debug_printf(char *fmt, ...) {
 	va_list args;
 	va_start(args, fmt);
@@ -34,13 +42,13 @@ int debug_printf(char *fmt, ...) {
 			debug_print_int(va_arg(args, int));
 			break;
 		case 'x':
-			panic("printf: %x not support");
+			debug_print_hex((uint64)va_arg(args, int));
 			break;
 		case 's':
 			debug_print(va_arg(args, char*));
 			break;
 		case 'p':
-			panic("printf: %p not support");
+			debug_print_hex((uint64)va_arg(args, int));
 			break;
 		case 'f':
 			panic("printf: %f not support");
@@ -82,7 +90,7 @@ void *memset(void *dst, char c, uint n) {
 
 void *memcpy(void *dst, void *src, uint n) {
 	for (int i = 0; i < n; i++) {
-		((char *)dst)[i] = ((char *)src)[i];
+		((uint8 *)dst)[i] = ((uint8 *)src)[i];
 	}
 	return dst;
 }

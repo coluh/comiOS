@@ -78,7 +78,7 @@ void init_kernel_pagetable() {
 	mappage(kpt, TRAMPOLINE, (uint64)trampoline, PGSIZE,	PTE_R | PTE_X);
 
 	// allocate and map kernel stacks
-	;
+	allocate_kernel_stacks(kpt);
 
 	sfence_vma();
 	w_satp(MAKE_SATP(kpt));

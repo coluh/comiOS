@@ -1,6 +1,6 @@
 #include "basic.h"
 #include "defs.h"
-#include "proccess.h"
+#include "process.h"
 
 struct proc *currentp;
 struct proc processes[NPROC];
@@ -9,14 +9,15 @@ int usable_pid = 1;
 
 void init_processes() {
 	struct proc *p = processes;
-	for (; p < &processes[NPROC]; p++) {
+	for (; p - processes < NPROC; p++) {
 		p->state = UNUSED;
-		p->kstack = KSTACK((int)(p - proc));
+		p->kstack = KSTACK((int)(p - processes));
 	}
 }
 
 extern char trampoline[];
 
+int allocate_pid();
 struct proc *allocate_proc() {
 	struct proc *p;
 	int found = 0;

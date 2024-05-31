@@ -6,6 +6,8 @@ void		init_kernel_pagetable();
 void		init_kernel_trap();
 void		plicinit();
 void		plicinithart();
+void		init_processes();
+void		init_userprocess();
 
 // memory/kmemory
 void*		kalloc(void);
@@ -15,6 +17,7 @@ int		mappage(uint64 *pagetable, uint64 v_addr, uint64 p_addr,
 
 // process/create
 struct proc *	current_proc();
+struct proc *	allocate_proc();
 
 // util
 extern void	debug_print_char(char c);

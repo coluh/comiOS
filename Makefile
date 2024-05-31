@@ -10,6 +10,7 @@ CFLAGS += -mcmodel=medany
 CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax
 CFLAGS += -I./$K
 CFLAGS += -I./$K/include
+CFLAGS += -I./$K/process
 CFLAGS += -fno-stack-protector
 CFLAGS += -fno-pie -no-pie
 LDFLAGS = -z max-page-size=4096
@@ -31,7 +32,7 @@ $(OBJ_DIR)/kernel: $(OBJS) $(KERNEL_LD)
 	@$(OBJDUMP) -S $@ > $(OBJ_DIR)/kernel.asm
 
 QEMU = qemu-system-riscv64
-QEMU_FLAG = -machine virt -bios none -smp 1 -m 128M -nographic
+QEMU_FLAG = -machine virt -bios none -m 128M -smp 1 -nographic
 
 qemu:	$(OBJ_DIR)/kernel
 	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel

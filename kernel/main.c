@@ -1,5 +1,7 @@
 #include "defs.h"
 
+extern void schedular();
+
 void main() {
 	init_kernel_freememory();
 	init_kernel_pagetable();
@@ -7,8 +9,9 @@ void main() {
 	plicinit();
 	plicinithart();
 	init_processes();
+	init_userprocess();
+
 	debug_printf("Hello, %s%d\n", "coluh", 23);
-	dpf1("cpu is %d\n", cpuid());
-	for(;;)
-		;
+
+	schedular();
 }

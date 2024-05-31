@@ -72,7 +72,8 @@ uservec:
         sd t0, 112(a0)
 
 	# save epc to p->trapframe->epc
-	sd sepc, 24(a0)
+	csrr t6, sepc
+	sd t6, 24(a0)
 
         # initialize kernel stack pointer, from p->trapframe->kernel_sp
         ld sp, 8(a0)
@@ -93,6 +94,8 @@ uservec:
 
         # install the kernel page table.
         csrw satp, t1
+	# now we didn't crash because trampoline still
+	# stay in the same address
 
         # flush now-stale user entries from the TLB.
         sfence.vma zero, zero
@@ -113,6 +116,10 @@ userret:
         sfence.vma zero, zero
 
         li a0, TRAPFRAME
+
+	# load epc from p->trapframe->epc
+	ld t6, 24(a0)
+	csrw sepc, t6
 
         # restore all but a0 from TRAPFRAME
         ld ra, 40(a0)
@@ -148,9 +155,6 @@ userret:
 
 	# restore user a0
         ld a0, 112(a0)
-
-	# load epc from p->trapframe->epc
-	ld sepc, 24(a0)
 
         # return to user mode and user pc.
         # usertrapret() set up sstatus and sepc.
