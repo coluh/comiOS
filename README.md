@@ -36,3 +36,7 @@ kernel/
 6 directories, 23 files
 ```
 
+## about Makefile
+
+Files in kernel/ could be placed anywhere. Makefile will find the c files and S files and then compiling them to obj/.
+
