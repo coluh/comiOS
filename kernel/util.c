@@ -2,24 +2,25 @@
 #include "basic.h"
 #include <stdarg.h>
 
-void debug_print_int(int d) {
+void debug_print_int(long d, int jinzhi) {
+	char l[] = "0123456789abcdef";
 	if (d < 0) {
 		debug_print_char('-');
 		d *= -1;
 	}
-	if (d < 10) {
-		debug_print_char('0' + d);
+	if (d < jinzhi) {
+		debug_print_char(l[d]);
 		return;
 	}
-	debug_print_int(d / 10);
-	debug_print_char('0' + d % 10);
+	debug_print_int(d / jinzhi, jinzhi);
+	debug_print_char(l[d % jinzhi]);
 }
 
-void debug_print_hex(uint64 x) {
+void debug_print_addr(uint64 p) {
 	char l[] = "0123456789abcdef";
 	debug_print("0x");
 	for (int i = 64 - 4; i >= 0; i -= 4) {
-		debug_print_char(l[(x >> i) & 0xf]);
+		debug_print_char(l[(p >> i) & 0xf]);
 	}
 }
 
@@ -39,16 +40,17 @@ int debug_printf(char *fmt, ...) {
 		}
 		switch(*p) {
 		case 'd':
-			debug_print_int(va_arg(args, int));
+			debug_print_int(va_arg(args, long), 10);
 			break;
 		case 'x':
-			debug_print_hex((uint64)va_arg(args, int));
+			debug_print("0x");
+			debug_print_int(va_arg(args, long), 16);
 			break;
 		case 's':
 			debug_print(va_arg(args, char*));
 			break;
 		case 'p':
-			debug_print_hex((uint64)va_arg(args, int));
+			debug_print_addr((uint64)va_arg(args, long));
 			break;
 		case 'f':
 			panic("printf: %f not support");

@@ -19,14 +19,14 @@ uint8 initcode[] = {0x93, 0x08, 0x70, 0x00,
 void init_userprocess() {
 	struct proc *p = allocate_proc();
 
-	// memory 0x00: ecall
 	char *data = (char *)kalloc();
 	memset(data, 0, PGSIZE);
 	memcpy(data, initcode, 12);
 	mappage(p->pagetable, 0, (uint64)data, PGSIZE, PTE_R|PTE_W|PTE_X|PTE_U);
 	p->size = PGSIZE;
 	p->trapframe->epc = 0;
-	p->trapframe->sp = PGSIZE;// we didnt alloc a stack!
+	// we didn't alloc a stack, so use this as a temp stack...
+	p->trapframe->sp = PGSIZE;
 
 	// for swtch
 	// go to usertrapreturn, to get into user mode!!

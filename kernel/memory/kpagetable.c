@@ -75,6 +75,7 @@ void init_kernel_pagetable() {
 	mappage(kpt, KERNBASE, KERNBASE, end_text-KERNBASE,	PTE_R | PTE_X);
 	// map kernel data and the physical RAM read and write
 	mappage(kpt, end_text, end_text, PHYSTOP-end_text,	PTE_R | PTE_W);
+	mappage(kpt, PHYSTOP, PHYSTOP, DISKTOP-PHYSTOP,		PTE_R | PTE_W);
 	mappage(kpt, TRAMPOLINE, (uint64)trampoline, PGSIZE,	PTE_R | PTE_X);
 
 	// allocate and map kernel stacks

@@ -45,7 +45,12 @@
 // for use by the kernel and user pages
 // from physical address 0x80000000 to PHYSTOP.
 #define KERNBASE 0x80000000L
-#define PHYSTOP (KERNBASE + 128*1024*1024)
+#define PHYSTOP (KERNBASE + 120*1024*1024)
+
+// my virtual disk
+#define DISKBLOCK(id)	(DISKTOP + 8*1024*id)
+#define DISKTOP		(PHYSTOP + 8*1024*1024)
+#define MAX_BLOCK_COUNT	((DISKTOP - PHYSTOP) / DISK_BLOCK_SIZE)
 
 // map the trampoline page to the highest address,
 // in both user and kernel space.

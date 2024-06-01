@@ -18,6 +18,10 @@ void kerneltrap() {
 	}
 
 	dpln("哪里来的中断 内核被断了");
+	dpln("unknown scause from supervisor");
+	dpf1("\t$scause=%d\n", r_scause());
+	dpf1("\t$stval=%x\n", r_stval());
+	dpf1("\t$sepc=%p\n", r_sepc());
 	panic("i die");
 
 	w_sepc(sepc);

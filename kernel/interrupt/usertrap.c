@@ -2,6 +2,10 @@
 #include "defs.h"
 #include "process.h"
 
+// debug
+extern void execttt();
+int first = 1;
+
 extern char trampoline[], uservec[], userret[];
 
 extern void kernelvec();
@@ -20,10 +24,14 @@ void usertrap() {
 	case 8:// Environment call from U-mode
 		p->trapframe->epc += 4;
 		dpln("发起了一次系统调用");
+		if (first) {
+			execttt();
+			first = 0;
+		}
 		break;
 	default:
 		dpf1("unknown scause from userspace pid=%d\n", p->pid);
-		dpf1("\t$scause=%x\n", r_scause());
+		dpf1("\t$scause=%d\n", r_scause());
 		dpf1("\t$stval=%x\n", r_stval());
 		dpf1("\t$sepc=%p\n", r_sepc());
 		panic("usertrap: ^");

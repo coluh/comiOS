@@ -41,4 +41,11 @@ SECTIONS
   }
 
   PROVIDE(end = .);
+
+  . = 0x87800000;
+
+  .disk : {
+    fs.o (.disk)
+  }
 }
+

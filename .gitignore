@@ -3,4 +3,5 @@
 */*.asm
 obj/*
 xv6
+fs*
 
