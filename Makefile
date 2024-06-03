@@ -1,10 +1,11 @@
 K	= kernel
+U	= user
 OBJ_DIR	= obj
 
 CC	= riscv64-linux-gnu-gcc
 LD	= riscv64-linux-gnu-ld
 OBJDUMP	= riscv64-linux-gnu-objdump
-CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2
+CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2
 # CFLAGS += -MD
 CFLAGS += -mcmodel=medany
 CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax
@@ -17,8 +18,8 @@ CFLAGS += -fno-stack-protector
 CFLAGS += -fno-pie -no-pie
 LDFLAGS = -z max-page-size=4096
 
-C_SRC = $(shell find $K -name "*.c")
-S_SRC = $(shell find $K -name "*.S")
+C_SRC	= $(shell find $K -name "*.c")
+S_SRC	= $(shell find $K -name "*.S")
 
 all:	qemu
 
@@ -26,9 +27,26 @@ $(OBJ_DIR)/%.o: $(C_SRC) $(S_SRC)
 	$(CC) $(CFLAGS) -c $(filter %$*.c %$*.S,$(C_SRC) $(S_SRC)) -o $@
 	@$(OBJDUMP) -S $@ > $(OBJ_DIR)/$*.asm
 
-C_OBJ = $(notdir $(patsubst %.c,%.o,$(C_SRC)))
-S_OBJ = $(notdir $(patsubst %.S,%.o,$(S_SRC)))
-OBJS = $(addprefix $(OBJ_DIR)/,$(C_OBJ) $(S_OBJ))
+C_OBJ	= $(notdir $(patsubst %.c,%.o,$(C_SRC)))
+S_OBJ	= $(notdir $(patsubst %.S,%.o,$(S_SRC)))
+OBJS	= $(addprefix $(OBJ_DIR)/,$(C_OBJ) $(S_OBJ))
+
+U_SRC	= $(shell find $U -name "*.c") $(shell find $U -name "*.S")
+UPROGS	= $(addprefix $U/,$(patsubst %.c,_%,$(patsubst %.S,_%,$(notdir $(U_SRC)))))
+
+$U/%.o:	$(U_SRC)
+	$(CC) $(CFLAGS) -c $(filter %$*.c %$*.S,$(U_SRC)) -o $@
+
+$U/_%:	$U/%.o
+	$(LD) $(LDFLAGS) -T $U/user.ld -o $@ $^
+
+fs.img:	$(UPROGS) mkfs/mkfs.c
+	gcc -g -Werror -Wall mkfs/mkfs.c -o mkfs/_mkfs -I kernel/filesystem/ -I kernel/include/
+	./mkfs/_mkfs fs.img $(UPROGS)
+
+checkdisk:mkfs/checkdisk.c
+	gcc -Werror -Wall mkfs/checkdisk.c -o mkfs/_check -I kernel/filesystem/ -I kernel/include/
+	./mkfs/_check fs.img
 
 fs.o:	fs.img
 	riscv64-linux-gnu-objcopy -I binary -O elf64-littleriscv -B riscv:rv64 fs.img fs.o \
@@ -58,5 +76,7 @@ tags:
 
 clean:
 	rm -f $(OBJ_DIR)/*
-	rm -f fs.o
+	rm -f mkfs/_*
+	rm -f $U/_*
+	rm -f fs.*
 

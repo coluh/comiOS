@@ -5,7 +5,7 @@
 
 #include "filesystem.h"
 
-#define ast(b) do {if(b==0)exit(1);} while(0)
+#define ast(b) do {if((b)==0) exit(1);} while(0)
 
 #define MAX_DISK_SIZE (8*1024*1024)
 struct DISK {
@@ -37,11 +37,6 @@ int main(int argc, char *argv[]) {
 	sb->data_startb = 2 + INODE_BLOCKS + BMAP_BLOCKS;
 
 	for (int i = 2; i < argc; i++) {
-		for (int idx = 0; argv[i][idx] != 0; idx++) {
-			if (argv[i][idx] == '/') {
-				argv[i] = argv[i] + idx;
-			}
-		}
 		FILE *fp = fopen(argv[i], "r");
 		ast(fp != NULL);
 		addfile(fp, i);
@@ -53,6 +48,12 @@ int main(int argc, char *argv[]) {
 	for (int i = 2; i < argc; i++) {
 		struct dirent_item ditem;
 		ditem.inode = i;
+		for (int idx = 0; argv[i][idx] != 0; idx++) {
+			if (argv[i][idx] == '_') {
+				argv[i] = argv[i] + idx + 1;
+				break;
+			}
+		}
 		strcpy(ditem.name, argv[i]);// not very safe though...
 		printf("Add %s]\n", ditem.name);
 		memcpy(root + (i-2)*sizeof(ditem), &ditem, sizeof(ditem));

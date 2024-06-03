@@ -1,5 +1,7 @@
 .global _start
 _start:
+.global _main
+_main:
 .global main
 main:
 	li s0, 7
