@@ -2,6 +2,15 @@
 #include "defs.h"
 #include "filesystem.h"
 
+struct superblock *sb;
+
+void init_disk() {
+	sb = (struct superblock *)(PHYSTOP + BSIZE);
+	if (sb->magic != SB_MAGIC) {
+		panic("init_disk: superblock magic not match");
+	}
+}
+
 // read a block to dst
 void disk_read_block(void *dst, int blockid) {
 	if ((uint64)dst >= PHYSTOP - DISK_BLOCK_SIZE) {
@@ -11,7 +20,7 @@ void disk_read_block(void *dst, int blockid) {
 		panic("disk_read_block: blockid out of range");
 	}
 
-	memcpy((char *)dst, (char *)DISKBLOCK(blockid), DISK_BLOCK_SIZE);
+	memcpy(dst, (void *)DISKBLOCK(blockid), DISK_BLOCK_SIZE);
 }
 
 // write a block from src

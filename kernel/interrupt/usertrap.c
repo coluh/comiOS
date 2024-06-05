@@ -2,9 +2,7 @@
 #include "defs.h"
 #include "process.h"
 
-// debug
-extern void execttt();
-int first = 1;
+extern void syscall();
 
 extern char trampoline[], uservec[], userret[];
 
@@ -23,11 +21,7 @@ void usertrap() {
 	switch(r_scause()) {
 	case 8:// Environment call from U-mode
 		p->trapframe->epc += 4;
-		dpln("发起了一次系统调用");
-		if (first) {
-			execttt();
-			first = 0;
-		}
+		syscall();
 		break;
 	default:
 		dpf1("unknown scause from userspace pid=%d\n", p->pid);

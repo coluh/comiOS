@@ -75,6 +75,20 @@ void debug_println(char *s) {
 	debug_printf("%s\n", s);
 }
 
+void backtrace() {
+	uint64 fp, ra;
+	dpln("Backtrace:");
+	fp = r_fp();
+	while (1) {
+		ra = *(uint64 *)(fp - 8);
+		dpf1("\t%p\n", ra);
+		fp = *(uint64 *)(fp - 16);
+		if (fp == PGROUNDUP(fp)) {
+			break;
+		}
+	}
+}
+
 void panic(char *s) {
 	debug_print("\npanic: ");
 	debug_print(s);
@@ -101,3 +115,5 @@ int cpuid() {
 	int id = r_tp();
 	return id;
 }
+
+

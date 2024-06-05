@@ -31,8 +31,8 @@ struct proc *allocate_proc() {
 		panic("processes used up");
 	}
 
-	p->state = USED;
 	p->pid = allocate_pid();
+	p->state = USED;
 
 	// trapframe
 	p->trapframe = (struct trapframe *)kalloc();
@@ -42,6 +42,13 @@ struct proc *allocate_proc() {
 	mappage(pt, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
 	mappage(pt, TRAPFRAME, (uint64)p->trapframe, PGSIZE, PTE_R | PTE_W);
 	p->pagetable = pt;
+
+	// set NULLs
+	p->parent = NULL;
+	for (int i = 0; i < FD_COUNT; i++) {
+		p->open_files[i] = NULL;
+	}
+	p->cwd = NULL;
 
 	memcpy(p->name, "undefined", 10);
 

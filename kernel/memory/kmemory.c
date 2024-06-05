@@ -36,9 +36,8 @@ void kfree(void *p_addr) {
 // init free memory(use a linktable to connect to them)
 void init_kernel_freememory() {
 	// end ~ PHYSTOP
-	char *p = (char *)PGROUNDUP((uint64)end);
-	while ((uint64)p < PHYSTOP) {
-		kfree(p);
-		p += PGSIZE;
+	uint64 p = PGROUNDUP((uint64)end);
+	for (uint64 q = PHYSTOP - PGSIZE; q >= p; q -= PGSIZE) {
+		kfree((void *)q);
 	}
 }

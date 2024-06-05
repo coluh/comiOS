@@ -5,6 +5,7 @@
 // return the PTE corresponding to virtual address
 // (of the third layer)
 // looks like what the hardware will do
+// return NULL when not found the p_addr
 uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {
 	if (v_addr >= MAXVA) {
 		panic("walk: virtual address out of range");
@@ -28,6 +29,18 @@ uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {
 		}
 	}
 	return &pagetable[PX(0, v_addr)];
+}
+
+// return page-aligned pa
+uint64 walkpaalign(uint64 *pagetable, uint64 va) {
+	uint64 *pte = walk(pagetable, va, 0);
+	if (pte == NULL) {
+		dpf1("User Address %p\n", va);
+		panic("walkaddr: corresponding p_addr not found");
+	}
+
+	uint64 pa = PTE2PA(*pte);
+	return pa;
 }
 
 int mappage(uint64 *pagetable, uint64 v_addr,

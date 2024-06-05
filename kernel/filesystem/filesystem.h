@@ -1,6 +1,5 @@
 #include "basic.h"
 
-#define DISK_BLOCK_SIZE 1024
 
 struct superblock {
 	uint32 magic;
@@ -39,3 +38,8 @@ struct dirent_item {
 #define INODE_BLOCKS	1
 #define BMAP_BLOCKS	1
 #define MAX_INODE	(INODE_BLOCKS*DISK_BLOCK_SIZE/sizeof(struct inode))
+
+
+
+void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n);
+void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n);

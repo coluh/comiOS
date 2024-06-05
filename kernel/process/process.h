@@ -8,7 +8,7 @@
 #define ZOMBIE   5
 
 // save some registers
-struct context {
+struct context {/*{{{*/
 	uint64 ra;
 	uint64 sp;
 	uint64 s0;
@@ -23,9 +23,9 @@ struct context {
 	uint64 s9;
 	uint64 s10;
 	uint64 s11;
-};
+};/*}}}*/
 
-struct trapframe {
+struct trapframe {/*{{{*/
 	uint64 ksatp;
 	uint64 ksp;
 	uint64 ktrap;
@@ -63,13 +63,17 @@ struct trapframe {
 	uint64 t4;
 	uint64 t5;
 	uint64 t6;
-};
+};/*}}}*/
+
+struct file;
+
+#define FD_COUNT 32
 
 struct proc {
 	int pid;		// allocate_proc
 	int state;		// allocate_proc/..
-	int killed;
-	int exit_state;
+	// int killed;
+	// int exit_state;
 	struct proc *parent;
 
 	uint64 kstack;		// init_processes
@@ -77,7 +81,7 @@ struct proc {
 	struct trapframe *trapframe;
 	uint64 size;
 	struct context context;	// for swtch()
-	// struct file *open_files[?];
-	// struct inode *cwd;
+	struct file *open_files[FD_COUNT];
+	struct inode *cwd;
 	char name[32];
 };

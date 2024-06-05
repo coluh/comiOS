@@ -48,7 +48,9 @@
 #define PHYSTOP (KERNBASE + 120*1024*1024)
 
 // my virtual disk
-#define DISKBLOCK(id)	(DISKTOP + 8*1024*id)
+#define DISK_BLOCK_SIZE 1024
+#define BSIZE	1024
+#define DISKBLOCK(id)	(PHYSTOP + DISK_BLOCK_SIZE*(id))
 #define DISKTOP		(PHYSTOP + 8*1024*1024)
 #define MAX_BLOCK_COUNT	((DISKTOP - PHYSTOP) / DISK_BLOCK_SIZE)
 

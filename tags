@@ -10,20 +10,71 @@
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	5.9.0	//
 $(OBJ_DIR)/%.o	Makefile	/^$(OBJ_DIR)\/%.o: $(C_SRC) $(S_SRC)$/;"	t
-$(OBJ_DIR)/kernel	Makefile	/^$(OBJ_DIR)\/kernel: $(OBJS) $(KERNEL_LD)$/;"	t
+$(OBJ_DIR)/kernel	Makefile	/^$(OBJ_DIR)\/kernel: $(OBJS) $(KERNEL_LD) fs.o$/;"	t
+$K/kernel	xv6/Makefile	/^$K\/kernel: $(OBJS) $K\/kernel.ld $U\/initcode$/;"	t
+$L/usys.S	Makefile	/^$L\/usys.S: $L\/usys.py$/;"	t
+$L/usys.o	Makefile	/^$L\/usys.o: $L\/usys.S$/;"	t
+$U/%.o	Makefile	/^$U\/%.o:	$(U_SRC)$/;"	t
+$U/_%	Makefile	/^$U\/_%:	$U\/%.o $L\/usys.o$/;"	t
+$U/_forktest	xv6/Makefile	/^$U\/_forktest: $U\/forktest.o $(ULIB)$/;"	t
+$U/initcode	xv6/Makefile	/^$U\/initcode: $U\/initcode.S$/;"	t
+$U/usys.S	xv6/Makefile	/^$U\/usys.S : $U\/usys.pl$/;"	t
+$U/usys.o	xv6/Makefile	/^$U\/usys.o : $U\/usys.S$/;"	t
 .bss	kernel/kernel.ld	/^  .bss : {$/;"	S
+.bss	user/user.ld	/^  .bss : {$/;"	S
+.bss	xv6/kernel/kernel.ld	/^  .bss : {$/;"	S
+.bss	xv6/user/user.ld	/^  .bss : {$/;"	S
 .data	kernel/kernel.ld	/^  .data : {$/;"	S
+.data	user/user.ld	/^  .data : {$/;"	S
+.data	xv6/kernel/kernel.ld	/^  .data : {$/;"	S
+.data	xv6/user/user.ld	/^  .data : {$/;"	S
+.disk	kernel/kernel.ld	/^  .disk : {$/;"	S
+.gdbinit	xv6/Makefile	/^.gdbinit: .gdbinit.tmpl-riscv$/;"	t
 .rodata	kernel/kernel.ld	/^  .rodata : {$/;"	S
+.rodata	user/user.ld	/^  .rodata : {$/;"	S
+.rodata	xv6/kernel/kernel.ld	/^  .rodata : {$/;"	S
+.rodata	xv6/user/user.ld	/^  .rodata : {$/;"	S
 .text	kernel/kernel.ld	/^  .text : {$/;"	S
-CC	Makefile	/^CC=riscv64-linux-gnu-gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2$/;"	m
+.text	user/user.ld	/^  .text : {$/;"	S
+.text	xv6/kernel/kernel.ld	/^  .text : {$/;"	S
+.text	xv6/user/user.ld	/^  .text : {$/;"	S
+AS	xv6/Makefile	/^AS = $(TOOLPREFIX)gas$/;"	m
+Align	xv6/user/umalloc.c	/^typedef long Align;$/;"	t	typeref:typename:long	file:
+BACK	xv6/user/sh.c	/^#define BACK /;"	d	file:
+BACKSPACE	xv6/kernel/console.c	/^#define BACKSPACE /;"	d	file:
+BBLOCK	xv6/kernel/fs.h	/^#define BBLOCK(/;"	d
+BIG	xv6/user/usertests.c	/^  enum { BIG=100*1024*1024 };$/;"	e	enum:sbrkfail::__anon72204ae91003	file:
+BIG	xv6/user/usertests.c	/^  enum { BIG=100*1024*1024 };$/;"	e	enum:sbrkmuch::__anon72204ae90f03	file:
+BMAP_BLOCKS	kernel/filesystem/filesystem.h	/^#define BMAP_BLOCKS	/;"	d
+BPB	xv6/kernel/fs.h	/^#define BPB /;"	d
+BSIZE	kernel/filesystem/filesystem.h	/^#define BSIZE	/;"	d
+BSIZE	xv6/kernel/fs.h	/^#define BSIZE /;"	d
+BUFSZ	xv6/user/usertests.c	/^#define BUFSZ /;"	d	file:
+C	xv6/kernel/console.c	/^#define C(/;"	d	file:
+CC	Makefile	/^CC	= riscv64-linux-gnu-gcc$/;"	m
+CC	xv6/Makefile	/^CC = $(TOOLPREFIX)gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2$/;"	m
+CFLAGS	xv6/Makefile	/^CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2	# for debugging$/;"	m
 CLINT	kernel/include/basic_memlayout.h	/^#define CLINT /;"	d
+CLINT	xv6/kernel/memlayout.h	/^#define CLINT /;"	d
 CLINT_MTIME	kernel/include/basic_memlayout.h	/^#define CLINT_MTIME /;"	d
+CLINT_MTIME	xv6/kernel/memlayout.h	/^#define CLINT_MTIME /;"	d
 CLINT_MTIMECMP	kernel/include/basic_memlayout.h	/^#define CLINT_MTIMECMP(/;"	d
-C_OBJ	Makefile	/^C_OBJ = $(notdir $(patsubst %.c,%.o,$(C_SRC)))$/;"	m
-C_SRC	Makefile	/^C_SRC = $(shell find $K -name "*.c")$/;"	m
+CLINT_MTIMECMP	xv6/kernel/memlayout.h	/^#define CLINT_MTIMECMP(/;"	d
+CONSOLE	xv6/kernel/file.h	/^#define CONSOLE /;"	d
+CPUS	xv6/Makefile	/^CPUS := 3$/;"	m
+C_OBJ	Makefile	/^C_OBJ	= $(notdir $(patsubst %.c,%.o,$(C_SRC)))$/;"	m
+C_SRC	Makefile	/^C_SRC	= $(shell find $K -name "*.c")$/;"	m
+DIRSIZ	xv6/kernel/fs.h	/^#define DIRSIZ /;"	d
+DISK	mkfs/mkfs.c	/^struct DISK {$/;"	s	file:
+DISKBLOCK	kernel/include/basic_memlayout.h	/^#define DISKBLOCK(/;"	d
+DISKTOP	kernel/include/basic_memlayout.h	/^#define DISKTOP	/;"	d
+DISK_BLOCK_SIZE	kernel/filesystem/filesystem.h	/^#define DISK_BLOCK_SIZE /;"	d
 Disassembly	obj/_entry.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/create.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/diskio.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/exec.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/inode.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/kernel.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/kerneltrap.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/kernelvec.asm	/^Disassembly of section .text:$/;"	l
@@ -34,92 +85,386 @@ Disassembly	obj/plic.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/schedular.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/start.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/swtch.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/syscall.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/upagetable.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/userproc.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/usertrap.asm	/^Disassembly of section .text:$/;"	l
 Disassembly	obj/util.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	xv6/kernel/kernel.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	xv6/user/initcode.asm	/^Disassembly of section .text:$/;"	l
+ELF_MAGIC	kernel/process/load/elf.h	/^#define ELF_MAGIC /;"	d
+ELF_MAGIC	xv6/kernel/elf.h	/^#define ELF_MAGIC /;"	d
+ELF_PROG_FLAG_EXEC	kernel/process/load/elf.h	/^#define ELF_PROG_FLAG_EXEC /;"	d
+ELF_PROG_FLAG_EXEC	xv6/kernel/elf.h	/^#define ELF_PROG_FLAG_EXEC /;"	d
+ELF_PROG_FLAG_READ	kernel/process/load/elf.h	/^#define ELF_PROG_FLAG_READ /;"	d
+ELF_PROG_FLAG_READ	xv6/kernel/elf.h	/^#define ELF_PROG_FLAG_READ /;"	d
+ELF_PROG_FLAG_WRITE	kernel/process/load/elf.h	/^#define ELF_PROG_FLAG_WRITE /;"	d
+ELF_PROG_FLAG_WRITE	xv6/kernel/elf.h	/^#define ELF_PROG_FLAG_WRITE /;"	d
+ELF_PROG_LOAD	kernel/process/load/elf.h	/^#define ELF_PROG_LOAD /;"	d
+ELF_PROG_LOAD	xv6/kernel/elf.h	/^#define ELF_PROG_LOAD /;"	d
+EXEC	xv6/user/sh.c	/^#define EXEC /;"	d	file:
+FCR	xv6/kernel/uart.c	/^#define FCR /;"	d	file:
+FCR_FIFO_CLEAR	xv6/kernel/uart.c	/^#define FCR_FIFO_CLEAR /;"	d	file:
+FCR_FIFO_ENABLE	xv6/kernel/uart.c	/^#define FCR_FIFO_ENABLE /;"	d	file:
+FD_DEVICE	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	e	enum:file::__anon94af1a1e0103
+FD_INODE	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	e	enum:file::__anon94af1a1e0103
+FD_NONE	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	e	enum:file::__anon94af1a1e0103
+FD_PIPE	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	e	enum:file::__anon94af1a1e0103
+FILENAME_LEN	kernel/filesystem/filesystem.h	/^#define FILENAME_LEN /;"	d
+FSMAGIC	xv6/kernel/fs.h	/^#define FSMAGIC /;"	d
+FSSIZE	xv6/kernel/param.h	/^#define FSSIZE /;"	d
 GDBOPTS	Makefile	/^GDBOPTS = -S -gdb tcp::$(GDBPORT)$/;"	m
 GDBPORT	Makefile	/^GDBPORT = 23333$/;"	m
-K	Makefile	/^K=kernel$/;"	m
+GDBPORT	xv6/Makefile	/^GDBPORT = $(shell expr `id -u` % 5000 + 25000)$/;"	m
+Header	xv6/user/umalloc.c	/^typedef union header Header;$/;"	t	typeref:union:header	file:
+IBLOCK	xv6/kernel/fs.h	/^#define IBLOCK(/;"	d
+IER	xv6/kernel/uart.c	/^#define IER /;"	d	file:
+IER_RX_ENABLE	xv6/kernel/uart.c	/^#define IER_RX_ENABLE /;"	d	file:
+IER_TX_ENABLE	xv6/kernel/uart.c	/^#define IER_TX_ENABLE /;"	d	file:
+INODE_BLOCKS	kernel/filesystem/filesystem.h	/^#define INODE_BLOCKS	/;"	d
+INODE_OFFSET	kernel/filesystem/filesystem.h	/^#define INODE_OFFSET(/;"	d
+INPUT_BUF_SIZE	xv6/kernel/console.c	/^#define INPUT_BUF_SIZE /;"	d	file:
+IPB	xv6/kernel/fs.h	/^#define IPB /;"	d
+ISR	xv6/kernel/uart.c	/^#define ISR /;"	d	file:
+I_DIRENT	kernel/filesystem/filesystem.h	/^#define I_DIRENT /;"	d
+I_FREE	kernel/filesystem/filesystem.h	/^#define I_FREE /;"	d
+I_NORMAL	kernel/filesystem/filesystem.h	/^#define I_NORMAL /;"	d
+I_USED	kernel/filesystem/filesystem.h	/^#define I_USED /;"	d
+K	Makefile	/^K	= kernel$/;"	m
+K	xv6/Makefile	/^K=kernel$/;"	m
 KERNBASE	kernel/include/basic_memlayout.h	/^#define KERNBASE /;"	d
+KERNBASE	xv6/kernel/memlayout.h	/^#define KERNBASE /;"	d
 KERNEL_LD	Makefile	/^KERNEL_LD = $(shell find $K -name "kernel.ld")$/;"	m
 KSTACK	kernel/include/basic_memlayout.h	/^#define KSTACK(/;"	d
-LD	Makefile	/^LD=riscv64-linux-gnu-ld$/;"	m
+KSTACK	xv6/kernel/memlayout.h	/^#define KSTACK(/;"	d
+K_INCLUDE	Makefile	/^K_INCLUDE  = -I.\/$K$/;"	m
+L	Makefile	/^L	= lib$/;"	m
+LCR	xv6/kernel/uart.c	/^#define LCR /;"	d	file:
+LCR_BAUD_LATCH	xv6/kernel/uart.c	/^#define LCR_BAUD_LATCH /;"	d	file:
+LCR_EIGHT_BITS	xv6/kernel/uart.c	/^#define LCR_EIGHT_BITS /;"	d	file:
+LD	Makefile	/^LD	= riscv64-linux-gnu-ld$/;"	m
+LD	xv6/Makefile	/^LD = $(TOOLPREFIX)ld$/;"	m
 LDFLAGS	Makefile	/^LDFLAGS = -z max-page-size=4096$/;"	m
+LDFLAGS	xv6/Makefile	/^LDFLAGS = -z max-page-size=4096$/;"	m
+LIST	xv6/user/sh.c	/^#define LIST /;"	d	file:
+LOGSIZE	xv6/kernel/param.h	/^#define LOGSIZE /;"	d
+LSR	xv6/kernel/uart.c	/^#define LSR /;"	d	file:
+LSR_RX_READY	xv6/kernel/uart.c	/^#define LSR_RX_READY /;"	d	file:
+LSR_TX_IDLE	xv6/kernel/uart.c	/^#define LSR_TX_IDLE /;"	d	file:
 MAKE_SATP	kernel/include/basic_riscv.h	/^#define MAKE_SATP(/;"	d
+MAKE_SATP	xv6/kernel/riscv.h	/^#define MAKE_SATP(/;"	d
+MAX	kernel/include/basic.h	/^#define MAX(/;"	d
+MAXARG	xv6/kernel/param.h	/^#define MAXARG /;"	d
+MAXARGS	xv6/user/sh.c	/^#define MAXARGS /;"	d	file:
+MAXFILE	xv6/kernel/fs.h	/^#define MAXFILE /;"	d
+MAXOPBLOCKS	xv6/kernel/param.h	/^#define MAXOPBLOCKS /;"	d
+MAXPATH	xv6/kernel/param.h	/^#define MAXPATH /;"	d
 MAXVA	kernel/include/basic_riscv.h	/^#define MAXVA /;"	d
+MAXVA	xv6/kernel/riscv.h	/^#define MAXVA /;"	d
+MAXVAplus	xv6/user/usertests.c	/^MAXVAplus(char *s)$/;"	f	typeref:typename:void
+MAX_BLOCK_COUNT	kernel/include/basic_memlayout.h	/^#define MAX_BLOCK_COUNT	/;"	d
+MAX_DISK_SIZE	mkfs/checkdisk.c	/^#define MAX_DISK_SIZE /;"	d	file:
+MAX_DISK_SIZE	mkfs/mkfs.c	/^#define MAX_DISK_SIZE /;"	d	file:
+MAX_INODE	kernel/filesystem/filesystem.h	/^#define MAX_INODE	/;"	d
 MIE_MEIE	kernel/include/basic_riscv.h	/^#define MIE_MEIE /;"	d
+MIE_MEIE	xv6/kernel/riscv.h	/^#define MIE_MEIE /;"	d
 MIE_MSIE	kernel/include/basic_riscv.h	/^#define MIE_MSIE /;"	d
+MIE_MSIE	xv6/kernel/riscv.h	/^#define MIE_MSIE /;"	d
 MIE_MTIE	kernel/include/basic_riscv.h	/^#define MIE_MTIE /;"	d
+MIE_MTIE	xv6/kernel/riscv.h	/^#define MIE_MTIE /;"	d
+MIN	kernel/include/basic.h	/^#define MIN(/;"	d
 MSTATUS_MIE	kernel/include/basic_riscv.h	/^#define MSTATUS_MIE /;"	d
+MSTATUS_MIE	xv6/kernel/riscv.h	/^#define MSTATUS_MIE /;"	d
 MSTATUS_MPP_M	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_M /;"	d
+MSTATUS_MPP_M	xv6/kernel/riscv.h	/^#define MSTATUS_MPP_M /;"	d
 MSTATUS_MPP_MASK	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_MASK /;"	d
+MSTATUS_MPP_MASK	xv6/kernel/riscv.h	/^#define MSTATUS_MPP_MASK /;"	d
 MSTATUS_MPP_S	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_S /;"	d
+MSTATUS_MPP_S	xv6/kernel/riscv.h	/^#define MSTATUS_MPP_S /;"	d
 MSTATUS_MPP_U	kernel/include/basic_riscv.h	/^#define MSTATUS_MPP_U /;"	d
+MSTATUS_MPP_U	xv6/kernel/riscv.h	/^#define MSTATUS_MPP_U /;"	d
+N	xv6/user/forktest.c	/^#define N /;"	d	file:
+N	xv6/user/usertests.c	/^  enum { N = 1000, SZ=10};$/;"	e	enum:sharedfd::__anon72204ae90503	file:
+N	xv6/user/usertests.c	/^  enum { N = 20, NCHILD=4 };$/;"	e	enum:createdelete::__anon72204ae90703	file:
+N	xv6/user/usertests.c	/^  enum { N = 20, SZ=600 };$/;"	e	enum:bigfile::__anon72204ae90c03	file:
+N	xv6/user/usertests.c	/^  enum { N = 40 };$/;"	e	enum:concreate::__anon72204ae90a03	file:
+N	xv6/user/usertests.c	/^  enum { N = 500 };$/;"	e	enum:bigdir::__anon72204ae91103	file:
+N	xv6/user/usertests.c	/^  enum { N=100, SZ=10 };$/;"	e	enum:writetest::__anon72204ae90103	file:
+N	xv6/user/usertests.c	/^  enum { N=12, NCHILD=4, SZ=500 };$/;"	e	enum:fourfiles::__anon72204ae90603	file:
+N	xv6/user/usertests.c	/^  enum { N=2 };$/;"	e	enum:forkfork::__anon72204ae90403	file:
+N	xv6/user/usertests.c	/^  enum { N=5, SZ=1033 };$/;"	e	enum:pipe1::__anon72204ae90303	file:
+N	xv6/user/usertests.c	/^  enum { N=52 };$/;"	e	enum:createtest::__anon72204ae90203	file:
+N	xv6/user/usertests.c	/^  enum{ N = 1000 };$/;"	e	enum:forktest::__anon72204ae90d03	file:
+NBUF	xv6/kernel/param.h	/^#define NBUF /;"	d
+NCHILD	xv6/user/usertests.c	/^  enum { N = 20, NCHILD=4 };$/;"	e	enum:createdelete::__anon72204ae90703	file:
+NCHILD	xv6/user/usertests.c	/^  enum { N=12, NCHILD=4, SZ=500 };$/;"	e	enum:fourfiles::__anon72204ae90603	file:
 NCPU	kernel/include/basic_parameters.h	/^#define NCPU	/;"	d
 NCPU	kernel/initial/start.c	/^#define NCPU /;"	d	file:
+NCPU	xv6/kernel/param.h	/^#define NCPU /;"	d
+NDEV	xv6/kernel/param.h	/^#define NDEV /;"	d
+NDIRECT	xv6/kernel/fs.h	/^#define NDIRECT /;"	d
+NELEM	kernel/include/basic.h	/^#define NELEM(/;"	d
+NELEM	xv6/kernel/defs.h	/^#define NELEM(/;"	d
+NFILE	xv6/kernel/param.h	/^#define NFILE /;"	d
+NINDIRECT	xv6/kernel/fs.h	/^#define NINDIRECT /;"	d
+NINODE	xv6/kernel/param.h	/^#define NINODE /;"	d
+NINODES	xv6/mkfs/mkfs.c	/^#define NINODES /;"	d	file:
+NOFILE	xv6/kernel/param.h	/^#define NOFILE /;"	d
 NPROC	kernel/include/basic_parameters.h	/^#define NPROC	/;"	d
+NPROC	xv6/kernel/param.h	/^#define NPROC /;"	d
 NULL	kernel/include/basic_types.h	/^#define NULL /;"	d
-OBJDUMP	Makefile	/^OBJDUMP=riscv64-linux-gnu-objdump$/;"	m
-OBJS	Makefile	/^OBJS = $(addprefix $(OBJ_DIR)\/,$(C_OBJ) $(S_OBJ))$/;"	m
-OBJ_DIR	Makefile	/^OBJ_DIR = obj$/;"	m
+NULL	user/stdint.h	/^#define NULL	/;"	d
+NUM	xv6/kernel/virtio.h	/^#define NUM /;"	d
+OBJCOPY	xv6/Makefile	/^OBJCOPY = $(TOOLPREFIX)objcopy$/;"	m
+OBJDUMP	Makefile	/^OBJDUMP	= riscv64-linux-gnu-objdump$/;"	m
+OBJDUMP	xv6/Makefile	/^OBJDUMP = $(TOOLPREFIX)objdump$/;"	m
+OBJS	Makefile	/^OBJS	= $(addprefix $(OBJ_DIR)\/,$(C_OBJ) $(S_OBJ))$/;"	m
+OBJS	xv6/Makefile	/^OBJS = \\$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR	= obj$/;"	m
+O_CREATE	xv6/kernel/fcntl.h	/^#define O_CREATE /;"	d
+O_RDONLY	xv6/kernel/fcntl.h	/^#define O_RDONLY /;"	d
+O_RDWR	xv6/kernel/fcntl.h	/^#define O_RDWR /;"	d
+O_TRUNC	xv6/kernel/fcntl.h	/^#define O_TRUNC /;"	d
+O_WRONLY	xv6/kernel/fcntl.h	/^#define O_WRONLY /;"	d
 PA2PTE	kernel/include/basic_riscv.h	/^#define PA2PTE(/;"	d
+PA2PTE	xv6/kernel/riscv.h	/^#define PA2PTE(/;"	d
 PGROUNDDOWN	kernel/include/basic_riscv.h	/^#define PGROUNDDOWN(/;"	d
+PGROUNDDOWN	xv6/kernel/riscv.h	/^#define PGROUNDDOWN(/;"	d
 PGROUNDUP	kernel/include/basic_riscv.h	/^#define PGROUNDUP(/;"	d
+PGROUNDUP	xv6/kernel/riscv.h	/^#define PGROUNDUP(/;"	d
 PGSHIFT	kernel/include/basic_riscv.h	/^#define PGSHIFT /;"	d
+PGSHIFT	xv6/kernel/riscv.h	/^#define PGSHIFT /;"	d
 PGSIZE	kernel/include/basic_riscv.h	/^#define PGSIZE /;"	d
+PGSIZE	xv6/kernel/riscv.h	/^#define PGSIZE /;"	d
 PHYSTOP	kernel/include/basic_memlayout.h	/^#define PHYSTOP /;"	d
+PHYSTOP	xv6/kernel/memlayout.h	/^#define PHYSTOP /;"	d
+PIPE	xv6/user/sh.c	/^#define PIPE /;"	d	file:
+PIPESIZE	xv6/kernel/pipe.c	/^#define PIPESIZE /;"	d	file:
 PLIC	kernel/include/basic_memlayout.h	/^#define PLIC /;"	d
+PLIC	xv6/kernel/memlayout.h	/^#define PLIC /;"	d
 PLIC_MCLAIM	kernel/include/basic_memlayout.h	/^#define PLIC_MCLAIM(/;"	d
+PLIC_MCLAIM	xv6/kernel/memlayout.h	/^#define PLIC_MCLAIM(/;"	d
 PLIC_MENABLE	kernel/include/basic_memlayout.h	/^#define PLIC_MENABLE(/;"	d
+PLIC_MENABLE	xv6/kernel/memlayout.h	/^#define PLIC_MENABLE(/;"	d
 PLIC_MPRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_MPRIORITY(/;"	d
+PLIC_MPRIORITY	xv6/kernel/memlayout.h	/^#define PLIC_MPRIORITY(/;"	d
 PLIC_PENDING	kernel/include/basic_memlayout.h	/^#define PLIC_PENDING /;"	d
+PLIC_PENDING	xv6/kernel/memlayout.h	/^#define PLIC_PENDING /;"	d
 PLIC_PRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_PRIORITY /;"	d
+PLIC_PRIORITY	xv6/kernel/memlayout.h	/^#define PLIC_PRIORITY /;"	d
 PLIC_SCLAIM	kernel/include/basic_memlayout.h	/^#define PLIC_SCLAIM(/;"	d
+PLIC_SCLAIM	xv6/kernel/memlayout.h	/^#define PLIC_SCLAIM(/;"	d
 PLIC_SENABLE	kernel/include/basic_memlayout.h	/^#define PLIC_SENABLE(/;"	d
+PLIC_SENABLE	xv6/kernel/memlayout.h	/^#define PLIC_SENABLE(/;"	d
 PLIC_SPRIORITY	kernel/include/basic_memlayout.h	/^#define PLIC_SPRIORITY(/;"	d
+PLIC_SPRIORITY	xv6/kernel/memlayout.h	/^#define PLIC_SPRIORITY(/;"	d
 PTE2PA	kernel/include/basic_riscv.h	/^#define PTE2PA(/;"	d
+PTE2PA	xv6/kernel/riscv.h	/^#define PTE2PA(/;"	d
 PTE_FLAGS	kernel/include/basic_riscv.h	/^#define PTE_FLAGS(/;"	d
+PTE_FLAGS	xv6/kernel/riscv.h	/^#define PTE_FLAGS(/;"	d
 PTE_R	kernel/include/basic_riscv.h	/^#define PTE_R /;"	d
+PTE_R	xv6/kernel/riscv.h	/^#define PTE_R /;"	d
 PTE_U	kernel/include/basic_riscv.h	/^#define PTE_U /;"	d
+PTE_U	xv6/kernel/riscv.h	/^#define PTE_U /;"	d
 PTE_V	kernel/include/basic_riscv.h	/^#define PTE_V /;"	d
+PTE_V	xv6/kernel/riscv.h	/^#define PTE_V /;"	d
 PTE_W	kernel/include/basic_riscv.h	/^#define PTE_W /;"	d
+PTE_W	xv6/kernel/riscv.h	/^#define PTE_W /;"	d
 PTE_X	kernel/include/basic_riscv.h	/^#define PTE_X /;"	d
+PTE_X	xv6/kernel/riscv.h	/^#define PTE_X /;"	d
 PX	kernel/include/basic_riscv.h	/^#define PX(/;"	d
+PX	xv6/kernel/riscv.h	/^#define PX(/;"	d
 PXMASK	kernel/include/basic_riscv.h	/^#define PXMASK /;"	d
+PXMASK	xv6/kernel/riscv.h	/^#define PXMASK /;"	d
 PXSHIFT	kernel/include/basic_riscv.h	/^#define PXSHIFT(/;"	d
+PXSHIFT	xv6/kernel/riscv.h	/^#define PXSHIFT(/;"	d
 QEMU	Makefile	/^QEMU = qemu-system-riscv64$/;"	m
-QEMU_FLAG	Makefile	/^QEMU_FLAG = -machine virt -bios none -smp 1 -m 128M -nographic$/;"	m
+QEMU	xv6/Makefile	/^QEMU = qemu-system-riscv64$/;"	m
+QEMUGDB	xv6/Makefile	/^QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \\$/;"	m
+QEMUOPTS	xv6/Makefile	/^QEMUOPTS = -machine virt -bios none -kernel $K\/kernel -m 128M -smp $(CPUS) -nographic$/;"	m
+QEMU_FLAG	Makefile	/^QEMU_FLAG = -machine virt -bios none -m 128M -smp 1 -nographic$/;"	m
+R	xv6/kernel/virtio_disk.c	/^#define R(/;"	d	file:
+REDIR	xv6/user/sh.c	/^#define REDIR /;"	d	file:
+RHR	xv6/kernel/uart.c	/^#define RHR /;"	d	file:
+ROOTDEV	xv6/kernel/param.h	/^#define ROOTDEV /;"	d
+ROOTINO	xv6/kernel/fs.h	/^#define ROOTINO /;"	d
 RUNNABLE	kernel/process/process.h	/^#define RUNNABLE /;"	d
+RUNNABLE	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
 RUNNING	kernel/process/process.h	/^#define RUNNING /;"	d
+RUNNING	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+ReadReg	xv6/kernel/uart.c	/^#define ReadReg(/;"	d	file:
+Reg	xv6/kernel/uart.c	/^#define Reg(/;"	d	file:
 SATP_SV39	kernel/include/basic_riscv.h	/^#define SATP_SV39 /;"	d
+SATP_SV39	xv6/kernel/riscv.h	/^#define SATP_SV39 /;"	d
+SB_MAGIC	kernel/filesystem/filesystem.h	/^#define SB_MAGIC /;"	d
 SIE_SEIE	kernel/include/basic_riscv.h	/^#define SIE_SEIE /;"	d
+SIE_SEIE	xv6/kernel/riscv.h	/^#define SIE_SEIE /;"	d
 SIE_SSIE	kernel/include/basic_riscv.h	/^#define SIE_SSIE /;"	d
+SIE_SSIE	xv6/kernel/riscv.h	/^#define SIE_SSIE /;"	d
 SIE_STIE	kernel/include/basic_riscv.h	/^#define SIE_STIE /;"	d
+SIE_STIE	xv6/kernel/riscv.h	/^#define SIE_STIE /;"	d
 SLEEPING	kernel/process/process.h	/^#define SLEEPING /;"	d
+SLEEPING	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
 SSTATUS_SIE	kernel/include/basic_riscv.h	/^#define SSTATUS_SIE /;"	d
+SSTATUS_SIE	xv6/kernel/riscv.h	/^#define SSTATUS_SIE /;"	d
 SSTATUS_SPIE	kernel/include/basic_riscv.h	/^#define SSTATUS_SPIE /;"	d
+SSTATUS_SPIE	xv6/kernel/riscv.h	/^#define SSTATUS_SPIE /;"	d
 SSTATUS_SPP	kernel/include/basic_riscv.h	/^#define SSTATUS_SPP /;"	d
+SSTATUS_SPP	xv6/kernel/riscv.h	/^#define SSTATUS_SPP /;"	d
 SSTATUS_UIE	kernel/include/basic_riscv.h	/^#define SSTATUS_UIE /;"	d
+SSTATUS_UIE	xv6/kernel/riscv.h	/^#define SSTATUS_UIE /;"	d
 SSTATUS_UPIE	kernel/include/basic_riscv.h	/^#define SSTATUS_UPIE /;"	d
-S_OBJ	Makefile	/^S_OBJ = $(notdir $(patsubst %.S,%.o,$(S_SRC)))$/;"	m
-S_SRC	Makefile	/^S_SRC = $(shell find $K -name "*.S")$/;"	m
+SSTATUS_UPIE	xv6/kernel/riscv.h	/^#define SSTATUS_UPIE /;"	d
+SYS_EXEC	kernel/syscall/syscall.h	/^#define SYS_EXEC	/;"	d
+SYS_EXIT	kernel/syscall/syscall.h	/^#define SYS_EXIT	/;"	d
+SYS_FORK	kernel/syscall/syscall.h	/^#define SYS_FORK	/;"	d
+SYS_GETPID	kernel/syscall/syscall.h	/^#define SYS_GETPID	/;"	d
+SYS_READ	kernel/syscall/syscall.h	/^#define SYS_READ	/;"	d
+SYS_WRITE	kernel/syscall/syscall.h	/^#define SYS_WRITE	/;"	d
+SYS_chdir	xv6/kernel/syscall.h	/^#define SYS_chdir /;"	d
+SYS_close	xv6/kernel/syscall.h	/^#define SYS_close /;"	d
+SYS_dup	xv6/kernel/syscall.h	/^#define SYS_dup /;"	d
+SYS_exec	xv6/kernel/syscall.h	/^#define SYS_exec /;"	d
+SYS_exit	xv6/kernel/syscall.h	/^#define SYS_exit /;"	d
+SYS_fork	xv6/kernel/syscall.h	/^#define SYS_fork /;"	d
+SYS_fstat	xv6/kernel/syscall.h	/^#define SYS_fstat /;"	d
+SYS_getpid	xv6/kernel/syscall.h	/^#define SYS_getpid /;"	d
+SYS_kill	xv6/kernel/syscall.h	/^#define SYS_kill /;"	d
+SYS_link	xv6/kernel/syscall.h	/^#define SYS_link /;"	d
+SYS_mkdir	xv6/kernel/syscall.h	/^#define SYS_mkdir /;"	d
+SYS_mknod	xv6/kernel/syscall.h	/^#define SYS_mknod /;"	d
+SYS_open	xv6/kernel/syscall.h	/^#define SYS_open /;"	d
+SYS_pipe	xv6/kernel/syscall.h	/^#define SYS_pipe /;"	d
+SYS_read	xv6/kernel/syscall.h	/^#define SYS_read /;"	d
+SYS_sbrk	xv6/kernel/syscall.h	/^#define SYS_sbrk /;"	d
+SYS_sleep	xv6/kernel/syscall.h	/^#define SYS_sleep /;"	d
+SYS_unlink	xv6/kernel/syscall.h	/^#define SYS_unlink /;"	d
+SYS_uptime	xv6/kernel/syscall.h	/^#define SYS_uptime /;"	d
+SYS_wait	xv6/kernel/syscall.h	/^#define SYS_wait /;"	d
+SYS_write	xv6/kernel/syscall.h	/^#define SYS_write /;"	d
+SZ	xv6/user/usertests.c	/^  enum { N = 1000, SZ=10};$/;"	e	enum:sharedfd::__anon72204ae90503	file:
+SZ	xv6/user/usertests.c	/^  enum { N = 20, SZ=600 };$/;"	e	enum:bigfile::__anon72204ae90c03	file:
+SZ	xv6/user/usertests.c	/^  enum { N=100, SZ=10 };$/;"	e	enum:writetest::__anon72204ae90103	file:
+SZ	xv6/user/usertests.c	/^  enum { N=12, NCHILD=4, SZ=500 };$/;"	e	enum:fourfiles::__anon72204ae90603	file:
+SZ	xv6/user/usertests.c	/^  enum { N=5, SZ=1033 };$/;"	e	enum:pipe1::__anon72204ae90303	file:
+SZ	xv6/user/usertests.c	/^  enum { SZ = 5 };$/;"	e	enum:linktest::__anon72204ae90903	file:
+SZ	xv6/user/usertests.c	/^  enum { SZ = 5 };$/;"	e	enum:unlinkread::__anon72204ae90803	file:
+S_OBJ	Makefile	/^S_OBJ	= $(notdir $(patsubst %.S,%.o,$(S_SRC)))$/;"	m
+S_SRC	Makefile	/^S_SRC	= $(shell find $K -name "*.S")$/;"	m
+THR	xv6/kernel/uart.c	/^#define THR /;"	d	file:
+TOOLPREFIX	xv6/Makefile	/^TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' >\/dev\/null 2>&/;"	m
+TOOMUCH	xv6/user/usertests.c	/^  enum { TOOMUCH=1024*1024*1024};$/;"	e	enum:sbrkbasic::__anon72204ae90e03	file:
 TRAMPOLINE	kernel/include/basic_memlayout.h	/^#define TRAMPOLINE /;"	d
+TRAMPOLINE	xv6/kernel/memlayout.h	/^#define TRAMPOLINE /;"	d
 TRAPFRAME	kernel/include/basic_memlayout.h	/^#define TRAPFRAME /;"	d
+TRAPFRAME	xv6/kernel/memlayout.h	/^#define TRAPFRAME /;"	d
+T_DEVICE	xv6/kernel/stat.h	/^#define T_DEVICE /;"	d
+T_DIR	xv6/kernel/stat.h	/^#define T_DIR /;"	d
+T_FILE	xv6/kernel/stat.h	/^#define T_FILE /;"	d
+U	Makefile	/^U	= user$/;"	m
+U	xv6/Makefile	/^U=user$/;"	m
 UART0	kernel/include/basic_memlayout.h	/^#define UART0 /;"	d
+UART0	xv6/kernel/memlayout.h	/^#define UART0 /;"	d
 UART0_IRQ	kernel/include/basic_memlayout.h	/^#define UART0_IRQ /;"	d
+UART0_IRQ	xv6/kernel/memlayout.h	/^#define UART0_IRQ /;"	d
+UART_TX_BUF_SIZE	xv6/kernel/uart.c	/^#define UART_TX_BUF_SIZE /;"	d	file:
+ULIB	xv6/Makefile	/^ULIB = $U\/ulib.o $U\/usys.o $U\/printf.o $U\/umalloc.o$/;"	m
 UNUSED	kernel/process/process.h	/^#define UNUSED /;"	d
+UNUSED	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+UPROGS	Makefile	/^UPROGS	= $(addprefix $U\/,$(patsubst %.c,_%,$(patsubst %.S,_%,$(notdir $(U_SRC)))))$/;"	m
+UPROGS	xv6/Makefile	/^UPROGS=\\$/;"	m
 USED	kernel/process/process.h	/^#define USED /;"	d
+USED	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+U_INCLUDE	Makefile	/^U_INCLUDE  = -I.\/$U$/;"	m
+U_SRC	Makefile	/^U_SRC	= $(shell find $U -name "*.c") $(shell find $U -name "*.S")$/;"	m
 VIRTIO0	kernel/include/basic_memlayout.h	/^#define VIRTIO0 /;"	d
+VIRTIO0	xv6/kernel/memlayout.h	/^#define VIRTIO0 /;"	d
 VIRTIO0_IRQ	kernel/include/basic_memlayout.h	/^#define VIRTIO0_IRQ /;"	d
+VIRTIO0_IRQ	xv6/kernel/memlayout.h	/^#define VIRTIO0_IRQ /;"	d
+VIRTIO_BLK_F_CONFIG_WCE	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_F_CONFIG_WCE /;"	d
+VIRTIO_BLK_F_MQ	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_F_MQ /;"	d
+VIRTIO_BLK_F_RO	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_F_RO /;"	d
+VIRTIO_BLK_F_SCSI	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_F_SCSI /;"	d
+VIRTIO_BLK_T_IN	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_T_IN /;"	d
+VIRTIO_BLK_T_OUT	xv6/kernel/virtio.h	/^#define VIRTIO_BLK_T_OUT /;"	d
+VIRTIO_CONFIG_S_ACKNOWLEDGE	xv6/kernel/virtio.h	/^#define VIRTIO_CONFIG_S_ACKNOWLEDGE	/;"	d
+VIRTIO_CONFIG_S_DRIVER	xv6/kernel/virtio.h	/^#define VIRTIO_CONFIG_S_DRIVER	/;"	d
+VIRTIO_CONFIG_S_DRIVER_OK	xv6/kernel/virtio.h	/^#define VIRTIO_CONFIG_S_DRIVER_OK	/;"	d
+VIRTIO_CONFIG_S_FEATURES_OK	xv6/kernel/virtio.h	/^#define VIRTIO_CONFIG_S_FEATURES_OK	/;"	d
+VIRTIO_F_ANY_LAYOUT	xv6/kernel/virtio.h	/^#define VIRTIO_F_ANY_LAYOUT /;"	d
+VIRTIO_MMIO_DEVICE_DESC_HIGH	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DEVICE_DESC_HIGH	/;"	d
+VIRTIO_MMIO_DEVICE_DESC_LOW	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DEVICE_DESC_LOW	/;"	d
+VIRTIO_MMIO_DEVICE_FEATURES	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DEVICE_FEATURES	/;"	d
+VIRTIO_MMIO_DEVICE_ID	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DEVICE_ID	/;"	d
+VIRTIO_MMIO_DRIVER_DESC_HIGH	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DRIVER_DESC_HIGH	/;"	d
+VIRTIO_MMIO_DRIVER_DESC_LOW	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DRIVER_DESC_LOW	/;"	d
+VIRTIO_MMIO_DRIVER_FEATURES	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_DRIVER_FEATURES	/;"	d
+VIRTIO_MMIO_INTERRUPT_ACK	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_INTERRUPT_ACK	/;"	d
+VIRTIO_MMIO_INTERRUPT_STATUS	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_INTERRUPT_STATUS	/;"	d
+VIRTIO_MMIO_MAGIC_VALUE	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_MAGIC_VALUE	/;"	d
+VIRTIO_MMIO_QUEUE_DESC_HIGH	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_DESC_HIGH	/;"	d
+VIRTIO_MMIO_QUEUE_DESC_LOW	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_DESC_LOW	/;"	d
+VIRTIO_MMIO_QUEUE_NOTIFY	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_NOTIFY	/;"	d
+VIRTIO_MMIO_QUEUE_NUM	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_NUM	/;"	d
+VIRTIO_MMIO_QUEUE_NUM_MAX	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_NUM_MAX	/;"	d
+VIRTIO_MMIO_QUEUE_READY	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_READY	/;"	d
+VIRTIO_MMIO_QUEUE_SEL	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_QUEUE_SEL	/;"	d
+VIRTIO_MMIO_STATUS	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_STATUS	/;"	d
+VIRTIO_MMIO_VENDOR_ID	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_VENDOR_ID	/;"	d
+VIRTIO_MMIO_VERSION	xv6/kernel/virtio.h	/^#define VIRTIO_MMIO_VERSION	/;"	d
+VIRTIO_RING_F_EVENT_IDX	xv6/kernel/virtio.h	/^#define VIRTIO_RING_F_EVENT_IDX /;"	d
+VIRTIO_RING_F_INDIRECT_DESC	xv6/kernel/virtio.h	/^#define VIRTIO_RING_F_INDIRECT_DESC /;"	d
+VRING_DESC_F_NEXT	xv6/kernel/virtio.h	/^#define VRING_DESC_F_NEXT /;"	d
+VRING_DESC_F_WRITE	xv6/kernel/virtio.h	/^#define VRING_DESC_F_WRITE /;"	d
+WriteReg	xv6/kernel/uart.c	/^#define WriteReg(/;"	d	file:
 ZOMBIE	kernel/process/process.h	/^#define ZOMBIE /;"	d
+ZOMBIE	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	e	enum:procstate
+_%	xv6/Makefile	/^_%: %.o $(ULIB)$/;"	t
+__BASIC_H__	kernel/include/basic.h	/^#define __BASIC_H__$/;"	d
+__STDINT_H__	user/stdint.h	/^#define __STDINT_H__$/;"	d
+__SYSTEM_H__	user/system.h	/^#define __SYSTEM_H__$/;"	d
 __TYPES_H__	kernel/include/basic_types.h	/^#define __TYPES_H__$/;"	d
+__anon03efc82c0108	xv6/kernel/console.c	/^struct {$/;"	s	file:
+__anon1c2856c00108	xv6/kernel/virtio_disk.c	/^  struct {$/;"	s	struct:disk	file:
+__anon44c7a4520108	xv6/kernel/fs.c	/^struct {$/;"	s	file:
+__anon6606502c0108	xv6/kernel/printf.c	/^static struct {$/;"	s	file:
+__anon6797c5240108	xv6/user/umalloc.c	/^  struct {$/;"	s	union:header	file:
+__anon72204ae90103	xv6/user/usertests.c	/^  enum { N=100, SZ=10 };$/;"	g	function:writetest	file:
+__anon72204ae90203	xv6/user/usertests.c	/^  enum { N=52 };$/;"	g	function:createtest	file:
+__anon72204ae90303	xv6/user/usertests.c	/^  enum { N=5, SZ=1033 };$/;"	g	function:pipe1	file:
+__anon72204ae90403	xv6/user/usertests.c	/^  enum { N=2 };$/;"	g	function:forkfork	file:
+__anon72204ae90503	xv6/user/usertests.c	/^  enum { N = 1000, SZ=10};$/;"	g	function:sharedfd	file:
+__anon72204ae90603	xv6/user/usertests.c	/^  enum { N=12, NCHILD=4, SZ=500 };$/;"	g	function:fourfiles	file:
+__anon72204ae90703	xv6/user/usertests.c	/^  enum { N = 20, NCHILD=4 };$/;"	g	function:createdelete	file:
+__anon72204ae90803	xv6/user/usertests.c	/^  enum { SZ = 5 };$/;"	g	function:unlinkread	file:
+__anon72204ae90903	xv6/user/usertests.c	/^  enum { SZ = 5 };$/;"	g	function:linktest	file:
+__anon72204ae90a03	xv6/user/usertests.c	/^  enum { N = 40 };$/;"	g	function:concreate	file:
+__anon72204ae90b08	xv6/user/usertests.c	/^  struct {$/;"	s	function:concreate	file:
+__anon72204ae90c03	xv6/user/usertests.c	/^  enum { N = 20, SZ=600 };$/;"	g	function:bigfile	file:
+__anon72204ae90d03	xv6/user/usertests.c	/^  enum{ N = 1000 };$/;"	g	function:forktest	file:
+__anon72204ae90e03	xv6/user/usertests.c	/^  enum { TOOMUCH=1024*1024*1024};$/;"	g	function:sbrkbasic	file:
+__anon72204ae90f03	xv6/user/usertests.c	/^  enum { BIG=100*1024*1024 };$/;"	g	function:sbrkmuch	file:
+__anon72204ae91003	xv6/user/usertests.c	/^  enum { BIG=100*1024*1024 };$/;"	g	function:sbrkfail	file:
+__anon72204ae91103	xv6/user/usertests.c	/^  enum { N = 500 };$/;"	g	function:bigdir	file:
+__anon94af1a190108	xv6/kernel/file.c	/^struct {$/;"	s	file:
+__anon94af1a1e0103	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	g	struct:file
 __anon9e7096f20108	kernel/memory/kmemory.c	/^struct {$/;"	s	file:
+__anonb2f79d2f0108	xv6/kernel/kalloc.c	/^struct {$/;"	s	file:
+__anondd6f5ed30108	xv6/kernel/bio.c	/^struct {$/;"	s	file:
 _entry	kernel/initial/_entry.S	/^_entry:$/;"	l
 _entry	obj/_entry.asm	/^_entry:$/;"	l
 _entry	obj/kernel.asm	/^_entry:$/;"	l
+_entry	xv6/kernel/entry.S	/^_entry:$/;"	l
+_main	user/test.S	/^_main:$/;"	l
+_main	xv6/user/ulib.c	/^_main()$/;"	f	typeref:typename:void
+_start	user/test.S	/^_start:$/;"	l
 _trampoline	kernel/kernel.ld	/^    _trampoline = .;$/;"	s	section:.text
+_trampoline	xv6/kernel/kernel.ld	/^    _trampoline = .;$/;"	s	section:.text
 a	obj/_entry.asm	/^   a:	912a                	add	sp,sp,a0$/;"	l
 a	obj/create.asm	/^   a:	00070713          	mv	a4,a4$/;"	l
+a	obj/diskio.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a	obj/exec.asm	/^   a:	0141                	add	sp,sp,16$/;"	l
+a	obj/inode.asm	/^   a:	ec4e                	sd	s3,24(sp)$/;"	l
 a	obj/kerneltrap.asm	/^   a:	00078793          	mv	a5,a5$/;"	l
 a	obj/kernelvec.asm	/^   a:	ec12                	sd	tp,24(sp)$/;"	l
 a	obj/kmemory.asm	/^   a:	00000497          	auipc	s1,0x0$/;"	l
@@ -128,98 +473,255 @@ a	obj/plic.asm	/^   a:	4705                	li	a4,1$/;"	l
 a	obj/schedular.asm	/^   a:	f44e                	sd	s3,40(sp)$/;"	l
 a	obj/start.asm	/^   a:	8082                	ret$/;"	l
 a	obj/swtch.asm	/^   a:	ed04                	sd	s1,24(a0)$/;"	l
-a	obj/userproc.asm	/^   a:	00053503          	ld	a0,0(a0) # 6 <.LCFI1>$/;"	l
-a	obj/util.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a	obj/syscall.asm	/^   a:	0141                	add	sp,sp,16$/;"	l
+a	obj/upagetable.asm	/^   a:	f426                	sd	s1,40(sp)$/;"	l
+a	obj/userproc.asm	/^   a:	00000517          	auipc	a0,0x0$/;"	l
+a	obj/usertrap.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a	obj/util.asm	/^   a:	0080                	add	s0,sp,64$/;"	l
+a	xv6/kernel/kernel.asm	/^    a = (uint*)bp->data;$/;"	d
+a	xv6/kernel/kernel.asm	/^  a = PGROUNDDOWN(va);$/;"	d
 a0	kernel/process/process.h	/^	uint64 a0;$/;"	m	struct:trapframe	typeref:typename:uint64
 a0	obj/create.asm	/^  a0:	00000097          	auipc	ra,0x0$/;"	l
-a0	obj/kmemory.asm	/^  a0:	000080e7          	jalr	ra # 9c <.L10+0x8>$/;"	l
+a0	obj/diskio.asm	/^  a0:	85ca                	mv	a1,s2$/;"	l
 a0	obj/kpagetable.asm	/^  a0:	050e                	sll	a0,a0,0x3$/;"	l
 a0	obj/start.asm	/^  a0:	00259693          	sll	a3,a1,0x2$/;"	l
-a0	obj/usertrap.asm	/^  a0:	00000097          	auipc	ra,0x0$/;"	l
-a0	obj/util.asm	/^  a0:	a001                	j	a0 <.L9>$/;"	l
+a0	obj/userproc.asm	/^  a0:	00078793          	mv	a5,a5$/;"	l
+a0	obj/usertrap.asm	/^  a0:	0800                	add	s0,sp,16$/;"	l
+a0	xv6/kernel/proc.h	/^  \/* 112 *\/ uint64 a0;$/;"	m	struct:trapframe	typeref:typename:uint64
 a1	kernel/process/process.h	/^	uint64 a1;$/;"	m	struct:trapframe	typeref:typename:uint64
+a1	xv6/kernel/proc.h	/^  \/* 120 *\/ uint64 a1;$/;"	m	struct:trapframe	typeref:typename:uint64
 a2	kernel/process/process.h	/^	uint64 a2;$/;"	m	struct:trapframe	typeref:typename:uint64
+a2	obj/diskio.asm	/^  a2:	4545                	li	a0,17$/;"	l
+a2	obj/exec.asm	/^  a2:	6785                	lui	a5,0x1$/;"	l
+a2	obj/inode.asm	/^  a2:	bfbd                	j	20 <.L2>$/;"	l
+a2	obj/kerneltrap.asm	/^  a2:	10049073          	csrw	sstatus,s1$/;"	l
+a2	obj/kmemory.asm	/^  a2:	000080e7          	jalr	ra # 9e <.L10+0x8>$/;"	l
 a2	obj/kpagetable.asm	/^  a2:	9526                	add	a0,a0,s1$/;"	l
-a2	obj/util.asm	/^  a2:	7175                	add	sp,sp,-144$/;"	l
+a2	obj/syscall.asm	/^  a2:	4795                	li	a5,5$/;"	l
+a2	obj/usertrap.asm	/^  a2:	00000797          	auipc	a5,0x0$/;"	l
+a2	obj/util.asm	/^  a2:	00078793          	mv	a5,a5$/;"	l
+a2	xv6/kernel/proc.h	/^  \/* 128 *\/ uint64 a2;$/;"	m	struct:trapframe	typeref:typename:uint64
 a3	kernel/process/process.h	/^	uint64 a3;$/;"	m	struct:trapframe	typeref:typename:uint64
+a3	xv6/kernel/proc.h	/^  \/* 136 *\/ uint64 a3;$/;"	m	struct:trapframe	typeref:typename:uint64
 a4	kernel/process/process.h	/^	uint64 a4;$/;"	m	struct:trapframe	typeref:typename:uint64
 a4	obj/create.asm	/^  a4:	000080e7          	jalr	ra # a0 <.L9+0x18>$/;"	l
-a4	obj/kmemory.asm	/^  a4:	bf4d                	j	56 <.L6>$/;"	l
+a4	obj/diskio.asm	/^  a4:	056e                	sll	a0,a0,0x1b$/;"	l
+a4	obj/exec.asm	/^  a4:	94be                	add	s1,s1,a5$/;"	l
+a4	obj/inode.asm	/^  a4:	00000517          	auipc	a0,0x0$/;"	l
 a4	obj/kpagetable.asm	/^  a4:	70e2                	ld	ra,56(sp)$/;"	l
 a4	obj/start.asm	/^  a4:	96ae                	add	a3,a3,a1$/;"	l
-a4	obj/usertrap.asm	/^  a4:	000080e7          	jalr	ra # a0 <.LBE47>$/;"	l
-a4	obj/util.asm	/^  a4:	e486                	sd	ra,72(sp)$/;"	l
+a4	obj/syscall.asm	/^  a4:	00c7ef63          	bltu	a5,a2,c2 <.L16>$/;"	l
+a4	obj/userproc.asm	/^  a4:	fc9c                	sd	a5,56(s1)$/;"	l
+a4	xv6/kernel/proc.h	/^  \/* 144 *\/ uint64 a4;$/;"	m	struct:trapframe	typeref:typename:uint64
 a5	kernel/process/process.h	/^	uint64 a5;$/;"	m	struct:trapframe	typeref:typename:uint64
+a5	xv6/kernel/proc.h	/^  \/* 152 *\/ uint64 a5;$/;"	m	struct:trapframe	typeref:typename:uint64
 a6	kernel/process/process.h	/^	uint64 a6;$/;"	m	struct:trapframe	typeref:typename:uint64
-a6	obj/kmemory.asm	/^  a6:	7179                	add	sp,sp,-48$/;"	l
+a6	obj/diskio.asm	/^  a6:	9526                	add	a0,a0,s1$/;"	l
+a6	obj/exec.asm	/^  a6:	fd34eae3          	bltu	s1,s3,7a <.L10>$/;"	l
+a6	obj/kerneltrap.asm	/^  a6:	60e2                	ld	ra,24(sp)$/;"	l
+a6	obj/kmemory.asm	/^  a6:	bf45                	j	56 <.L6>$/;"	l
 a6	obj/kpagetable.asm	/^  a6:	7442                	ld	s0,48(sp)$/;"	l
 a6	obj/start.asm	/^  a6:	068e                	sll	a3,a3,0x3$/;"	l
-a6	obj/util.asm	/^  a6:	e0a2                	sd	s0,64(sp)$/;"	l
+a6	obj/userproc.asm	/^  a6:	6c9c                	ld	a5,24(s1)$/;"	l
+a6	obj/usertrap.asm	/^  a6:	00078793          	mv	a5,a5$/;"	l
+a6	obj/util.asm	/^  a6:	6398                	ld	a4,0(a5)$/;"	l
+a6	xv6/kernel/proc.h	/^  \/* 160 *\/ uint64 a6;$/;"	m	struct:trapframe	typeref:typename:uint64
 a7	kernel/process/process.h	/^	uint64 a7;$/;"	m	struct:trapframe	typeref:typename:uint64
+a7	xv6/kernel/proc.h	/^  \/* 168 *\/ uint64 a7;$/;"	m	struct:trapframe	typeref:typename:uint64
 a8	obj/create.asm	/^  a8:	4785                	li	a5,1$/;"	l
-a8	obj/kmemory.asm	/^  a8:	f406                	sd	ra,40(sp)$/;"	l
+a8	obj/diskio.asm	/^  a8:	00000097          	auipc	ra,0x0$/;"	l
+a8	obj/inode.asm	/^  a8:	00050513          	mv	a0,a0$/;"	l
+a8	obj/kerneltrap.asm	/^  a8:	6442                	ld	s0,16(sp)$/;"	l
+a8	obj/kmemory.asm	/^  a8:	7179                	add	sp,sp,-48$/;"	l
 a8	obj/kpagetable.asm	/^  a8:	74a2                	ld	s1,40(sp)$/;"	l
 a8	obj/start.asm	/^  a8:	00000717          	auipc	a4,0x0$/;"	l
-a8	obj/usertrap.asm	/^  a8:	751c                	ld	a5,40(a0)$/;"	l
-a8	obj/util.asm	/^  a8:	fc26                	sd	s1,56(sp)$/;"	l
+a8	obj/syscall.asm	/^  a8:	00361713          	sll	a4,a2,0x3$/;"	l
+a8	obj/userproc.asm	/^  a8:	97ba                	add	a5,a5,a4$/;"	l
+a8	obj/util.asm	/^  a8:	fae43c23          	sd	a4,-72(s0)$/;"	l
 aa	obj/create.asm	/^  aa:	c0dc                	sw	a5,4(s1)$/;"	l
-aa	obj/kmemory.asm	/^  aa:	f022                	sd	s0,32(sp)$/;"	l
+aa	obj/exec.asm	/^  aa:	70e2                	ld	ra,56(sp)$/;"	l
+aa	obj/kerneltrap.asm	/^  aa:	64a2                	ld	s1,8(sp)$/;"	l
+aa	obj/kmemory.asm	/^  aa:	f406                	sd	ra,40(sp)$/;"	l
 aa	obj/kpagetable.asm	/^  aa:	7902                	ld	s2,32(sp)$/;"	l
-aa	obj/usertrap.asm	/^  aa:	18002773          	csrr	a4,satp$/;"	l
-aa	obj/util.asm	/^  aa:	f84a                	sd	s2,48(sp)$/;"	l
+aa	obj/userproc.asm	/^  aa:	e0bc                	sd	a5,64(s1)$/;"	l
+aa	obj/usertrap.asm	/^  aa:	10579073          	csrw	stvec,a5$/;"	l
+about Makefile	README.md	/^## about Makefile$/;"	s
 ac	obj/create.asm	/^  ac:	00000097          	auipc	ra,0x0$/;"	l
-ac	obj/kmemory.asm	/^  ac:	ec26                	sd	s1,24(sp)$/;"	l
+ac	obj/diskio.asm	/^  ac:	000080e7          	jalr	ra # a8 <.L9+0x10>$/;"	l
+ac	obj/exec.asm	/^  ac:	7442                	ld	s0,48(sp)$/;"	l
+ac	obj/inode.asm	/^  ac:	00000097          	auipc	ra,0x0$/;"	l
+ac	obj/kerneltrap.asm	/^  ac:	6902                	ld	s2,0(sp)$/;"	l
+ac	obj/kmemory.asm	/^  ac:	f022                	sd	s0,32(sp)$/;"	l
 ac	obj/kpagetable.asm	/^  ac:	69e2                	ld	s3,24(sp)$/;"	l
 ac	obj/start.asm	/^  ac:	00070713          	mv	a4,a4$/;"	l
-ac	obj/util.asm	/^  ac:	f44e                	sd	s3,40(sp)$/;"	l
-ae	obj/kmemory.asm	/^  ae:	e84a                	sd	s2,16(sp)$/;"	l
+ac	obj/syscall.asm	/^  ac:	00000797          	auipc	a5,0x0$/;"	l
+ac	obj/userproc.asm	/^  ac:	4789                	li	a5,2$/;"	l
+ac	obj/util.asm	/^  ac:	6798                	ld	a4,8(a5)$/;"	l
+acquire	xv6/kernel/spinlock.c	/^acquire(struct spinlock *lk)$/;"	f	typeref:typename:void
+acquiresleep	xv6/kernel/sleeplock.c	/^acquiresleep(struct sleeplock *lk)$/;"	f	typeref:typename:void
+addcall	lib/usys.py	/^def addcall(name):$/;"	f
+addfile	mkfs/mkfs.c	/^void addfile(FILE *fp, uint32 i) {$/;"	f	typeref:typename:void
+addr	xv6/kernel/kernel.asm	/^      addr = balloc(ip->dev);$/;"	d
+addr	xv6/kernel/kernel.asm	/^  addr = myproc()->sz;$/;"	d
+addr	xv6/kernel/virtio.h	/^  uint64 addr;$/;"	m	struct:virtq_desc	typeref:typename:uint64
+addrs	xv6/kernel/file.h	/^  uint addrs[NDIRECT+1];$/;"	m	struct:inode	typeref:typename:uint[]
+addrs	xv6/kernel/fs.h	/^  uint addrs[NDIRECT+1];   \/\/ Data block addresses$/;"	m	struct:dinode	typeref:typename:uint[]
+ae	obj/exec.asm	/^  ae:	74a2                	ld	s1,40(sp)$/;"	l
+ae	obj/kerneltrap.asm	/^  ae:	6105                	add	sp,sp,32$/;"	l
+ae	obj/kmemory.asm	/^  ae:	ec26                	sd	s1,24(sp)$/;"	l
 ae	obj/kpagetable.asm	/^  ae:	6a42                	ld	s4,16(sp)$/;"	l
-ae	obj/usertrap.asm	/^  ae:	e398                	sd	a4,0(a5)$/;"	l
-ae	obj/util.asm	/^  ae:	f052                	sd	s4,32(sp)$/;"	l
+ae	obj/userproc.asm	/^  ae:	c0dc                	sw	a5,4(s1)$/;"	l
+ae	obj/usertrap.asm	/^  ae:	100027f3          	csrr	a5,sstatus$/;"	l
+ae	obj/util.asm	/^  ae:	fce43023          	sd	a4,-64(s0)$/;"	l
+align	kernel/process/load/elf.h	/^  uint64 align;$/;"	m	struct:proghdr	typeref:typename:uint64
+align	xv6/kernel/elf.h	/^  uint64 align;$/;"	m	struct:proghdr	typeref:typename:uint64
+all	Makefile	/^all:	qemu$/;"	t
+alloc3_desc	xv6/kernel/virtio_disk.c	/^alloc3_desc(int *idx)$/;"	f	typeref:typename:int	file:
+alloc_desc	xv6/kernel/virtio_disk.c	/^alloc_desc()$/;"	f	typeref:typename:int	file:
 allocate_kernel_stacks	kernel/memory/kpagetable.c	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	f	typeref:typename:void
 allocate_pid	kernel/process/create.c	/^int allocate_pid() {$/;"	f	typeref:typename:int
 allocate_proc	kernel/process/create.c	/^struct proc *allocate_proc() {$/;"	f	typeref:struct:proc *
+allocmem	kernel/process/load/exec.c	/^void allocmem(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	f	typeref:typename:void
+allocpid	xv6/kernel/proc.c	/^allocpid()$/;"	f	typeref:typename:int
+allocproc	xv6/kernel/proc.c	/^allocproc(void)$/;"	f	typeref:struct:proc *	file:
+argaddr	xv6/kernel/syscall.c	/^argaddr(int n, uint64 *ip)$/;"	f	typeref:typename:void
+argfd	xv6/kernel/sysfile.c	/^argfd(int n, int *pfd, struct file **pf)$/;"	f	typeref:typename:int	file:
+argint	xv6/kernel/syscall.c	/^argint(int n, int *ip)$/;"	f	typeref:typename:void
+argptest	xv6/user/usertests.c	/^void argptest(char *s)$/;"	f	typeref:typename:void
+argraw	xv6/kernel/syscall.c	/^argraw(int n)$/;"	f	typeref:typename:uint64	file:
+argstr	xv6/kernel/syscall.c	/^argstr(int n, char *buf, int max)$/;"	f	typeref:typename:int
+argv	xv6/user/init.c	/^char *argv[] = { "sh", 0 };$/;"	v	typeref:typename:char * []
+argv	xv6/user/initcode.S	/^argv:$/;"	l
+argv	xv6/user/sh.c	/^  char *argv[MAXARGS];$/;"	m	struct:execcmd	typeref:typename:char * []	file:
+ast	mkfs/mkfs.c	/^#define ast(/;"	d	file:
+atoi	xv6/user/ulib.c	/^atoi(const char *s)$/;"	f	typeref:typename:int
+avail	xv6/kernel/virtio_disk.c	/^  struct virtq_avail *avail;$/;"	m	struct:disk	typeref:struct:virtq_avail *	file:
+b	xv6/kernel/kernel.asm	/^  b = bget(dev, blockno);$/;"	d
+b	xv6/kernel/virtio_disk.c	/^    struct buf *b;$/;"	m	struct:disk::__anon1c2856c00108	typeref:struct:buf *	file:
 b0	obj/create.asm	/^  b0:	000080e7          	jalr	ra # ac <.L8+0x4>$/;"	l
-b0	obj/kmemory.asm	/^  b0:	e44e                	sd	s3,8(sp)$/;"	l
+b0	obj/diskio.asm	/^  b0:	60e2                	ld	ra,24(sp)$/;"	l
+b0	obj/exec.asm	/^  b0:	7902                	ld	s2,32(sp)$/;"	l
+b0	obj/inode.asm	/^  b0:	000080e7          	jalr	ra # ac <.L15+0x8>$/;"	l
+b0	obj/kerneltrap.asm	/^  b0:	8082                	ret$/;"	l
+b0	obj/kmemory.asm	/^  b0:	e84a                	sd	s2,16(sp)$/;"	l
 b0	obj/kpagetable.asm	/^  b0:	6aa2                	ld	s5,8(sp)$/;"	l
 b0	obj/start.asm	/^  b0:	9736                	add	a4,a4,a3$/;"	l
-b0	obj/usertrap.asm	/^  b0:	7518                	ld	a4,40(a0)$/;"	l
-b0	obj/util.asm	/^  b0:	ec56                	sd	s5,24(sp)$/;"	l
-b2	obj/kmemory.asm	/^  b2:	1800                	add	s0,sp,48$/;"	l
+b0	obj/syscall.asm	/^  b0:	00078793          	mv	a5,a5$/;"	l
+b0	obj/userproc.asm	/^  b0:	60e2                	ld	ra,24(sp)$/;"	l
+b2	obj/diskio.asm	/^  b2:	6442                	ld	s0,16(sp)$/;"	l
+b2	obj/exec.asm	/^  b2:	69e2                	ld	s3,24(sp)$/;"	l
+b2	obj/kerneltrap.asm	/^  b2:	00000517          	auipc	a0,0x0$/;"	l
+b2	obj/kmemory.asm	/^  b2:	e44e                	sd	s3,8(sp)$/;"	l
 b2	obj/kpagetable.asm	/^  b2:	6b02                	ld	s6,0(sp)$/;"	l
 b2	obj/start.asm	/^  b2:	ef1c                	sd	a5,24(a4)$/;"	l
-b2	obj/usertrap.asm	/^  b2:	6d1c                	ld	a5,24(a0)$/;"	l
-b2	obj/util.asm	/^  b2:	0880                	add	s0,sp,80$/;"	l
+b2	obj/userproc.asm	/^  b2:	6442                	ld	s0,16(sp)$/;"	l
+b2	obj/usertrap.asm	/^  b2:	1007f793          	and	a5,a5,256$/;"	l
+b2	obj/util.asm	/^  b2:	0107c783          	lbu	a5,16(a5) # ae <.LCFI6+0x12>$/;"	l
 b4	obj/create.asm	/^  b4:	c088                	sw	a0,0(s1)$/;"	l
-b4	obj/kmemory.asm	/^  b4:	00000497          	auipc	s1,0x0$/;"	l
+b4	obj/diskio.asm	/^  b4:	64a2                	ld	s1,8(sp)$/;"	l
+b4	obj/exec.asm	/^  b4:	6a42                	ld	s4,16(sp)$/;"	l
+b4	obj/inode.asm	/^  b4:	bf95                	j	28 <.L3>$/;"	l
+b4	obj/kmemory.asm	/^  b4:	1800                	add	s0,sp,48$/;"	l
 b4	obj/kpagetable.asm	/^  b4:	6121                	add	sp,sp,64$/;"	l
 b4	obj/start.asm	/^  b4:	f310                	sd	a2,32(a4)$/;"	l
-b4	obj/usertrap.asm	/^  b4:	6685                	lui	a3,0x1$/;"	l
-b4	obj/util.asm	/^  b4:	892a                	mv	s2,a0$/;"	l
+b4	obj/syscall.asm	/^  b4:	97ba                	add	a5,a5,a4$/;"	l
+b4	obj/userproc.asm	/^  b4:	64a2                	ld	s1,8(sp)$/;"	l
 b6	obj/create.asm	/^  b6:	00000097          	auipc	ra,0x0$/;"	l
+b6	obj/diskio.asm	/^  b6:	6902                	ld	s2,0(sp)$/;"	l
+b6	obj/exec.asm	/^  b6:	6aa2                	ld	s5,8(sp)$/;"	l
+b6	obj/inode.asm	/^  b6:	078a                	sll	a5,a5,0x2$/;"	l
+b6	obj/kerneltrap.asm	/^  b6:	00050513          	mv	a0,a0$/;"	l
+b6	obj/kmemory.asm	/^  b6:	00000497          	auipc	s1,0x0$/;"	l
 b6	obj/kpagetable.asm	/^  b6:	8082                	ret$/;"	l
 b6	obj/start.asm	/^  b6:	34071073          	csrw	mscratch,a4$/;"	l
-b6	obj/usertrap.asm	/^  b6:	97b6                	add	a5,a5,a3$/;"	l
-b6	obj/util.asm	/^  b6:	e40c                	sd	a1,8(s0)$/;"	l
-b8	obj/kmemory.asm	/^  b8:	00048493          	mv	s1,s1$/;"	l
-b8	obj/kpagetable.asm	/^  b8:	711d                	add	sp,sp,-96$/;"	l
-b8	obj/usertrap.asm	/^  b8:	e71c                	sd	a5,8(a4)$/;"	l
-b8	obj/util.asm	/^  b8:	e810                	sd	a2,16(s0)$/;"	l
+b6	obj/syscall.asm	/^  b6:	639c                	ld	a5,0(a5)$/;"	l
+b6	obj/userproc.asm	/^  b6:	6902                	ld	s2,0(sp)$/;"	l
+b6	obj/usertrap.asm	/^  b6:	e3c9                	bnez	a5,138 <.L8>$/;"	l
+b6	obj/util.asm	/^  b6:	fcf40423          	sb	a5,-56(s0)$/;"	l
+b8	obj/diskio.asm	/^  b8:	6105                	add	sp,sp,32$/;"	l
+b8	obj/exec.asm	/^  b8:	6121                	add	sp,sp,64$/;"	l
+b8	obj/inode.asm	/^  b8:	00f90533          	add	a0,s2,a5$/;"	l
+b8	obj/kpagetable.asm	/^  b8:	1101                	add	sp,sp,-32$/;"	l
+b8	obj/syscall.asm	/^  b8:	c789                	beqz	a5,c2 <.L16>$/;"	l
+b8	obj/userproc.asm	/^  b8:	6105                	add	sp,sp,32$/;"	l
+b8	obj/usertrap.asm	/^  b8:	00000097          	auipc	ra,0x0$/;"	l
 ba	obj/create.asm	/^  ba:	000080e7          	jalr	ra # b6 <.LVL8+0x2>$/;"	l
-ba	obj/kpagetable.asm	/^  ba:	ec86                	sd	ra,88(sp)$/;"	l
+ba	obj/diskio.asm	/^  ba:	8082                	ret$/;"	l
+ba	obj/exec.asm	/^  ba:	8082                	ret$/;"	l
+ba	obj/kerneltrap.asm	/^  ba:	00000097          	auipc	ra,0x0$/;"	l
+ba	obj/kmemory.asm	/^  ba:	00048493          	mv	s1,s1$/;"	l
+ba	obj/kpagetable.asm	/^  ba:	ec06                	sd	ra,24(sp)$/;"	l
 ba	obj/start.asm	/^  ba:	00000797          	auipc	a5,0x0$/;"	l
-ba	obj/usertrap.asm	/^  ba:	751c                	ld	a5,40(a0)$/;"	l
-ba	obj/util.asm	/^  ba:	ec14                	sd	a3,24(s0)$/;"	l
-bc	obj/kmemory.asm	/^  bc:	77fd                	lui	a5,0xfffff$/;"	l
-bc	obj/kpagetable.asm	/^  bc:	e8a2                	sd	s0,80(sp)$/;"	l
-bc	obj/usertrap.asm	/^  bc:	00000717          	auipc	a4,0x0$/;"	l
-bc	obj/util.asm	/^  bc:	f018                	sd	a4,32(s0)$/;"	l
+ba	obj/syscall.asm	/^  ba:	9782                	jalr	a5$/;"	l
+ba	obj/userproc.asm	/^  ba:	8082                	ret$/;"	l
+ba	obj/util.asm	/^  ba:	00000517          	auipc	a0,0x0$/;"	l
+backcmd	xv6/user/sh.c	/^backcmd(struct cmd *subcmd)$/;"	f	typeref:struct:cmd *
+backcmd	xv6/user/sh.c	/^struct backcmd {$/;"	s	file:
+backtrace	kernel/util.c	/^void backtrace() {$/;"	f	typeref:typename:void
+bad	xv6/kernel/kernel.asm	/^ bad:$/;"	l
+badarg	xv6/user/usertests.c	/^badarg(char *s)$/;"	f	typeref:typename:void
+badwrite	xv6/user/usertests.c	/^badwrite(char *s)$/;"	f	typeref:typename:void
+balloc	xv6/kernel/fs.c	/^balloc(uint dev)$/;"	f	typeref:typename:uint	file:
+balloc	xv6/mkfs/mkfs.c	/^balloc(int used)$/;"	f	typeref:typename:void
+base	xv6/user/umalloc.c	/^static Header base;$/;"	v	typeref:typename:Header	file:
+bc	obj/diskio.asm	/^  bc:	00000517          	auipc	a0,0x0$/;"	l
+bc	obj/exec.asm	/^  bc:	8082                	ret$/;"	l
+bc	obj/inode.asm	/^  bc:	4544                	lw	s1,12(a0)$/;"	l
+bc	obj/kpagetable.asm	/^  bc:	e822                	sd	s0,16(sp)$/;"	l
+bc	obj/syscall.asm	/^  bc:	06a93823          	sd	a0,112(s2)$/;"	l
+bc	obj/usertrap.asm	/^  bc:	000080e7          	jalr	ra # b8 <.L4>$/;"	l
+bcache	xv6/kernel/bio.c	/^} bcache;$/;"	v	typeref:struct:__anondd6f5ed30108
 be	obj/create.asm	/^  be:	f488                	sd	a0,40(s1)$/;"	l
-be	obj/kmemory.asm	/^  be:	8cfd                	and	s1,s1,a5$/;"	l
-be	obj/kpagetable.asm	/^  be:	e4a6                	sd	s1,72(sp)$/;"	l
+be	obj/exec.asm	/^  be:	7111                	add	sp,sp,-256$/;"	l
+be	obj/inode.asm	/^  be:	00a4d49b          	srlw	s1,s1,0xa$/;"	l
+be	obj/kerneltrap.asm	/^  be:	000080e7          	jalr	ra # ba <.L6+0x8>$/;"	l
+be	obj/kmemory.asm	/^  be:	77fd                	lui	a5,0xfffff$/;"	l
+be	obj/kpagetable.asm	/^  be:	e426                	sd	s1,8(sp)$/;"	l
 be	obj/start.asm	/^  be:	00078793          	mv	a5,a5$/;"	l
-be	obj/util.asm	/^  be:	f41c                	sd	a5,40(s0)$/;"	l
+be	obj/util.asm	/^  be:	00050513          	mv	a0,a0$/;"	l
+begin_op	xv6/kernel/log.c	/^begin_op(void)$/;"	f	typeref:typename:void
+bfree	xv6/kernel/fs.c	/^bfree(int dev, uint b)$/;"	f	typeref:typename:void	file:
+bget	xv6/kernel/bio.c	/^bget(uint dev, uint blockno)$/;"	f	typeref:struct:buf *	file:
+bi	xv6/kernel/kernel.asm	/^  bi = b % BPB;$/;"	d
+big	xv6/user/usertests.c	/^void *big = (void*) 0xeaeb0b5b00002f5e;$/;"	v	typeref:typename:void *
+bigargtest	xv6/user/usertests.c	/^bigargtest(char *s)$/;"	f	typeref:typename:void
+bigdir	xv6/user/usertests.c	/^bigdir(char *s)$/;"	f	typeref:typename:void
+bigfile	xv6/user/usertests.c	/^bigfile(char *s)$/;"	f	typeref:typename:void
+bigwrite	xv6/user/usertests.c	/^bigwrite(char *s)$/;"	f	typeref:typename:void
+binit	xv6/kernel/bio.c	/^binit(void)$/;"	f	typeref:typename:void
+block	xv6/kernel/log.c	/^  int block[LOGSIZE];$/;"	m	struct:logheader	typeref:typename:int[]	file:
+blockno	xv6/kernel/buf.h	/^  uint blockno;$/;"	m	struct:buf	typeref:typename:uint
+blocks	mkfs/mkfs.c	/^	uint blocks;$/;"	m	struct:DISK	typeref:typename:uint	file:
+bmap	xv6/kernel/fs.c	/^bmap(struct inode *ip, uint bn)$/;"	f	typeref:typename:uint	file:
+bmap_startb	kernel/filesystem/filesystem.h	/^	uint32 bmap_startb;$/;"	m	struct:superblock	typeref:typename:uint32
+bmapstart	xv6/kernel/fs.h	/^  uint bmapstart;    \/\/ Block number of first free map block$/;"	m	struct:superblock	typeref:typename:uint
+bp	xv6/kernel/kernel.asm	/^    bp = bread(dev, BBLOCK(b, sb));$/;"	d
+bp	xv6/kernel/kernel.asm	/^    bp = bread(dev, IBLOCK(inum, sb));$/;"	d
+bp	xv6/kernel/kernel.asm	/^    bp = bread(ip->dev, IBLOCK(ip->inum, sb));$/;"	d
+bp	xv6/kernel/kernel.asm	/^    bp = bread(ip->dev, addr);$/;"	d
+bp	xv6/kernel/kernel.asm	/^    bp = bread(ip->dev, ip->addrs[NDIRECT]);$/;"	d
+bp	xv6/kernel/kernel.asm	/^  bp = bread(dev, 1);$/;"	d
+bp	xv6/kernel/kernel.asm	/^  bp = bread(dev, BBLOCK(b, sb));$/;"	d
+bp	xv6/kernel/kernel.asm	/^  bp = bread(dev, bno);$/;"	d
+bp	xv6/kernel/kernel.asm	/^  bp = bread(ip->dev, IBLOCK(ip->inum, sb));$/;"	d
+bpin	xv6/kernel/bio.c	/^bpin(struct buf *b) {$/;"	f	typeref:typename:void
+bread	xv6/kernel/bio.c	/^bread(uint dev, uint blockno)$/;"	f	typeref:struct:buf *
+brelse	xv6/kernel/bio.c	/^brelse(struct buf *b)$/;"	f	typeref:typename:void
+bsstest	xv6/user/usertests.c	/^bsstest(char *s)$/;"	f	typeref:typename:void
+buf	xv6/kernel/bio.c	/^  struct buf buf[NBUF];$/;"	m	struct:__anondd6f5ed30108	typeref:struct:buf[]	file:
+buf	xv6/kernel/buf.h	/^struct buf {$/;"	s
+buf	xv6/kernel/console.c	/^  char buf[INPUT_BUF_SIZE];$/;"	m	struct:__anon03efc82c0108	typeref:typename:char[]	file:
+buf	xv6/user/cat.c	/^char buf[512];$/;"	v	typeref:typename:char[512]
+buf	xv6/user/grep.c	/^char buf[1024];$/;"	v	typeref:typename:char[1024]
+buf	xv6/user/usertests.c	/^char buf[BUFSZ];$/;"	v	typeref:typename:char[]
+buf	xv6/user/wc.c	/^char buf[512];$/;"	v	typeref:typename:char[512]
+bunpin	xv6/kernel/bio.c	/^bunpin(struct buf *b) {$/;"	f	typeref:typename:void
+bwrite	xv6/kernel/bio.c	/^bwrite(struct buf *b)$/;"	f	typeref:typename:void
+bzero	xv6/kernel/fs.c	/^bzero(int dev, int bno)$/;"	f	typeref:typename:void	file:
 c	obj/_entry.asm	/^   c:	00000097          	auipc	ra,0x0$/;"	l
+c	obj/diskio.asm	/^   c:	892a                	mv	s2,a0$/;"	l
+c	obj/exec.asm	/^   c:	8082                	ret$/;"	l
+c	obj/inode.asm	/^   c:	e852                	sd	s4,16(sp)$/;"	l
 c	obj/kernelvec.asm	/^   c:	f016                	sd	t0,32(sp)$/;"	l
 c	obj/kpagetable.asm	/^   c:	e852                	sd	s4,16(sp)$/;"	l
 c	obj/main.asm	/^   c:	000080e7          	jalr	ra # 8 <.LCFI1>$/;"	l
@@ -227,98 +729,228 @@ c	obj/plic.asm	/^   c:	d798                	sw	a4,40(a5)$/;"	l
 c	obj/schedular.asm	/^   c:	f052                	sd	s4,32(sp)$/;"	l
 c	obj/start.asm	/^   c:	1141                	add	sp,sp,-16$/;"	l
 c	obj/swtch.asm	/^   c:	03253023          	sd	s2,32(a0)$/;"	l
-c	obj/usertrap.asm	/^   c:	00078793          	mv	a5,a5$/;"	l
+c	obj/syscall.asm	/^   c:	8082                	ret$/;"	l
+c	obj/upagetable.asm	/^   c:	f04a                	sd	s2,32(sp)$/;"	l
+c	obj/usertrap.asm	/^   c:	100027f3          	csrr	a5,sstatus$/;"	l
 c	obj/util.asm	/^   c:	84aa                	mv	s1,a0$/;"	l
+c	xv6/kernel/kernel.asm	/^      c = (c == '\\r') ? '\\n' : c;$/;"	d
+c	xv6/kernel/kernel.asm	/^    c = cons.buf[cons.r++ % INPUT_BUF_SIZE];$/;"	d
+c	xv6/kernel/kernel.asm	/^    c = fmt[++i] & 0xff;$/;"	d
+c	xv6/user/initcode.asm	/^   c:	00058593          	mv	a1,a1$/;"	l
 c0	obj/create.asm	/^  c0:	00000097          	auipc	ra,0x0$/;"	l
-c0	obj/kmemory.asm	/^  c0:	47c5                	li	a5,17$/;"	l
-c0	obj/kpagetable.asm	/^  c0:	e0ca                	sd	s2,64(sp)$/;"	l
-c0	obj/usertrap.asm	/^  c0:	00070713          	mv	a4,a4$/;"	l
-c0	obj/util.asm	/^  c0:	03043823          	sd	a6,48(s0)$/;"	l
-c2	obj/kmemory.asm	/^  c2:	07ee                	sll	a5,a5,0x1b$/;"	l
-c2	obj/kpagetable.asm	/^  c2:	fc4e                	sd	s3,56(sp)$/;"	l
+c0	obj/diskio.asm	/^  c0:	00050513          	mv	a0,a0$/;"	l
+c0	obj/exec.asm	/^  c0:	fd86                	sd	ra,248(sp)$/;"	l
+c0	obj/kmemory.asm	/^  c0:	8cfd                	and	s1,s1,a5$/;"	l
+c0	obj/kpagetable.asm	/^  c0:	1000                	add	s0,sp,32$/;"	l
+c0	obj/syscall.asm	/^  c0:	a829                	j	da <.L15>$/;"	l
+c0	obj/usertrap.asm	/^  c0:	14202773          	csrr	a4,scause$/;"	l
+c2	obj/exec.asm	/^  c2:	f9a2                	sd	s0,240(sp)$/;"	l
+c2	obj/inode.asm	/^  c2:	b76d                	j	6c <.L5>$/;"	l
+c2	obj/kerneltrap.asm	/^  c2:	bf85                	j	32 <.L4>$/;"	l
+c2	obj/kmemory.asm	/^  c2:	10f00793          	li	a5,271$/;"	l
+c2	obj/kpagetable.asm	/^  c2:	4601                	li	a2,0$/;"	l
 c2	obj/start.asm	/^  c2:	30579073          	csrw	mtvec,a5$/;"	l
+c2	obj/syscall.asm	/^  c2:	408c                	lw	a1,0(s1)$/;"	l
+c2	obj/util.asm	/^  c2:	00000097          	auipc	ra,0x0$/;"	l
 c4	obj/create.asm	/^  c4:	000080e7          	jalr	ra # c0 <.LVL9+0x2>$/;"	l
-c4	obj/kmemory.asm	/^  c4:	00f4fc63          	bgeu	s1,a5,dc <.L11>$/;"	l
-c4	obj/kpagetable.asm	/^  c4:	f852                	sd	s4,48(sp)$/;"	l
-c4	obj/usertrap.asm	/^  c4:	eb98                	sd	a4,16(a5)$/;"	l
-c4	obj/util.asm	/^  c4:	03143c23          	sd	a7,56(s0)$/;"	l
-c6	obj/kpagetable.asm	/^  c6:	f456                	sd	s5,40(sp)$/;"	l
+c4	obj/diskio.asm	/^  c4:	00000097          	auipc	ra,0x0$/;"	l
+c4	obj/exec.asm	/^  c4:	f5a6                	sd	s1,232(sp)$/;"	l
+c4	obj/inode.asm	/^  c4:	4a85                	li	s5,1$/;"	l
+c4	obj/kpagetable.asm	/^  c4:	00000097          	auipc	ra,0x0$/;"	l
+c4	obj/syscall.asm	/^  c4:	00000517          	auipc	a0,0x0$/;"	l
+c4	obj/usertrap.asm	/^  c4:	47a1                	li	a5,8$/;"	l
+c6	obj/exec.asm	/^  c6:	f1ca                	sd	s2,224(sp)$/;"	l
+c6	obj/inode.asm	/^  c6:	00048a1b          	sext.w	s4,s1$/;"	l
+c6	obj/kmemory.asm	/^  c6:	07de                	sll	a5,a5,0x17$/;"	l
 c6	obj/start.asm	/^  c6:	300027f3          	csrr	a5,mstatus$/;"	l
-c6	obj/usertrap.asm	/^  c6:	751c                	ld	a5,40(a0)$/;"	l
+c6	obj/usertrap.asm	/^  c6:	08f70263          	beq	a4,a5,14a <.L9>$/;"	l
+c6	obj/util.asm	/^  c6:	000080e7          	jalr	ra # c2 <.LVL11>$/;"	l
 c8	obj/create.asm	/^  c8:	892a                	mv	s2,a0$/;"	l
-c8	obj/kmemory.asm	/^  c8:	6985                	lui	s3,0x1$/;"	l
-c8	obj/kpagetable.asm	/^  c8:	f05a                	sd	s6,32(sp)$/;"	l
-c8	obj/usertrap.asm	/^  c8:	8712                	mv	a4,tp$/;"	l
-c8	obj/util.asm	/^  c8:	00840793          	add	a5,s0,8$/;"	l
+c8	obj/diskio.asm	/^  c8:	000080e7          	jalr	ra # c4 <.LVL13>$/;"	l
+c8	obj/exec.asm	/^  c8:	edce                	sd	s3,216(sp)$/;"	l
+c8	obj/kmemory.asm	/^  c8:	00f4fc63          	bgeu	s1,a5,e0 <.L11>$/;"	l
+c8	obj/kpagetable.asm	/^  c8:	000080e7          	jalr	ra # c4 <.LCFI5+0x2>$/;"	l
+c8	obj/syscall.asm	/^  c8:	00050513          	mv	a0,a0$/;"	l
 ca	obj/create.asm	/^  ca:	6605                	lui	a2,0x1$/;"	l
-ca	obj/kmemory.asm	/^  ca:	893e                	mv	s2,a5$/;"	l
-ca	obj/kpagetable.asm	/^  ca:	ec5e                	sd	s7,24(sp)$/;"	l
+ca	obj/exec.asm	/^  ca:	e9d2                	sd	s4,208(sp)$/;"	l
+ca	obj/inode.asm	/^  ca:	00000097          	auipc	ra,0x0$/;"	l
 ca	obj/start.asm	/^  ca:	0087e793          	or	a5,a5,8$/;"	l
-ca	obj/usertrap.asm	/^  ca:	f398                	sd	a4,32(a5)$/;"	l
+ca	obj/usertrap.asm	/^  ca:	410c                	lw	a1,0(a0)$/;"	l
+ca	obj/util.asm	/^  ca:	03c00493          	li	s1,60$/;"	l
+cat	xv6/user/cat.c	/^cat(int fd)$/;"	f	typeref:typename:void
+cbuf	xv6/kernel/kernel.asm	/^    cbuf = c;$/;"	d
 cc	obj/create.asm	/^  cc:	4581                	li	a1,0$/;"	l
-cc	obj/kmemory.asm	/^  cc:	8526                	mv	a0,s1$/;"	l
-cc	obj/kpagetable.asm	/^  cc:	e862                	sd	s8,16(sp)$/;"	l
-cc	obj/usertrap.asm	/^  cc:	7108                	ld	a0,32(a0)$/;"	l
-cc	obj/util.asm	/^  cc:	faf43c23          	sd	a5,-72(s0)$/;"	l
+cc	obj/diskio.asm	/^  cc:	b7c9                	j	8e <.L8>$/;"	l
+cc	obj/exec.asm	/^  cc:	e5d6                	sd	s5,200(sp)$/;"	l
+cc	obj/kmemory.asm	/^  cc:	6985                	lui	s3,0x1$/;"	l
+cc	obj/kpagetable.asm	/^  cc:	84aa                	mv	s1,a0$/;"	l
+cc	obj/syscall.asm	/^  cc:	00000097          	auipc	ra,0x0$/;"	l
+cc	obj/usertrap.asm	/^  cc:	00000517          	auipc	a0,0x0$/;"	l
 ce	obj/create.asm	/^  ce:	00000097          	auipc	ra,0x0$/;"	l
-ce	obj/kmemory.asm	/^  ce:	00000097          	auipc	ra,0x0$/;"	l
-ce	obj/kpagetable.asm	/^  ce:	e466                	sd	s9,8(sp)$/;"	l
+ce	obj/diskio.asm	/^  ce:	00000517          	auipc	a0,0x0$/;"	l
+ce	obj/exec.asm	/^  ce:	e1da                	sd	s6,192(sp)$/;"	l
+ce	obj/inode.asm	/^  ce:	000080e7          	jalr	ra # ca <.L6>$/;"	l
+ce	obj/kmemory.asm	/^  ce:	893e                	mv	s2,a5$/;"	l
+ce	obj/kpagetable.asm	/^  ce:	c909                	beqz	a0,e0 <.L16>$/;"	l
 ce	obj/start.asm	/^  ce:	30079073          	csrw	mstatus,a5$/;"	l
-ce	obj/usertrap.asm	/^  ce:	8131                	srl	a0,a0,0xc$/;"	l
+ce	obj/util.asm	/^  ce:	59f1                	li	s3,-4$/;"	l
+ch	xv6/kernel/kernel.asm	/^    ch = pi->data[pi->nread++ % PIPESIZE];$/;"	d
+chan	xv6/kernel/proc.h	/^  void *chan;                  \/\/ If non-zero, sleeping on chan$/;"	m	struct:proc	typeref:typename:void *
+checkdisk	Makefile	/^checkdisk:mkfs\/checkdisk.c$/;"	t
 clean	Makefile	/^clean:$/;"	t
+clean	xv6/Makefile	/^clean: $/;"	t
+clockintr	xv6/kernel/trap.c	/^clockintr()$/;"	f	typeref:typename:void
+cmd	xv6/user/sh.c	/^  struct cmd *cmd;$/;"	m	struct:backcmd	typeref:struct:cmd *	file:
+cmd	xv6/user/sh.c	/^  struct cmd *cmd;$/;"	m	struct:redircmd	typeref:struct:cmd *	file:
+cmd	xv6/user/sh.c	/^struct cmd {$/;"	s	file:
+commit	xv6/kernel/log.c	/^commit()$/;"	f	typeref:typename:void	file:
+committing	xv6/kernel/log.c	/^  int committing;  \/\/ in commit(), please wait.$/;"	m	struct:log	typeref:typename:int	file:
+concreate	xv6/user/usertests.c	/^concreate(char *s)$/;"	f	typeref:typename:void
+cons	xv6/kernel/console.c	/^} cons;$/;"	v	typeref:struct:__anon03efc82c0108
+consoleinit	xv6/kernel/console.c	/^consoleinit(void)$/;"	f	typeref:typename:void
+consoleintr	xv6/kernel/console.c	/^consoleintr(int c)$/;"	f	typeref:typename:void
+consoleread	xv6/kernel/console.c	/^consoleread(int user_dst, uint64 dst, int n)$/;"	f	typeref:typename:int
+consolewrite	xv6/kernel/console.c	/^consolewrite(int user_src, uint64 src, int n)$/;"	f	typeref:typename:int
+consputc	xv6/kernel/console.c	/^consputc(int c)$/;"	f	typeref:typename:void
 context	kernel/process/process.h	/^	struct context context;	\/\/ for swtch()$/;"	m	struct:proc	typeref:struct:context
 context	kernel/process/process.h	/^struct context {$/;"	s
+context	xv6/kernel/proc.h	/^  struct context context;      \/\/ swtch() here to run process$/;"	m	struct:proc	typeref:struct:context
+context	xv6/kernel/proc.h	/^  struct context context;     \/\/ swtch() here to enter scheduler().$/;"	m	struct:cpu	typeref:struct:context
+context	xv6/kernel/proc.h	/^struct context {\/*{{{*\/$/;"	s
+copyin	xv6/kernel/vm.c	/^copyin(pagetable_t pagetable, char *dst, uint64 srcva, uint64 len)$/;"	f	typeref:typename:int
+copyin	xv6/user/usertests.c	/^copyin(char *s)$/;"	f	typeref:typename:void
+copyinstr	xv6/kernel/vm.c	/^copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)$/;"	f	typeref:typename:int
+copyinstr1	xv6/user/usertests.c	/^copyinstr1(char *s)$/;"	f	typeref:typename:void
+copyinstr2	xv6/user/usertests.c	/^copyinstr2(char *s)$/;"	f	typeref:typename:void
+copyinstr3	xv6/user/usertests.c	/^copyinstr3(char *s)$/;"	f	typeref:typename:void
+copyout	xv6/kernel/vm.c	/^copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)$/;"	f	typeref:typename:int
+copyout	xv6/user/usertests.c	/^copyout(char *s)$/;"	f	typeref:typename:void
+countfree	xv6/user/usertests.c	/^countfree()$/;"	f	typeref:typename:int
+cpu	xv6/kernel/proc.h	/^struct cpu {$/;"	s
+cpu	xv6/kernel/spinlock.h	/^  struct cpu *cpu;   \/\/ The cpu holding the lock.$/;"	m	struct:spinlock	typeref:struct:cpu *
 cpuid	kernel/util.c	/^int cpuid() {$/;"	f	typeref:typename:int
+cpuid	xv6/kernel/proc.c	/^cpuid()$/;"	f	typeref:typename:int
+cpus	xv6/kernel/proc.c	/^struct cpu cpus[NCPU];$/;"	v	typeref:struct:cpu[]
+create	xv6/kernel/sysfile.c	/^create(char *path, short type, short major, short minor)$/;"	f	typeref:struct:inode *	file:
+createdelete	xv6/user/usertests.c	/^createdelete(char *s)$/;"	f	typeref:typename:void
+createtest	xv6/user/usertests.c	/^createtest(char *s)$/;"	f	typeref:typename:void
 current_proc	kernel/process/userproc.c	/^struct proc *current_proc() {$/;"	f	typeref:struct:proc *
 currentp	kernel/process/create.c	/^struct proc *currentp;$/;"	v	typeref:struct:proc *
 currentp	obj/kernel.asm	/^				currentp = NULL;$/;"	d
 currentp	obj/kernel.asm	/^				currentp = p;$/;"	d
 currentp	obj/schedular.asm	/^				currentp = NULL;$/;"	d
 currentp	obj/schedular.asm	/^				currentp = p;$/;"	d
-d0	obj/kpagetable.asm	/^  d0:	1080                	add	s0,sp,96$/;"	l
-d0	obj/usertrap.asm	/^  d0:	00000797          	auipc	a5,0x0$/;"	l
-d0	obj/util.asm	/^  d0:	00054503          	lbu	a0,0(a0) # 90 <.LVL14>$/;"	l
+cwd	xv6/kernel/proc.h	/^  struct inode *cwd;           \/\/ Current directory$/;"	m	struct:proc	typeref:struct:inode *
+d	xv6/kernel/kernel.asm	/^  d = dst;$/;"	d
+d0	obj/exec.asm	/^  d0:	fd5e                	sd	s7,184(sp)$/;"	l
+d0	obj/kmemory.asm	/^  d0:	8526                	mv	a0,s1$/;"	l
+d0	obj/kpagetable.asm	/^  d0:	6088                	ld	a0,0(s1)$/;"	l
+d0	obj/syscall.asm	/^  d0:	000080e7          	jalr	ra # cc <.L16+0xa>$/;"	l
+d0	obj/usertrap.asm	/^  d0:	00050513          	mv	a0,a0$/;"	l
+d0	obj/util.asm	/^  d0:	009957b3          	srl	a5,s2,s1$/;"	l
 d2	obj/create.asm	/^  d2:	000080e7          	jalr	ra # ce <.LVL11+0x4>$/;"	l
-d2	obj/kmemory.asm	/^  d2:	000080e7          	jalr	ra # ce <.L13+0x2>$/;"	l
-d2	obj/kpagetable.asm	/^  d2:	8b2a                	mv	s6,a0$/;"	l
+d2	obj/diskio.asm	/^  d2:	00050513          	mv	a0,a0$/;"	l
+d2	obj/exec.asm	/^  d2:	f962                	sd	s8,176(sp)$/;"	l
+d2	obj/inode.asm	/^  d2:	8b2a                	mv	s6,a0$/;"	l
+d2	obj/kmemory.asm	/^  d2:	00000097          	auipc	ra,0x0$/;"	l
+d2	obj/kpagetable.asm	/^  d2:	8129                	srl	a0,a0,0xa$/;"	l
 d2	obj/start.asm	/^  d2:	304027f3          	csrr	a5,mie$/;"	l
-d4	obj/kpagetable.asm	/^  d4:	8a2e                	mv	s4,a1$/;"	l
-d4	obj/usertrap.asm	/^  d4:	00078793          	mv	a5,a5$/;"	l
-d4	obj/util.asm	/^  d4:	10050363          	beqz	a0,1da <.L12>$/;"	l
+d4	obj/exec.asm	/^  d4:	f566                	sd	s9,168(sp)$/;"	l
+d4	obj/inode.asm	/^  d4:	00ca8793          	add	a5,s5,12$/;"	l
+d4	obj/kpagetable.asm	/^  d4:	0532                	sll	a0,a0,0xc$/;"	l
+d4	obj/syscall.asm	/^  d4:	749c                	ld	a5,40(s1)$/;"	l
+d4	obj/usertrap.asm	/^  d4:	00000097          	auipc	ra,0x0$/;"	l
+d4	obj/util.asm	/^  d4:	8bbd                	and	a5,a5,15$/;"	l
 d6	obj/create.asm	/^  d6:	4729                	li	a4,10$/;"	l
-d6	obj/kmemory.asm	/^  d6:	94ce                	add	s1,s1,s3$/;"	l
-d6	obj/kpagetable.asm	/^  d6:	8ab2                	mv	s5,a2$/;"	l
+d6	obj/diskio.asm	/^  d6:	00000097          	auipc	ra,0x0$/;"	l
+d6	obj/exec.asm	/^  d6:	f16a                	sd	s10,160(sp)$/;"	l
+d6	obj/kmemory.asm	/^  d6:	000080e7          	jalr	ra # d2 <.L13+0x2>$/;"	l
+d6	obj/kpagetable.asm	/^  d6:	60e2                	ld	ra,24(sp)$/;"	l
 d6	obj/start.asm	/^  d6:	0807e793          	or	a5,a5,128$/;"	l
+d6	obj/syscall.asm	/^  d6:	577d                	li	a4,-1$/;"	l
+d6	obj/util.asm	/^  d6:	fd078793          	add	a5,a5,-48$/;"	l
 d8	obj/create.asm	/^  d8:	6685                	lui	a3,0x1$/;"	l
-d8	obj/kmemory.asm	/^  d8:	ff24eae3          	bltu	s1,s2,cc <.L13>$/;"	l
-d8	obj/kpagetable.asm	/^  d8:	84b6                	mv	s1,a3$/;"	l
-d8	obj/usertrap.asm	/^  d8:	412787b3          	sub	a5,a5,s2$/;"	l
-d8	obj/util.asm	/^  d8:	02500993          	li	s3,37$/;"	l
+d8	obj/exec.asm	/^  d8:	ed6e                	sd	s11,152(sp)$/;"	l
+d8	obj/inode.asm	/^  d8:	078a                	sll	a5,a5,0x2$/;"	l
+d8	obj/kpagetable.asm	/^  d8:	6442                	ld	s0,16(sp)$/;"	l
+d8	obj/syscall.asm	/^  d8:	fbb8                	sd	a4,112(a5)$/;"	l
+d8	obj/usertrap.asm	/^  d8:	000080e7          	jalr	ra # d4 <.LVL18>$/;"	l
 da	obj/create.asm	/^  da:	00000617          	auipc	a2,0x0$/;"	l
-da	obj/kpagetable.asm	/^  da:	8bba                	mv	s7,a4$/;"	l
+da	obj/diskio.asm	/^  da:	000080e7          	jalr	ra # d6 <.L12+0x8>$/;"	l
+da	obj/exec.asm	/^  da:	0200                	add	s0,sp,256$/;"	l
+da	obj/inode.asm	/^  da:	97ca                	add	a5,a5,s2$/;"	l
+da	obj/kmemory.asm	/^  da:	94ce                	add	s1,s1,s3$/;"	l
+da	obj/kpagetable.asm	/^  da:	64a2                	ld	s1,8(sp)$/;"	l
 da	obj/start.asm	/^  da:	30479073          	csrw	mie,a5$/;"	l
-dc	obj/kmemory.asm	/^  dc:	70a2                	ld	ra,40(sp)$/;"	l
-dc	obj/kpagetable.asm	/^  dc:	c68d                	beqz	a3,106 <.L20>$/;"	l
-dc	obj/usertrap.asm	/^  dc:	97a6                	add	a5,a5,s1$/;"	l
-dc	obj/util.asm	/^  dc:	4a51                	li	s4,20$/;"	l
+da	obj/syscall.asm	/^  da:	60e2                	ld	ra,24(sp)$/;"	l
+da	obj/util.asm	/^  da:	97a2                	add	a5,a5,s0$/;"	l
+data	mkfs/mkfs.c	/^	uint8 *data;$/;"	m	struct:DISK	typeref:typename:uint8 *	file:
+data	xv6/kernel/buf.h	/^  uchar data[BSIZE];$/;"	m	struct:buf	typeref:typename:uchar[]
+data	xv6/kernel/pipe.c	/^  char data[PIPESIZE];$/;"	m	struct:pipe	typeref:typename:char[]	file:
+data_startb	kernel/filesystem/filesystem.h	/^	uint32 data_startb;$/;"	m	struct:superblock	typeref:typename:uint32
+dc	obj/exec.asm	/^  dc:	00000517          	auipc	a0,0x0$/;"	l
+dc	obj/inode.asm	/^  dc:	43cc                	lw	a1,4(a5)$/;"	l
+dc	obj/kmemory.asm	/^  dc:	ff24eae3          	bltu	s1,s2,d0 <.L13>$/;"	l
+dc	obj/kpagetable.asm	/^  dc:	6105                	add	sp,sp,32$/;"	l
+dc	obj/syscall.asm	/^  dc:	6442                	ld	s0,16(sp)$/;"	l
+dc	obj/usertrap.asm	/^  dc:	142025f3          	csrr	a1,scause$/;"	l
+dc	obj/util.asm	/^  dc:	fe87c503          	lbu	a0,-24(a5)$/;"	l
 de	obj/create.asm	/^  de:	00060613          	mv	a2,a2$/;"	l
-de	obj/kmemory.asm	/^  de:	7402                	ld	s0,32(sp)$/;"	l
-de	obj/kpagetable.asm	/^  de:	77fd                	lui	a5,0xfffff$/;"	l
+de	obj/diskio.asm	/^  de:	bf6d                	j	98 <.L9>$/;"	l
+de	obj/inode.asm	/^  de:	00000097          	auipc	ra,0x0$/;"	l
+de	obj/kpagetable.asm	/^  de:	8082                	ret$/;"	l
 de	obj/start.asm	/^  de:	6422                	ld	s0,8(sp)$/;"	l
-de	obj/usertrap.asm	/^  de:	577d                	li	a4,-1$/;"	l
-de	obj/util.asm	/^  de:	00000a97          	auipc	s5,0x0$/;"	l
+de	obj/syscall.asm	/^  de:	64a2                	ld	s1,8(sp)$/;"	l
 debug_print	kernel/initial/_entry.S	/^debug_print:$/;"	l
 debug_print	obj/_entry.asm	/^debug_print:$/;"	l
 debug_print	obj/kernel.asm	/^debug_print:$/;"	l
+debug_print_addr	kernel/util.c	/^void debug_print_addr(uint64 p) {$/;"	f	typeref:typename:void
 debug_print_char	kernel/initial/_entry.S	/^debug_print_char:$/;"	l
 debug_print_char	obj/_entry.asm	/^debug_print_char:$/;"	l
 debug_print_char	obj/kernel.asm	/^debug_print_char:$/;"	l
-debug_print_int	kernel/util.c	/^void debug_print_int(int d) {$/;"	f	typeref:typename:void
+debug_print_int	kernel/util.c	/^void debug_print_int(long d, int jinzhi) {$/;"	f	typeref:typename:void
 debug_printf	kernel/util.c	/^int debug_printf(char *fmt, ...) {$/;"	f	typeref:typename:int
 debug_println	kernel/util.c	/^void debug_println(char *s) {$/;"	f	typeref:typename:void
+desc	xv6/kernel/virtio_disk.c	/^  struct virtq_desc *desc;$/;"	m	struct:disk	typeref:struct:virtq_desc *	file:
+dev	xv6/kernel/buf.h	/^  uint dev;$/;"	m	struct:buf	typeref:typename:uint
+dev	xv6/kernel/file.h	/^  uint dev;           \/\/ Device number$/;"	m	struct:inode	typeref:typename:uint
+dev	xv6/kernel/log.c	/^  int dev;$/;"	m	struct:log	typeref:typename:int	file:
+dev	xv6/kernel/stat.h	/^  int dev;     \/\/ File system's disk device$/;"	m	struct:stat	typeref:typename:int
+devintr	xv6/kernel/trap.c	/^devintr()$/;"	f	typeref:typename:int
+devsw	xv6/kernel/file.c	/^struct devsw devsw[NDEV];$/;"	v	typeref:struct:devsw[]
+devsw	xv6/kernel/file.h	/^struct devsw {$/;"	s
+die	xv6/mkfs/mkfs.c	/^die(const char *s)$/;"	f	typeref:typename:void
+digits	xv6/kernel/printf.c	/^static char digits[] = "0123456789abcdef";$/;"	v	typeref:typename:char[]	file:
+digits	xv6/user/printf.c	/^static char digits[] = "0123456789ABCDEF";$/;"	v	typeref:typename:char[]	file:
+dinode	xv6/kernel/fs.h	/^struct dinode {$/;"	s
+dip	xv6/kernel/kernel.asm	/^    dip = (struct dinode*)bp->data + inum%IPB;$/;"	d
+dip	xv6/kernel/kernel.asm	/^    dip = (struct dinode*)bp->data + ip->inum%IPB;$/;"	d
+dip	xv6/kernel/kernel.asm	/^  dip = (struct dinode*)bp->data + ip->inum%IPB;$/;"	d
+direct	kernel/filesystem/filesystem.h	/^	uint32 direct[10];$/;"	m	struct:inode	typeref:typename:uint32[10]
+dirent	xv6/kernel/fs.h	/^struct dirent {$/;"	s
+dirent_item	kernel/filesystem/filesystem.h	/^struct dirent_item {$/;"	s
+dirfile	xv6/user/usertests.c	/^dirfile(char *s)$/;"	f	typeref:typename:void
+dirlink	xv6/kernel/fs.c	/^dirlink(struct inode *dp, char *name, uint inum)$/;"	f	typeref:typename:int
+dirlookup	xv6/kernel/fs.c	/^dirlookup(struct inode *dp, char *name, uint *poff)$/;"	f	typeref:struct:inode *
+dirtest	xv6/user/usertests.c	/^void dirtest(char *s)$/;"	f	typeref:typename:void
+disk	mkfs/mkfs.c	/^} disk;$/;"	v	typeref:struct:DISK
+disk	xv6/kernel/buf.h	/^  int disk;    \/\/ does disk "own" buf?$/;"	m	struct:buf	typeref:typename:int
+disk	xv6/kernel/virtio_disk.c	/^static struct disk {$/;"	s	file:
+disk	xv6/kernel/virtio_disk.c	/^} disk;$/;"	v	typeref:struct:disk
+disk_read_block	kernel/filesystem/diskio.c	/^void disk_read_block(void *dst, int blockid) {$/;"	f	typeref:typename:void
+disk_write_block	kernel/filesystem/diskio.c	/^void disk_write_block(void *src, int blockid) {$/;"	f	typeref:typename:void
+diskfull	xv6/user/usertests.c	/^diskfull(char *s)$/;"	f	typeref:typename:void
+do_commit	xv6/kernel/kernel.asm	/^    do_commit = 1;$/;"	d
+do_rand	xv6/user/grind.c	/^do_rand(unsigned long *ctx)$/;"	f	typeref:typename:int
 dpf1	kernel/defs.h	/^#define dpf1(/;"	d
+dpf2	kernel/defs.h	/^#define dpf2(/;"	d
 dpln	kernel/defs.h	/^#define dpln(/;"	d
+drivetests	xv6/user/usertests.c	/^drivetests(int quick, int continuous, char *justone) {$/;"	f	typeref:typename:int
+dstva	xv6/kernel/kernel.asm	/^    dstva = va0 + PGSIZE;$/;"	d
 e	obj/create.asm	/^   e:	4781                	li	a5,0$/;"	l
+e	obj/diskio.asm	/^   e:	84ae                	mv	s1,a1$/;"	l
+e	obj/exec.asm	/^   e:	1141                	add	sp,sp,-16$/;"	l
+e	obj/inode.asm	/^   e:	e456                	sd	s5,8(sp)$/;"	l
 e	obj/kerneltrap.asm	/^   e:	10579073          	csrw	stvec,a5$/;"	l
 e	obj/kernelvec.asm	/^   e:	f41a                	sd	t1,40(sp)$/;"	l
 e	obj/kmemory.asm	/^   e:	0004b483          	ld	s1,0(s1) # a <.LCFI1>$/;"	l
@@ -326,42 +958,92 @@ e	obj/kpagetable.asm	/^   e:	e456                	sd	s5,8(sp)$/;"	l
 e	obj/plic.asm	/^   e:	c3d8                	sw	a4,4(a5)$/;"	l
 e	obj/schedular.asm	/^   e:	ec56                	sd	s5,24(sp)$/;"	l
 e	obj/start.asm	/^   e:	e422                	sd	s0,8(sp)$/;"	l
-e	obj/userproc.asm	/^   e:	6422                	ld	s0,8(sp)$/;"	l
-e	obj/util.asm	/^   e:	02054c63          	bltz	a0,46 <.L6>$/;"	l
-e0	obj/kmemory.asm	/^  e0:	64e2                	ld	s1,24(sp)$/;"	l
-e0	obj/kpagetable.asm	/^  e0:	00fa7733          	and	a4,s4,a5$/;"	l
+e	obj/syscall.asm	/^   e:	1141                	add	sp,sp,-16$/;"	l
+e	obj/upagetable.asm	/^   e:	ec4e                	sd	s3,24(sp)$/;"	l
+e	obj/userproc.asm	/^   e:	00053503          	ld	a0,0(a0) # a <current_proc+0xa>$/;"	l
+e	obj/util.asm	/^   e:	892e                	mv	s2,a1$/;"	l
+e	xv6/kernel/console.c	/^  uint e;  \/\/ Edit index$/;"	m	struct:__anon03efc82c0108	typeref:typename:uint	file:
+e0	obj/exec.asm	/^  e0:	00050513          	mv	a0,a0$/;"	l
+e0	obj/kmemory.asm	/^  e0:	70a2                	ld	ra,40(sp)$/;"	l
+e0	obj/kpagetable.asm	/^  e0:	00000517          	auipc	a0,0x0$/;"	l
 e0	obj/start.asm	/^  e0:	0141                	add	sp,sp,16$/;"	l
-e0	obj/usertrap.asm	/^  e0:	177e                	sll	a4,a4,0x3f$/;"	l
+e0	obj/syscall.asm	/^  e0:	6902                	ld	s2,0(sp)$/;"	l
+e0	obj/usertrap.asm	/^  e0:	00000517          	auipc	a0,0x0$/;"	l
+e0	obj/util.asm	/^  e0:	00000097          	auipc	ra,0x0$/;"	l
 e2	obj/create.asm	/^  e2:	040005b7          	lui	a1,0x4000$/;"	l
-e2	obj/kmemory.asm	/^  e2:	6942                	ld	s2,16(sp)$/;"	l
+e2	obj/inode.asm	/^  e2:	000080e7          	jalr	ra # de <.LVL27+0xa>$/;"	l
+e2	obj/kmemory.asm	/^  e2:	7402                	ld	s0,32(sp)$/;"	l
 e2	obj/start.asm	/^  e2:	8082                	ret$/;"	l
-e2	obj/usertrap.asm	/^  e2:	8d59                	or	a0,a0,a4$/;"	l
-e2	obj/util.asm	/^  e2:	000a8a93          	mv	s5,s5$/;"	l
-e4	obj/kmemory.asm	/^  e4:	69a2                	ld	s3,8(sp)$/;"	l
-e4	obj/kpagetable.asm	/^  e4:	00fafab3          	and	s5,s5,a5$/;"	l
-e4	obj/usertrap.asm	/^  e4:	9782                	jalr	a5$/;"	l
+e2	obj/syscall.asm	/^  e2:	6105                	add	sp,sp,32$/;"	l
+e4	obj/exec.asm	/^  e4:	00000097          	auipc	ra,0x0$/;"	l
+e4	obj/kmemory.asm	/^  e4:	64e2                	ld	s1,24(sp)$/;"	l
+e4	obj/kpagetable.asm	/^  e4:	00050513          	mv	a0,a0$/;"	l
+e4	obj/syscall.asm	/^  e4:	8082                	ret$/;"	l
+e4	obj/usertrap.asm	/^  e4:	00050513          	mv	a0,a0$/;"	l
+e4	obj/util.asm	/^  e4:	000080e7          	jalr	ra # e0 <.L9+0x10>$/;"	l
 e6	obj/create.asm	/^  e6:	15fd                	add	a1,a1,-1 # 3ffffff <.LASF28+0x3fffdde>$/;"	l
-e6	obj/kmemory.asm	/^  e6:	6145                	add	sp,sp,48$/;"	l
-e6	obj/usertrap.asm	/^  e6:	60e2                	ld	ra,24(sp)$/;"	l
-e6	obj/util.asm	/^  e6:	a819                	j	fc <.L24>$/;"	l
+e6	obj/inode.asm	/^  e6:	0a0a                	sll	s4,s4,0x2$/;"	l
+e6	obj/kmemory.asm	/^  e6:	6942                	ld	s2,16(sp)$/;"	l
 e8	obj/create.asm	/^  e8:	05b2                	sll	a1,a1,0xc$/;"	l
-e8	obj/kmemory.asm	/^  e8:	8082                	ret$/;"	l
-e8	obj/kpagetable.asm	/^  e8:	1a7d                	add	s4,s4,-1$/;"	l
-e8	obj/usertrap.asm	/^  e8:	6442                	ld	s0,16(sp)$/;"	l
-e8	obj/util.asm	/^  e8:	00000097          	auipc	ra,0x0$/;"	l
+e8	obj/exec.asm	/^  e8:	000080e7          	jalr	ra # e4 <.LCFI17+0x8>$/;"	l
+e8	obj/inode.asm	/^  e8:	9a5a                	add	s4,s4,s6$/;"	l
+e8	obj/kmemory.asm	/^  e8:	69a2                	ld	s3,8(sp)$/;"	l
+e8	obj/kpagetable.asm	/^  e8:	00000097          	auipc	ra,0x0$/;"	l
+e8	obj/usertrap.asm	/^  e8:	00000097          	auipc	ra,0x0$/;"	l
+e8	obj/util.asm	/^  e8:	34f1                	addw	s1,s1,-4$/;"	l
 ea	obj/create.asm	/^  ea:	854a                	mv	a0,s2$/;"	l
-ea	obj/kpagetable.asm	/^  ea:	9a26                	add	s4,s4,s1$/;"	l
-ea	obj/usertrap.asm	/^  ea:	64a2                	ld	s1,8(sp)$/;"	l
+ea	obj/inode.asm	/^  ea:	000a2483          	lw	s1,0(s4)$/;"	l
+ea	obj/kmemory.asm	/^  ea:	6145                	add	sp,sp,48$/;"	l
+ea	obj/util.asm	/^  ea:	ff3493e3          	bne	s1,s3,d0 <.L9>$/;"	l
+eargv	xv6/user/sh.c	/^  char *eargv[MAXARGS];$/;"	m	struct:execcmd	typeref:typename:char * []	file:
 ec	obj/create.asm	/^  ec:	00000097          	auipc	ra,0x0$/;"	l
-ec	obj/kpagetable.asm	/^  ec:	00fa7a33          	and	s4,s4,a5$/;"	l
-ec	obj/usertrap.asm	/^  ec:	6902                	ld	s2,0(sp)$/;"	l
-ec	obj/util.asm	/^  ec:	000080e7          	jalr	ra # e8 <.L27>$/;"	l
-ee	obj/usertrap.asm	/^  ee:	6105                	add	sp,sp,32$/;"	l
+ec	obj/exec.asm	/^  ec:	00000097          	auipc	ra,0x0$/;"	l
+ec	obj/kmemory.asm	/^  ec:	8082                	ret$/;"	l
+ec	obj/kpagetable.asm	/^  ec:	000080e7          	jalr	ra # e8 <.L16+0x8>$/;"	l
+ec	obj/usertrap.asm	/^  ec:	000080e7          	jalr	ra # e8 <.LBE62+0x8>$/;"	l
+ee	obj/inode.asm	/^  ee:	85a6                	mv	a1,s1$/;"	l
+ee	obj/util.asm	/^  ee:	60a6                	ld	ra,72(sp)$/;"	l
+efile	xv6/user/sh.c	/^  char *efile;$/;"	m	struct:redircmd	typeref:typename:char *	file:
+ehsize	kernel/process/load/elf.h	/^  ushort ehsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+ehsize	xv6/kernel/elf.h	/^  ushort ehsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+either_copyin	xv6/kernel/proc.c	/^either_copyin(void *dst, int user_src, uint64 src, uint64 len)$/;"	f	typeref:typename:int
+either_copyout	xv6/kernel/proc.c	/^either_copyout(int user_dst, uint64 dst, void *src, uint64 len)$/;"	f	typeref:typename:int
+elf	kernel/process/load/elf.h	/^  uchar elf[12];$/;"	m	struct:elfhdr	typeref:typename:uchar[12]
+elf	xv6/kernel/elf.h	/^  uchar elf[12];$/;"	m	struct:elfhdr	typeref:typename:uchar[12]
+elfhdr	kernel/process/load/elf.h	/^struct elfhdr {$/;"	s
+elfhdr	xv6/kernel/elf.h	/^struct elfhdr {$/;"	s
+empty	mkfs/checkdisk.c	/^int empty(void *p, uint n) {$/;"	f	typeref:typename:int
+empty	xv6/kernel/kernel.asm	/^  empty = 0;$/;"	d
 end	kernel/kernel.ld	/^  PROVIDE(end = .);$/;"	s	assignment:provide
+end	user/user.ld	/^  PROVIDE(end = .);$/;"	s	assignment:provide
+end	xv6/kernel/kernel.ld	/^  PROVIDE(end = .);$/;"	s	assignment:provide
+end	xv6/user/user.ld	/^  PROVIDE(end = .);$/;"	s	assignment:provide
+end_op	xv6/kernel/log.c	/^end_op(void)$/;"	f	typeref:typename:void
+entry	kernel/process/load/elf.h	/^  uint64 entry;$/;"	m	struct:elfhdr	typeref:typename:uint64
+entry	xv6/kernel/elf.h	/^  uint64 entry;$/;"	m	struct:elfhdr	typeref:typename:uint64
+entry	xv6/user/usys.pl	/^sub entry {$/;"	s
 epc	kernel/process/process.h	/^	uint64 epc;$/;"	m	struct:trapframe	typeref:typename:uint64
+epc	xv6/kernel/proc.h	/^  \/*  24 *\/ uint64 epc;           \/\/ saved user program counter$/;"	m	struct:trapframe	typeref:typename:uint64
+err	xv6/kernel/kernel.asm	/^ err:$/;"	l
 etext	kernel/kernel.ld	/^    PROVIDE(etext = .);$/;"	s	section:.text	assignment:provide
+etext	xv6/kernel/kernel.ld	/^    PROVIDE(etext = .);$/;"	s	section:.text	assignment:provide
+exec	kernel/process/load/exec.c	/^int exec(char *path, char **argv) {$/;"	f	typeref:typename:int
+exec	lib/usys.S	/^exec:$/;"	l
+exec	xv6/kernel/exec.c	/^exec(char *path, char **argv)$/;"	f	typeref:typename:int
+execcmd	xv6/user/sh.c	/^execcmd(void)$/;"	f	typeref:struct:cmd *
+execcmd	xv6/user/sh.c	/^struct execcmd {$/;"	s	file:
+execout	xv6/user/usertests.c	/^execout(char *s)$/;"	f	typeref:typename:void
+exectest	xv6/user/usertests.c	/^exectest(char *s)$/;"	f	typeref:typename:void
+execttt	kernel/process/load/exec.c	/^int execttt() {$/;"	f	typeref:typename:int
+exit	lib/usys.S	/^exit:$/;"	l
+exit	xv6/kernel/proc.c	/^exit(int status)$/;"	f	typeref:typename:void
+exit	xv6/user/initcode.S	/^exit:$/;"	l
+exit	xv6/user/initcode.asm	/^exit:$/;"	l
 exit_state	kernel/process/process.h	/^	int exit_state;$/;"	m	struct:proc	typeref:typename:int
-extern	obj/kernel.asm	/^extern char trampoline[], uservec[], userret[];$/;"	l
+exitiputtest	xv6/user/usertests.c	/^exitiputtest(char *s)$/;"	f	typeref:typename:void
+exitwait	xv6/user/usertests.c	/^exitwait(char *s)$/;"	f	typeref:typename:void
+extern	obj/exec.asm	/^extern char trampoline[];$/;"	l
+extern	obj/kernel.asm	/^extern char trampoline[];$/;"	l
 extern	obj/kernel.asm	/^extern struct proc *currentp;$/;"	t
 extern	obj/kernel.asm	/^extern struct proc processes[NPROC];$/;"	t
 extern	obj/kernel.asm	/^extern void kernelvec();$/;"	l
@@ -376,39 +1058,176 @@ extern	obj/schedular.asm	/^extern struct proc processes[NPROC];$/;"	t
 extern	obj/schedular.asm	/^extern void swtch(struct context *old, struct context *new);$/;"	l
 extern	obj/userproc.asm	/^extern struct proc *currentp;$/;"	t
 extern	obj/userproc.asm	/^extern void usertrap_return();$/;"	l
-extern	obj/usertrap.asm	/^extern char trampoline[], uservec[], userret[];$/;"	l
-extern	obj/usertrap.asm	/^extern void kernelvec();$/;"	l
+extern	xv6/kernel/kernel.asm	/^extern int devintr();$/;"	l
+f	xv6/user/usertests.c	/^  void (*f)(char *);$/;"	m	struct:test	typeref:typename:void (*)(char *)	file:
 f0	obj/create.asm	/^  f0:	000080e7          	jalr	ra # ec <.LVL12+0x16>$/;"	l
-f0	obj/kpagetable.asm	/^  f0:	06ea6263          	bltu	s4,a4,154 <.L15>$/;"	l
-f0	obj/usertrap.asm	/^  f0:	8082                	ret$/;"	l
-f0	obj/util.asm	/^  f0:	84ca                	mv	s1,s2$/;"	l
-f2	obj/util.asm	/^  f2:	00148913          	add	s2,s1,1$/;"	l
+f0	obj/exec.asm	/^  f0:	000080e7          	jalr	ra # ec <.LVL28>$/;"	l
+f0	obj/inode.asm	/^  f0:	854e                	mv	a0,s3$/;"	l
+f0	obj/kpagetable.asm	/^  f0:	b7c5                	j	d0 <.L14>$/;"	l
+f0	obj/usertrap.asm	/^  f0:	143025f3          	csrr	a1,stval$/;"	l
+f0	obj/util.asm	/^  f0:	6406                	ld	s0,64(sp)$/;"	l
+f2	obj/inode.asm	/^  f2:	00000097          	auipc	ra,0x0$/;"	l
+f2	obj/kpagetable.asm	/^  f2:	711d                	add	sp,sp,-96$/;"	l
+f2	obj/util.asm	/^  f2:	74e2                	ld	s1,56(sp)$/;"	l
+f2p	kernel/process/load/exec.c	/^int f2p(int f) {$/;"	f	typeref:typename:int
 f4	obj/create.asm	/^  f4:	4719                	li	a4,6$/;"	l
-f4	obj/kpagetable.asm	/^  f4:	893a                	mv	s2,a4$/;"	l
+f4	obj/exec.asm	/^  f4:	8daa                	mv	s11,a0$/;"	l
+f4	obj/kpagetable.asm	/^  f4:	ec86                	sd	ra,88(sp)$/;"	l
+f4	obj/usertrap.asm	/^  f4:	00000517          	auipc	a0,0x0$/;"	l
+f4	obj/util.asm	/^  f4:	7942                	ld	s2,48(sp)$/;"	l
 f6	obj/create.asm	/^  f6:	6685                	lui	a3,0x1$/;"	l
-f6	obj/kpagetable.asm	/^  f6:	40ea8ab3          	sub	s5,s5,a4$/;"	l
-f6	obj/util.asm	/^  f6:	0014c503          	lbu	a0,1(s1)$/;"	l
+f6	obj/exec.asm	/^  f6:	00000097          	auipc	ra,0x0$/;"	l
+f6	obj/inode.asm	/^  f6:	000080e7          	jalr	ra # f2 <.LVL28+0xc>$/;"	l
+f6	obj/kpagetable.asm	/^  f6:	e8a2                	sd	s0,80(sp)$/;"	l
+f6	obj/util.asm	/^  f6:	79a2                	ld	s3,40(sp)$/;"	l
 f8	obj/create.asm	/^  f8:	7490                	ld	a2,40(s1)$/;"	l
+f8	obj/kpagetable.asm	/^  f8:	e4a6                	sd	s1,72(sp)$/;"	l
+f8	obj/usertrap.asm	/^  f8:	00050513          	mv	a0,a0$/;"	l
+f8	obj/util.asm	/^  f8:	6161                	add	sp,sp,80$/;"	l
 fa	obj/create.asm	/^  fa:	020005b7          	lui	a1,0x2000$/;"	l
-fa	obj/kpagetable.asm	/^  fa:	00000c97          	auipc	s9,0x0$/;"	l
-fa	obj/util.asm	/^  fa:	c165                	beqz	a0,1da <.L12>$/;"	l
-fc	obj/util.asm	/^  fc:	ff3516e3          	bne	a0,s3,e8 <.L27>$/;"	l
+fa	obj/exec.asm	/^  fa:	000080e7          	jalr	ra # f6 <.LVL30>$/;"	l
+fa	obj/inode.asm	/^  fa:	855a                	mv	a0,s6$/;"	l
+fa	obj/kpagetable.asm	/^  fa:	e0ca                	sd	s2,64(sp)$/;"	l
+fa	obj/util.asm	/^  fa:	8082                	ret$/;"	l
+fc	obj/inode.asm	/^  fc:	00000097          	auipc	ra,0x0$/;"	l
+fc	obj/kpagetable.asm	/^  fc:	fc4e                	sd	s3,56(sp)$/;"	l
+fc	obj/usertrap.asm	/^  fc:	00000097          	auipc	ra,0x0$/;"	l
+fc	obj/util.asm	/^  fc:	1101                	add	sp,sp,-32$/;"	l
+fd	xv6/user/sh.c	/^  int fd;$/;"	m	struct:redircmd	typeref:typename:int	file:
+fd0	xv6/kernel/kernel.asm	/^  fd0 = -1;$/;"	d
+fdalloc	xv6/kernel/sysfile.c	/^fdalloc(struct file *f)$/;"	f	typeref:typename:int	file:
 fe	obj/create.asm	/^  fe:	15fd                	add	a1,a1,-1 # 1ffffff <.LASF28+0x1fffdde>$/;"	l
-fe	obj/kpagetable.asm	/^  fe:	000c8c93          	mv	s9,s9$/;"	l
+fe	obj/exec.asm	/^  fe:	84aa                	mv	s1,a0$/;"	l
+fe	obj/kpagetable.asm	/^  fe:	f852                	sd	s4,48(sp)$/;"	l
+fe	obj/util.asm	/^  fe:	ec06                	sd	ra,24(sp)$/;"	l
+fetchaddr	xv6/kernel/syscall.c	/^fetchaddr(uint64 addr, uint64 *ip)$/;"	f	typeref:typename:int
+fetchstr	xv6/kernel/syscall.c	/^fetchstr(uint64 addr, char *buf, int max)$/;"	f	typeref:typename:int
+ff	xv6/kernel/kernel.asm	/^  ff = *f;$/;"	d
+file	xv6/kernel/file.c	/^  struct file file[NFILE];$/;"	m	struct:__anon94af1a190108	typeref:struct:file[]	file:
+file	xv6/kernel/file.h	/^struct file {$/;"	s
+file	xv6/user/sh.c	/^  char *file;$/;"	m	struct:redircmd	typeref:typename:char *	file:
+filealloc	xv6/kernel/file.c	/^filealloc(void)$/;"	f	typeref:struct:file *
+fileclose	xv6/kernel/file.c	/^fileclose(struct file *f)$/;"	f	typeref:typename:void
+filedup	xv6/kernel/file.c	/^filedup(struct file *f)$/;"	f	typeref:struct:file *
+fileinit	xv6/kernel/file.c	/^fileinit(void)$/;"	f	typeref:typename:void
+fileread	xv6/kernel/file.c	/^fileread(struct file *f, uint64 addr, int n)$/;"	f	typeref:typename:int
+filestat	xv6/kernel/file.c	/^filestat(struct file *f, uint64 addr)$/;"	f	typeref:typename:int
+filesz	kernel/process/load/elf.h	/^  uint64 filesz;$/;"	m	struct:proghdr	typeref:typename:uint64
+filesz	xv6/kernel/elf.h	/^  uint64 filesz;$/;"	m	struct:proghdr	typeref:typename:uint64
+filewrite	xv6/kernel/file.c	/^filewrite(struct file *f, uint64 addr, int n)$/;"	f	typeref:typename:int
+first	kernel/syscall/syscall.c	/^int first = 1;$/;"	v	typeref:typename:int
+first	obj/kernel.asm	/^		first = 0;$/;"	d
+first	obj/syscall.asm	/^		first = 0;$/;"	d
+first	xv6/kernel/kernel.asm	/^    first = 0;$/;"	d
+flags	kernel/process/load/elf.h	/^  uint flags;$/;"	m	struct:elfhdr	typeref:typename:uint
+flags	kernel/process/load/elf.h	/^  uint32 flags;$/;"	m	struct:proghdr	typeref:typename:uint32
+flags	xv6/kernel/elf.h	/^  uint flags;$/;"	m	struct:elfhdr	typeref:typename:uint
+flags	xv6/kernel/elf.h	/^  uint32 flags;$/;"	m	struct:proghdr	typeref:typename:uint32
+flags	xv6/kernel/kernel.asm	/^    flags = PTE_FLAGS(*pte);$/;"	d
+flags	xv6/kernel/virtio.h	/^  uint16 flags; \/\/ always zero$/;"	m	struct:virtq_avail	typeref:typename:uint16
+flags	xv6/kernel/virtio.h	/^  uint16 flags; \/\/ always zero$/;"	m	struct:virtq_used	typeref:typename:uint16
+flags	xv6/kernel/virtio.h	/^  uint16 flags;$/;"	m	struct:virtq_desc	typeref:typename:uint16
+flags2perm	xv6/kernel/exec.c	/^int flags2perm(int flags)$/;"	f	typeref:typename:int
+fmtname	xv6/user/ls.c	/^fmtname(char *path)$/;"	f	typeref:typename:char *
+fork	lib/usys.S	/^fork:$/;"	l
+fork	xv6/kernel/proc.c	/^fork(void)$/;"	f	typeref:typename:int
+fork1	xv6/user/sh.c	/^fork1(void)$/;"	f	typeref:typename:int
+forkfork	xv6/user/usertests.c	/^forkfork(char *s)$/;"	f	typeref:typename:void
+forkforkfork	xv6/user/usertests.c	/^forkforkfork(char *s)$/;"	f	typeref:typename:void
+forkret	xv6/kernel/proc.c	/^forkret(void)$/;"	f	typeref:typename:void
+forktest	xv6/user/forktest.c	/^forktest(void)$/;"	f	typeref:typename:void
+forktest	xv6/user/usertests.c	/^forktest(char *s)$/;"	f	typeref:typename:void
+fourfiles	xv6/user/usertests.c	/^fourfiles(char *s)$/;"	f	typeref:typename:void
+fourteen	xv6/user/usertests.c	/^fourteen(char *s)$/;"	f	typeref:typename:void
+fp	lib/usys.py	/^fp = open(sys.argv[1], "w");$/;"	v
+fp	obj/kernel.asm	/^		fp = *(uint64 *)(fp - 16);$/;"	d
+fp	obj/kernel.asm	/^	fp = *(&ra - 8);$/;"	d
+fp	obj/util.asm	/^		fp = *(uint64 *)(fp - 16);$/;"	d
+fp	obj/util.asm	/^	fp = *(&ra - 8);$/;"	d
+fprintf	xv6/user/printf.c	/^fprintf(int fd, const char *fmt, ...)$/;"	f	typeref:typename:void
+free	xv6/kernel/virtio_disk.c	/^  char free[NUM];  \/\/ is a descriptor free?$/;"	m	struct:disk	typeref:typename:char[]	file:
+free	xv6/user/umalloc.c	/^free(void *ap)$/;"	f	typeref:typename:void
+free_chain	xv6/kernel/virtio_disk.c	/^free_chain(int i)$/;"	f	typeref:typename:void	file:
+free_desc	xv6/kernel/virtio_disk.c	/^free_desc(int i)$/;"	f	typeref:typename:void	file:
 free_memory	kernel/memory/kmemory.c	/^} free_memory;$/;"	v	typeref:struct:__anon9e7096f20108
+freeblock	xv6/mkfs/mkfs.c	/^uint freeblock;$/;"	v	typeref:typename:uint
+freeinode	xv6/mkfs/mkfs.c	/^uint freeinode = 1;$/;"	v	typeref:typename:uint
+freelist	xv6/kernel/kalloc.c	/^  struct run *freelist;$/;"	m	struct:__anonb2f79d2f0108	typeref:struct:run *	file:
+freep	xv6/user/umalloc.c	/^static Header *freep;$/;"	v	typeref:typename:Header *	file:
+freeproc	xv6/kernel/proc.c	/^freeproc(struct proc *p)$/;"	f	typeref:typename:void	file:
+freerange	xv6/kernel/kalloc.c	/^freerange(void *pa_start, void *pa_end)$/;"	f	typeref:typename:void
+freewalk	xv6/kernel/vm.c	/^freewalk(pagetable_t pagetable)$/;"	f	typeref:typename:void
+fs.img	Makefile	/^fs.img:	$(UPROGS) mkfs\/mkfs.c$/;"	t
+fs.img	xv6/Makefile	/^fs.img: mkfs\/mkfs README $(UPROGS)$/;"	t
+fs.o	Makefile	/^fs.o:	fs.img$/;"	t
+fsfd	xv6/mkfs/mkfs.c	/^int fsfd;$/;"	v	typeref:typename:int
+fsfull	xv6/user/usertests.c	/^fsfull()$/;"	f	typeref:typename:void
+fsinit	xv6/kernel/fs.c	/^fsinit(int dev) {$/;"	f	typeref:typename:void
+ftable	xv6/kernel/file.c	/^} ftable;$/;"	v	typeref:struct:__anon94af1a190108
+getcmd	xv6/user/sh.c	/^getcmd(char *buf, int nbuf)$/;"	f	typeref:typename:int
+getpid	lib/usys.S	/^getpid:$/;"	l
+gets	xv6/user/ulib.c	/^gets(char *buf, int max)$/;"	f	typeref:typename:char *
+gettoken	xv6/user/sh.c	/^gettoken(char **ps, char *es, char **q, char **eq)$/;"	f	typeref:typename:int
+go	xv6/user/grind.c	/^go(int which_child)$/;"	f	typeref:typename:void
 gp	kernel/process/process.h	/^	uint64 gp;$/;"	m	struct:trapframe	typeref:typename:uint64
+gp	xv6/kernel/proc.h	/^  \/*  56 *\/ uint64 gp;$/;"	m	struct:trapframe	typeref:typename:uint64
+grep	xv6/user/grep.c	/^grep(char *pattern, int fd)$/;"	f	typeref:typename:void
+growproc	xv6/kernel/proc.c	/^growproc(int n)$/;"	f	typeref:typename:int
 hartid	kernel/process/process.h	/^	uint64 hartid;$/;"	m	struct:trapframe	typeref:typename:uint64
+havekids	xv6/kernel/kernel.asm	/^        havekids = 1;$/;"	d
+havekids	xv6/kernel/kernel.asm	/^    havekids = 0;$/;"	d
+head	xv6/kernel/bio.c	/^  struct buf head;$/;"	m	struct:__anondd6f5ed30108	typeref:struct:buf	file:
+header	xv6/user/umalloc.c	/^union header {$/;"	u	file:
+holding	xv6/kernel/spinlock.c	/^holding(struct spinlock *lk)$/;"	f	typeref:typename:int
+holdingsleep	xv6/kernel/sleeplock.c	/^holdingsleep(struct sleeplock *lk)$/;"	f	typeref:typename:int
+i	xv6/kernel/kernel.asm	/^  i = 0;$/;"	d
+ialloc	xv6/kernel/fs.c	/^ialloc(uint dev, short type)$/;"	f	typeref:struct:inode *
+ialloc	xv6/mkfs/mkfs.c	/^ialloc(ushort type)$/;"	f	typeref:typename:uint
+iappend	xv6/mkfs/mkfs.c	/^iappend(uint inum, void *xp, int n)$/;"	f	typeref:typename:void
+id	xv6/kernel/virtio.h	/^  uint32 id;   \/\/ index of start of completed descriptor chain$/;"	m	struct:virtq_used_elem	typeref:typename:uint32
+idup	xv6/kernel/fs.c	/^idup(struct inode *ip)$/;"	f	typeref:struct:inode *
+idx	xv6/kernel/virtio.h	/^  uint16 idx;   \/\/ device increments when it adds a ring[] entry$/;"	m	struct:virtq_used	typeref:typename:uint16
+idx	xv6/kernel/virtio.h	/^  uint16 idx;   \/\/ driver will write ring[idx] next$/;"	m	struct:virtq_avail	typeref:typename:uint16
+iget	xv6/kernel/fs.c	/^iget(uint dev, uint inum)$/;"	f	typeref:struct:inode *	file:
+iinit	xv6/kernel/fs.c	/^iinit()$/;"	f	typeref:typename:void
+ilock	xv6/kernel/fs.c	/^ilock(struct inode *ip)$/;"	f	typeref:typename:void
+info	xv6/kernel/virtio_disk.c	/^  } info[NUM];$/;"	m	struct:disk	typeref:struct:disk::__anon1c2856c00108[]	file:
+init	xv6/user/initcode.S	/^init:$/;"	l
 init_kernel_freememory	kernel/memory/kmemory.c	/^void init_kernel_freememory() {$/;"	f	typeref:typename:void
 init_kernel_pagetable	kernel/memory/kpagetable.c	/^void init_kernel_pagetable() {$/;"	f	typeref:typename:void
 init_kernel_trap	kernel/interrupt/kerneltrap.c	/^void init_kernel_trap() {$/;"	f	typeref:typename:void
 init_processes	kernel/process/create.c	/^void init_processes() {$/;"	f	typeref:typename:void
 init_userprocess	kernel/process/userproc.c	/^void init_userprocess() {$/;"	f	typeref:typename:void
-initcode	kernel/process/userproc.c	/^uint8 initcode[] = {0x73, 0x00, 0x00, 0x00};$/;"	v	typeref:typename:uint8[]
+initcode	kernel/process/userproc.c	/^uint8 initcode[] = {$/;"	v	typeref:typename:uint8[]
+initcode	xv6/kernel/proc.c	/^uchar initcode[] = {$/;"	v	typeref:typename:uchar[]
+initlock	xv6/kernel/spinlock.c	/^initlock(struct spinlock *lk, char *name)$/;"	f	typeref:typename:void
+initlog	xv6/kernel/log.c	/^initlog(int dev, struct superblock *sb)$/;"	f	typeref:typename:void
+initproc	xv6/kernel/kernel.asm	/^  initproc = p;$/;"	d
+initproc	xv6/kernel/proc.c	/^struct proc *initproc;$/;"	v	typeref:struct:proc *
+initsleeplock	xv6/kernel/sleeplock.c	/^initsleeplock(struct sleeplock *lk, char *name)$/;"	f	typeref:typename:void
+innerloop	user/test.S	/^innerloop:$/;"	l
+ino	xv6/kernel/stat.h	/^  uint ino;    \/\/ Inode number$/;"	m	struct:stat	typeref:typename:uint
+inode	kernel/filesystem/filesystem.h	/^	uint32 inode;$/;"	m	struct:dirent_item	typeref:typename:uint32
+inode	kernel/filesystem/filesystem.h	/^struct inode {$/;"	s
+inode	xv6/kernel/file.h	/^struct inode {$/;"	s
+inode	xv6/kernel/fs.c	/^  struct inode inode[NINODE];$/;"	m	struct:__anon44c7a4520108	typeref:struct:inode[]	file:
+inode_readblock	kernel/filesystem/inode.c	/^int inode_readblock(struct inode *inode, void *buf, uint64 off) {$/;"	f	typeref:typename:int
+inode_startb	kernel/filesystem/filesystem.h	/^	uint32 inode_startb;$/;"	m	struct:superblock	typeref:typename:uint32
+inodestart	xv6/kernel/fs.h	/^  uint inodestart;   \/\/ Block number of first inode block$/;"	m	struct:superblock	typeref:typename:uint
+install_trans	xv6/kernel/log.c	/^install_trans(int recovering)$/;"	f	typeref:typename:void	file:
 int	obj/create.asm	/^int allocate_pid() {$/;"	l
 int	obj/create.asm	/^int usable_pid = 1;$/;"	l
+int	obj/exec.asm	/^int exec(char *path, char **argv) {$/;"	l
+int	obj/exec.asm	/^int execttt() {$/;"	l
+int	obj/exec.asm	/^int f2p(int f) {$/;"	l
+int	obj/inode.asm	/^int inode_readblock(struct inode *inode, void *buf, uint64 off) {$/;"	l
 int	obj/kernel.asm	/^int allocate_pid() {$/;"	l
 int	obj/kernel.asm	/^int cpuid() {$/;"	l
 int	obj/kernel.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+int	obj/kernel.asm	/^int exec(char *path, char **argv) {$/;"	l
+int	obj/kernel.asm	/^int execttt() {$/;"	l
+int	obj/kernel.asm	/^int f2p(int f) {$/;"	l
+int	obj/kernel.asm	/^int inode_readblock(struct inode *inode, void *buf, uint64 off) {$/;"	l
 int	obj/kernel.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
 int	obj/kernel.asm	/^int usable_pid = 1;$/;"	l
 int	obj/kernel.asm	/^int$/;"	l
@@ -416,119 +1235,612 @@ int	obj/kpagetable.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
 int	obj/plic.asm	/^int$/;"	l
 int	obj/util.asm	/^int cpuid() {$/;"	l
 int	obj/util.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+int	xv6/kernel/kernel.asm	/^int flags2perm(int flags)$/;"	l
+int	xv6/kernel/kernel.asm	/^int$/;"	l
+intena	xv6/kernel/kernel.asm	/^  intena = mycpu()->intena;$/;"	d
+intena	xv6/kernel/proc.h	/^  int intena;                 \/\/ Were interrupts enabled before push_off()?$/;"	m	struct:cpu	typeref:typename:int
 intr_get	kernel/include/basic_riscv.h	/^intr_get()$/;"	f	typeref:typename:int
+intr_get	xv6/kernel/riscv.h	/^intr_get()$/;"	f	typeref:typename:int
 intr_off	kernel/include/basic_riscv.h	/^intr_off()$/;"	f	typeref:typename:void
+intr_off	xv6/kernel/riscv.h	/^intr_off()$/;"	f	typeref:typename:void
 intr_on	kernel/include/basic_riscv.h	/^intr_on()$/;"	f	typeref:typename:void
+intr_on	xv6/kernel/riscv.h	/^intr_on()$/;"	f	typeref:typename:void
+inum	xv6/kernel/file.h	/^  uint inum;          \/\/ Inode number$/;"	m	struct:inode	typeref:typename:uint
+inum	xv6/kernel/fs.h	/^  ushort inum;$/;"	m	struct:dirent	typeref:typename:ushort
+inum	xv6/kernel/kernel.asm	/^      inum = de.inum;$/;"	d
+inum	xv6/user/usertests.c	/^    ushort inum;$/;"	m	struct:concreate::__anon72204ae90b08	typeref:typename:ushort	file:
+ip	xv6/kernel/file.h	/^  struct inode *ip;  \/\/ FD_INODE and FD_DEVICE$/;"	m	struct:file	typeref:struct:inode *
+ip	xv6/kernel/kernel.asm	/^    ip = create(path, T_FILE, 0, 0);$/;"	d
+ip	xv6/kernel/kernel.asm	/^    ip = idup(myproc()->cwd);$/;"	d
+ip	xv6/kernel/kernel.asm	/^    ip = iget(ROOTDEV, ROOTINO);$/;"	d
+ip	xv6/kernel/kernel.asm	/^    ip = next;$/;"	d
+ip	xv6/kernel/kernel.asm	/^  ip = 0;$/;"	d
+iput	xv6/kernel/fs.c	/^iput(struct inode *ip)$/;"	f	typeref:typename:void
+iputtest	xv6/user/usertests.c	/^iputtest(char *s)$/;"	f	typeref:typename:void
+iref	xv6/user/usertests.c	/^iref(char *s)$/;"	f	typeref:typename:void
+isdirempty	xv6/kernel/sysfile.c	/^isdirempty(struct inode *dp)$/;"	f	typeref:typename:int	file:
+itable	xv6/kernel/fs.c	/^} itable;$/;"	v	typeref:struct:__anon44c7a4520108
+iter	xv6/user/grind.c	/^iter()$/;"	f	typeref:typename:void
+itrunc	xv6/kernel/fs.c	/^itrunc(struct inode *ip)$/;"	f	typeref:typename:void
+iunlock	xv6/kernel/fs.c	/^iunlock(struct inode *ip)$/;"	f	typeref:typename:void
+iunlockput	xv6/kernel/fs.c	/^iunlockput(struct inode *ip)$/;"	f	typeref:typename:void
+iupdate	xv6/kernel/fs.c	/^iupdate(struct inode *ip)$/;"	f	typeref:typename:void
+k	xv6/kernel/kernel.asm	/^  k = p->killed;$/;"	d
 kalloc	kernel/memory/kmemory.c	/^void *kalloc(void) {$/;"	f	typeref:typename:void *
+kalloc	xv6/kernel/kalloc.c	/^kalloc(void)$/;"	f	typeref:typename:void *
 kcontext	kernel/process/schedular.c	/^struct context kcontext;$/;"	v	typeref:struct:context
+kernel_hartid	xv6/kernel/proc.h	/^  \/*  32 *\/ uint64 kernel_hartid; \/\/ saved kernel tp$/;"	m	struct:trapframe	typeref:typename:uint64
+kernel_pagetable	xv6/kernel/kernel.asm	/^  kernel_pagetable = kvmmake();$/;"	d
+kernel_pagetable	xv6/kernel/vm.c	/^pagetable_t kernel_pagetable;$/;"	v	typeref:typename:pagetable_t
+kernel_satp	xv6/kernel/proc.h	/^  \/*   0 *\/ uint64 kernel_satp;   \/\/ kernel page table$/;"	m	struct:trapframe	typeref:typename:uint64
+kernel_sp	xv6/kernel/proc.h	/^  \/*   8 *\/ uint64 kernel_sp;     \/\/ top of process's kernel stack$/;"	m	struct:trapframe	typeref:typename:uint64
+kernel_trap	xv6/kernel/proc.h	/^  \/*  16 *\/ uint64 kernel_trap;   \/\/ usertrap()$/;"	m	struct:trapframe	typeref:typename:uint64
 kerneltrap	kernel/interrupt/kerneltrap.c	/^void kerneltrap() {$/;"	f	typeref:typename:void
+kerneltrap	xv6/kernel/trap.c	/^kerneltrap()$/;"	f	typeref:typename:void
 kernelvec	kernel/interrupt/kernelvec.S	/^kernelvec:$/;"	l
 kernelvec	obj/kernel.asm	/^kernelvec:$/;"	l
 kernelvec	obj/kernelvec.asm	/^kernelvec:$/;"	l
+kernelvec	xv6/kernel/kernelvec.S	/^kernelvec:$/;"	l
+kernmem	xv6/user/usertests.c	/^kernmem(char *s)$/;"	f	typeref:typename:void
 kfree	kernel/memory/kmemory.c	/^void kfree(void *p_addr) {$/;"	f	typeref:typename:void
+kfree	xv6/kernel/kalloc.c	/^kfree(void *pa)$/;"	f	typeref:typename:void
+kill	xv6/kernel/proc.c	/^kill(int pid)$/;"	f	typeref:typename:int
 killed	kernel/process/process.h	/^	int killed;$/;"	m	struct:proc	typeref:typename:int
+killed	xv6/kernel/proc.c	/^killed(struct proc *p)$/;"	f	typeref:typename:int
+killed	xv6/kernel/proc.h	/^  int killed;                  \/\/ If non-zero, have been killed$/;"	m	struct:proc	typeref:typename:int
+killstatus	xv6/user/usertests.c	/^killstatus(char *s)$/;"	f	typeref:typename:void
+kinit	xv6/kernel/kalloc.c	/^kinit()$/;"	f	typeref:typename:void
+kinode_read	kernel/filesystem/inode.c	/^void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n) {$/;"	f	typeref:typename:void
+kmem	xv6/kernel/kalloc.c	/^} kmem;$/;"	v	typeref:struct:__anonb2f79d2f0108
+kpgtbl	xv6/kernel/kernel.asm	/^  kpgtbl = (pagetable_t) kalloc();$/;"	d
 kpt	obj/kernel.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
 kpt	obj/kpagetable.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
 ksatp	kernel/process/process.h	/^	uint64 ksatp;$/;"	m	struct:trapframe	typeref:typename:uint64
 ksp	kernel/process/process.h	/^	uint64 ksp;$/;"	m	struct:trapframe	typeref:typename:uint64
 kstack	kernel/process/process.h	/^	uint64 kstack;		\/\/ init_processes$/;"	m	struct:proc	typeref:typename:uint64
+kstack	xv6/kernel/proc.h	/^  uint64 kstack;               \/\/ Virtual address of kernel stack$/;"	m	struct:proc	typeref:typename:uint64
 ktrap	kernel/process/process.h	/^	uint64 ktrap;$/;"	m	struct:trapframe	typeref:typename:uint64
+kvminit	xv6/kernel/vm.c	/^kvminit(void)$/;"	f	typeref:typename:void
+kvminithart	xv6/kernel/vm.c	/^kvminithart()$/;"	f	typeref:typename:void
+kvmmake	xv6/kernel/vm.c	/^kvmmake(void)$/;"	f	typeref:typename:pagetable_t
+kvmmap	xv6/kernel/vm.c	/^kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)$/;"	f	typeref:typename:void
+last	xv6/kernel/kernel.asm	/^      last = s+1;$/;"	d
+last	xv6/kernel/kernel.asm	/^  last = PGROUNDDOWN(va + size - 1);$/;"	d
+left	xv6/user/sh.c	/^  struct cmd *left;$/;"	m	struct:listcmd	typeref:struct:cmd *	file:
+left	xv6/user/sh.c	/^  struct cmd *left;$/;"	m	struct:pipecmd	typeref:struct:cmd *	file:
+len	xv6/kernel/kernel.asm	/^  len = path - s;$/;"	d
+len	xv6/kernel/virtio.h	/^  uint32 len;$/;"	m	struct:virtq_desc	typeref:typename:uint32
+len	xv6/kernel/virtio.h	/^  uint32 len;$/;"	m	struct:virtq_used_elem	typeref:typename:uint32
+lh	xv6/kernel/log.c	/^  struct logheader lh;$/;"	m	struct:log	typeref:struct:logheader	file:
+linktest	xv6/user/usertests.c	/^linktest(char *s)$/;"	f	typeref:typename:void
+linkunlink	xv6/user/usertests.c	/^linkunlink(char *s)$/;"	f	typeref:typename:void
 list	kernel/memory/kmemory.c	/^	struct memory_unit *list;$/;"	m	struct:__anon9e7096f20108	typeref:struct:memory_unit *	file:
+listcmd	xv6/user/sh.c	/^listcmd(struct cmd *left, struct cmd *right)$/;"	f	typeref:struct:cmd *
+listcmd	xv6/user/sh.c	/^struct listcmd {$/;"	s	file:
+lk	xv6/kernel/sleeplock.h	/^  struct spinlock lk; \/\/ spinlock protecting this sleep lock$/;"	m	struct:sleeplock	typeref:struct:spinlock
+loadseg	xv6/kernel/exec.c	/^loadseg(pagetable_t pagetable, uint64 va, struct inode *ip, uint offset, uint sz)$/;"	f	typeref:typename:int	file:
+lock	xv6/kernel/bio.c	/^  struct spinlock lock;$/;"	m	struct:__anondd6f5ed30108	typeref:struct:spinlock	file:
+lock	xv6/kernel/buf.h	/^  struct sleeplock lock;$/;"	m	struct:buf	typeref:struct:sleeplock
+lock	xv6/kernel/console.c	/^  struct spinlock lock;$/;"	m	struct:__anon03efc82c0108	typeref:struct:spinlock	file:
+lock	xv6/kernel/file.c	/^  struct spinlock lock;$/;"	m	struct:__anon94af1a190108	typeref:struct:spinlock	file:
+lock	xv6/kernel/file.h	/^  struct sleeplock lock; \/\/ protects everything below here$/;"	m	struct:inode	typeref:struct:sleeplock
+lock	xv6/kernel/fs.c	/^  struct spinlock lock;$/;"	m	struct:__anon44c7a4520108	typeref:struct:spinlock	file:
+lock	xv6/kernel/kalloc.c	/^  struct spinlock lock;$/;"	m	struct:__anonb2f79d2f0108	typeref:struct:spinlock	file:
+lock	xv6/kernel/log.c	/^  struct spinlock lock;$/;"	m	struct:log	typeref:struct:spinlock	file:
+lock	xv6/kernel/pipe.c	/^  struct spinlock lock;$/;"	m	struct:pipe	typeref:struct:spinlock	file:
+lock	xv6/kernel/printf.c	/^  struct spinlock lock;$/;"	m	struct:__anon6606502c0108	typeref:struct:spinlock	file:
+lock	xv6/kernel/proc.h	/^  struct spinlock lock;$/;"	m	struct:proc	typeref:struct:spinlock
+locked	xv6/kernel/sleeplock.h	/^  uint locked;       \/\/ Is the lock held?$/;"	m	struct:sleeplock	typeref:typename:uint
+locked	xv6/kernel/spinlock.h	/^  uint locked;       \/\/ Is the lock held?$/;"	m	struct:spinlock	typeref:typename:uint
+locking	xv6/kernel/kernel.asm	/^  locking = pr.locking;$/;"	d
+locking	xv6/kernel/printf.c	/^  int locking;$/;"	m	struct:__anon6606502c0108	typeref:typename:int	file:
+log	xv6/kernel/log.c	/^struct log log;$/;"	v	typeref:struct:log
+log	xv6/kernel/log.c	/^struct log {$/;"	s	file:
+log_write	xv6/kernel/log.c	/^log_write(struct buf *b)$/;"	f	typeref:typename:void
+logheader	xv6/kernel/log.c	/^struct logheader {$/;"	s	file:
+logstart	xv6/kernel/fs.h	/^  uint logstart;     \/\/ Block number of first log block$/;"	m	struct:superblock	typeref:typename:uint
 loop	kernel/initial/_entry.S	/^loop:$/;"	l
 loop	obj/_entry.asm	/^loop:$/;"	l
 loop	obj/kernel.asm	/^loop:$/;"	l
+loop	user/test.S	/^loop:$/;"	l
+ls	xv6/user/ls.c	/^ls(char *path)$/;"	f	typeref:typename:void
+m	obj/inode.asm	/^		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	obj/inode.asm	/^		m = MIN(PGSIZE - vaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(PGSIZE - vaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	xv6/kernel/kernel.asm	/^      m = 1 << (bi % 8);$/;"	d
+m	xv6/kernel/kernel.asm	/^    m = min(n - tot, BSIZE - off%BSIZE);$/;"	d
+m	xv6/kernel/kernel.asm	/^  m = 1 << (bi % 8);$/;"	d
+machine	kernel/process/load/elf.h	/^  ushort machine;$/;"	m	struct:elfhdr	typeref:typename:ushort
+machine	xv6/kernel/elf.h	/^  ushort machine;$/;"	m	struct:elfhdr	typeref:typename:ushort
+magic	kernel/filesystem/filesystem.h	/^	uint32 magic;$/;"	m	struct:superblock	typeref:typename:uint32
+magic	kernel/process/load/elf.h	/^  uint magic;  \/\/ must equal ELF_MAGIC$/;"	m	struct:elfhdr	typeref:typename:uint
+magic	xv6/kernel/elf.h	/^  uint magic;  \/\/ must equal ELF_MAGIC$/;"	m	struct:elfhdr	typeref:typename:uint
+magic	xv6/kernel/fs.h	/^  uint magic;        \/\/ Must be FSMAGIC$/;"	m	struct:superblock	typeref:typename:uint
 main	kernel/main.c	/^void main() {$/;"	f	typeref:typename:void
+main	mkfs/checkdisk.c	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+main	mkfs/mkfs.c	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+main	user/test.S	/^main:$/;"	l
+main	user/whoi.c	/^int main() {$/;"	f	typeref:typename:int
+main	xv6/kernel/main.c	/^main()$/;"	f	typeref:typename:void
+main	xv6/mkfs/mkfs.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/cat.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/echo.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/forktest.c	/^main(void)$/;"	f	typeref:typename:int
+main	xv6/user/grep.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/grind.c	/^main()$/;"	f	typeref:typename:int
+main	xv6/user/init.c	/^main(void)$/;"	f	typeref:typename:int
+main	xv6/user/kill.c	/^main(int argc, char **argv)$/;"	f	typeref:typename:int
+main	xv6/user/ln.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/ls.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/mkdir.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/rm.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/sh.c	/^main(void)$/;"	f	typeref:typename:int
+main	xv6/user/stressfs.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/usertests.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/wc.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
+main	xv6/user/zombie.c	/^main(void)$/;"	f	typeref:typename:int
+major	kernel/filesystem/filesystem.h	/^	uint16 major;	\/\/ I dont use this$/;"	m	struct:inode	typeref:typename:uint16
+major	xv6/kernel/file.h	/^  short major;       \/\/ FD_DEVICE$/;"	m	struct:file	typeref:typename:short
+major	xv6/kernel/file.h	/^  short major;$/;"	m	struct:inode	typeref:typename:short
+major	xv6/kernel/file.h	/^#define major(/;"	d
+major	xv6/kernel/fs.h	/^  short major;          \/\/ Major device number (T_DEVICE only)$/;"	m	struct:dinode	typeref:typename:short
+malloc	xv6/user/umalloc.c	/^malloc(uint nbytes)$/;"	f	typeref:typename:void *
+manywrites	xv6/user/usertests.c	/^manywrites(char *s)$/;"	f	typeref:typename:void
 mappage	kernel/memory/kpagetable.c	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	f	typeref:typename:int
+mappages	xv6/kernel/vm.c	/^mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)$/;"	f	typeref:typename:int
+match	xv6/user/grep.c	/^match(char *re, char *text)$/;"	f	typeref:typename:int
+matchhere	xv6/user/grep.c	/^int matchhere(char *re, char *text)$/;"	f	typeref:typename:int
+matchstar	xv6/user/grep.c	/^int matchstar(int c, char *re, char *text)$/;"	f	typeref:typename:int
+mem	xv6/kernel/kernel.asm	/^    mem = kalloc();$/;"	d
+mem	xv6/kernel/kernel.asm	/^  mem = kalloc();$/;"	d
+mem	xv6/user/usertests.c	/^mem(char *s)$/;"	f	typeref:typename:void
+memcmp	xv6/kernel/string.c	/^memcmp(const void *v1, const void *v2, uint n)$/;"	f	typeref:typename:int
+memcmp	xv6/user/ulib.c	/^memcmp(const void *s1, const void *s2, uint n)$/;"	f	typeref:typename:int
 memcpy	kernel/util.c	/^void *memcpy(void *dst, void *src, uint n) {$/;"	f	typeref:typename:void *
+memcpy	xv6/kernel/string.c	/^memcpy(void *dst, const void *src, uint n)$/;"	f	typeref:typename:void *
+memcpy	xv6/user/ulib.c	/^memcpy(void *dst, const void *src, uint n)$/;"	f	typeref:typename:void *
+memmove	xv6/kernel/string.c	/^memmove(void *dst, const void *src, uint n)$/;"	f	typeref:typename:void *
+memmove	xv6/user/ulib.c	/^memmove(void *vdst, const void *vsrc, int n)$/;"	f	typeref:typename:void *
 memory_unit	kernel/memory/kmemory.c	/^struct memory_unit {$/;"	s	file:
 memset	kernel/util.c	/^void *memset(void *dst, char c, uint n) {$/;"	f	typeref:typename:void *
+memset	xv6/kernel/string.c	/^memset(void *dst, int c, uint n)$/;"	f	typeref:typename:void *
+memset	xv6/user/ulib.c	/^memset(void *dst, int c, uint n)$/;"	f	typeref:typename:void *
+memsz	kernel/process/load/elf.h	/^  uint64 memsz;$/;"	m	struct:proghdr	typeref:typename:uint64
+memsz	xv6/kernel/elf.h	/^  uint64 memsz;$/;"	m	struct:proghdr	typeref:typename:uint64
+min	xv6/kernel/fs.c	/^#define min(/;"	d	file:
+min	xv6/mkfs/mkfs.c	/^#define min(/;"	d	file:
+minor	kernel/filesystem/filesystem.h	/^	uint16 minor;	\/\/ I dont use this either$/;"	m	struct:inode	typeref:typename:uint16
+minor	xv6/kernel/file.h	/^  short minor;$/;"	m	struct:inode	typeref:typename:short
+minor	xv6/kernel/file.h	/^#define minor(/;"	d
+minor	xv6/kernel/fs.h	/^  short minor;          \/\/ Minor device number (T_DEVICE only)$/;"	m	struct:dinode	typeref:typename:short
+mkdev	xv6/kernel/file.h	/^#define	mkdev(/;"	d
+mkfs/mkfs	xv6/Makefile	/^mkfs\/mkfs: mkfs\/mkfs.c $K\/fs.h $K\/param.h$/;"	t
+mode	xv6/user/sh.c	/^  int mode;$/;"	m	struct:redircmd	typeref:typename:int	file:
+more	kernel/filesystem/filesystem.h	/^	uint32 more[3];$/;"	m	struct:inode	typeref:typename:uint32[3]
+morecore	xv6/user/umalloc.c	/^morecore(uint nu)$/;"	f	typeref:typename:Header *	file:
+mycpu	xv6/kernel/proc.c	/^mycpu(void)$/;"	f	typeref:struct:cpu *
+myproc	xv6/kernel/proc.c	/^myproc(void)$/;"	f	typeref:struct:proc *
+n	obj/exec.asm	/^				n = PGSIZE;$/;"	d
+n	obj/exec.asm	/^				n = ph.filesz - a;$/;"	d
+n	obj/kernel.asm	/^				n = PGSIZE;$/;"	d
+n	obj/kernel.asm	/^				n = ph.filesz - a;$/;"	d
+n	xv6/kernel/kernel.asm	/^      n = PGSIZE;$/;"	d
+n	xv6/kernel/kernel.asm	/^      n = len;$/;"	d
+n	xv6/kernel/kernel.asm	/^      n = max;$/;"	d
+n	xv6/kernel/kernel.asm	/^      n = sz - i;$/;"	d
+n	xv6/kernel/kernel.asm	/^    n = PGSIZE - (dstva - va0);$/;"	d
+n	xv6/kernel/kernel.asm	/^    n = PGSIZE - (srcva - va0);$/;"	d
+n	xv6/kernel/kernel.asm	/^    n = ip->size - off;$/;"	d
+n	xv6/kernel/log.c	/^  int n;$/;"	m	struct:logheader	typeref:typename:int	file:
+n1	xv6/kernel/kernel.asm	/^        n1 = max;$/;"	d
+n_block	kernel/filesystem/filesystem.h	/^	uint32 n_block;$/;"	m	struct:superblock	typeref:typename:uint32
+n_inode	kernel/filesystem/filesystem.h	/^	uint32 n_inode;$/;"	m	struct:superblock	typeref:typename:uint32
+name	kernel/filesystem/filesystem.h	/^	char name[FILENAME_LEN];$/;"	m	struct:dirent_item	typeref:typename:char[]
 name	kernel/process/process.h	/^	char name[32];$/;"	m	struct:proc	typeref:typename:char[32]
+name	xv6/kernel/fs.h	/^  char name[DIRSIZ];$/;"	m	struct:dirent	typeref:typename:char[]
+name	xv6/kernel/proc.h	/^  char name[16];               \/\/ Process name (debugging)$/;"	m	struct:proc	typeref:typename:char[16]
+name	xv6/kernel/sleeplock.h	/^  char *name;        \/\/ Name of lock.$/;"	m	struct:sleeplock	typeref:typename:char *
+name	xv6/kernel/spinlock.h	/^  char *name;        \/\/ Name of lock.$/;"	m	struct:spinlock	typeref:typename:char *
+name	xv6/user/usertests.c	/^    char name[DIRSIZ];$/;"	m	struct:concreate::__anon72204ae90b08	typeref:typename:char[]	file:
+namecmp	xv6/kernel/fs.c	/^namecmp(const char *s, const char *t)$/;"	f	typeref:typename:int
+namei	xv6/kernel/fs.c	/^namei(char *path)$/;"	f	typeref:struct:inode *
+nameiparent	xv6/kernel/fs.c	/^nameiparent(char *path, char *name)$/;"	f	typeref:struct:inode *
+namex	xv6/kernel/fs.c	/^namex(char *path, int nameiparent, char *name)$/;"	f	typeref:struct:inode *	file:
+nbitmap	xv6/mkfs/mkfs.c	/^int nbitmap = FSSIZE\/(BSIZE*8) + 1;$/;"	v	typeref:typename:int
+nblocks	xv6/kernel/fs.h	/^  uint nblocks;      \/\/ Number of data blocks$/;"	m	struct:superblock	typeref:typename:uint
+nblocks	xv6/mkfs/mkfs.c	/^int nblocks;  \/\/ Number of data blocks$/;"	v	typeref:typename:int
 next	kernel/memory/kmemory.c	/^	struct memory_unit *next;$/;"	m	struct:memory_unit	typeref:struct:memory_unit *	file:
+next	xv6/kernel/buf.h	/^  struct buf *next;$/;"	m	struct:buf	typeref:struct:buf *
+next	xv6/kernel/kalloc.c	/^  struct run *next;$/;"	m	struct:run	typeref:struct:run *	file:
+next	xv6/kernel/virtio.h	/^  uint16 next;$/;"	m	struct:virtq_desc	typeref:typename:uint16
+nextpid	xv6/kernel/kernel.asm	/^  nextpid = nextpid + 1;$/;"	d
+nextpid	xv6/kernel/proc.c	/^int nextpid = 1;$/;"	v	typeref:typename:int
+ninodeblocks	xv6/mkfs/mkfs.c	/^int ninodeblocks = NINODES \/ IPB + 1;$/;"	v	typeref:typename:int
+ninodes	xv6/kernel/fs.h	/^  uint ninodes;      \/\/ Number of inodes.$/;"	m	struct:superblock	typeref:typename:uint
+nlink	kernel/filesystem/filesystem.h	/^	uint16 nlink;$/;"	m	struct:inode	typeref:typename:uint16
+nlink	xv6/kernel/file.h	/^  short nlink;$/;"	m	struct:inode	typeref:typename:short
+nlink	xv6/kernel/fs.h	/^  short nlink;          \/\/ Number of links to inode in file system$/;"	m	struct:dinode	typeref:typename:short
+nlink	xv6/kernel/stat.h	/^  short nlink; \/\/ Number of links to file$/;"	m	struct:stat	typeref:typename:short
+nlog	xv6/kernel/fs.h	/^  uint nlog;         \/\/ Number of log blocks$/;"	m	struct:superblock	typeref:typename:uint
+nlog	xv6/mkfs/mkfs.c	/^int nlog = LOGSIZE;$/;"	v	typeref:typename:int
+nmeta	xv6/mkfs/mkfs.c	/^int nmeta;    \/\/ Number of meta blocks (boot, sb, nlog, inode, bitmap)$/;"	v	typeref:typename:int
+noff	xv6/kernel/proc.h	/^  int noff;                   \/\/ Depth of push_off() nesting.$/;"	m	struct:cpu	typeref:typename:int
+nread	xv6/kernel/pipe.c	/^  uint nread;     \/\/ number of bytes read$/;"	m	struct:pipe	typeref:typename:uint	file:
+nulterminate	xv6/user/sh.c	/^nulterminate(struct cmd *cmd)$/;"	f	typeref:struct:cmd *
+num	xv6/kernel/kernel.asm	/^  num = p->trapframe->a7;$/;"	d
+nwrite	xv6/kernel/pipe.c	/^  uint nwrite;    \/\/ number of bytes written$/;"	m	struct:pipe	typeref:typename:uint	file:
+off	kernel/process/load/elf.h	/^  uint64 off;$/;"	m	struct:proghdr	typeref:typename:uint64
+off	xv6/kernel/elf.h	/^  uint64 off;$/;"	m	struct:proghdr	typeref:typename:uint64
+off	xv6/kernel/file.h	/^  uint off;          \/\/ FD_INODE$/;"	m	struct:file	typeref:typename:uint
+ofile	xv6/kernel/proc.h	/^  struct file *ofile[NOFILE];  \/\/ Open files$/;"	m	struct:proc	typeref:struct:file * []
+oldpagetable	xv6/kernel/kernel.asm	/^  oldpagetable = p->pagetable;$/;"	d
+oldsz	obj/exec.asm	/^		oldsz = newsz;$/;"	d
+oldsz	obj/exec.asm	/^	oldsz = PGROUNDUP(oldsz);$/;"	d
+oldsz	obj/kernel.asm	/^		oldsz = newsz;$/;"	d
+oldsz	obj/kernel.asm	/^	oldsz = PGROUNDUP(oldsz);$/;"	d
+oldsz	xv6/kernel/kernel.asm	/^  oldsz = PGROUNDUP(oldsz);$/;"	d
+openiputtest	xv6/user/usertests.c	/^openiputtest(char *s)$/;"	f	typeref:typename:void
+opentest	xv6/user/usertests.c	/^opentest(char *s)$/;"	f	typeref:typename:void
+ops	xv6/kernel/virtio_disk.c	/^  struct virtio_blk_req ops[NUM];$/;"	m	struct:disk	typeref:struct:virtio_blk_req[]	file:
+os	xv6/kernel/kernel.asm	/^  os = s;$/;"	d
+outofinodes	xv6/user/usertests.c	/^outofinodes(char *s)$/;"	f	typeref:typename:void
+outstanding	xv6/kernel/log.c	/^  int outstanding; \/\/ how many FS sys calls are executing.$/;"	m	struct:log	typeref:typename:int	file:
+p	obj/exec.asm	/^		p = PTE_X;$/;"	d
+p	obj/kernel.asm	/^		p = PTE_X;$/;"	d
+p	xv6/kernel/kernel.asm	/^  p = (char*)PGROUNDUP((uint64)pa_start);$/;"	d
+p	xv6/kernel/kernel.asm	/^  p = allocproc();$/;"	d
+p	xv6/kernel/kernel.asm	/^  p = myproc();$/;"	d
+pa	xv6/kernel/kernel.asm	/^    pa = PTE2PA(*pte);$/;"	d
+pa	xv6/kernel/kernel.asm	/^    pa = walkaddr(pagetable, va + i);$/;"	d
+pa	xv6/kernel/kernel.asm	/^  pa = PTE2PA(*pte);$/;"	d
+pa0	xv6/kernel/kernel.asm	/^    pa0 = walkaddr(pagetable, va0);$/;"	d
+paddr	kernel/process/load/elf.h	/^  uint64 paddr;$/;"	m	struct:proghdr	typeref:typename:uint64
+paddr	xv6/kernel/elf.h	/^  uint64 paddr;$/;"	m	struct:proghdr	typeref:typename:uint64
 pagetable	kernel/process/process.h	/^	uint64 *pagetable;	\/\/ allocate_proc$/;"	m	struct:proc	typeref:typename:uint64 *
 pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
 pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
 pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
 pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
+pagetable	xv6/kernel/kernel.asm	/^      pagetable = (pagetable_t)PTE2PA(*pte);$/;"	d
+pagetable	xv6/kernel/kernel.asm	/^  pagetable = (pagetable_t) kalloc();$/;"	d
+pagetable	xv6/kernel/kernel.asm	/^  pagetable = uvmcreate();$/;"	d
+pagetable	xv6/kernel/proc.h	/^  pagetable_t pagetable;       \/\/ User page table$/;"	m	struct:proc	typeref:typename:pagetable_t
 pagetable_t	kernel/include/basic_riscv.h	/^typedef uint64 *pagetable_t; \/\/ 512 PTEs$/;"	t	typeref:typename:uint64 *
+pagetable_t	xv6/kernel/kernel.asm	/^pagetable_t$/;"	l
+pagetable_t	xv6/kernel/riscv.h	/^typedef uint64 *pagetable_t; \/\/ 512 PTEs$/;"	t	typeref:typename:uint64 *
 panic	kernel/util.c	/^void panic(char *s) {$/;"	f	typeref:typename:void
+panic	xv6/kernel/printf.c	/^panic(char *s)$/;"	f	typeref:typename:void
+panic	xv6/user/sh.c	/^panic(char *s)$/;"	f	typeref:typename:void
+panicked	xv6/kernel/kernel.asm	/^  panicked = 1; \/\/ freeze uart output from other CPUs$/;"	d
+panicked	xv6/kernel/printf.c	/^volatile int panicked = 0;$/;"	v	typeref:typename:volatile int
 parent	kernel/process/process.h	/^	struct proc *parent;$/;"	m	struct:proc	typeref:struct:proc *
+parent	xv6/kernel/proc.h	/^  struct proc *parent;         \/\/ Parent process$/;"	m	struct:proc	typeref:struct:proc *
+parseblock	xv6/user/sh.c	/^parseblock(char **ps, char *es)$/;"	f	typeref:struct:cmd *
+parsecmd	xv6/user/sh.c	/^parsecmd(char *s)$/;"	f	typeref:struct:cmd *
+parseexec	xv6/user/sh.c	/^parseexec(char **ps, char *es)$/;"	f	typeref:struct:cmd *
+parseline	xv6/user/sh.c	/^parseline(char **ps, char *es)$/;"	f	typeref:struct:cmd *
+parsepipe	xv6/user/sh.c	/^parsepipe(char **ps, char *es)$/;"	f	typeref:struct:cmd *
+parseredirs	xv6/user/sh.c	/^parseredirs(struct cmd *cmd, char **ps, char *es)$/;"	f	typeref:struct:cmd *
+pde_t	xv6/kernel/types.h	/^typedef uint64 pde_t;$/;"	t	typeref:typename:uint64
+peek	xv6/user/sh.c	/^peek(char **ps, char *es, char *toks)$/;"	f	typeref:typename:int
+perm	xv6/kernel/kernel.asm	/^      perm = PTE_X;$/;"	d
+pgbug	xv6/user/usertests.c	/^pgbug(char *s)$/;"	f	typeref:typename:void
+phentsize	kernel/process/load/elf.h	/^  ushort phentsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+phentsize	xv6/kernel/elf.h	/^  ushort phentsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+phnum	kernel/process/load/elf.h	/^  ushort phnum;$/;"	m	struct:elfhdr	typeref:typename:ushort
+phnum	xv6/kernel/elf.h	/^  ushort phnum;$/;"	m	struct:elfhdr	typeref:typename:ushort
+phoff	kernel/process/load/elf.h	/^  uint64 phoff;$/;"	m	struct:elfhdr	typeref:typename:uint64
+phoff	xv6/kernel/elf.h	/^  uint64 phoff;$/;"	m	struct:elfhdr	typeref:typename:uint64
+pi	xv6/kernel/kernel.asm	/^  pi = 0;$/;"	d
 pid	kernel/process/process.h	/^	int pid;		\/\/ allocate_proc$/;"	m	struct:proc	typeref:typename:int
+pid	xv6/kernel/kernel.asm	/^          pid = pp->pid;$/;"	d
+pid	xv6/kernel/kernel.asm	/^  pid = nextpid;$/;"	d
+pid	xv6/kernel/kernel.asm	/^  pid = np->pid;$/;"	d
+pid	xv6/kernel/proc.h	/^  int pid;                     \/\/ Process ID$/;"	m	struct:proc	typeref:typename:int
+pid	xv6/kernel/sleeplock.h	/^  int pid;           \/\/ Process holding lock$/;"	m	struct:sleeplock	typeref:typename:int
+pid_lock	xv6/kernel/proc.c	/^struct spinlock pid_lock;$/;"	v	typeref:struct:spinlock
+pipe	xv6/kernel/file.h	/^  struct pipe *pipe; \/\/ FD_PIPE$/;"	m	struct:file	typeref:struct:pipe *
+pipe	xv6/kernel/pipe.c	/^struct pipe {$/;"	s	file:
+pipe1	xv6/user/usertests.c	/^pipe1(char *s)$/;"	f	typeref:typename:void
+pipealloc	xv6/kernel/pipe.c	/^pipealloc(struct file **f0, struct file **f1)$/;"	f	typeref:typename:int
+pipeclose	xv6/kernel/pipe.c	/^pipeclose(struct pipe *pi, int writable)$/;"	f	typeref:typename:void
+pipecmd	xv6/user/sh.c	/^pipecmd(struct cmd *left, struct cmd *right)$/;"	f	typeref:struct:cmd *
+pipecmd	xv6/user/sh.c	/^struct pipecmd {$/;"	s	file:
+piperead	xv6/kernel/pipe.c	/^piperead(struct pipe *pi, uint64 addr, int n)$/;"	f	typeref:typename:int
+pipewrite	xv6/kernel/pipe.c	/^pipewrite(struct pipe *pi, uint64 addr, int n)$/;"	f	typeref:typename:int
 plic_claim	kernel/interrupt/plic.c	/^plic_claim(void)$/;"	f	typeref:typename:int
+plic_claim	xv6/kernel/plic.c	/^plic_claim(void)$/;"	f	typeref:typename:int
 plic_complete	kernel/interrupt/plic.c	/^plic_complete(int irq)$/;"	f	typeref:typename:void
+plic_complete	xv6/kernel/plic.c	/^plic_complete(int irq)$/;"	f	typeref:typename:void
 plicinit	kernel/interrupt/plic.c	/^plicinit(void)$/;"	f	typeref:typename:void
+plicinit	xv6/kernel/plic.c	/^plicinit(void)$/;"	f	typeref:typename:void
 plicinithart	kernel/interrupt/plic.c	/^plicinithart(void)$/;"	f	typeref:typename:void
+plicinithart	xv6/kernel/plic.c	/^plicinithart(void)$/;"	f	typeref:typename:void
+pop_off	xv6/kernel/spinlock.c	/^pop_off(void)$/;"	f	typeref:typename:void
+pr	xv6/kernel/printf.c	/^} pr;$/;"	v	typeref:struct:__anon6606502c0108
+preempt	xv6/user/usertests.c	/^preempt(char *s)$/;"	f	typeref:typename:void
+prev	xv6/kernel/buf.h	/^  struct buf *prev; \/\/ LRU cache list$/;"	m	struct:buf	typeref:struct:buf *
+print	xv6/user/forktest.c	/^print(const char *s)$/;"	f	typeref:typename:void
+printf	xv6/kernel/printf.c	/^printf(char *fmt, ...)$/;"	f	typeref:typename:void
+printf	xv6/user/printf.c	/^printf(const char *fmt, ...)$/;"	f	typeref:typename:void
+printfinit	xv6/kernel/printf.c	/^printfinit(void)$/;"	f	typeref:typename:void
+printint	xv6/kernel/printf.c	/^printint(int xx, int base, int sign)$/;"	f	typeref:typename:void	file:
+printint	xv6/user/printf.c	/^printint(int fd, int xx, int base, int sgn)$/;"	f	typeref:typename:void	file:
+printptr	xv6/kernel/printf.c	/^printptr(uint64 x)$/;"	f	typeref:typename:void	file:
+printptr	xv6/user/printf.c	/^printptr(int fd, uint64 x) {$/;"	f	typeref:typename:void	file:
 proc	kernel/process/process.h	/^struct proc {$/;"	s
+proc	xv6/kernel/proc.c	/^struct proc proc[NPROC];$/;"	v	typeref:struct:proc[]
+proc	xv6/kernel/proc.h	/^  struct proc *proc;          \/\/ The process running on this cpu, or null.$/;"	m	struct:cpu	typeref:struct:proc *
+proc	xv6/kernel/proc.h	/^struct proc {$/;"	s
+proc_freepagetable	xv6/kernel/proc.c	/^proc_freepagetable(pagetable_t pagetable, uint64 sz)$/;"	f	typeref:typename:void
+proc_mapstacks	xv6/kernel/proc.c	/^proc_mapstacks(pagetable_t kpgtbl)$/;"	f	typeref:typename:void
+proc_pagetable	xv6/kernel/proc.c	/^proc_pagetable(struct proc *p)$/;"	f	typeref:typename:pagetable_t
+procdump	xv6/kernel/proc.c	/^procdump(void)$/;"	f	typeref:typename:void
 processes	kernel/process/create.c	/^struct proc processes[NPROC];$/;"	v	typeref:struct:proc[]
+procinit	xv6/kernel/proc.c	/^procinit(void)$/;"	f	typeref:typename:void
+procstate	xv6/kernel/proc.h	/^enum procstate { UNUSED, USED, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };$/;"	g
+proghdr	kernel/process/load/elf.h	/^struct proghdr {$/;"	s
+proghdr	xv6/kernel/elf.h	/^struct proghdr {$/;"	s
+pte	xv6/kernel/kernel.asm	/^  pte = walk(pagetable, va, 0);$/;"	d
 pte_t	kernel/include/basic_riscv.h	/^typedef uint64 pte_t;$/;"	t	typeref:typename:uint64
+pte_t	xv6/kernel/kernel.asm	/^pte_t *$/;"	l
+pte_t	xv6/kernel/riscv.h	/^typedef uint64 pte_t;$/;"	t	typeref:typename:uint64
+ptr	xv6/user/umalloc.c	/^    union header *ptr;$/;"	m	struct:header::__anon6797c5240108	typeref:union:header *	file:
+push_off	xv6/kernel/spinlock.c	/^push_off(void)$/;"	f	typeref:typename:void
+putc	xv6/user/printf.c	/^putc(int fd, char c)$/;"	f	typeref:typename:void	file:
 qemu	Makefile	/^qemu:	$(OBJ_DIR)\/kernel$/;"	t
+qemu	xv6/Makefile	/^qemu: $K\/kernel fs.img$/;"	t
 qemu-gdb	Makefile	/^qemu-gdb: $(OBJ_DIR)\/kernel .gdbinit$/;"	t
+qemu-gdb	xv6/Makefile	/^qemu-gdb: $K\/kernel .gdbinit fs.img$/;"	t
+quicktests	xv6/user/usertests.c	/^} quicktests[] = {$/;"	v	typeref:struct:test[]
+r	xv6/kernel/console.c	/^  uint r;  \/\/ Read index$/;"	m	struct:__anon03efc82c0108	typeref:typename:uint	file:
+r	xv6/kernel/kernel.asm	/^    r = devsw[f->major].read(1, addr, n);$/;"	d
+r	xv6/kernel/kernel.asm	/^    r = piperead(f->pipe, addr, n);$/;"	d
+r	xv6/kernel/kernel.asm	/^  r = (lk->locked && lk->cpu == mycpu());$/;"	d
+r	xv6/kernel/kernel.asm	/^  r = (struct run*)pa;$/;"	d
+r	xv6/kernel/kernel.asm	/^  r = kmem.freelist;$/;"	d
+r	xv6/kernel/kernel.asm	/^  r = lk->locked && (lk->pid == myproc()->pid);$/;"	d
+r_fp	kernel/include/basic_riscv.h	/^r_fp()$/;"	f	typeref:typename:uint64
 r_mcounteren	kernel/include/basic_riscv.h	/^r_mcounteren()$/;"	f	typeref:typename:uint64
+r_mcounteren	xv6/kernel/riscv.h	/^r_mcounteren()$/;"	f	typeref:typename:uint64
 r_medeleg	kernel/include/basic_riscv.h	/^r_medeleg()$/;"	f	typeref:typename:uint64
+r_medeleg	xv6/kernel/riscv.h	/^r_medeleg()$/;"	f	typeref:typename:uint64
 r_mhartid	kernel/include/basic_riscv.h	/^r_mhartid()$/;"	f	typeref:typename:uint64
+r_mhartid	xv6/kernel/riscv.h	/^r_mhartid()$/;"	f	typeref:typename:uint64
 r_mideleg	kernel/include/basic_riscv.h	/^r_mideleg()$/;"	f	typeref:typename:uint64
+r_mideleg	xv6/kernel/riscv.h	/^r_mideleg()$/;"	f	typeref:typename:uint64
 r_mie	kernel/include/basic_riscv.h	/^r_mie()$/;"	f	typeref:typename:uint64
+r_mie	xv6/kernel/riscv.h	/^r_mie()$/;"	f	typeref:typename:uint64
 r_mstatus	kernel/include/basic_riscv.h	/^r_mstatus()$/;"	f	typeref:typename:uint64
+r_mstatus	xv6/kernel/riscv.h	/^r_mstatus()$/;"	f	typeref:typename:uint64
 r_ra	kernel/include/basic_riscv.h	/^r_ra()$/;"	f	typeref:typename:uint64
+r_ra	xv6/kernel/riscv.h	/^r_ra()$/;"	f	typeref:typename:uint64
 r_satp	kernel/include/basic_riscv.h	/^r_satp()$/;"	f	typeref:typename:uint64
+r_satp	xv6/kernel/riscv.h	/^r_satp()$/;"	f	typeref:typename:uint64
 r_scause	kernel/include/basic_riscv.h	/^r_scause()$/;"	f	typeref:typename:uint64
+r_scause	xv6/kernel/riscv.h	/^r_scause()$/;"	f	typeref:typename:uint64
 r_sepc	kernel/include/basic_riscv.h	/^r_sepc()$/;"	f	typeref:typename:uint64
+r_sepc	xv6/kernel/riscv.h	/^r_sepc()$/;"	f	typeref:typename:uint64
 r_sie	kernel/include/basic_riscv.h	/^r_sie()$/;"	f	typeref:typename:uint64
+r_sie	xv6/kernel/riscv.h	/^r_sie()$/;"	f	typeref:typename:uint64
 r_sip	kernel/include/basic_riscv.h	/^r_sip()$/;"	f	typeref:typename:uint64
+r_sip	xv6/kernel/riscv.h	/^r_sip()$/;"	f	typeref:typename:uint64
 r_sp	kernel/include/basic_riscv.h	/^r_sp()$/;"	f	typeref:typename:uint64
+r_sp	xv6/kernel/riscv.h	/^r_sp()$/;"	f	typeref:typename:uint64
 r_sstatus	kernel/include/basic_riscv.h	/^r_sstatus()$/;"	f	typeref:typename:uint64
+r_sstatus	xv6/kernel/riscv.h	/^r_sstatus()$/;"	f	typeref:typename:uint64
 r_stval	kernel/include/basic_riscv.h	/^r_stval()$/;"	f	typeref:typename:uint64
+r_stval	xv6/kernel/riscv.h	/^r_stval()$/;"	f	typeref:typename:uint64
 r_stvec	kernel/include/basic_riscv.h	/^r_stvec()$/;"	f	typeref:typename:uint64
+r_stvec	xv6/kernel/riscv.h	/^r_stvec()$/;"	f	typeref:typename:uint64
 r_time	kernel/include/basic_riscv.h	/^r_time()$/;"	f	typeref:typename:uint64
+r_time	xv6/kernel/riscv.h	/^r_time()$/;"	f	typeref:typename:uint64
 r_tp	kernel/include/basic_riscv.h	/^r_tp()$/;"	f	typeref:typename:uint64
+r_tp	xv6/kernel/riscv.h	/^r_tp()$/;"	f	typeref:typename:uint64
 ra	kernel/process/process.h	/^	uint64 ra;$/;"	m	struct:context	typeref:typename:uint64
 ra	kernel/process/process.h	/^	uint64 ra;$/;"	m	struct:trapframe	typeref:typename:uint64
+ra	obj/kernel.asm	/^		ra = *(uint64 *)(fp - 8);$/;"	d
+ra	obj/kernel.asm	/^	ra = r_sepc();$/;"	d
+ra	obj/util.asm	/^		ra = *(uint64 *)(fp - 8);$/;"	d
+ra	obj/util.asm	/^	ra = r_sepc();$/;"	d
+ra	xv6/kernel/proc.h	/^  \/*  40 *\/ uint64 ra;$/;"	m	struct:trapframe	typeref:typename:uint64
+ra	xv6/kernel/proc.h	/^  uint64 ra;$/;"	m	struct:context	typeref:typename:uint64
+ramdiskinit	xv6/kernel/ramdisk.c	/^ramdiskinit(void)$/;"	f	typeref:typename:void
+ramdiskrw	xv6/kernel/ramdisk.c	/^ramdiskrw(struct buf *b)$/;"	f	typeref:typename:void
+rand	xv6/user/grind.c	/^rand(void)$/;"	f	typeref:typename:int
+rand_next	xv6/user/grind.c	/^unsigned long rand_next = 1;$/;"	v	typeref:typename:unsigned long
+read	lib/usys.S	/^read:$/;"	l
+read	xv6/kernel/file.h	/^  int (*read)(int, uint64, int);$/;"	m	struct:devsw	typeref:typename:int (*)(int,uint64,int)
+read_head	xv6/kernel/log.c	/^read_head(void)$/;"	f	typeref:typename:void	file:
+readable	xv6/kernel/file.h	/^  char readable;$/;"	m	struct:file	typeref:typename:char
+readi	xv6/kernel/fs.c	/^readi(struct inode *ip, int user_dst, uint64 dst, uint off, uint n)$/;"	f	typeref:typename:int
+readmem	kernel/process/load/exec.c	/^void readmem(char *dst, uint off, int n) {$/;"	f	typeref:typename:void
+readopen	xv6/kernel/pipe.c	/^  int readopen;   \/\/ read fd is still open$/;"	m	struct:pipe	typeref:typename:int	file:
+readsb	xv6/kernel/fs.c	/^readsb(int dev, struct superblock *sb)$/;"	f	typeref:typename:void	file:
+recover_from_log	xv6/kernel/log.c	/^recover_from_log(void)$/;"	f	typeref:typename:void	file:
+redircmd	xv6/user/sh.c	/^redircmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd)$/;"	f	typeref:struct:cmd *
+redircmd	xv6/user/sh.c	/^struct redircmd {$/;"	s	file:
+ref	xv6/kernel/file.h	/^  int ref;            \/\/ Reference count$/;"	m	struct:inode	typeref:typename:int
+ref	xv6/kernel/file.h	/^  int ref; \/\/ reference count$/;"	m	struct:file	typeref:typename:int
+refcnt	xv6/kernel/buf.h	/^  uint refcnt;$/;"	m	struct:buf	typeref:typename:uint
+release	xv6/kernel/spinlock.c	/^release(struct spinlock *lk)$/;"	f	typeref:typename:void
+releasesleep	xv6/kernel/sleeplock.c	/^releasesleep(struct sleeplock *lk)$/;"	f	typeref:typename:void
+reparent	xv6/kernel/proc.c	/^reparent(struct proc *p)$/;"	f	typeref:typename:void
+reparent	xv6/user/usertests.c	/^reparent(char *s)$/;"	f	typeref:typename:void
+reparent2	xv6/user/usertests.c	/^reparent2(char *s)$/;"	f	typeref:typename:void
+reserved	xv6/kernel/virtio.h	/^  uint32 reserved;$/;"	m	struct:virtio_blk_req	typeref:typename:uint32
+ret	xv6/kernel/kernel.asm	/^    ret = (i == n ? n : -1);$/;"	d
+ret	xv6/kernel/kernel.asm	/^    ret = devsw[f->major].write(1, addr, n);$/;"	d
+ret	xv6/kernel/kernel.asm	/^    ret = pipewrite(f->pipe, addr, n);$/;"	d
+right	xv6/user/sh.c	/^  struct cmd *right;$/;"	m	struct:listcmd	typeref:struct:cmd *	file:
+right	xv6/user/sh.c	/^  struct cmd *right;$/;"	m	struct:pipecmd	typeref:struct:cmd *	file:
+ring	xv6/kernel/virtio.h	/^  struct virtq_used_elem ring[NUM];$/;"	m	struct:virtq_used	typeref:struct:virtq_used_elem[]
+ring	xv6/kernel/virtio.h	/^  uint16 ring[NUM]; \/\/ descriptor numbers of chain heads$/;"	m	struct:virtq_avail	typeref:typename:uint16[]
+rinode	xv6/mkfs/mkfs.c	/^rinode(uint inum, struct dinode *ip)$/;"	f	typeref:typename:void
+rmdot	xv6/user/usertests.c	/^rmdot(char *s)$/;"	f	typeref:typename:void
+rsect	xv6/mkfs/mkfs.c	/^rsect(uint sec, void *buf)$/;"	f	typeref:typename:void
+run	xv6/kernel/kalloc.c	/^struct run {$/;"	s	file:
+run	xv6/user/usertests.c	/^run(void f(char *), char *s) {$/;"	f	typeref:typename:int
+runcmd	xv6/user/sh.c	/^runcmd(struct cmd *cmd)$/;"	f	typeref:typename:void
+runtests	xv6/user/usertests.c	/^runtests(struct test *tests, char *justone) {$/;"	f	typeref:typename:int
+rwsbrk	xv6/user/usertests.c	/^rwsbrk()$/;"	f	typeref:typename:void
+s	xv6/kernel/kernel.asm	/^        s = "(null)";$/;"	d
+s	xv6/kernel/kernel.asm	/^  s = src;$/;"	d
+s	xv6/user/umalloc.c	/^  } s;$/;"	m	union:header	typeref:struct:header::__anon6797c5240108	file:
+s	xv6/user/usertests.c	/^  char *s;$/;"	m	struct:test	typeref:typename:char *	file:
 s0	kernel/process/process.h	/^	uint64 s0;$/;"	m	struct:context	typeref:typename:uint64
 s0	kernel/process/process.h	/^	uint64 s0;$/;"	m	struct:trapframe	typeref:typename:uint64
+s0	xv6/kernel/proc.h	/^  \/*  96 *\/ uint64 s0;$/;"	m	struct:trapframe	typeref:typename:uint64
+s0	xv6/kernel/proc.h	/^  uint64 s0;$/;"	m	struct:context	typeref:typename:uint64
 s1	kernel/process/process.h	/^	uint64 s1;$/;"	m	struct:context	typeref:typename:uint64
 s1	kernel/process/process.h	/^	uint64 s1;$/;"	m	struct:trapframe	typeref:typename:uint64
+s1	xv6/kernel/kernel.asm	/^  s1 = v1;$/;"	d
+s1	xv6/kernel/proc.h	/^  \/* 104 *\/ uint64 s1;$/;"	m	struct:trapframe	typeref:typename:uint64
+s1	xv6/kernel/proc.h	/^  uint64 s1;$/;"	m	struct:context	typeref:typename:uint64
 s10	kernel/process/process.h	/^	uint64 s10;$/;"	m	struct:context	typeref:typename:uint64
 s10	kernel/process/process.h	/^	uint64 s10;$/;"	m	struct:trapframe	typeref:typename:uint64
+s10	xv6/kernel/proc.h	/^  \/* 240 *\/ uint64 s10;$/;"	m	struct:trapframe	typeref:typename:uint64
+s10	xv6/kernel/proc.h	/^  uint64 s10;$/;"	m	struct:context	typeref:typename:uint64
 s11	kernel/process/process.h	/^	uint64 s11;$/;"	m	struct:context	typeref:typename:uint64
 s11	kernel/process/process.h	/^	uint64 s11;$/;"	m	struct:trapframe	typeref:typename:uint64
+s11	xv6/kernel/proc.h	/^  \/* 248 *\/ uint64 s11;$/;"	m	struct:trapframe	typeref:typename:uint64
+s11	xv6/kernel/proc.h	/^  uint64 s11;$/;"	m	struct:context	typeref:typename:uint64
 s2	kernel/process/process.h	/^	uint64 s2;$/;"	m	struct:context	typeref:typename:uint64
 s2	kernel/process/process.h	/^	uint64 s2;$/;"	m	struct:trapframe	typeref:typename:uint64
+s2	xv6/kernel/kernel.asm	/^  s2 = v2;$/;"	d
+s2	xv6/kernel/proc.h	/^  \/* 176 *\/ uint64 s2;$/;"	m	struct:trapframe	typeref:typename:uint64
+s2	xv6/kernel/proc.h	/^  uint64 s2;$/;"	m	struct:context	typeref:typename:uint64
 s3	kernel/process/process.h	/^	uint64 s3;$/;"	m	struct:context	typeref:typename:uint64
 s3	kernel/process/process.h	/^	uint64 s3;$/;"	m	struct:trapframe	typeref:typename:uint64
+s3	xv6/kernel/proc.h	/^  \/* 184 *\/ uint64 s3;$/;"	m	struct:trapframe	typeref:typename:uint64
+s3	xv6/kernel/proc.h	/^  uint64 s3;$/;"	m	struct:context	typeref:typename:uint64
 s4	kernel/process/process.h	/^	uint64 s4;$/;"	m	struct:context	typeref:typename:uint64
 s4	kernel/process/process.h	/^	uint64 s4;$/;"	m	struct:trapframe	typeref:typename:uint64
+s4	xv6/kernel/proc.h	/^  \/* 192 *\/ uint64 s4;$/;"	m	struct:trapframe	typeref:typename:uint64
+s4	xv6/kernel/proc.h	/^  uint64 s4;$/;"	m	struct:context	typeref:typename:uint64
 s5	kernel/process/process.h	/^	uint64 s5;$/;"	m	struct:context	typeref:typename:uint64
 s5	kernel/process/process.h	/^	uint64 s5;$/;"	m	struct:trapframe	typeref:typename:uint64
+s5	xv6/kernel/proc.h	/^  \/* 200 *\/ uint64 s5;$/;"	m	struct:trapframe	typeref:typename:uint64
+s5	xv6/kernel/proc.h	/^  uint64 s5;$/;"	m	struct:context	typeref:typename:uint64
 s6	kernel/process/process.h	/^	uint64 s6;$/;"	m	struct:context	typeref:typename:uint64
 s6	kernel/process/process.h	/^	uint64 s6;$/;"	m	struct:trapframe	typeref:typename:uint64
+s6	xv6/kernel/proc.h	/^  \/* 208 *\/ uint64 s6;$/;"	m	struct:trapframe	typeref:typename:uint64
+s6	xv6/kernel/proc.h	/^  uint64 s6;$/;"	m	struct:context	typeref:typename:uint64
 s7	kernel/process/process.h	/^	uint64 s7;$/;"	m	struct:context	typeref:typename:uint64
 s7	kernel/process/process.h	/^	uint64 s7;$/;"	m	struct:trapframe	typeref:typename:uint64
+s7	xv6/kernel/proc.h	/^  \/* 216 *\/ uint64 s7;$/;"	m	struct:trapframe	typeref:typename:uint64
+s7	xv6/kernel/proc.h	/^  uint64 s7;$/;"	m	struct:context	typeref:typename:uint64
 s8	kernel/process/process.h	/^	uint64 s8;$/;"	m	struct:context	typeref:typename:uint64
 s8	kernel/process/process.h	/^	uint64 s8;$/;"	m	struct:trapframe	typeref:typename:uint64
+s8	xv6/kernel/proc.h	/^  \/* 224 *\/ uint64 s8;$/;"	m	struct:trapframe	typeref:typename:uint64
+s8	xv6/kernel/proc.h	/^  uint64 s8;$/;"	m	struct:context	typeref:typename:uint64
 s9	kernel/process/process.h	/^	uint64 s9;$/;"	m	struct:context	typeref:typename:uint64
 s9	kernel/process/process.h	/^	uint64 s9;$/;"	m	struct:trapframe	typeref:typename:uint64
+s9	xv6/kernel/proc.h	/^  \/* 232 *\/ uint64 s9;$/;"	m	struct:trapframe	typeref:typename:uint64
+s9	xv6/kernel/proc.h	/^  uint64 s9;$/;"	m	struct:context	typeref:typename:uint64
+safestrcpy	xv6/kernel/string.c	/^safestrcpy(char *s, const char *t, int n)$/;"	f	typeref:typename:char *
+sb	xv6/kernel/fs.c	/^struct superblock sb; $/;"	v	typeref:struct:superblock
+sb	xv6/mkfs/mkfs.c	/^struct superblock sb;$/;"	v	typeref:struct:superblock
+sbrk8000	xv6/user/usertests.c	/^sbrk8000(char *s)$/;"	f	typeref:typename:void
+sbrkarg	xv6/user/usertests.c	/^sbrkarg(char *s)$/;"	f	typeref:typename:void
+sbrkbasic	xv6/user/usertests.c	/^sbrkbasic(char *s)$/;"	f	typeref:typename:void
+sbrkbugs	xv6/user/usertests.c	/^sbrkbugs(char *s)$/;"	f	typeref:typename:void
+sbrkfail	xv6/user/usertests.c	/^sbrkfail(char *s)$/;"	f	typeref:typename:void
+sbrklast	xv6/user/usertests.c	/^sbrklast(char *s)$/;"	f	typeref:typename:void
+sbrkmuch	xv6/user/usertests.c	/^sbrkmuch(char *s)$/;"	f	typeref:typename:void
+sched	xv6/kernel/proc.c	/^sched(void)$/;"	f	typeref:typename:void
 schedular	kernel/process/schedular.c	/^void schedular() {$/;"	f	typeref:typename:void
+scheduler	xv6/kernel/proc.c	/^scheduler(void)$/;"	f	typeref:typename:void
+sector	xv6/kernel/virtio.h	/^  uint64 sector;$/;"	m	struct:virtio_blk_req	typeref:typename:uint64
+setkilled	xv6/kernel/proc.c	/^setkilled(struct proc *p)$/;"	f	typeref:typename:void
 sfence_vma	kernel/include/basic_riscv.h	/^sfence_vma()$/;"	f	typeref:typename:void
+sfence_vma	xv6/kernel/riscv.h	/^sfence_vma()$/;"	f	typeref:typename:void
+sharedfd	xv6/user/usertests.c	/^sharedfd(char *s)$/;"	f	typeref:typename:void
+shentsize	kernel/process/load/elf.h	/^  ushort shentsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+shentsize	xv6/kernel/elf.h	/^  ushort shentsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
+shnum	kernel/process/load/elf.h	/^  ushort shnum;$/;"	m	struct:elfhdr	typeref:typename:ushort
+shnum	xv6/kernel/elf.h	/^  ushort shnum;$/;"	m	struct:elfhdr	typeref:typename:ushort
+shoff	kernel/process/load/elf.h	/^  uint64 shoff;$/;"	m	struct:elfhdr	typeref:typename:uint64
+shoff	xv6/kernel/elf.h	/^  uint64 shoff;$/;"	m	struct:elfhdr	typeref:typename:uint64
+shstrndx	kernel/process/load/elf.h	/^  ushort shstrndx;$/;"	m	struct:elfhdr	typeref:typename:ushort
+shstrndx	xv6/kernel/elf.h	/^  ushort shstrndx;$/;"	m	struct:elfhdr	typeref:typename:ushort
+size	kernel/filesystem/filesystem.h	/^	uint32 size;	\/\/ bytes$/;"	m	struct:inode	typeref:typename:uint32
 size	kernel/process/process.h	/^	uint64 size;$/;"	m	struct:proc	typeref:typename:uint64
+size	xv6/kernel/file.h	/^  uint size;$/;"	m	struct:inode	typeref:typename:uint
+size	xv6/kernel/fs.h	/^  uint size;            \/\/ Size of file (bytes)$/;"	m	struct:dinode	typeref:typename:uint
+size	xv6/kernel/fs.h	/^  uint size;         \/\/ Size of file system image (blocks)$/;"	m	struct:superblock	typeref:typename:uint
+size	xv6/kernel/log.c	/^  int size;$/;"	m	struct:log	typeref:typename:int	file:
+size	xv6/kernel/stat.h	/^  uint64 size; \/\/ Size of file in bytes$/;"	m	struct:stat	typeref:typename:uint64
+size	xv6/user/umalloc.c	/^    uint size;$/;"	m	struct:header::__anon6797c5240108	typeref:typename:uint	file:
+sizeb	kernel/filesystem/filesystem.h	/^	uint32 sizeb;$/;"	m	struct:superblock	typeref:typename:uint32
+skipelem	xv6/kernel/fs.c	/^skipelem(char *path, char *name)$/;"	f	typeref:typename:char *	file:
+sleep	xv6/kernel/proc.c	/^sleep(void *chan, struct spinlock *lk)$/;"	f	typeref:typename:void
+sleeplock	xv6/kernel/sleeplock.h	/^struct sleeplock {$/;"	s
+slowtests	xv6/user/usertests.c	/^struct test slowtests[] = {$/;"	v	typeref:struct:test[]
 sp	kernel/process/process.h	/^	uint64 sp;$/;"	m	struct:context	typeref:typename:uint64
 sp	kernel/process/process.h	/^	uint64 sp;$/;"	m	struct:trapframe	typeref:typename:uint64
+sp	xv6/kernel/kernel.asm	/^  sp = sz;$/;"	d
+sp	xv6/kernel/proc.h	/^  \/*  48 *\/ uint64 sp;$/;"	m	struct:trapframe	typeref:typename:uint64
+sp	xv6/kernel/proc.h	/^  uint64 sp;$/;"	m	struct:context	typeref:typename:uint64
+spin	xv6/kernel/entry.S	/^spin:$/;"	l
+spinlock	xv6/kernel/spinlock.h	/^struct spinlock {$/;"	s
+srcva	xv6/kernel/kernel.asm	/^    srcva = va0 + PGSIZE;$/;"	d
 stack0	kernel/initial/start.c	/^__attribute__ ((aligned (16))) char stack0[4096 * NCPU];$/;"	v	typeref:typename:char[]
+stack0	xv6/kernel/start.c	/^__attribute__ ((aligned (16))) char stack0[4096 * NCPU];$/;"	v	typeref:typename:char[]
+stackbase	xv6/kernel/kernel.asm	/^  stackbase = sp - PGSIZE;$/;"	d
+stacktest	xv6/user/usertests.c	/^stacktest(char *s)$/;"	f	typeref:typename:void
 start	kernel/initial/start.c	/^start()$/;"	f	typeref:typename:void
+start	xv6/kernel/log.c	/^  int start;$/;"	m	struct:log	typeref:typename:int	file:
+start	xv6/kernel/start.c	/^start()$/;"	f	typeref:typename:void
+start	xv6/user/initcode.S	/^start:$/;"	l
+start	xv6/user/initcode.asm	/^start:$/;"	l
+started	xv6/kernel/kernel.asm	/^    started = 1;$/;"	d
+started	xv6/kernel/main.c	/^volatile static int started = 0;$/;"	v	typeref:typename:volatile int	file:
+stat	xv6/kernel/stat.h	/^struct stat {$/;"	s
+stat	xv6/mkfs/mkfs.c	/^#define stat /;"	d	file:
+stat	xv6/user/ulib.c	/^stat(const char *n, struct stat *st)$/;"	f	typeref:typename:int
 state	kernel/process/process.h	/^	int state;		\/\/ allocate_proc\/..$/;"	m	struct:proc	typeref:typename:int
+state	xv6/kernel/kernel.asm	/^      state = "???";$/;"	d
+state	xv6/kernel/kernel.asm	/^      state = states[p->state];$/;"	d
+state	xv6/kernel/proc.h	/^  enum procstate state;        \/\/ Process state$/;"	m	struct:proc	typeref:enum:procstate
+stati	xv6/kernel/fs.c	/^stati(struct inode *ip, struct stat *st)$/;"	f	typeref:typename:void
 static	obj/kernel.asm	/^static inline uint64$/;"	l
 static	obj/kernel.asm	/^static inline void $/;"	l
 static	obj/kernel.asm	/^static inline void$/;"	l
+static	obj/kerneltrap.asm	/^static inline uint64$/;"	l
 static	obj/kerneltrap.asm	/^static inline void $/;"	l
 static	obj/kpagetable.asm	/^static inline void$/;"	l
 static	obj/start.asm	/^static inline uint64$/;"	l
 static	obj/start.asm	/^static inline void $/;"	l
 static	obj/usertrap.asm	/^static inline uint64$/;"	l
-static	obj/usertrap.asm	/^static inline void $/;"	l
 static	obj/usertrap.asm	/^static inline void$/;"	l
 static	obj/util.asm	/^static inline uint64$/;"	l
+static	xv6/kernel/kernel.asm	/^static char digits[] = "0123456789abcdef";$/;"	l
+static	xv6/kernel/kernel.asm	/^static inline uint64$/;"	l
+static	xv6/kernel/kernel.asm	/^static inline void $/;"	l
+static	xv6/kernel/kernel.asm	/^static inline void$/;"	l
+static	xv6/kernel/kernel.asm	/^static int loadseg(pde_t *, uint64, struct inode *, uint, uint);$/;"	l
+static	xv6/kernel/kernel.asm	/^static int$/;"	l
+static	xv6/kernel/kernel.asm	/^static struct inode*$/;"	t
+static	xv6/kernel/kernel.asm	/^static uint$/;"	l
+static	xv6/kernel/kernel.asm	/^static uint64$/;"	l
+static	xv6/kernel/kernel.asm	/^static void$/;"	l
+static_assert	xv6/mkfs/mkfs.c	/^#define static_assert(/;"	d	file:
+status	xv6/kernel/kernel.asm	/^  status = *R(VIRTIO_MMIO_STATUS);$/;"	d
+status	xv6/kernel/virtio_disk.c	/^    char status;$/;"	m	struct:disk::__anon1c2856c00108	typeref:typename:char	file:
+strchr	xv6/user/ulib.c	/^strchr(const char *s, char c)$/;"	f	typeref:typename:char *
+strcmp	xv6/user/ulib.c	/^strcmp(const char *p, const char *q)$/;"	f	typeref:typename:int
+strcpy	xv6/user/ulib.c	/^strcpy(char *s, const char *t)$/;"	f	typeref:typename:char *
+strlen	xv6/kernel/string.c	/^strlen(const char *s)$/;"	f	typeref:typename:int
+strlen	xv6/user/ulib.c	/^strlen(const char *s)$/;"	f	typeref:typename:uint
+strncmp	xv6/kernel/string.c	/^strncmp(const char *p, const char *q, uint n)$/;"	f	typeref:typename:int
+strncpy	xv6/kernel/string.c	/^strncpy(char *s, const char *t, int n)$/;"	f	typeref:typename:char *
 struct	obj/create.asm	/^	struct proc *p = processes;$/;"	l
 struct	obj/create.asm	/^struct proc *allocate_proc() {$/;"	l
 struct	obj/create.asm	/^struct proc *currentp;$/;"	l
 struct	obj/create.asm	/^struct proc processes[NPROC];$/;"	l
+struct	obj/exec.asm	/^	struct proc *p = current_proc();$/;"	l
 struct	obj/kernel.asm	/^	struct proc *p = allocate_proc();$/;"	l
 struct	obj/kernel.asm	/^	struct proc *p = current_proc();$/;"	l
 struct	obj/kernel.asm	/^	struct proc *p = processes;$/;"	l
@@ -539,53 +1851,229 @@ struct	obj/kernel.asm	/^struct proc *currentp;$/;"	l
 struct	obj/kernel.asm	/^struct proc processes[NPROC];$/;"	l
 struct	obj/kpagetable.asm	/^	struct proc *p = processes;$/;"	l
 struct	obj/schedular.asm	/^	struct proc *p;$/;"	l
+struct	obj/syscall.asm	/^	struct proc *p = current_proc();$/;"	l
 struct	obj/userproc.asm	/^	struct proc *p = allocate_proc();$/;"	l
 struct	obj/userproc.asm	/^struct proc *current_proc() {$/;"	l
 struct	obj/usertrap.asm	/^	struct proc *p = current_proc();$/;"	l
+struct	xv6/kernel/kernel.asm	/^  struct proc *p = c->proc;$/;"	l
+struct	xv6/kernel/kernel.asm	/^  struct proc *p = myproc();$/;"	l
+struct	xv6/kernel/kernel.asm	/^  struct proc *p;$/;"	l
+struct	xv6/kernel/kernel.asm	/^  struct proc *pr = myproc();$/;"	l
+structure	README.md	/^#### structure$/;"	t
+subdir	xv6/user/usertests.c	/^subdir(char *s)$/;"	f	typeref:typename:void
+superblock	kernel/filesystem/filesystem.h	/^struct superblock {$/;"	s
+superblock	xv6/kernel/fs.h	/^struct superblock {$/;"	s
 swtch	kernel/process/swtch.S	/^swtch:$/;"	l
 swtch	obj/kernel.asm	/^swtch:$/;"	l
 swtch	obj/swtch.asm	/^swtch:$/;"	l
+swtch	xv6/kernel/swtch.S	/^swtch:$/;"	l
+symbols	xv6/user/sh.c	/^char symbols[] = "<|>&;()";$/;"	v	typeref:typename:char[]
+sys_chdir	xv6/kernel/sysfile.c	/^sys_chdir(void)$/;"	f	typeref:typename:uint64
+sys_close	xv6/kernel/sysfile.c	/^sys_close(void)$/;"	f	typeref:typename:uint64
+sys_dup	xv6/kernel/sysfile.c	/^sys_dup(void)$/;"	f	typeref:typename:uint64
+sys_exec	kernel/syscall/syscall.c	/^uint64 sys_exec(void) {$/;"	f	typeref:typename:uint64
+sys_exec	xv6/kernel/sysfile.c	/^sys_exec(void)$/;"	f	typeref:typename:uint64
+sys_exit	kernel/syscall/syscall.c	/^uint64 sys_exit(void) {$/;"	f	typeref:typename:uint64
+sys_exit	xv6/kernel/sysproc.c	/^sys_exit(void)$/;"	f	typeref:typename:uint64
+sys_fork	kernel/syscall/syscall.c	/^uint64 sys_fork(void) {$/;"	f	typeref:typename:uint64
+sys_fork	xv6/kernel/sysproc.c	/^sys_fork(void)$/;"	f	typeref:typename:uint64
+sys_fstat	xv6/kernel/sysfile.c	/^sys_fstat(void)$/;"	f	typeref:typename:uint64
+sys_getpid	kernel/syscall/syscall.c	/^uint64 sys_getpid(void) {$/;"	f	typeref:typename:uint64
+sys_getpid	xv6/kernel/sysproc.c	/^sys_getpid(void)$/;"	f	typeref:typename:uint64
+sys_kill	xv6/kernel/sysproc.c	/^sys_kill(void)$/;"	f	typeref:typename:uint64
+sys_link	xv6/kernel/sysfile.c	/^sys_link(void)$/;"	f	typeref:typename:uint64
+sys_mkdir	xv6/kernel/sysfile.c	/^sys_mkdir(void)$/;"	f	typeref:typename:uint64
+sys_mknod	xv6/kernel/sysfile.c	/^sys_mknod(void)$/;"	f	typeref:typename:uint64
+sys_open	xv6/kernel/sysfile.c	/^sys_open(void)$/;"	f	typeref:typename:uint64
+sys_pipe	xv6/kernel/sysfile.c	/^sys_pipe(void)$/;"	f	typeref:typename:uint64
+sys_read	kernel/syscall/syscall.c	/^uint64 sys_read(void) {$/;"	f	typeref:typename:uint64
+sys_read	xv6/kernel/sysfile.c	/^sys_read(void)$/;"	f	typeref:typename:uint64
+sys_sbrk	xv6/kernel/sysproc.c	/^sys_sbrk(void)$/;"	f	typeref:typename:uint64
+sys_sleep	xv6/kernel/sysproc.c	/^sys_sleep(void)$/;"	f	typeref:typename:uint64
+sys_unlink	xv6/kernel/sysfile.c	/^sys_unlink(void)$/;"	f	typeref:typename:uint64
+sys_uptime	xv6/kernel/sysproc.c	/^sys_uptime(void)$/;"	f	typeref:typename:uint64
+sys_wait	xv6/kernel/sysproc.c	/^sys_wait(void)$/;"	f	typeref:typename:uint64
+sys_write	kernel/syscall/syscall.c	/^uint64 sys_write(void) {$/;"	f	typeref:typename:uint64
+sys_write	xv6/kernel/sysfile.c	/^sys_write(void)$/;"	f	typeref:typename:uint64
+syscall	kernel/syscall/syscall.c	/^void syscall() {$/;"	f	typeref:typename:void
+syscall	xv6/kernel/syscall.c	/^syscall(void)$/;"	f	typeref:typename:void
+syscalls	xv6/kernel/syscall.c	/^static uint64 (*syscalls[])(void) = {$/;"	v	typeref:typename:uint64 (* [])(void)	file:
+system_calls	kernel/syscall/syscall.c	/^uint64 (*system_calls[])(void) = {$/;"	v	typeref:typename:uint64 (* [])(void)
+sz	obj/exec.asm	/^	sz = PGROUNDUP(sz);$/;"	d
+sz	obj/kernel.asm	/^	sz = PGROUNDUP(sz);$/;"	d
+sz	obj/upagetable.asm	/^	sz = PGROUNDUP(sz);$/;"	d
+sz	xv6/kernel/kernel.asm	/^    sz = uvmdealloc(p->pagetable, sz, sz + n);$/;"	d
+sz	xv6/kernel/kernel.asm	/^  sz = PGROUNDUP(sz);$/;"	d
+sz	xv6/kernel/kernel.asm	/^  sz = p->sz;$/;"	d
+sz	xv6/kernel/kernel.asm	/^  sz = sz1;$/;"	d
+sz	xv6/kernel/proc.h	/^  uint64 sz;                   \/\/ Size of process memory (bytes)$/;"	m	struct:proc	typeref:typename:uint64
 t0	kernel/process/process.h	/^	uint64 t0;$/;"	m	struct:trapframe	typeref:typename:uint64
+t0	xv6/kernel/proc.h	/^  \/*  72 *\/ uint64 t0;$/;"	m	struct:trapframe	typeref:typename:uint64
 t1	kernel/process/process.h	/^	uint64 t1;$/;"	m	struct:trapframe	typeref:typename:uint64
+t1	xv6/kernel/proc.h	/^  \/*  80 *\/ uint64 t1;$/;"	m	struct:trapframe	typeref:typename:uint64
 t2	kernel/process/process.h	/^	uint64 t2;$/;"	m	struct:trapframe	typeref:typename:uint64
+t2	xv6/kernel/proc.h	/^  \/*  88 *\/ uint64 t2;$/;"	m	struct:trapframe	typeref:typename:uint64
 t3	kernel/process/process.h	/^	uint64 t3;$/;"	m	struct:trapframe	typeref:typename:uint64
+t3	xv6/kernel/proc.h	/^  \/* 256 *\/ uint64 t3;$/;"	m	struct:trapframe	typeref:typename:uint64
 t4	kernel/process/process.h	/^	uint64 t4;$/;"	m	struct:trapframe	typeref:typename:uint64
+t4	xv6/kernel/proc.h	/^  \/* 264 *\/ uint64 t4;$/;"	m	struct:trapframe	typeref:typename:uint64
 t5	kernel/process/process.h	/^	uint64 t5;$/;"	m	struct:trapframe	typeref:typename:uint64
+t5	xv6/kernel/proc.h	/^  \/* 272 *\/ uint64 t5;$/;"	m	struct:trapframe	typeref:typename:uint64
 t6	kernel/process/process.h	/^	uint64 t6;$/;"	m	struct:trapframe	typeref:typename:uint64
+t6	xv6/kernel/proc.h	/^  \/* 280 *\/ uint64 t6;$/;"	m	struct:trapframe	typeref:typename:uint64
 tags	Makefile	/^tags:$/;"	t
+tags	xv6/Makefile	/^tags: $(OBJS) _init$/;"	t
+target	xv6/kernel/kernel.asm	/^  target = n;$/;"	d
+test	xv6/user/usertests.c	/^struct test {$/;"	s	file:
+textwrite	xv6/user/usertests.c	/^textwrite(char *s)$/;"	f	typeref:typename:void
+ticks	xv6/kernel/trap.c	/^uint ticks;$/;"	v	typeref:typename:uint
+ticks0	xv6/kernel/kernel.asm	/^  ticks0 = ticks;$/;"	d
+tickslock	xv6/kernel/trap.c	/^struct spinlock tickslock;$/;"	v	typeref:struct:spinlock
 timer_scratch	kernel/initial/start.c	/^uint64 timer_scratch[NCPU][5];$/;"	v	typeref:typename:uint64[][5]
+timer_scratch	xv6/kernel/start.c	/^uint64 timer_scratch[NCPU][5];$/;"	v	typeref:typename:uint64[][5]
 timerinit	kernel/initial/start.c	/^timerinit()$/;"	f	typeref:typename:void
+timerinit	xv6/kernel/start.c	/^timerinit()$/;"	f	typeref:typename:void
 timervec	kernel/initial/start.c	/^void timervec() {}$/;"	f	typeref:typename:void
+timervec	xv6/kernel/kernelvec.S	/^timervec:$/;"	l
+tot	xv6/kernel/kernel.asm	/^      tot = -1;$/;"	d
 tp	kernel/process/process.h	/^	uint64 tp;$/;"	m	struct:trapframe	typeref:typename:uint64
+tp	xv6/kernel/proc.h	/^  \/*  64 *\/ uint64 tp;$/;"	m	struct:trapframe	typeref:typename:uint64
 trampoline	kernel/interrupt/trampoline.S	/^trampoline:$/;"	l
+trampoline	xv6/kernel/trampoline.S	/^trampoline:$/;"	l
 trapframe	kernel/process/process.h	/^	struct trapframe *trapframe;$/;"	m	struct:proc	typeref:struct:trapframe *
 trapframe	kernel/process/process.h	/^struct trapframe {$/;"	s
+trapframe	xv6/kernel/proc.h	/^  struct trapframe *trapframe; \/\/ data page for trampoline.S$/;"	m	struct:proc	typeref:struct:trapframe *
+trapframe	xv6/kernel/proc.h	/^struct trapframe {\/*{{{*\/$/;"	s
+trapinit	xv6/kernel/trap.c	/^trapinit(void)$/;"	f	typeref:typename:void
+trapinithart	xv6/kernel/trap.c	/^trapinithart(void)$/;"	f	typeref:typename:void
+truncate1	xv6/user/usertests.c	/^truncate1(char *s)$/;"	f	typeref:typename:void
+truncate2	xv6/user/usertests.c	/^truncate2(char *s)$/;"	f	typeref:typename:void
+truncate3	xv6/user/usertests.c	/^truncate3(char *s)$/;"	f	typeref:typename:void
+twochildren	xv6/user/usertests.c	/^twochildren(char *s)$/;"	f	typeref:typename:void
+type	kernel/filesystem/filesystem.h	/^	uint16 type;$/;"	m	struct:inode	typeref:typename:uint16
+type	kernel/process/load/elf.h	/^  uint32 type;$/;"	m	struct:proghdr	typeref:typename:uint32
+type	kernel/process/load/elf.h	/^  ushort type;$/;"	m	struct:elfhdr	typeref:typename:ushort
+type	xv6/kernel/elf.h	/^  uint32 type;$/;"	m	struct:proghdr	typeref:typename:uint32
+type	xv6/kernel/elf.h	/^  ushort type;$/;"	m	struct:elfhdr	typeref:typename:ushort
+type	xv6/kernel/file.h	/^  enum { FD_NONE, FD_PIPE, FD_INODE, FD_DEVICE } type;$/;"	m	struct:file	typeref:enum:file::__anon94af1a1e0103
+type	xv6/kernel/file.h	/^  short type;         \/\/ copy of disk inode$/;"	m	struct:inode	typeref:typename:short
+type	xv6/kernel/fs.h	/^  short type;           \/\/ File type$/;"	m	struct:dinode	typeref:typename:short
+type	xv6/kernel/stat.h	/^  short type;  \/\/ Type of file$/;"	m	struct:stat	typeref:typename:short
+type	xv6/kernel/virtio.h	/^  uint32 type; \/\/ VIRTIO_BLK_T_IN or ..._OUT$/;"	m	struct:virtio_blk_req	typeref:typename:uint32
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:backcmd	typeref:typename:int	file:
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:cmd	typeref:typename:int	file:
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:execcmd	typeref:typename:int	file:
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:listcmd	typeref:typename:int	file:
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:pipecmd	typeref:typename:int	file:
+type	xv6/user/sh.c	/^  int type;$/;"	m	struct:redircmd	typeref:typename:int	file:
+uart_tx_buf	xv6/kernel/uart.c	/^char uart_tx_buf[UART_TX_BUF_SIZE];$/;"	v	typeref:typename:char[]
+uart_tx_lock	xv6/kernel/uart.c	/^struct spinlock uart_tx_lock;$/;"	v	typeref:struct:spinlock
+uart_tx_r	xv6/kernel/uart.c	/^uint64 uart_tx_r; \/\/ read next from uart_tx_buf[uart_tx_r % UART_TX_BUF_SIZE]$/;"	v	typeref:typename:uint64
+uart_tx_w	xv6/kernel/uart.c	/^uint64 uart_tx_w; \/\/ write next to uart_tx_buf[uart_tx_w % UART_TX_BUF_SIZE]$/;"	v	typeref:typename:uint64
+uartgetc	xv6/kernel/uart.c	/^uartgetc(void)$/;"	f	typeref:typename:int
+uartinit	xv6/kernel/uart.c	/^uartinit(void)$/;"	f	typeref:typename:void
+uartintr	xv6/kernel/uart.c	/^uartintr(void)$/;"	f	typeref:typename:void
+uartputc	xv6/kernel/uart.c	/^uartputc(int c)$/;"	f	typeref:typename:void
+uartputc_sync	xv6/kernel/uart.c	/^uartputc_sync(int c)$/;"	f	typeref:typename:void
+uartstart	xv6/kernel/uart.c	/^uartstart()$/;"	f	typeref:typename:void
 uchar	kernel/include/basic_types.h	/^typedef unsigned char  uchar;$/;"	t	typeref:typename:unsigned char
+uchar	xv6/kernel/types.h	/^typedef unsigned char  uchar;$/;"	t	typeref:typename:unsigned char
+ugrow_memory	kernel/memory/upagetable.c	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	f	typeref:typename:void
+uinode_read	kernel/filesystem/inode.c	/^void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n) {$/;"	f	typeref:typename:void
 uint	kernel/include/basic_types.h	/^typedef unsigned int   uint;$/;"	t	typeref:typename:unsigned int
+uint	xv6/kernel/types.h	/^typedef unsigned int   uint;$/;"	t	typeref:typename:unsigned int
 uint16	kernel/include/basic_types.h	/^typedef unsigned short	uint16;$/;"	t	typeref:typename:unsigned short
+uint16	xv6/kernel/types.h	/^typedef unsigned short uint16;$/;"	t	typeref:typename:unsigned short
+uint16_t	user/stdint.h	/^typedef unsigned short	uint16_t;$/;"	t	typeref:typename:unsigned short
 uint32	kernel/include/basic_types.h	/^typedef unsigned int	uint32;$/;"	t	typeref:typename:unsigned int
+uint32	xv6/kernel/types.h	/^typedef unsigned int  uint32;$/;"	t	typeref:typename:unsigned int
+uint32_t	user/stdint.h	/^typedef unsigned int	uint32_t;$/;"	t	typeref:typename:unsigned int
 uint64	kernel/include/basic_types.h	/^typedef unsigned long	uint64;$/;"	t	typeref:typename:unsigned long
 uint64	obj/kernel.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_exec(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_exit(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_fork(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_getpid(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_read(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_write(void) {$/;"	l
 uint64	obj/kernel.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint64	obj/kernel.asm	/^uint64 walkpaalign(uint64 *pagetable, uint64 va) {$/;"	l
 uint64	obj/kpagetable.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/kpagetable.asm	/^uint64 walkpaalign(uint64 *pagetable, uint64 va) {$/;"	l
 uint64	obj/start.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_exec(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_exit(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_fork(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_getpid(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_read(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_write(void) {$/;"	l
+uint64	xv6/kernel/kernel.asm	/^uint64$/;"	l
+uint64	xv6/kernel/types.h	/^typedef unsigned long uint64;$/;"	t	typeref:typename:unsigned long
+uint64_t	user/stdint.h	/^typedef unsigned long	uint64_t;$/;"	t	typeref:typename:unsigned long
 uint8	kernel/include/basic_types.h	/^typedef unsigned char	uint8;$/;"	t	typeref:typename:unsigned char
-uint8	obj/kernel.asm	/^uint8 initcode[] = {0x73, 0x00, 0x00, 0x00};$/;"	l
-uint8	obj/userproc.asm	/^uint8 initcode[] = {0x73, 0x00, 0x00, 0x00};$/;"	l
+uint8	xv6/kernel/types.h	/^typedef unsigned char uint8;$/;"	t	typeref:typename:unsigned char
+uint8_t	user/stdint.h	/^typedef unsigned char	uint8_t;$/;"	t	typeref:typename:unsigned char
+uninit	xv6/user/usertests.c	/^char uninit[10000];$/;"	v	typeref:typename:char[10000]
+unlinkread	xv6/user/usertests.c	/^unlinkread(char *s)$/;"	f	typeref:typename:void
+unused	xv6/kernel/virtio.h	/^  uint16 unused;$/;"	m	struct:virtq_avail	typeref:typename:uint16
 usable_pid	kernel/process/create.c	/^int usable_pid = 1;$/;"	v	typeref:typename:int
+used	xv6/kernel/virtio_disk.c	/^  struct virtq_used *used;$/;"	m	struct:disk	typeref:struct:virtq_used *	file:
+used_idx	xv6/kernel/virtio_disk.c	/^  uint16 used_idx; \/\/ we've looked this far in used[2..NUM].$/;"	m	struct:disk	typeref:typename:uint16	file:
+userinit	xv6/kernel/proc.c	/^userinit(void)$/;"	f	typeref:typename:void
 userret	kernel/interrupt/trampoline.S	/^userret:$/;"	l
+userret	xv6/kernel/trampoline.S	/^userret:$/;"	l
 usertrap	kernel/interrupt/usertrap.c	/^void usertrap() {$/;"	f	typeref:typename:void
+usertrap	xv6/kernel/trap.c	/^usertrap(void)$/;"	f	typeref:typename:void
 usertrap_return	kernel/interrupt/usertrap.c	/^void usertrap_return() {$/;"	f	typeref:typename:void
+usertrapret	xv6/kernel/trap.c	/^usertrapret(void)$/;"	f	typeref:typename:void
 uservec	kernel/interrupt/trampoline.S	/^uservec:    $/;"	l
+uservec	xv6/kernel/trampoline.S	/^uservec:    $/;"	l
 ushort	kernel/include/basic_types.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
+ushort	xv6/kernel/types.h	/^typedef unsigned short ushort;$/;"	t	typeref:typename:unsigned short
+uvmalloc	xv6/kernel/vm.c	/^uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm)$/;"	f	typeref:typename:uint64
+uvmclear	xv6/kernel/vm.c	/^uvmclear(pagetable_t pagetable, uint64 va)$/;"	f	typeref:typename:void
+uvmcopy	xv6/kernel/vm.c	/^uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)$/;"	f	typeref:typename:int
+uvmcreate	xv6/kernel/vm.c	/^uvmcreate()$/;"	f	typeref:typename:pagetable_t
+uvmdealloc	xv6/kernel/vm.c	/^uvmdealloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz)$/;"	f	typeref:typename:uint64
+uvmfirst	xv6/kernel/vm.c	/^uvmfirst(pagetable_t pagetable, uchar *src, uint sz)$/;"	f	typeref:typename:void
+uvmfree	xv6/kernel/vm.c	/^uvmfree(pagetable_t pagetable, uint64 sz)$/;"	f	typeref:typename:void
+uvmunmap	xv6/kernel/vm.c	/^uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)$/;"	f	typeref:typename:void
+va0	xv6/kernel/kernel.asm	/^    va0 = PGROUNDDOWN(dstva);$/;"	d
+va0	xv6/kernel/kernel.asm	/^    va0 = PGROUNDDOWN(srcva);$/;"	d
+vaddr	kernel/process/load/elf.h	/^  uint64 vaddr;$/;"	m	struct:proghdr	typeref:typename:uint64
+vaddr	xv6/kernel/elf.h	/^  uint64 vaddr;$/;"	m	struct:proghdr	typeref:typename:uint64
+valid	xv6/kernel/buf.h	/^  int valid;   \/\/ has data been read from disk?$/;"	m	struct:buf	typeref:typename:int
+valid	xv6/kernel/file.h	/^  int valid;          \/\/ inode has been read from disk?$/;"	m	struct:inode	typeref:typename:int
+validatetest	xv6/user/usertests.c	/^validatetest(char *s)$/;"	f	typeref:typename:void
+vdisk_lock	xv6/kernel/virtio_disk.c	/^  struct spinlock vdisk_lock;$/;"	m	struct:disk	typeref:struct:spinlock	file:
+version	kernel/process/load/elf.h	/^  uint version;$/;"	m	struct:elfhdr	typeref:typename:uint
+version	xv6/kernel/elf.h	/^  uint version;$/;"	m	struct:elfhdr	typeref:typename:uint
+virtio_blk_req	xv6/kernel/virtio.h	/^struct virtio_blk_req {$/;"	s
+virtio_disk_init	xv6/kernel/virtio_disk.c	/^virtio_disk_init(void)$/;"	f	typeref:typename:void
+virtio_disk_intr	xv6/kernel/virtio_disk.c	/^virtio_disk_intr()$/;"	f	typeref:typename:void
+virtio_disk_rw	xv6/kernel/virtio_disk.c	/^virtio_disk_rw(struct buf *b, int write)$/;"	f	typeref:typename:void
+virtq_avail	xv6/kernel/virtio.h	/^struct virtq_avail {$/;"	s
+virtq_desc	xv6/kernel/virtio.h	/^struct virtq_desc {$/;"	s
+virtq_used	xv6/kernel/virtio.h	/^struct virtq_used {$/;"	s
+virtq_used_elem	xv6/kernel/virtio.h	/^struct virtq_used_elem {$/;"	s
 void	obj/create.asm	/^void init_processes() {$/;"	l
+void	obj/diskio.asm	/^void disk_read_block(void *dst, int blockid) {$/;"	l
+void	obj/diskio.asm	/^void disk_write_block(void *src, int blockid) {$/;"	l
+void	obj/exec.asm	/^void allocmem(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
+void	obj/exec.asm	/^void readmem(char *dst, uint off, int n) {$/;"	l
+void	obj/inode.asm	/^void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n) {$/;"	l
+void	obj/inode.asm	/^void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n) {$/;"	l
 void	obj/kernel.asm	/^void *kalloc(void) {$/;"	l
 void	obj/kernel.asm	/^void *memcpy(void *dst, void *src, uint n) {$/;"	l
 void	obj/kernel.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
 void	obj/kernel.asm	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	l
-void	obj/kernel.asm	/^void allocate_kernel_stacks(uint64 *pagetable);$/;"	l
-void	obj/kernel.asm	/^void debug_print_int(int d) {$/;"	l
+void	obj/kernel.asm	/^void allocmem(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
+void	obj/kernel.asm	/^void backtrace() {$/;"	l
+void	obj/kernel.asm	/^void debug_print_addr(uint64 p) {$/;"	l
+void	obj/kernel.asm	/^void debug_print_int(long d, int jinzhi) {$/;"	l
 void	obj/kernel.asm	/^void debug_println(char *s) {$/;"	l
+void	obj/kernel.asm	/^void disk_read_block(void *dst, int blockid) {$/;"	l
+void	obj/kernel.asm	/^void disk_write_block(void *src, int blockid) {$/;"	l
 void	obj/kernel.asm	/^void init_kernel_freememory() {$/;"	l
 void	obj/kernel.asm	/^void init_kernel_pagetable() {$/;"	l
 void	obj/kernel.asm	/^void init_kernel_trap() {$/;"	l
@@ -593,10 +2081,15 @@ void	obj/kernel.asm	/^void init_processes() {$/;"	l
 void	obj/kernel.asm	/^void init_userprocess() {$/;"	l
 void	obj/kernel.asm	/^void kerneltrap() {$/;"	l
 void	obj/kernel.asm	/^void kfree(void *p_addr) {$/;"	l
+void	obj/kernel.asm	/^void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n) {$/;"	l
 void	obj/kernel.asm	/^void main() {$/;"	l
 void	obj/kernel.asm	/^void panic(char *s) {$/;"	l
+void	obj/kernel.asm	/^void readmem(char *dst, uint off, int n) {$/;"	l
 void	obj/kernel.asm	/^void schedular() {$/;"	l
+void	obj/kernel.asm	/^void syscall() {$/;"	l
 void	obj/kernel.asm	/^void timervec() {}$/;"	l
+void	obj/kernel.asm	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
+void	obj/kernel.asm	/^void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n) {$/;"	l
 void	obj/kernel.asm	/^void usertrap() {$/;"	l
 void	obj/kernel.asm	/^void usertrap_return() {$/;"	l
 void	obj/kernel.asm	/^void$/;"	l
@@ -606,36 +2099,90 @@ void	obj/kmemory.asm	/^void *kalloc(void) {$/;"	l
 void	obj/kmemory.asm	/^void init_kernel_freememory() {$/;"	l
 void	obj/kmemory.asm	/^void kfree(void *p_addr) {$/;"	l
 void	obj/kpagetable.asm	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	l
-void	obj/kpagetable.asm	/^void allocate_kernel_stacks(uint64 *pagetable);$/;"	l
 void	obj/kpagetable.asm	/^void init_kernel_pagetable() {$/;"	l
 void	obj/main.asm	/^void main() {$/;"	l
 void	obj/plic.asm	/^void$/;"	l
 void	obj/schedular.asm	/^void schedular() {$/;"	l
 void	obj/start.asm	/^void timervec() {}$/;"	l
 void	obj/start.asm	/^void$/;"	l
+void	obj/syscall.asm	/^void syscall() {$/;"	l
+void	obj/upagetable.asm	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
 void	obj/userproc.asm	/^void init_userprocess() {$/;"	l
 void	obj/usertrap.asm	/^void usertrap() {$/;"	l
 void	obj/usertrap.asm	/^void usertrap_return() {$/;"	l
 void	obj/util.asm	/^void *memcpy(void *dst, void *src, uint n) {$/;"	l
 void	obj/util.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
-void	obj/util.asm	/^void debug_print_int(int d) {$/;"	l
+void	obj/util.asm	/^void backtrace() {$/;"	l
+void	obj/util.asm	/^void debug_print_addr(uint64 p) {$/;"	l
+void	obj/util.asm	/^void debug_print_int(long d, int jinzhi) {$/;"	l
 void	obj/util.asm	/^void debug_println(char *s) {$/;"	l
 void	obj/util.asm	/^void panic(char *s) {$/;"	l
+void	xv6/kernel/kernel.asm	/^void *$/;"	l
+void	xv6/kernel/kernel.asm	/^void uartstart();$/;"	l
+void	xv6/kernel/kernel.asm	/^void$/;"	l
+volatile	xv6/kernel/kernel.asm	/^volatile static int started = 0;$/;"	l
+vprintf	xv6/user/printf.c	/^vprintf(int fd, const char *fmt, va_list ap)$/;"	f	typeref:typename:void
+w	xv6/kernel/console.c	/^  uint w;  \/\/ Write index$/;"	m	struct:__anon03efc82c0108	typeref:typename:uint	file:
 w_mcounteren	kernel/include/basic_riscv.h	/^w_mcounteren(uint64 x)$/;"	f	typeref:typename:void
+w_mcounteren	xv6/kernel/riscv.h	/^w_mcounteren(uint64 x)$/;"	f	typeref:typename:void
 w_medeleg	kernel/include/basic_riscv.h	/^w_medeleg(uint64 x)$/;"	f	typeref:typename:void
+w_medeleg	xv6/kernel/riscv.h	/^w_medeleg(uint64 x)$/;"	f	typeref:typename:void
 w_mepc	kernel/include/basic_riscv.h	/^w_mepc(uint64 x)$/;"	f	typeref:typename:void
+w_mepc	xv6/kernel/riscv.h	/^w_mepc(uint64 x)$/;"	f	typeref:typename:void
 w_mideleg	kernel/include/basic_riscv.h	/^w_mideleg(uint64 x)$/;"	f	typeref:typename:void
+w_mideleg	xv6/kernel/riscv.h	/^w_mideleg(uint64 x)$/;"	f	typeref:typename:void
 w_mie	kernel/include/basic_riscv.h	/^w_mie(uint64 x)$/;"	f	typeref:typename:void
+w_mie	xv6/kernel/riscv.h	/^w_mie(uint64 x)$/;"	f	typeref:typename:void
 w_mscratch	kernel/include/basic_riscv.h	/^w_mscratch(uint64 x)$/;"	f	typeref:typename:void
+w_mscratch	xv6/kernel/riscv.h	/^w_mscratch(uint64 x)$/;"	f	typeref:typename:void
 w_mstatus	kernel/include/basic_riscv.h	/^w_mstatus(uint64 x)$/;"	f	typeref:typename:void
+w_mstatus	xv6/kernel/riscv.h	/^w_mstatus(uint64 x)$/;"	f	typeref:typename:void
 w_mtvec	kernel/include/basic_riscv.h	/^w_mtvec(uint64 x)$/;"	f	typeref:typename:void
+w_mtvec	xv6/kernel/riscv.h	/^w_mtvec(uint64 x)$/;"	f	typeref:typename:void
 w_pmpaddr0	kernel/include/basic_riscv.h	/^w_pmpaddr0(uint64 x)$/;"	f	typeref:typename:void
+w_pmpaddr0	xv6/kernel/riscv.h	/^w_pmpaddr0(uint64 x)$/;"	f	typeref:typename:void
 w_pmpcfg0	kernel/include/basic_riscv.h	/^w_pmpcfg0(uint64 x)$/;"	f	typeref:typename:void
+w_pmpcfg0	xv6/kernel/riscv.h	/^w_pmpcfg0(uint64 x)$/;"	f	typeref:typename:void
 w_satp	kernel/include/basic_riscv.h	/^w_satp(uint64 x)$/;"	f	typeref:typename:void
+w_satp	xv6/kernel/riscv.h	/^w_satp(uint64 x)$/;"	f	typeref:typename:void
 w_sepc	kernel/include/basic_riscv.h	/^w_sepc(uint64 x)$/;"	f	typeref:typename:void
+w_sepc	xv6/kernel/riscv.h	/^w_sepc(uint64 x)$/;"	f	typeref:typename:void
 w_sie	kernel/include/basic_riscv.h	/^w_sie(uint64 x)$/;"	f	typeref:typename:void
+w_sie	xv6/kernel/riscv.h	/^w_sie(uint64 x)$/;"	f	typeref:typename:void
 w_sip	kernel/include/basic_riscv.h	/^w_sip(uint64 x)$/;"	f	typeref:typename:void
+w_sip	xv6/kernel/riscv.h	/^w_sip(uint64 x)$/;"	f	typeref:typename:void
 w_sstatus	kernel/include/basic_riscv.h	/^w_sstatus(uint64 x)$/;"	f	typeref:typename:void
+w_sstatus	xv6/kernel/riscv.h	/^w_sstatus(uint64 x)$/;"	f	typeref:typename:void
 w_stvec	kernel/include/basic_riscv.h	/^w_stvec(uint64 x)$/;"	f	typeref:typename:void
+w_stvec	xv6/kernel/riscv.h	/^w_stvec(uint64 x)$/;"	f	typeref:typename:void
 w_tp	kernel/include/basic_riscv.h	/^w_tp(uint64 x)$/;"	f	typeref:typename:void
+w_tp	xv6/kernel/riscv.h	/^w_tp(uint64 x)$/;"	f	typeref:typename:void
+wait	xv6/kernel/proc.c	/^wait(uint64 addr)$/;"	f	typeref:typename:int
+wait_lock	xv6/kernel/proc.c	/^struct spinlock wait_lock;$/;"	v	typeref:struct:spinlock
+wakeup	xv6/kernel/proc.c	/^wakeup(void *chan)$/;"	f	typeref:typename:void
 walk	kernel/memory/kpagetable.c	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	f	typeref:typename:uint64 *
+walk	xv6/kernel/vm.c	/^walk(pagetable_t pagetable, uint64 va, int alloc)$/;"	f	typeref:typename:pte_t *
+walkaddr	xv6/kernel/vm.c	/^walkaddr(pagetable_t pagetable, uint64 va)$/;"	f	typeref:typename:uint64
+walkpaalign	kernel/memory/kpagetable.c	/^uint64 walkpaalign(uint64 *pagetable, uint64 va) {$/;"	f	typeref:typename:uint64
+wc	xv6/user/wc.c	/^wc(int fd, char *name)$/;"	f	typeref:typename:void
+whitespace	xv6/user/sh.c	/^char whitespace[] = " \\t\\r\\n\\v";$/;"	v	typeref:typename:char[]
+winode	xv6/mkfs/mkfs.c	/^winode(uint inum, struct dinode *ip)$/;"	f	typeref:typename:void
+writable	xv6/kernel/file.h	/^  char writable;$/;"	m	struct:file	typeref:typename:char
+write	lib/usys.S	/^write:$/;"	l
+write	xv6/kernel/file.h	/^  int (*write)(int, uint64, int);$/;"	m	struct:devsw	typeref:typename:int (*)(int,uint64,int)
+write_head	xv6/kernel/log.c	/^write_head(void)$/;"	f	typeref:typename:void	file:
+write_log	xv6/kernel/log.c	/^write_log(void)$/;"	f	typeref:typename:void	file:
+writebig	xv6/user/usertests.c	/^writebig(char *s)$/;"	f	typeref:typename:void
+writei	xv6/kernel/fs.c	/^writei(struct inode *ip, int user_src, uint64 src, uint off, uint n)$/;"	f	typeref:typename:int
+writeopen	xv6/kernel/pipe.c	/^  int writeopen;  \/\/ write fd is still open$/;"	m	struct:pipe	typeref:typename:int	file:
+writetest	xv6/user/usertests.c	/^writetest(char *s)$/;"	f	typeref:typename:void
+wsect	xv6/mkfs/mkfs.c	/^wsect(uint sec, void *buf)$/;"	f	typeref:typename:void
+x	xv6/kernel/kernel.asm	/^    x = -xx;$/;"	d
+x	xv6/kernel/kernel.asm	/^    x = xx;$/;"	d
+x	xv6/user/umalloc.c	/^  Align x;$/;"	m	union:header	typeref:typename:Align	file:
+xint	xv6/mkfs/mkfs.c	/^xint(uint x)$/;"	f	typeref:typename:uint
+xshort	xv6/mkfs/mkfs.c	/^xshort(ushort x)$/;"	f	typeref:typename:ushort
+xstate	xv6/kernel/proc.h	/^  int xstate;                  \/\/ Exit status to be returned to parent's wait$/;"	m	struct:proc	typeref:typename:int
+xticks	xv6/kernel/kernel.asm	/^  xticks = ticks;$/;"	d
+yield	xv6/kernel/proc.c	/^yield(void)$/;"	f	typeref:typename:void
+zeroes	xv6/mkfs/mkfs.c	/^char zeroes[BSIZE];$/;"	v	typeref:typename:char[]

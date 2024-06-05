@@ -14,6 +14,7 @@ innerloop:
 	bne t1, s1, innerloop
 
 	addi t0, t0, 1
+	li a7, 2
 	ecall
 	bne t0, s0, loop
 
