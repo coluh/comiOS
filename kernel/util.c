@@ -111,6 +111,25 @@ void *memcpy(void *dst, void *src, uint n) {
 	return dst;
 }
 
+int strcmp(char *a, char *b) {
+	int i;
+	for(i = 0; a[i] != 0 && b[i] != 0; i++) {
+		if (a[i] > b[i]) {
+			return 1;
+		}
+		if (a[i] < b[i]) {
+			return -1;
+		}
+	}
+	if (a[i]) {
+		return 1;
+	}
+	if (b[i]) {
+		return -1;
+	}
+	return 0;
+}
+
 int cpuid() {
 	int id = r_tp();
 	return id;

@@ -4,4 +4,6 @@
 #define SYS_EXIT	3
 #define SYS_READ	4
 #define SYS_WRITE	5
+#define SYS_OPEN	6
+#define SYS_CLOSE	7
 

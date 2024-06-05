@@ -17,6 +17,8 @@ addcall("exec")
 addcall("exit")
 addcall("read")
 addcall("write")
+addcall("open")
+addcall("close")
 
 fp.write("\n")
 fp.close();

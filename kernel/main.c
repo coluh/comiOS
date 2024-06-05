@@ -10,6 +10,7 @@ void main() {
 	plicinit();
 	plicinithart();
 	init_processes();
+	init_file();
 	init_disk();
 	init_userprocess();
 

@@ -19,6 +19,7 @@ K_INCLUDE += -I./$K/include
 K_INCLUDE += -I./$K/process
 K_INCLUDE += -I./$K/process/load
 K_INCLUDE += -I./$K/filesystem
+K_INCLUDE += -I./$K/filesystem/file
 K_INCLUDE += -I./$K/syscall
 
 U_INCLUDE  = -I./$U

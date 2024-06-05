@@ -9,6 +9,8 @@ int	exec(char *path, char *argv[]);
 int	exit(int status);
 int	read(int fd, char *buf, int n);
 int	write(int fd, char *buf, int n);
+int	open(char *path, int flags);
+int	close(int fd);
 
 #endif
 

@@ -4,10 +4,6 @@
 #include "process.h"
 #include "filesystem.h"
 
-int exec(char *path, char **argv) {
-	return 0;
-}
-
 extern char trampoline[];
 
 int f2p(int f) {
@@ -19,18 +15,16 @@ int f2p(int f) {
 	return p;
 }
 
-int execttt() {
+int exec(char *path, char **argv) {
 	dpln("Start exec");
 	struct proc *p = current_proc();
 	struct elfhdr elf;
 	struct proghdr ph;
 
-	char *inodearea = (char *)kalloc();
-	disk_read_block(inodearea, INODE_OFFSET(2)/BSIZE);
-	char *inodeaddr = inodearea + INODE_OFFSET(2) % BSIZE;
-	struct inode *inode = (struct inode *)inodeaddr;
+	struct inode inode;
+	getinode_frompath(&inode, path);
 
-	kinode_read((uint64)&elf, inode, 0, sizeof(elf));
+	kinode_read((uint64)&elf, &inode, 0, sizeof(elf));
 	if (elf.magic != ELF_MAGIC) {
 		panic("elf magic number wrong");
 	}
@@ -46,14 +40,14 @@ int execttt() {
 	dpf1("elf.phnum=%d\n", elf.phnum);
 	// load into memory
 	for (int i = 0; i < elf.phnum; i++, off += sizeof(ph)) {
-		kinode_read((uint64)&ph, inode, off, sizeof(ph));
+		kinode_read((uint64)&ph, &inode, off, sizeof(ph));
 		if (ph.type != ELF_PROG_LOAD) {
 			continue;
 		}
 		uint64 newsz = ph.vaddr + ph.memsz;
 		ugrow_memory(pt, oldsz, newsz, f2p(ph.flags));
 		oldsz = newsz;
-		uinode_read(pt, ph.vaddr, inode, ph.off, ph.filesz);
+		uinode_read(pt, ph.vaddr, &inode, ph.off, ph.filesz);
 	}
 
 	oldsz = PGROUNDUP(oldsz);
@@ -67,6 +61,5 @@ int execttt() {
 	dpf1("elf.entry=%p\n", elf.entry);
 	p->trapframe->sp = sp;
 	dpln("Complete exec");
-	kfree(inodearea);
 	return 0;
 }

@@ -2,37 +2,102 @@
 #include "basic.h"
 #include "process.h"
 #include "syscall.h"
+#include "file.h"
 
+uint64 getreg_a(int n) {
+	struct proc *p = current_proc();
+	switch (n) {
+	case 0:
+		return p->trapframe->a0;
+	case 1:
+		return p->trapframe->a1;
+	case 2:
+		return p->trapframe->a2;
+	case 3:
+		return p->trapframe->a3;
+	case 4:
+		return p->trapframe->a4;
+	case 5:
+		return p->trapframe->a5;
+	}
+	dpf1("try to get a%d\n", n);
+	panic("getreg_a: n?");
+	return -1;
+}
+
+int getint_a(int n) {
+	int ret = getreg_a(n);
+	return ret;
+}
+
+// int getpid();
 uint64 sys_getpid(void) {
 	dpln("Successfully run getpid() system call");
-	return 0;
+	return current_proc()->pid;
 }
+// int fork();
 uint64 sys_fork(void) {
 	return 0;
 }
-// debug
-extern int execttt();
 int first = 1;
+extern int exec(char *path, char *argv[]);
+// int exec(char *path, char *argv[]);
 uint64 sys_exec(void) {
-	dpln("run exec()");
 	if (first) {
 		first = 0;
-		execttt();
+		return exec("/whoi", NULL);
 	}
-	return 0;
+	char *pathua = (char *)getreg_a(0);
+	char path[MAX_PATHLEN];
+	struct proc *p = current_proc();
+	if (copyin_string(path, MAX_PATHLEN, p->pagetable, pathua) < 0) {
+		return -1;
+	}
+	return exec(path, NULL);
 }
+// int exit(int status);
 uint64 sys_exit(void) {
 	return 0;
 }
+// int read(int fd, char *buf, int n);
 uint64 sys_read(void) {
 	return 0;
 }
+// int write(int fd, char *buf, int n);
 uint64 sys_write(void) {
+	int fd = getint_a(0);
+	char *buf = (char *)getreg_a(1);
+	int n = getint_a(2);
+	if (n < 0) {
+		dpln("sys_write: n < 0");
+		return -1;
+	}
+
+	struct proc *p = current_proc();
+
+	// special
+	if (fd == 1) {
+		char *ka = (char *)kalloc();
+		while (n > 0) {
+			uint m = n < PGSIZE ? n : PGSIZE;
+			copyin(ka, p->pagetable, buf, m);
+			for (int i = 0; i < m; i++) {
+				debug_print_char(ka[i]);
+			}
+			n -= m;
+		}
+	}
+
 	return 0;
 }
-
-
-
+// int open(char *path, int flags);
+uint64 sys_open(void) {
+	return 0;
+}
+// int close(int fd);
+uint64 sys_close(void) {
+	return 0;
+}
 
 uint64 (*system_calls[])(void) = {
 	[SYS_GETPID]	= sys_getpid,
@@ -41,6 +106,8 @@ uint64 (*system_calls[])(void) = {
 	[SYS_EXIT]	= sys_exit,
 	[SYS_READ]	= sys_read,
 	[SYS_WRITE]	= sys_write,
+	[SYS_OPEN]	= sys_open,
+	[SYS_CLOSE]	= sys_close,
 };
 
 void syscall() {

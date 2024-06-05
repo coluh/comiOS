@@ -35,8 +35,8 @@ uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {
 uint64 walkpaalign(uint64 *pagetable, uint64 va) {
 	uint64 *pte = walk(pagetable, va, 0);
 	if (pte == NULL) {
-		dpf1("User Address %p\n", va);
-		panic("walkaddr: corresponding p_addr not found");
+		dpf1("User Address %p not alloc\n", va);
+		return 0;
 	}
 
 	uint64 pa = PTE2PA(*pte);

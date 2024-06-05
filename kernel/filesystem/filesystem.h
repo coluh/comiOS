@@ -33,6 +33,7 @@ struct dirent_item {
 };
 
 #define INODE_OFFSET(i)	(2*DISK_BLOCK_SIZE+(i)*sizeof(struct inode))
+#define ROOT_INODE 1
 
 // #define INODE_BLOCKS	27
 #define INODE_BLOCKS	1
@@ -41,5 +42,3 @@ struct dirent_item {
 
 
 
-void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n);
-void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n);

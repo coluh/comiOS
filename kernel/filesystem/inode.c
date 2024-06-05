@@ -2,6 +2,15 @@
 #include "defs.h"
 #include "filesystem.h"
 
+int getinode(struct inode *buf, int i) {
+	char *ka = (char *)kalloc();
+	disk_read_block(ka, INODE_OFFSET(i)/BSIZE);
+	char *inodepa = ka + INODE_OFFSET(i)%BSIZE;
+	memcpy(buf, inodepa, sizeof(struct inode));
+	kfree(ka);
+	return 0;
+}
+
 // off should be n * BSIZE
 int inode_readblock(struct inode *inode, void *buf, uint64 off) {
 
@@ -44,6 +53,9 @@ void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uin
 	uint m;
 	for (; n > 0; n -= m) {
 		uint64 dst = walkpaalign(upt, uaddr);
+		if (dst == 0) {
+			panic("uinode_read: user memory not alloc");
+		}
 		dst += uaddr % PGSIZE;
 		inode_readblock(inode, buf, off - off % BSIZE);
 		uint64 src = (uint64)(buf + off % BSIZE);

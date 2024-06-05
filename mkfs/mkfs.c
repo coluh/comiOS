@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 		memcpy(root + (i-2)*sizeof(ditem), &ditem, sizeof(ditem));
 	}
 
-	struct inode *inode = (struct inode *)(disk.data + INODE_OFFSET(1));
+	struct inode *inode = (struct inode *)(disk.data + INODE_OFFSET(ROOT_INODE));
 	memset(inode, 0, sizeof(struct inode));
 	inode->type	= I_DIRENT;
 	inode->nlink	= 1;
