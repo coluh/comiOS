@@ -3,7 +3,7 @@ A small OS inspired by MIT xv6-riscv
 #### structure
 
 ```
-u@~$ tree kernel/                                                                                                           
+u@pc:~$ tree kernel/                                                                                                           
 kernel/
 ├── defs.h
 ├── filesystem
