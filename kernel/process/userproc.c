@@ -20,6 +20,8 @@ uint8 initcode[] = {
 	0x00, 0x00, 0x00, 0x00,
 };
 
+extern struct proc *allocate_proc();
+
 void init_userprocess() {
 	struct proc *p = allocate_proc();
 

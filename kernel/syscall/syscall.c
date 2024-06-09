@@ -61,42 +61,35 @@ uint64 sys_exit(void) {
 }
 // int read(int fd, char *buf, int n);
 uint64 sys_read(void) {
-	return 0;
+	int fd = getint_a(0);
+	char *buf = (char *)getreg_a(1);
+	int n = getint_a(2);
+
+	return fileread(fd, (uint64)buf, n);
 }
 // int write(int fd, char *buf, int n);
 uint64 sys_write(void) {
 	int fd = getint_a(0);
 	char *buf = (char *)getreg_a(1);
 	int n = getint_a(2);
-	if (n < 0) {
-		dpln("sys_write: n < 0");
-		return -1;
-	}
 
-	struct proc *p = current_proc();
-
-	// special
-	if (fd == 1) {
-		char *ka = (char *)kalloc();
-		while (n > 0) {
-			uint m = n < PGSIZE ? n : PGSIZE;
-			copyin(ka, p->pagetable, buf, m);
-			for (int i = 0; i < m; i++) {
-				debug_print_char(ka[i]);
-			}
-			n -= m;
-		}
-	}
-
-	return 0;
+	return filewrite(fd, (uint64)buf, n);
 }
 // int open(char *path, int flags);
 uint64 sys_open(void) {
-	return 0;
+	char *pathua = (char *)getreg_a(0);
+	char path[MAX_PATHLEN];
+	struct proc *p = current_proc();
+	if (copyin_string(path, MAX_PATHLEN, p->pagetable, pathua) < 0) {
+		return -1;
+	}
+	int flags = getint_a(1);
+	return fileadd(path, flags);
 }
 // int close(int fd);
 uint64 sys_close(void) {
-	return 0;
+	int fd = getreg_a(0);
+	return fileclose(fd);
 }
 
 uint64 (*system_calls[])(void) = {

@@ -3,6 +3,7 @@
 #include "elf.h"
 #include "process.h"
 #include "filesystem.h"
+#include "file.h"
 
 extern char trampoline[];
 
@@ -15,16 +16,20 @@ int f2p(int f) {
 	return p;
 }
 
+extern int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);
+
 int exec(char *path, char **argv) {
 	dpln("Start exec");
 	struct proc *p = current_proc();
 	struct elfhdr elf;
 	struct proghdr ph;
 
-	struct inode inode;
-	getinode_frompath(&inode, path);
+	struct vnode vnode;
+	if (fillvnode(&vnode, path) < 0) {
+		return -1;
+	}
 
-	kinode_read((uint64)&elf, &inode, 0, sizeof(elf));
+	kvnode_read(&vnode, 0, sizeof(elf), (uint64)&elf);
 	if (elf.magic != ELF_MAGIC) {
 		panic("elf magic number wrong");
 	}
@@ -40,14 +45,14 @@ int exec(char *path, char **argv) {
 	dpf1("elf.phnum=%d\n", elf.phnum);
 	// load into memory
 	for (int i = 0; i < elf.phnum; i++, off += sizeof(ph)) {
-		kinode_read((uint64)&ph, &inode, off, sizeof(ph));
+		kvnode_read(&vnode, off, sizeof(ph), (uint64)&ph);
 		if (ph.type != ELF_PROG_LOAD) {
 			continue;
 		}
 		uint64 newsz = ph.vaddr + ph.memsz;
 		ugrow_memory(pt, oldsz, newsz, f2p(ph.flags));
 		oldsz = newsz;
-		uinode_read(pt, ph.vaddr, &inode, ph.off, ph.filesz);
+		vnode_read(&vnode, ph.off, ph.filesz, pt, ph.vaddr);
 	}
 
 	oldsz = PGROUNDUP(oldsz);

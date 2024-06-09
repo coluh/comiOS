@@ -14,14 +14,17 @@ void		init_userprocess();
 // filesystem/diskio
 void disk_read_block(void *dst, int blockid);
 void disk_write_block(void *src, int blockid);
-// filesystem/inode
-struct inode;
-void uinode_read(uint64 *upt, uint64 uaddr, struct inode *inode, uint64 off, uint n);
-void kinode_read(uint64 vaddr, struct inode *inode, uint64 off, uint n);
-int getinode(struct inode *buf, int i);
 
 // filesystem/file
-int getinode_frompath(struct inode *inode, char *path);
+int fileadd(char *path, int flags);
+int fileclose(int fd);
+int fileread(int fd, uint64 uaddr, uint n);
+int filewrite(int fd, uint64 uaddr, uint n);
+int filedelete(char *path);
+// filesystem/vnode
+struct vnode;
+int fillvnode(struct vnode *vp, char *path);
+void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka);
 
 // memory/k
 uint64 *	walk(uint64 *pagetable, uint64 v_addr, int alloc);
@@ -32,13 +35,12 @@ int		mappage(uint64 *pagetable, uint64 v_addr, uint64 p_addr,
 			uint64 size, int perm);
 // memory/u
 void		ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int perm);
-int		copyin(void *ka, uint64 *upt, void *ua, uint n);
+int		copyin(uint64 ka, uint64 *upt, uint64 ua, uint n);
 int		copyin_string(char *ka, uint max, uint64 *upt, char *s);
-int		copyout(void *ka, uint64 *upt, void *ua, uint n);
+int		copyout(uint64 ka, uint64 *upt, uint64 ua, uint n);
 
 // process/create
 struct proc *	current_proc();
-struct proc *	allocate_proc();
 
 // util
 extern void	debug_print_char(char c);

@@ -81,7 +81,7 @@ struct proc {
 	struct trapframe *trapframe;
 	uint64 size;
 	struct context context;	// for swtch()
-	struct file *open_files[FD_COUNT];
+	struct file *open_files[FD_COUNT];	// These are fds
 	struct inode *cwd;
 	char name[32];
 };

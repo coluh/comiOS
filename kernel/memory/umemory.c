@@ -2,19 +2,18 @@
 #include "defs.h"
 #include "process.h"
 
-int copyin(void *ka, uint64 *upt, void *ua, uint n) {
-	uint64 kapa = (uint64)ka;
+int copyin(uint64 ka, uint64 *upt, uint64 ua, uint n) {
 	uint m;
 	for (; n > 0; n -= m) {
-		uint64 uapa = walkpaalign(upt, (uint64)ua);
+		uint64 uapa = walkpaalign(upt, ua);
 		if (uapa == 0) {
 			return -1;
 		}
-		uapa += (uint64)ua % PGSIZE;
-		m = MIN(PGSIZE - (uint64)ua % PGSIZE, n);
-		memcpy((void *)kapa, (void *)uapa, m);
-		kapa += m;
-		ua = (void *)((uint64)ua + m);
+		uapa += ua % PGSIZE;
+		m = MIN(PGSIZE - ua % PGSIZE, n);
+		memcpy((void *)ka, (void *)uapa, m);
+		ka += m;
+		ua += m;
 	}
 	return 0;
 }
@@ -43,19 +42,18 @@ int copyin_string(char *ka, uint max, uint64 *upt, char *s) {
 	return -1;
 }
 
-int copyout(void *ka, uint64 *upt, void *ua, uint n) {
-	uint64 kapa = (uint64)ka;
+int copyout(uint64 ka, uint64 *upt, uint64 ua, uint n) {
 	uint m;
 	for (; n > 0; n -= m) {
-		uint64 uapa = walkpaalign(upt, (uint64)ua);
+		uint64 uapa = walkpaalign(upt, ua);
 		if (uapa == 0) {
 			return -1;
 		}
-		uapa += (uint64)ua % PGSIZE;
-		m = MIN(PGSIZE - (uint64)ua % PGSIZE, n);
-		memcpy((void *)uapa, (void *)kapa, m);
-		kapa += m;
-		ua = (void *)((uint64)ua + m);
+		uapa += ua % PGSIZE;
+		m = MIN(PGSIZE - ua % PGSIZE, n);
+		memcpy((void *)uapa, (void *)ka, m);
+		ka += m;
+		ua += m;
 	}
 	return 0;
 }

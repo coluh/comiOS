@@ -12,6 +12,7 @@ struct superblock {
 };
 #define SB_MAGIC 1145141919
 
+// inode in the disk
 struct inode {
 	uint16 type;
 	uint16 nlink;
