@@ -5,7 +5,32 @@
 
 // opened file point to these
 struct vnode vnodelist[VNODE_COUNT];
+extern int allocate_block();
 
+extern struct superblock *sb;
+int allocate_inode() {
+	char *ka = (char *)kalloc();
+	for (int b = sb->inode_startb; b < sb->bmap_startb; b++) {
+		disk_read_block(ka, b);
+		struct inode *in = (struct inode *)ka;
+		for (int i = 0; i < BSIZE/sizeof(struct inode); i++) {
+			if (in[i].type == I_FREE) {
+				// Found!
+				in[i].type = I_USED;
+				disk_write_block(ka, b);
+
+				int ret = (b - sb->inode_startb);
+				ret *= BSIZE/sizeof(struct inode);
+				ret += i;
+				kfree(ka);
+				return ret;
+			}
+		}
+	}
+	kfree(ka);
+	panic("inode used up");
+	return -1;
+}
 int fillinode(struct inode *buf, int i) {
 	char *ka = (char *)kalloc();
 	disk_read_block(ka, INODE_OFFSET(i)/BSIZE);
@@ -22,9 +47,9 @@ void fillvnodei(struct vnode *v, int inum) {
 	v->nlink	= inode.nlink;
 	v->size		= inode.size;
 	for (int i = 0; i < 10; i++)
-		v->direct[i] = inode.direct[i];
+		v->direct[i]	= inode.direct[i];
 	for (int i = 0; i < 3; i++)
-		v->more[i] = inode.more[i];
+		v->more[i]	= inode.more[i];
 }
 
 void synch_vnode(struct vnode *v) {
@@ -35,18 +60,14 @@ void synch_vnode(struct vnode *v) {
 	for (int i = 0; i < 10; i++)
 		inode.direct[i]	= v->direct[i];
 	for (int i = 0; i < 3; i++)
-		inode.more[i] = v->direct[i];
+		inode.more[i] = v->more[i];
 
 	char *ka = (char *)kalloc();
 	disk_read_block(ka, INODE_OFFSET(v->inode)/BSIZE);
 	char *inodepa = ka + INODE_OFFSET(v->inode)%BSIZE;
 	memcpy(inodepa, &inode, sizeof(struct inode));
+	disk_write_block(ka, INODE_OFFSET(v->inode)/BSIZE);
 	kfree(ka);
-}
-
-int vnode_create(char *path, int flags) {
-	panic("fileadd: CREATE not support");
-	return -1;
 }
 
 int finddir(struct vnode *v, char *name) {
@@ -122,27 +143,60 @@ int vnodelist_delete(int v) {
 
 // return the blockid;
 int blockmap(struct vnode *v, uint off) {
-	if (off >= v->size) {
-		return -1;
-	}
-
 	int b = off / BSIZE;
 	if (b < 10) {
-		return v->direct[b] / BSIZE;
+		return v->direct[b];
 	}
 	b -= 10;
 	for (int i = 0; i < 3; i++) {
-		if (b < BSIZE/sizeof(uint32)) {
+		if (b < BLOCK_BNUM) {
 			uint32 *page = (uint32 *)kalloc();
 			disk_read_block(page, v->more[i]);
 			int ret = page[b];
 			kfree(page);
 			return ret;
 		}
-		b -= BSIZE/sizeof(uint32);
+		b -= BLOCK_BNUM;
 	}
 
-	dpln("File Too Much!");
+	dpln("File Too Big!");
+	return -1;
+}
+int blockmap_alloc(struct vnode *v, uint off) {
+	int b = off / BSIZE;
+	if (b < 10) {
+		int bid = v->direct[b];
+		if (bid == 0) {
+			bid = allocate_block();
+			v->direct[b] = bid;
+		}
+		return bid;
+	}
+	b -= 10;
+	for (int i = 0; i < 3; i++) {
+		if (b < BLOCK_BNUM) {
+			if (v->more[i] == 0) {
+				v->more[i] = allocate_block();
+				char *temp = (char *)kalloc();
+				memset(temp, 0, BSIZE);
+				disk_write_block(temp, v->more[i]);
+				kfree(temp);
+			}
+			uint32 *page = (uint32 *)kalloc();
+			disk_read_block(page, v->more[i]);
+			int ret = page[b];
+			if (ret == 0) {
+				ret = allocate_block();
+				page[b] = ret;
+				disk_write_block(page, v->more[i]);
+			}
+			kfree(page);
+			return ret;
+		}
+		b -= BLOCK_BNUM;
+	}
+
+	dpln("File Too Big!");
 	return -1;
 }
 
@@ -153,25 +207,32 @@ int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {
 	for (; n > 0; n -= m) {
 		uint64 upa = walkpaalign(upt, uaddr);
 		if (upa == 0) {
-			dpln("Wrong user path");
+			dpln("Wrong user address");
 			kfree(buf);
 			return total;
 		}
 		upa += uaddr % PGSIZE;
-		int bid = blockmap(v, off);
-		if (bid < 0) {
-			dpln("End Of File");
+		if (off >= v->size) {
+			dpln("vnode_read: End Of File");
 			kfree(buf);
 			return total;
 		}
+		int bid = blockmap(v, off);
+
 		disk_read_block(buf, bid);
 		uint64 src = (uint64)(buf + off % BSIZE);
 		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);
 		m = MIN(m, n);
+		m = MIN(m, v->size - off);
 		memcpy((void *)upa, (void *)src, m);
 		uaddr += m;
 		off += m;
 		total += m;
+		if (off >= v->size) {
+			dpln("vnode_read: End Of File");
+			kfree(buf);
+			return total;
+		}
 	}
 	kfree(buf);
 	return total;
@@ -180,12 +241,15 @@ void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka) {
 	char *buf = (char *)kalloc();
 	uint m;
 	for (; n > 0; n -= m) {
+		if (off >= v->size) {
+			dpln("kvnode_read: End Of File");
+			kfree(buf);
+		}
 		int bid = blockmap(v, off);
-		if (bid < 0)
-			panic("kvnode_read: off get wrong");
 		disk_read_block(buf, bid);
 		uint64 src = (uint64)(buf + off % BSIZE);
 		m = MIN(BSIZE - off % BSIZE, n);
+		m = MIN(m, v->size - off);
 		memcpy((void *)ka, (void *)src, m);
 		ka += m;
 		off += m;
@@ -194,7 +258,51 @@ void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka) {
 }
 
 int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {
-	return 0;
+	char *buf = (char *)kalloc();
+	uint m;
+	uint total = 0;
+	for (; n > 0; n -= m) {
+		// get physical addr of user data
+		uint64 upa = walkpaalign(upt, uaddr);
+		if (upa == 0) {
+			dpln("Wrong user path");
+			kfree(buf);
+			synch_vnode(v);
+			return total;
+		}
+		upa += uaddr % PGSIZE;
+		// get physical addr of file data
+		int bid = blockmap_alloc(v, off);
+		if (bid < 0) {
+			dpln("blockmap_alloc: wrong");
+			kfree(buf);
+			return total;
+		}
+		disk_read_block(buf, bid);
+		uint64 src = (uint64)(buf + off % BSIZE);
+		// copy with memory continuous
+		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);
+		m = MIN(m, n);
+		memcpy((void *)src, (void *)upa, m);
+		disk_write_block(buf, bid);
+		// next
+		uaddr += m;
+		off += m;
+		v->size += m;
+		total += m;
+	}
+	kfree(buf);
+	synch_vnode(v);
+	return total;
+}
+
+int vnode_create(char *path, int flags) {
+	// allocate inode
+	/* int inode = allocate_inode(); */
+
+	// modify the direntory to add the file
+	// parse path to dirent and filename
+	return -1;
 }
 
 int vnode_delete(char *path) {

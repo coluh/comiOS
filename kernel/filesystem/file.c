@@ -47,7 +47,12 @@ int fileadd(char *path, int flags) {
 	openfilelist[i].type	= FD_VNODE;
 	openfilelist[i].refcount= 1;
 	openfilelist[i].v	= &vnodelist[v];
-	openfilelist[i].offset	= 0;
+	if (flags & O_APPEND) {
+		openfilelist[i].offset = vnodelist[v].size;
+	} else {
+		openfilelist[i].offset	= 0;
+	}
+	flags &= ~O_APPEND;
 	openfilelist[i].mode	= flags;
 
 	struct proc *p = current_proc();
@@ -108,6 +113,9 @@ int fileread(int fd, uint64 uaddr, uint n) {
 	}
 
 	int ret = vnode_read(f->v, f->offset, n, p->pagetable, uaddr);
+	if (ret == 0) {
+		return -1;
+	}
 	f->offset += ret;
 
 	return ret;
@@ -133,6 +141,7 @@ int filewrite(int fd, uint64 uaddr, uint n) {
 			n -= m;
 			total += m;
 		}
+		kfree(ka);
 		return total;
 	}
 	struct file *f = p->open_files[fd];
@@ -141,6 +150,9 @@ int filewrite(int fd, uint64 uaddr, uint n) {
 	}
 
 	int ret = vnode_write(f->v, f->offset, n, p->pagetable, uaddr);
+	if (ret == 0) {
+		return -1;
+	}
 	f->offset += ret;
 
 	return ret;

@@ -74,11 +74,16 @@ int main(int argc, char *argv[]) {
 	memcpy(start, root, rootsize);
 	disk.blocks += b;
 	for (int i = 0; i < b; i++) {
-		inode->direct[i] = start + i * DISK_BLOCK_SIZE - disk.data;
+		inode->direct[i] = (start + i * DISK_BLOCK_SIZE - disk.data) / BSIZE;
 	}
 
 	sb->sizeb = disk.blocks;
 	sb->n_block = sb->sizeb - 2 - INODE_BLOCKS - BMAP_BLOCKS;
+
+	uint8 *bmap = (uint8 *)(disk.data + sb->bmap_startb * BSIZE);
+	for (int i = 0; i < disk.blocks; i++) {
+		bmap[i/8] |= 1 << i%8;
+	}
 
 	FILE *fp = fopen(argv[1], "w");
 	fwrite(disk.data, 1, disk.blocks * DISK_BLOCK_SIZE, fp);
@@ -96,6 +101,7 @@ void addfile(FILE *fp, uint32 i) {
 	inode->nlink	= 1;
 	inode->size	= 0;
 
+	// First, write the file into disk and count the used block
 	uint8 * const start = disk.data + disk.blocks * DISK_BLOCK_SIZE;
 	uint usedb = 0;
 	uint8 *p = start;
@@ -110,29 +116,31 @@ void addfile(FILE *fp, uint32 i) {
 		p += DISK_BLOCK_SIZE;
 	}
 
+	// Then, record the block number
 	if (usedb <= 10) {
 		for (int i = 0; i < usedb; i++) {
-			inode->direct[i] = start + i * DISK_BLOCK_SIZE - disk.data;
+			inode->direct[i] = (start + i * DISK_BLOCK_SIZE - disk.data) / BSIZE;
 		}
 	} else {
 		for (int i = 0; i < 10; i++) {
-			inode->direct[i] = start + i * DISK_BLOCK_SIZE - disk.data;
+			inode->direct[i] = (start + i * DISK_BLOCK_SIZE - disk.data) / BSIZE;
 		}
 		usedb -= 10;
 		int page = 0;
 		uint8 *b = start + 10 * DISK_BLOCK_SIZE;
 		while (usedb > 0) {
 			if (page == 3) {
+				fprintf(stderr, "File Too Big");
 				exit(1);
 			}
 			// allocate a block
 			uint32 *m = (uint32 *)(disk.data + disk.blocks * DISK_BLOCK_SIZE);
 			disk.blocks++;
 			memset(m, 0, DISK_BLOCK_SIZE);
-			inode->more[page] = (uint8 *)m - disk.data;
+			inode->more[page] = ((uint8 *)m - disk.data) / BSIZE;
 
 			for (int i = 0; i < DISK_BLOCK_SIZE/sizeof(uint32); i++) {
-				m[i] = b - disk.data;
+				m[i] = (b - disk.data) / BSIZE;
 				b += DISK_BLOCK_SIZE;
 				usedb--;
 				if (usedb == 0) {

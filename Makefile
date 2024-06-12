@@ -6,7 +6,7 @@ OBJ_DIR	= obj
 CC	= riscv64-linux-gnu-gcc
 LD	= riscv64-linux-gnu-ld
 OBJDUMP	= riscv64-linux-gnu-objdump
-CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2
+CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -g
 # CFLAGS += -MD
 CFLAGS += -mcmodel=medany
 CFLAGS += -ffreestanding -fno-common -nostdlib -mno-relax

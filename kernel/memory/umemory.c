@@ -7,6 +7,7 @@ int copyin(uint64 ka, uint64 *upt, uint64 ua, uint n) {
 	for (; n > 0; n -= m) {
 		uint64 uapa = walkpaalign(upt, ua);
 		if (uapa == 0) {
+			dpln("copyin: Wrong user addr");
 			return -1;
 		}
 		uapa += ua % PGSIZE;

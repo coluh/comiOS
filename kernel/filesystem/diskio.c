@@ -17,6 +17,7 @@ void disk_read_block(void *dst, int blockid) {
 		panic("disk_read_block: addr out of range");
 	}
 	if (blockid >= MAX_BLOCK_COUNT || blockid < 0) {
+		dpf1("Blockid=%d\n", blockid);
 		panic("disk_read_block: blockid out of range");
 	}
 

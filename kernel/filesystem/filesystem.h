@@ -12,6 +12,9 @@ struct superblock {
 };
 #define SB_MAGIC 1145141919
 
+#define INODE_BLOCKS	27
+#define BMAP_BLOCKS	1
+
 // inode in the disk
 struct inode {
 	uint16 type;
@@ -27,19 +30,16 @@ struct inode {
 #define I_NORMAL 2
 #define I_DIRENT 3
 
+#define BLOCK_BNUM	(BSIZE/sizeof(uint32))
+
+#define INODE_OFFSET(i)	(2*DISK_BLOCK_SIZE+(i)*sizeof(struct inode))
+#define ROOT_INODE 1
+#define MAX_INODE	(INODE_BLOCKS*DISK_BLOCK_SIZE/sizeof(struct inode))
+
 #define FILENAME_LEN 60
 struct dirent_item {
 	uint32 inode;
 	char name[FILENAME_LEN];
 };
-
-#define INODE_OFFSET(i)	(2*DISK_BLOCK_SIZE+(i)*sizeof(struct inode))
-#define ROOT_INODE 1
-
-// #define INODE_BLOCKS	27
-#define INODE_BLOCKS	1
-#define BMAP_BLOCKS	1
-#define MAX_INODE	(INODE_BLOCKS*DISK_BLOCK_SIZE/sizeof(struct inode))
-
 
 
