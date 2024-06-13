@@ -130,6 +130,14 @@ int strcmp(char *a, char *b) {
 	return 0;
 }
 
+// strlen("abc") == 3
+uint strlen(char *s) {
+	uint n = 0;
+	while (s[n] != 0)
+		n++;
+	return n;
+}
+
 int cpuid() {
 	int id = r_tp();
 	return id;

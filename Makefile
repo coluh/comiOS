@@ -57,7 +57,7 @@ $U/_%:	$U/%.o $L/usys.o $L/ulib.o
 
 fs.img:	$(UPROGS) mkfs/mkfs.c
 	gcc -g -Werror -Wall mkfs/mkfs.c -o mkfs/_mkfs -I kernel/filesystem/ -I kernel/include/
-	./mkfs/_mkfs fs.img $(UPROGS) $U/_debugtxt
+	./mkfs/_mkfs fs.img $(UPROGS) $U/debug.txt
 
 checkdisk:mkfs/checkdisk.c
 	gcc -Werror -Wall mkfs/checkdisk.c -o mkfs/_check -I kernel/filesystem/ -I kernel/include/
@@ -81,7 +81,7 @@ qemu:	$(OBJ_DIR)/kernel
 GDBPORT = 23333
 GDBOPTS = -S -gdb tcp::$(GDBPORT)
 
-qemu-gdb: $(OBJ_DIR)/kernel .gdbinit
+gdb-qemu: $(OBJ_DIR)/kernel .gdbinit
 	@echo "run gdb-multiarch in this direntory..."
 	$(QEMU) $(QEMU_FLAG) -kernel $(OBJ_DIR)/kernel $(GDBOPTS)
 
@@ -92,7 +92,7 @@ tags:
 clean:
 	rm -f $(OBJ_DIR)/*
 	rm -f mkfs/_*
-	# rm -f $U/_*
+	rm -f $U/_*
 	rm -f $U/*.asm
 	rm -f fs.*
 	rm -f $L/usys.o $L/usys.S

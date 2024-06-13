@@ -57,5 +57,6 @@ void		panic(char *s);
 void*		memset(void *dst, char c, uint n);
 void*		memcpy(void *dst, void *src, uint n);
 int		strcmp(char *a, char *b);
+uint		strlen(char *s);
 int		cpuid();
 

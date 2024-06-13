@@ -32,6 +32,7 @@ int copyin_string(char *ka, uint max, uint64 *upt, char *s) {
 			ka[idx] = uapa[i];
 			idx++;
 			if (idx == max) {
+				dpln("copyin_string: path too long");
 				return -1;
 			}
 			if (uapa[i] == 0) {

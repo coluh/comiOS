@@ -45,7 +45,7 @@ extern int exec(char *path, char *argv[]);
 uint64 sys_exec(void) {
 	if (first) {
 		first = 0;
-		return exec("/whoi", NULL);
+		return exec("/writ", NULL);
 	}
 	char *pathua = (char *)getreg_a(0);
 	char path[MAX_PATHLEN];

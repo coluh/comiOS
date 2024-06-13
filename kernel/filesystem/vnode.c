@@ -10,7 +10,7 @@ extern int allocate_block();
 extern struct superblock *sb;
 int allocate_inode() {
 	char *ka = (char *)kalloc();
-	for (int b = sb->inode_startb; b < sb->bmap_startb; b++) {
+	for (int b = sb->inode_startb+1; b < sb->bmap_startb; b++) {
 		disk_read_block(ka, b);
 		struct inode *in = (struct inode *)ka;
 		for (int i = 0; i < BSIZE/sizeof(struct inode); i++) {
@@ -83,17 +83,19 @@ int finddir(struct vnode *v, char *name) {
 
 int fillvnode(struct vnode *vp, char *path) {
 	if (path[0] != '/') {
-		dpln("Wrong path");
+		dpln("fillvnode: Wrong path");
 		return -1;
 	}
 	fillvnodei(vp, ROOT_INODE);
-	path++;
 	int inum = ROOT_INODE;
 	while (1) {
-		if (*path == 0) {
+		if (*path == 0)
 			break;
-		}
+		path++;	// pass '/'
+		if (*path == 0)
+			break;
 		if (vp->type != I_DIRENT) {
+			dpf1("Path: %s\n", path);
 			dpln("find slash after not-dir file");
 			return -1;
 		}
@@ -104,11 +106,10 @@ int fillvnode(struct vnode *vp, char *path) {
 		}
 		name[i] = 0;
 		path += i;
-		path++;	// pass '/'
 
 		inum = finddir(vp, name);
 		if (inum < 0) {
-			dpf1("File %s not found", name);
+			dpf1("fillvnode: File %s not found\n", name);
 			return -1;
 		}
 		fillvnodei(vp, inum);
@@ -138,6 +139,8 @@ int vnodelist_add(char *path) {
 }
 
 int vnodelist_delete(int v) {
+	synch_vnode(&vnodelist[v]);
+	memset(&vnodelist[v], 0, sizeof(struct vnode));
 	return 0;
 }
 
@@ -279,11 +282,11 @@ int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {
 			return total;
 		}
 		disk_read_block(buf, bid);
-		uint64 src = (uint64)(buf + off % BSIZE);
+		uint64 dst = (uint64)(buf + off % BSIZE);
 		// copy with memory continuous
 		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);
 		m = MIN(m, n);
-		memcpy((void *)src, (void *)upa, m);
+		memcpy((void *)dst, (void *)upa, m);
 		disk_write_block(buf, bid);
 		// next
 		uaddr += m;
@@ -296,13 +299,56 @@ int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {
 	return total;
 }
 
+void kvnode_write(struct vnode *v, uint off, uint n, uint64 ka) {
+	char *buf = (char *)kalloc();
+	uint m;
+	for (; n > 0; n -= m) {
+		int bid = blockmap_alloc(v, off);
+		if (bid < 0)
+			panic("kvnode_write: get negative bid");
+		disk_read_block(buf, bid);
+		uint64 dst = (uint64)(buf + off % BSIZE);
+		m = MIN(n, BSIZE - off % BSIZE);
+		memcpy((void *)dst, (void *)ka, m);
+		disk_write_block(buf, bid);
+		ka	+= m;
+		off	+= m;
+		v->size	+= m;
+	}
+	kfree(buf);
+	synch_vnode(v);
+}
+
 int vnode_create(char *path, int flags) {
 	// allocate inode
-	/* int inode = allocate_inode(); */
+	int inode = allocate_inode();
+	struct dirent_item di;
+	di.inode = inode;
 
 	// modify the direntory to add the file
-	// parse path to dirent and filename
-	return -1;
+	char *filename = NULL;
+	for (int i = 0; path[i] != 0; i++) {
+		if (path[i] == '/')
+			filename = path + i + 1;
+	}
+	if (filename == NULL || *filename == 0) {
+		dpf1("Path:%s\n", path);
+		dpln("vnode_create: path has something wrong");
+		return -1;
+	}
+	memcpy(di.name, filename, strlen(filename) + 1);
+
+	char t = *filename;
+	*filename = 0;
+	struct vnode dir;
+	if (fillvnode(&dir, path) < 0) {
+		return -1;
+	}
+	// restore the path for following functions
+	*filename = t;
+
+	kvnode_write(&dir, dir.size, sizeof(di), (uint64)&di);
+	return 0;
 }
 
 int vnode_delete(char *path) {

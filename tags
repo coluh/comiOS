@@ -55,7 +55,7 @@ BUFSZ	xv6/user/usertests.c	/^#define BUFSZ /;"	d	file:
 C	xv6/kernel/console.c	/^#define C(/;"	d	file:
 CC	Makefile	/^CC	= riscv64-linux-gnu-gcc$/;"	m
 CC	xv6/Makefile	/^CC = $(TOOLPREFIX)gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2$/;"	m
+CFLAGS	Makefile	/^CFLAGS 	= -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -g$/;"	m
 CFLAGS	xv6/Makefile	/^CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2	# for debugging$/;"	m
 CLINT	kernel/include/basic_memlayout.h	/^#define CLINT /;"	d
 CLINT	xv6/kernel/memlayout.h	/^#define CLINT /;"	d
@@ -72,6 +72,28 @@ DISK	mkfs/mkfs.c	/^struct DISK {$/;"	s	file:
 DISKBLOCK	kernel/include/basic_memlayout.h	/^#define DISKBLOCK(/;"	d
 DISKTOP	kernel/include/basic_memlayout.h	/^#define DISKTOP	/;"	d
 DISK_BLOCK_SIZE	kernel/include/basic_memlayout.h	/^#define DISK_BLOCK_SIZE /;"	d
+Disassembly	obj/_entry.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/block.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/create.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/diskio.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/exec.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/file.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kernel.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kerneltrap.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kernelvec.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kmemory.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/kpagetable.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/main.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/plic.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/schedular.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/start.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/swtch.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/syscall.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/umemory.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/userproc.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/usertrap.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/util.asm	/^Disassembly of section .text:$/;"	l
+Disassembly	obj/vnode.asm	/^Disassembly of section .text:$/;"	l
 ELF_MAGIC	kernel/process/load/elf.h	/^#define ELF_MAGIC /;"	d
 ELF_MAGIC	xv6/kernel/elf.h	/^#define ELF_MAGIC /;"	d
 ELF_PROG_FLAG_EXEC	kernel/process/load/elf.h	/^#define ELF_PROG_FLAG_EXEC /;"	d
@@ -211,6 +233,7 @@ OBJS	xv6/Makefile	/^OBJS = \\$/;"	m
 OBJ_DIR	Makefile	/^OBJ_DIR	= obj$/;"	m
 OPENFILE_COUNT	kernel/filesystem/file.h	/^#define OPENFILE_COUNT	/;"	d
 O_APPEND	kernel/filesystem/file.h	/^#define O_APPEND	/;"	d
+O_APPEND	user/system.h	/^#define O_APPEND	/;"	d
 O_CREATE	kernel/filesystem/file.h	/^#define O_CREATE	/;"	d
 O_CREATE	user/system.h	/^#define O_CREATE	/;"	d
 O_CREATE	xv6/kernel/fcntl.h	/^#define O_CREATE /;"	d
@@ -454,42 +477,238 @@ __anon9e7096f20108	kernel/memory/kmemory.c	/^struct {$/;"	s	file:
 __anonb2f79d2f0108	xv6/kernel/kalloc.c	/^struct {$/;"	s	file:
 __anondd6f5ed30108	xv6/kernel/bio.c	/^struct {$/;"	s	file:
 _entry	kernel/initial/_entry.S	/^_entry:$/;"	l
+_entry	obj/_entry.asm	/^_entry:$/;"	l
+_entry	obj/kernel.asm	/^_entry:$/;"	l
 _entry	xv6/kernel/entry.S	/^_entry:$/;"	l
 _main	user/test.S	/^_main:$/;"	l
 _main	xv6/user/ulib.c	/^_main()$/;"	f	typeref:typename:void
 _start	user/test.S	/^_start:$/;"	l
 _trampoline	kernel/kernel.ld	/^    _trampoline = .;$/;"	s	section:.text
 _trampoline	xv6/kernel/kernel.ld	/^    _trampoline = .;$/;"	s	section:.text
+a	obj/_entry.asm	/^   a:	912a                	add	sp,sp,a0$/;"	l
+a	obj/block.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a	obj/create.asm	/^   a:	00070713          	mv	a4,a4$/;"	l
+a	obj/diskio.asm	/^   a:	00000697          	auipc	a3,0x0$/;"	l
+a	obj/exec.asm	/^   a:	050e                	sll	a0,a0,0x3$/;"	l
+a	obj/file.asm	/^   a:	6485                	lui	s1,0x1$/;"	l
+a	obj/kerneltrap.asm	/^   a:	00078793          	mv	a5,a5$/;"	l
+a	obj/kernelvec.asm	/^   a:	ec12                	sd	tp,24(sp)$/;"	l
+a	obj/kmemory.asm	/^   a:	00000497          	auipc	s1,0x0$/;"	l
+a	obj/kpagetable.asm	/^   a:	ec4e                	sd	s3,24(sp)$/;"	l
+a	obj/plic.asm	/^   a:	4705                	li	a4,1$/;"	l
+a	obj/schedular.asm	/^   a:	f44e                	sd	s3,40(sp)$/;"	l
+a	obj/start.asm	/^   a:	8082                	ret$/;"	l
+a	obj/swtch.asm	/^   a:	ed04                	sd	s1,24(a0)$/;"	l
+a	obj/syscall.asm	/^   a:	0141                	add	sp,sp,16$/;"	l
+a	obj/umemory.asm	/^   a:	f84a                	sd	s2,48(sp)$/;"	l
+a	obj/userproc.asm	/^   a:	00000517          	auipc	a0,0x0$/;"	l
+a	obj/usertrap.asm	/^   a:	1000                	add	s0,sp,32$/;"	l
+a	obj/util.asm	/^   a:	0080                	add	s0,sp,64$/;"	l
+a	obj/vnode.asm	/^   a:	ec4e                	sd	s3,24(sp)$/;"	l
 a0	kernel/process/process.h	/^	uint64 a0;$/;"	m	struct:trapframe	typeref:typename:uint64
+a0	obj/block.asm	/^  a0:	87ca                	mv	a5,s2$/;"	l
+a0	obj/create.asm	/^  a0:	00000097          	auipc	ra,0x0$/;"	l
+a0	obj/kpagetable.asm	/^  a0:	050e                	sll	a0,a0,0x3$/;"	l
+a0	obj/start.asm	/^  a0:	00259693          	sll	a3,a1,0x2$/;"	l
+a0	obj/syscall.asm	/^  a0:	00000517          	auipc	a0,0x0$/;"	l
+a0	obj/umemory.asm	/^  a0:	e486                	sd	ra,72(sp)$/;"	l
+a0	obj/userproc.asm	/^  a0:	00078793          	mv	a5,a5$/;"	l
+a0	obj/usertrap.asm	/^  a0:	0800                	add	s0,sp,16$/;"	l
 a0	xv6/kernel/proc.h	/^  \/* 112 *\/ uint64 a0;$/;"	m	struct:trapframe	typeref:typename:uint64
+a00	obj/vnode.asm	/^ a00:	8bb6                	mv	s7,a3$/;"	l
+a02	obj/vnode.asm	/^ a02:	00000097          	auipc	ra,0x0$/;"	l
+a06	obj/vnode.asm	/^ a06:	000080e7          	jalr	ra # a02 <.LCFI58+0x8>$/;"	l
+a0a	obj/vnode.asm	/^ a0a:	8b2a                	mv	s6,a0$/;"	l
+a0c	obj/vnode.asm	/^ a0c:	08098563          	beqz	s3,a96 <.L131>$/;"	l
 a1	kernel/process/process.h	/^	uint64 a1;$/;"	m	struct:trapframe	typeref:typename:uint64
 a1	xv6/kernel/proc.h	/^  \/* 120 *\/ uint64 a1;$/;"	m	struct:trapframe	typeref:typename:uint64
+a10	obj/vnode.asm	/^ a10:	00000c97          	auipc	s9,0x0$/;"	l
+a14	obj/vnode.asm	/^ a14:	000c8c93          	mv	s9,s9$/;"	l
+a18	obj/vnode.asm	/^ a18:	40000c13          	li	s8,1024$/;"	l
+a1c	obj/vnode.asm	/^ a1c:	a0a1                	j	a64 <.L134>$/;"	l
+a1e	obj/vnode.asm	/^ a1e:	8566                	mv	a0,s9$/;"	l
 a2	kernel/process/process.h	/^	uint64 a2;$/;"	m	struct:trapframe	typeref:typename:uint64
+a2	obj/block.asm	/^  a2:	4481                	li	s1,0$/;"	l
+a2	obj/diskio.asm	/^  a2:	b7c1                	j	62 <.L9>$/;"	l
+a2	obj/exec.asm	/^  a2:	00060613          	mv	a2,a2$/;"	l
+a2	obj/file.asm	/^  a2:	54fd                	li	s1,-1$/;"	l
+a2	obj/kerneltrap.asm	/^  a2:	10049073          	csrw	sstatus,s1$/;"	l
+a2	obj/kmemory.asm	/^  a2:	000080e7          	jalr	ra # 9e <.L10+0x8>$/;"	l
+a2	obj/kpagetable.asm	/^  a2:	9526                	add	a0,a0,s1$/;"	l
+a2	obj/umemory.asm	/^  a2:	e0a2                	sd	s0,64(sp)$/;"	l
+a2	obj/usertrap.asm	/^  a2:	00000797          	auipc	a5,0x0$/;"	l
+a2	obj/util.asm	/^  a2:	00078793          	mv	a5,a5$/;"	l
+a2	obj/vnode.asm	/^  a2:	000080e7          	jalr	ra # 9e <.L6+0x4>$/;"	l
 a2	xv6/kernel/proc.h	/^  \/* 128 *\/ uint64 a2;$/;"	m	struct:trapframe	typeref:typename:uint64
+a20	obj/vnode.asm	/^ a20:	00000097          	auipc	ra,0x0$/;"	l
+a24	obj/vnode.asm	/^ a24:	000080e7          	jalr	ra # a20 <.LVL278>$/;"	l
+a28	obj/vnode.asm	/^ a28:	a0b9                	j	a76 <.L132>$/;"	l
+a2a	obj/vnode.asm	/^ a2a:	0004861b          	sext.w	a2,s1$/;"	l
+a2e	obj/vnode.asm	/^ a2e:	85de                	mv	a1,s7$/;"	l
 a3	kernel/process/process.h	/^	uint64 a3;$/;"	m	struct:trapframe	typeref:typename:uint64
 a3	xv6/kernel/proc.h	/^  \/* 136 *\/ uint64 a3;$/;"	m	struct:trapframe	typeref:typename:uint64
+a30	obj/vnode.asm	/^ a30:	955a                	add	a0,a0,s6$/;"	l
+a32	obj/vnode.asm	/^ a32:	00000097          	auipc	ra,0x0$/;"	l
+a36	obj/vnode.asm	/^ a36:	000080e7          	jalr	ra # a32 <.LVL281>$/;"	l
+a3a	obj/vnode.asm	/^ a3a:	85ca                	mv	a1,s2$/;"	l
+a3c	obj/vnode.asm	/^ a3c:	855a                	mv	a0,s6$/;"	l
+a3e	obj/vnode.asm	/^ a3e:	00000097          	auipc	ra,0x0$/;"	l
 a4	kernel/process/process.h	/^	uint64 a4;$/;"	m	struct:trapframe	typeref:typename:uint64
+a4	obj/block.asm	/^  a4:	4601                	li	a2,0$/;"	l
+a4	obj/create.asm	/^  a4:	000080e7          	jalr	ra # a0 <.L9+0x18>$/;"	l
+a4	obj/diskio.asm	/^  a4:	85a6                	mv	a1,s1$/;"	l
+a4	obj/file.asm	/^  a4:	a8e1                	j	17c <.L5>$/;"	l
+a4	obj/kpagetable.asm	/^  a4:	70e2                	ld	ra,56(sp)$/;"	l
+a4	obj/start.asm	/^  a4:	96ae                	add	a3,a3,a1$/;"	l
+a4	obj/syscall.asm	/^  a4:	00050513          	mv	a0,a0$/;"	l
+a4	obj/umemory.asm	/^  a4:	fc26                	sd	s1,56(sp)$/;"	l
+a4	obj/userproc.asm	/^  a4:	f89c                	sd	a5,48(s1)$/;"	l
 a4	xv6/kernel/proc.h	/^  \/* 144 *\/ uint64 a4;$/;"	m	struct:trapframe	typeref:typename:uint64
+a42	obj/vnode.asm	/^ a42:	000080e7          	jalr	ra # a3e <.LVL282+0x4>$/;"	l
+a46	obj/vnode.asm	/^ a46:	02049793          	sll	a5,s1,0x20$/;"	l
+a4a	obj/vnode.asm	/^ a4a:	9381                	srl	a5,a5,0x20$/;"	l
+a4c	obj/vnode.asm	/^ a4c:	9bbe                	add	s7,s7,a5$/;"	l
+a4e	obj/vnode.asm	/^ a4e:	01448a3b          	addw	s4,s1,s4$/;"	l
 a5	kernel/process/process.h	/^	uint64 a5;$/;"	m	struct:trapframe	typeref:typename:uint64
 a5	xv6/kernel/proc.h	/^  \/* 152 *\/ uint64 a5;$/;"	m	struct:trapframe	typeref:typename:uint64
+a52	obj/vnode.asm	/^ a52:	00caa783          	lw	a5,12(s5)$/;"	l
+a56	obj/vnode.asm	/^ a56:	9fa5                	addw	a5,a5,s1$/;"	l
+a58	obj/vnode.asm	/^ a58:	00faa623          	sw	a5,12(s5)$/;"	l
+a5c	obj/vnode.asm	/^ a5c:	409989bb          	subw	s3,s3,s1$/;"	l
 a6	kernel/process/process.h	/^	uint64 a6;$/;"	m	struct:trapframe	typeref:typename:uint64
+a6	obj/block.asm	/^  a6:	bf75                	j	62 <.L2>$/;"	l
+a6	obj/diskio.asm	/^  a6:	00000517          	auipc	a0,0x0$/;"	l
+a6	obj/exec.asm	/^  a6:	040005b7          	lui	a1,0x4000$/;"	l
+a6	obj/file.asm	/^  a6:	07f00793          	li	a5,127$/;"	l
+a6	obj/kerneltrap.asm	/^  a6:	60e2                	ld	ra,24(sp)$/;"	l
+a6	obj/kmemory.asm	/^  a6:	bf45                	j	56 <.L6>$/;"	l
+a6	obj/kpagetable.asm	/^  a6:	7442                	ld	s0,48(sp)$/;"	l
+a6	obj/start.asm	/^  a6:	068e                	sll	a3,a3,0x3$/;"	l
+a6	obj/umemory.asm	/^  a6:	f84a                	sd	s2,48(sp)$/;"	l
+a6	obj/userproc.asm	/^  a6:	689c                	ld	a5,16(s1)$/;"	l
+a6	obj/usertrap.asm	/^  a6:	00078793          	mv	a5,a5$/;"	l
+a6	obj/util.asm	/^  a6:	6398                	ld	a4,0(a5)$/;"	l
+a6	obj/vnode.asm	/^  a6:	87d2                	mv	a5,s4$/;"	l
 a6	xv6/kernel/proc.h	/^  \/* 160 *\/ uint64 a6;$/;"	m	struct:trapframe	typeref:typename:uint64
+a60	obj/vnode.asm	/^ a60:	02098b63          	beqz	s3,a96 <.L131>$/;"	l
+a64	obj/vnode.asm	/^ a64:	85d2                	mv	a1,s4$/;"	l
+a66	obj/vnode.asm	/^ a66:	8556                	mv	a0,s5$/;"	l
+a68	obj/vnode.asm	/^ a68:	00000097          	auipc	ra,0x0$/;"	l
+a6c	obj/vnode.asm	/^ a6c:	000080e7          	jalr	ra # a68 <.L134+0x4>$/;"	l
 a7	kernel/process/process.h	/^	uint64 a7;$/;"	m	struct:trapframe	typeref:typename:uint64
 a7	xv6/kernel/proc.h	/^  \/* 168 *\/ uint64 a7;$/;"	m	struct:trapframe	typeref:typename:uint64
+a70	obj/vnode.asm	/^ a70:	892a                	mv	s2,a0$/;"	l
+a72	obj/vnode.asm	/^ a72:	fa0546e3          	bltz	a0,a1e <.L137>$/;"	l
+a76	obj/vnode.asm	/^ a76:	85ca                	mv	a1,s2$/;"	l
+a78	obj/vnode.asm	/^ a78:	855a                	mv	a0,s6$/;"	l
+a7a	obj/vnode.asm	/^ a7a:	00000097          	auipc	ra,0x0$/;"	l
+a7e	obj/vnode.asm	/^ a7e:	000080e7          	jalr	ra # a7a <.L132+0x4>$/;"	l
+a8	obj/block.asm	/^  a8:	00000517          	auipc	a0,0x0$/;"	l
+a8	obj/create.asm	/^  a8:	00000097          	auipc	ra,0x0$/;"	l
+a8	obj/kerneltrap.asm	/^  a8:	6442                	ld	s0,16(sp)$/;"	l
+a8	obj/kmemory.asm	/^  a8:	7179                	add	sp,sp,-48$/;"	l
+a8	obj/kpagetable.asm	/^  a8:	74a2                	ld	s1,40(sp)$/;"	l
+a8	obj/start.asm	/^  a8:	00000717          	auipc	a4,0x0$/;"	l
+a8	obj/syscall.asm	/^  a8:	00000097          	auipc	ra,0x0$/;"	l
+a8	obj/umemory.asm	/^  a8:	f44e                	sd	s3,40(sp)$/;"	l
+a8	obj/userproc.asm	/^  a8:	97ba                	add	a5,a5,a4$/;"	l
+a8	obj/util.asm	/^  a8:	fae43c23          	sd	a4,-72(s0)$/;"	l
+a8	obj/vnode.asm	/^  a8:	84d6                	mv	s1,s5$/;"	l
+a82	obj/vnode.asm	/^ a82:	3ffa7513          	and	a0,s4,1023$/;"	l
+a86	obj/vnode.asm	/^ a86:	40ac07bb          	subw	a5,s8,a0$/;"	l
+a8a	obj/vnode.asm	/^ a8a:	84be                	mv	s1,a5$/;"	l
+a8c	obj/vnode.asm	/^ a8c:	2781                	sext.w	a5,a5$/;"	l
+a8e	obj/vnode.asm	/^ a8e:	f8f9fee3          	bgeu	s3,a5,a2a <.L133>$/;"	l
+a92	obj/vnode.asm	/^ a92:	84ce                	mv	s1,s3$/;"	l
+a94	obj/vnode.asm	/^ a94:	bf59                	j	a2a <.L133>$/;"	l
+a96	obj/vnode.asm	/^ a96:	855a                	mv	a0,s6$/;"	l
+a98	obj/vnode.asm	/^ a98:	00000097          	auipc	ra,0x0$/;"	l
+a9c	obj/vnode.asm	/^ a9c:	000080e7          	jalr	ra # a98 <.L131+0x2>$/;"	l
+aa	obj/diskio.asm	/^  aa:	00050513          	mv	a0,a0$/;"	l
+aa	obj/exec.asm	/^  aa:	15fd                	add	a1,a1,-1 # 3ffffff <.LLST2+0x3fffc17>$/;"	l
+aa	obj/file.asm	/^  aa:	ff27c7e3          	blt	a5,s2,98 <.L8>$/;"	l
+aa	obj/kerneltrap.asm	/^  aa:	64a2                	ld	s1,8(sp)$/;"	l
+aa	obj/kmemory.asm	/^  aa:	f406                	sd	ra,40(sp)$/;"	l
+aa	obj/kpagetable.asm	/^  aa:	7902                	ld	s2,32(sp)$/;"	l
+aa	obj/umemory.asm	/^  aa:	f052                	sd	s4,32(sp)$/;"	l
+aa	obj/userproc.asm	/^  aa:	fc9c                	sd	a5,56(s1)$/;"	l
+aa	obj/usertrap.asm	/^  aa:	10579073          	csrw	stvec,a5$/;"	l
+aa	obj/vnode.asm	/^  aa:	0007d703          	lhu	a4,0(a5)$/;"	l
+aa0	obj/vnode.asm	/^ aa0:	8556                	mv	a0,s5$/;"	l
+aa2	obj/vnode.asm	/^ aa2:	00000097          	auipc	ra,0x0$/;"	l
+aa6	obj/vnode.asm	/^ aa6:	000080e7          	jalr	ra # aa2 <.LVL294+0x2>$/;"	l
+aaa	obj/vnode.asm	/^ aaa:	60e6                	ld	ra,88(sp)$/;"	l
+aac	obj/vnode.asm	/^ aac:	6446                	ld	s0,80(sp)$/;"	l
+aae	obj/vnode.asm	/^ aae:	64a6                	ld	s1,72(sp)$/;"	l
+ab0	obj/vnode.asm	/^ ab0:	6906                	ld	s2,64(sp)$/;"	l
+ab2	obj/vnode.asm	/^ ab2:	79e2                	ld	s3,56(sp)$/;"	l
+ab4	obj/vnode.asm	/^ ab4:	7a42                	ld	s4,48(sp)$/;"	l
+ab6	obj/vnode.asm	/^ ab6:	7aa2                	ld	s5,40(sp)$/;"	l
+ab8	obj/vnode.asm	/^ ab8:	7b02                	ld	s6,32(sp)$/;"	l
+aba	obj/vnode.asm	/^ aba:	6be2                	ld	s7,24(sp)$/;"	l
+abc	obj/vnode.asm	/^ abc:	6c42                	ld	s8,16(sp)$/;"	l
+abe	obj/vnode.asm	/^ abe:	6ca2                	ld	s9,8(sp)$/;"	l
 about Makefile	README.md	/^## about Makefile$/;"	s
+ac	obj/block.asm	/^  ac:	00050513          	mv	a0,a0$/;"	l
+ac	obj/create.asm	/^  ac:	000080e7          	jalr	ra # a8 <.L8>$/;"	l
+ac	obj/exec.asm	/^  ac:	05b2                	sll	a1,a1,0xc$/;"	l
+ac	obj/kerneltrap.asm	/^  ac:	6902                	ld	s2,0(sp)$/;"	l
+ac	obj/kmemory.asm	/^  ac:	f022                	sd	s0,32(sp)$/;"	l
+ac	obj/kpagetable.asm	/^  ac:	69e2                	ld	s3,24(sp)$/;"	l
+ac	obj/start.asm	/^  ac:	00070713          	mv	a4,a4$/;"	l
+ac	obj/syscall.asm	/^  ac:	000080e7          	jalr	ra # a8 <.LVL16>$/;"	l
+ac	obj/umemory.asm	/^  ac:	ec56                	sd	s5,24(sp)$/;"	l
+ac	obj/userproc.asm	/^  ac:	4789                	li	a5,2$/;"	l
+ac	obj/util.asm	/^  ac:	6798                	ld	a4,8(a5)$/;"	l
+ac0	obj/vnode.asm	/^ ac0:	6125                	add	sp,sp,96$/;"	l
+ac2	obj/vnode.asm	/^ ac2:	8082                	ret$/;"	l
+ac4	obj/vnode.asm	/^ ac4:	7131                	add	sp,sp,-192$/;"	l
+ac6	obj/vnode.asm	/^ ac6:	fd06                	sd	ra,184(sp)$/;"	l
+ac8	obj/vnode.asm	/^ ac8:	f922                	sd	s0,176(sp)$/;"	l
+aca	obj/vnode.asm	/^ aca:	f526                	sd	s1,168(sp)$/;"	l
+acc	obj/vnode.asm	/^ acc:	f14a                	sd	s2,160(sp)$/;"	l
+ace	obj/vnode.asm	/^ ace:	ed4e                	sd	s3,152(sp)$/;"	l
 acquire	xv6/kernel/spinlock.c	/^acquire(struct spinlock *lk)$/;"	f	typeref:typename:void
 acquiresleep	xv6/kernel/sleeplock.c	/^acquiresleep(struct sleeplock *lk)$/;"	f	typeref:typename:void
+ad0	obj/vnode.asm	/^ ad0:	0180                	add	s0,sp,192$/;"	l
+ad2	obj/vnode.asm	/^ ad2:	892a                	mv	s2,a0$/;"	l
+ad4	obj/vnode.asm	/^ ad4:	00000097          	auipc	ra,0x0$/;"	l
+ad8	obj/vnode.asm	/^ ad8:	000080e7          	jalr	ra # ad4 <.LCFI62+0x2>$/;"	l
+adc	obj/vnode.asm	/^ adc:	89aa                	mv	s3,a0$/;"	l
 addcall	lib/usys.py	/^def addcall(name):$/;"	f
 addfile	mkfs/mkfs.c	/^void addfile(FILE *fp, uint32 i) {$/;"	f	typeref:typename:void
 addr	xv6/kernel/virtio.h	/^  uint64 addr;$/;"	m	struct:virtq_desc	typeref:typename:uint64
 addrs	xv6/kernel/file.h	/^  uint addrs[NDIRECT+1];$/;"	m	struct:inode	typeref:typename:uint[]
 addrs	xv6/kernel/fs.h	/^  uint addrs[NDIRECT+1];   \/\/ Data block addresses$/;"	m	struct:dinode	typeref:typename:uint[]
+ade	obj/vnode.asm	/^ ade:	00190793          	add	a5,s2,1$/;"	l
+ae	obj/diskio.asm	/^  ae:	00000097          	auipc	ra,0x0$/;"	l
+ae	obj/exec.asm	/^  ae:	8556                	mv	a0,s5$/;"	l
+ae	obj/file.asm	/^  ae:	00191793          	sll	a5,s2,0x1$/;"	l
+ae	obj/kerneltrap.asm	/^  ae:	6105                	add	sp,sp,32$/;"	l
+ae	obj/kmemory.asm	/^  ae:	ec26                	sd	s1,24(sp)$/;"	l
+ae	obj/kpagetable.asm	/^  ae:	6a42                	ld	s4,16(sp)$/;"	l
+ae	obj/umemory.asm	/^  ae:	e85a                	sd	s6,16(sp)$/;"	l
+ae	obj/userproc.asm	/^  ae:	c0dc                	sw	a5,4(s1)$/;"	l
+ae	obj/usertrap.asm	/^  ae:	100027f3          	csrr	a5,sstatus$/;"	l
+ae	obj/util.asm	/^  ae:	fce43023          	sd	a4,-64(s0)$/;"	l
+ae	obj/vnode.asm	/^  ae:	db49                	beqz	a4,40 <.L10>$/;"	l
+ae2	obj/vnode.asm	/^ ae2:	08190613          	add	a2,s2,129$/;"	l
+ae6	obj/vnode.asm	/^ ae6:	4481                	li	s1,0$/;"	l
+ae8	obj/vnode.asm	/^ ae8:	02f00693          	li	a3,47$/;"	l
+aec	obj/vnode.asm	/^ aec:	a021                	j	af4 <.L140>$/;"	l
+aee	obj/vnode.asm	/^ aee:	0785                	add	a5,a5,1$/;"	l
+af0	obj/vnode.asm	/^ af0:	00c78863          	beq	a5,a2,b00 <.L146>$/;"	l
+af4	obj/vnode.asm	/^ af4:	fff7c703          	lbu	a4,-1(a5)$/;"	l
+af8	obj/vnode.asm	/^ af8:	fed71be3          	bne	a4,a3,aee <.L139>$/;"	l
+afc	obj/vnode.asm	/^ afc:	84be                	mv	s1,a5$/;"	l
+afe	obj/vnode.asm	/^ afe:	bfc5                	j	aee <.L139>$/;"	l
 align	kernel/process/load/elf.h	/^  uint64 align;$/;"	m	struct:proghdr	typeref:typename:uint64
 align	xv6/kernel/elf.h	/^  uint64 align;$/;"	m	struct:proghdr	typeref:typename:uint64
 all	Makefile	/^all:	qemu$/;"	t
 alloc3_desc	xv6/kernel/virtio_disk.c	/^alloc3_desc(int *idx)$/;"	f	typeref:typename:int	file:
 alloc_desc	xv6/kernel/virtio_disk.c	/^alloc_desc()$/;"	f	typeref:typename:int	file:
 allocate_block	kernel/filesystem/block.c	/^int allocate_block() {$/;"	f	typeref:typename:int
+allocate_inode	kernel/filesystem/vnode.c	/^int allocate_inode() {$/;"	f	typeref:typename:int
 allocate_kernel_stacks	kernel/memory/kpagetable.c	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	f	typeref:typename:void
 allocate_pid	kernel/process/create.c	/^int allocate_pid() {$/;"	f	typeref:typename:int
 allocate_proc	kernel/process/create.c	/^struct proc *allocate_proc() {$/;"	f	typeref:struct:proc *
@@ -508,18 +727,158 @@ ast	mkfs/mkfs.c	/^#define ast(/;"	d	file:
 atoi	xv6/user/ulib.c	/^atoi(const char *s)$/;"	f	typeref:typename:int
 avail	xv6/kernel/virtio_disk.c	/^  struct virtq_avail *avail;$/;"	m	struct:disk	typeref:struct:virtq_avail *	file:
 b	xv6/kernel/virtio_disk.c	/^    struct buf *b;$/;"	m	struct:disk::__anon1c2856c00108	typeref:struct:buf *	file:
+b0	obj/block.asm	/^  b0:	00000097          	auipc	ra,0x0$/;"	l
+b0	obj/create.asm	/^  b0:	c088                	sw	a0,0(s1)$/;"	l
+b0	obj/exec.asm	/^  b0:	00000097          	auipc	ra,0x0$/;"	l
+b0	obj/kerneltrap.asm	/^  b0:	8082                	ret$/;"	l
+b0	obj/kmemory.asm	/^  b0:	e84a                	sd	s2,16(sp)$/;"	l
+b0	obj/kpagetable.asm	/^  b0:	6aa2                	ld	s5,8(sp)$/;"	l
+b0	obj/start.asm	/^  b0:	9736                	add	a4,a4,a3$/;"	l
+b0	obj/syscall.asm	/^  b0:	00000517          	auipc	a0,0x0$/;"	l
+b0	obj/umemory.asm	/^  b0:	e45e                	sd	s7,8(sp)$/;"	l
+b0	obj/userproc.asm	/^  b0:	60e2                	ld	ra,24(sp)$/;"	l
+b0	obj/vnode.asm	/^  b0:	2485                	addw	s1,s1,1$/;"	l
+b00	obj/vnode.asm	/^ b00:	c481                	beqz	s1,b08 <.L141>$/;"	l
+b02	obj/vnode.asm	/^ b02:	0004c783          	lbu	a5,0(s1)$/;"	l
+b06	obj/vnode.asm	/^ b06:	eb95                	bnez	a5,b3a <.L142>$/;"	l
+b08	obj/vnode.asm	/^ b08:	85ca                	mv	a1,s2$/;"	l
+b0a	obj/vnode.asm	/^ b0a:	00000517          	auipc	a0,0x0$/;"	l
+b0e	obj/vnode.asm	/^ b0e:	00050513          	mv	a0,a0$/;"	l
+b12	obj/vnode.asm	/^ b12:	00000097          	auipc	ra,0x0$/;"	l
+b16	obj/vnode.asm	/^ b16:	000080e7          	jalr	ra # b12 <.L141+0xa>$/;"	l
+b1a	obj/vnode.asm	/^ b1a:	00000517          	auipc	a0,0x0$/;"	l
+b1e	obj/vnode.asm	/^ b1e:	00050513          	mv	a0,a0$/;"	l
+b2	obj/create.asm	/^  b2:	4785                	li	a5,1$/;"	l
+b2	obj/diskio.asm	/^  b2:	000080e7          	jalr	ra # ae <.L13+0xa>$/;"	l
+b2	obj/file.asm	/^  b2:	97ca                	add	a5,a5,s2$/;"	l
+b2	obj/kerneltrap.asm	/^  b2:	00000517          	auipc	a0,0x0$/;"	l
+b2	obj/kmemory.asm	/^  b2:	e44e                	sd	s3,8(sp)$/;"	l
+b2	obj/kpagetable.asm	/^  b2:	6b02                	ld	s6,0(sp)$/;"	l
+b2	obj/start.asm	/^  b2:	ef1c                	sd	a5,24(a4)$/;"	l
+b2	obj/umemory.asm	/^  b2:	e062                	sd	s8,0(sp)$/;"	l
+b2	obj/userproc.asm	/^  b2:	6442                	ld	s0,16(sp)$/;"	l
+b2	obj/usertrap.asm	/^  b2:	1007f793          	and	a5,a5,256$/;"	l
+b2	obj/util.asm	/^  b2:	0107c783          	lbu	a5,16(a5) # ae <.LCFI6+0x12>$/;"	l
+b2	obj/vnode.asm	/^  b2:	04078793          	add	a5,a5,64$/;"	l
+b22	obj/vnode.asm	/^ b22:	00000097          	auipc	ra,0x0$/;"	l
+b26	obj/vnode.asm	/^ b26:	000080e7          	jalr	ra # b22 <.LVL307+0x8>$/;"	l
+b2a	obj/vnode.asm	/^ b2a:	557d                	li	a0,-1$/;"	l
+b2c	obj/vnode.asm	/^ b2c:	70ea                	ld	ra,184(sp)$/;"	l
+b2e	obj/vnode.asm	/^ b2e:	744a                	ld	s0,176(sp)$/;"	l
+b30	obj/vnode.asm	/^ b30:	74aa                	ld	s1,168(sp)$/;"	l
+b32	obj/vnode.asm	/^ b32:	790a                	ld	s2,160(sp)$/;"	l
+b34	obj/vnode.asm	/^ b34:	69ea                	ld	s3,152(sp)$/;"	l
+b36	obj/vnode.asm	/^ b36:	6129                	add	sp,sp,192$/;"	l
+b38	obj/vnode.asm	/^ b38:	8082                	ret$/;"	l
+b3a	obj/vnode.asm	/^ b3a:	fe048fa3          	sb	zero,-1(s1)$/;"	l
+b3e	obj/vnode.asm	/^ b3e:	85ca                	mv	a1,s2$/;"	l
+b4	obj/block.asm	/^  b4:	000080e7          	jalr	ra # b0 <.L4+0x8>$/;"	l
+b4	obj/create.asm	/^  b4:	c0dc                	sw	a5,4(s1)$/;"	l
+b4	obj/exec.asm	/^  b4:	000080e7          	jalr	ra # b0 <.LVL16+0x16>$/;"	l
+b4	obj/file.asm	/^  b4:	078e                	sll	a5,a5,0x3$/;"	l
+b4	obj/kmemory.asm	/^  b4:	1800                	add	s0,sp,48$/;"	l
+b4	obj/kpagetable.asm	/^  b4:	6121                	add	sp,sp,64$/;"	l
+b4	obj/start.asm	/^  b4:	f310                	sd	a2,32(a4)$/;"	l
+b4	obj/syscall.asm	/^  b4:	00050513          	mv	a0,a0$/;"	l
+b4	obj/umemory.asm	/^  b4:	0880                	add	s0,sp,80$/;"	l
+b4	obj/userproc.asm	/^  b4:	64a2                	ld	s1,8(sp)$/;"	l
+b40	obj/vnode.asm	/^ b40:	f8840513          	add	a0,s0,-120$/;"	l
+b44	obj/vnode.asm	/^ b44:	00000097          	auipc	ra,0x0$/;"	l
+b48	obj/vnode.asm	/^ b48:	000080e7          	jalr	ra # b44 <.L142+0xa>$/;"	l
+b4c	obj/vnode.asm	/^ b4c:	fc054fe3          	bltz	a0,b2a <.L143>$/;"	l
+b50	obj/vnode.asm	/^ b50:	f5342423          	sw	s3,-184(s0)$/;"	l
+b54	obj/vnode.asm	/^ b54:	8526                	mv	a0,s1$/;"	l
+b56	obj/vnode.asm	/^ b56:	00000097          	auipc	ra,0x0$/;"	l
+b5a	obj/vnode.asm	/^ b5a:	000080e7          	jalr	ra # b56 <.LVL313+0xa>$/;"	l
+b5e	obj/vnode.asm	/^ b5e:	0015061b          	addw	a2,a0,1 # b1b <.LVL307+0x1>$/;"	l
+b6	obj/create.asm	/^  b6:	00000097          	auipc	ra,0x0$/;"	l
+b6	obj/diskio.asm	/^  b6:	00000517          	auipc	a0,0x0$/;"	l
+b6	obj/file.asm	/^  b6:	00000717          	auipc	a4,0x0$/;"	l
+b6	obj/kerneltrap.asm	/^  b6:	00050513          	mv	a0,a0$/;"	l
+b6	obj/kmemory.asm	/^  b6:	00000917          	auipc	s2,0x0$/;"	l
+b6	obj/kpagetable.asm	/^  b6:	8082                	ret$/;"	l
+b6	obj/start.asm	/^  b6:	34071073          	csrw	mscratch,a4$/;"	l
+b6	obj/umemory.asm	/^  b6:	89aa                	mv	s3,a0$/;"	l
+b6	obj/userproc.asm	/^  b6:	6902                	ld	s2,0(sp)$/;"	l
+b6	obj/usertrap.asm	/^  b6:	e3c9                	bnez	a5,138 <.L8>$/;"	l
+b6	obj/util.asm	/^  b6:	fcf40423          	sb	a5,-56(s0)$/;"	l
+b6	obj/vnode.asm	/^  b6:	ff249ae3          	bne	s1,s2,aa <.L5>$/;"	l
+b62	obj/vnode.asm	/^ b62:	85a6                	mv	a1,s1$/;"	l
+b64	obj/vnode.asm	/^ b64:	f4c40513          	add	a0,s0,-180$/;"	l
+b68	obj/vnode.asm	/^ b68:	00000097          	auipc	ra,0x0$/;"	l
+b6c	obj/vnode.asm	/^ b6c:	000080e7          	jalr	ra # b68 <.LVL314+0xa>$/;"	l
+b70	obj/vnode.asm	/^ b70:	f4840693          	add	a3,s0,-184$/;"	l
+b74	obj/vnode.asm	/^ b74:	04000613          	li	a2,64$/;"	l
+b78	obj/vnode.asm	/^ b78:	f9442583          	lw	a1,-108(s0)$/;"	l
+b7c	obj/vnode.asm	/^ b7c:	f8840513          	add	a0,s0,-120$/;"	l
+b8	obj/block.asm	/^  b8:	bf75                	j	74 <.L5>$/;"	l
+b8	obj/exec.asm	/^  b8:	4719                	li	a4,6$/;"	l
+b8	obj/kpagetable.asm	/^  b8:	1101                	add	sp,sp,-32$/;"	l
+b8	obj/syscall.asm	/^  b8:	00000097          	auipc	ra,0x0$/;"	l
+b8	obj/umemory.asm	/^  b8:	892e                	mv	s2,a1$/;"	l
+b8	obj/userproc.asm	/^  b8:	6105                	add	sp,sp,32$/;"	l
+b8	obj/usertrap.asm	/^  b8:	00000097          	auipc	ra,0x0$/;"	l
+b80	obj/vnode.asm	/^ b80:	00000097          	auipc	ra,0x0$/;"	l
+b84	obj/vnode.asm	/^ b84:	000080e7          	jalr	ra # b80 <.LVL315+0x10>$/;"	l
+b88	obj/vnode.asm	/^ b88:	f8840513          	add	a0,s0,-120$/;"	l
+b8c	obj/vnode.asm	/^ b8c:	00000097          	auipc	ra,0x0$/;"	l
+b90	obj/vnode.asm	/^ b90:	000080e7          	jalr	ra # b8c <.LVL316+0x4>$/;"	l
+b94	obj/vnode.asm	/^ b94:	bf59                	j	b2a <.L143>$/;"	l
+b96	obj/vnode.asm	/^ b96:	1141                	add	sp,sp,-16$/;"	l
+b98	obj/vnode.asm	/^ b98:	e406                	sd	ra,8(sp)$/;"	l
+b9a	obj/vnode.asm	/^ b9a:	e022                	sd	s0,0(sp)$/;"	l
+b9c	obj/vnode.asm	/^ b9c:	0800                	add	s0,sp,16$/;"	l
+b9e	obj/vnode.asm	/^ b9e:	00000517          	auipc	a0,0x0$/;"	l
+ba	obj/create.asm	/^  ba:	000080e7          	jalr	ra # b6 <.LVL8+0x6>$/;"	l
+ba	obj/diskio.asm	/^  ba:	00050513          	mv	a0,a0$/;"	l
+ba	obj/exec.asm	/^  ba:	6685                	lui	a3,0x1$/;"	l
+ba	obj/file.asm	/^  ba:	00070713          	mv	a4,a4$/;"	l
+ba	obj/kerneltrap.asm	/^  ba:	00000097          	auipc	ra,0x0$/;"	l
+ba	obj/kmemory.asm	/^  ba:	00090913          	mv	s2,s2$/;"	l
+ba	obj/kpagetable.asm	/^  ba:	ec06                	sd	ra,24(sp)$/;"	l
+ba	obj/start.asm	/^  ba:	00000797          	auipc	a5,0x0$/;"	l
+ba	obj/umemory.asm	/^  ba:	8ab2                	mv	s5,a2$/;"	l
+ba	obj/userproc.asm	/^  ba:	8082                	ret$/;"	l
+ba	obj/util.asm	/^  ba:	00000517          	auipc	a0,0x0$/;"	l
+ba	obj/vnode.asm	/^  ba:	b7f9                	j	88 <.L11>$/;"	l
+ba2	obj/vnode.asm	/^ ba2:	00050513          	mv	a0,a0$/;"	l
+ba6	obj/vnode.asm	/^ ba6:	00000097          	auipc	ra,0x0$/;"	l
+baa	obj/vnode.asm	/^ baa:	000080e7          	jalr	ra # ba6 <.LVL319>$/;"	l
 backcmd	xv6/user/sh.c	/^backcmd(struct cmd *subcmd)$/;"	f	typeref:struct:cmd *
 backcmd	xv6/user/sh.c	/^struct backcmd {$/;"	s	file:
 backtrace	kernel/util.c	/^void backtrace() {$/;"	f	typeref:typename:void
 badarg	xv6/user/usertests.c	/^badarg(char *s)$/;"	f	typeref:typename:void
 badwrite	xv6/user/usertests.c	/^badwrite(char *s)$/;"	f	typeref:typename:void
+bae	obj/vnode.asm	/^ bae:	557d                	li	a0,-1$/;"	l
 balloc	xv6/kernel/fs.c	/^balloc(uint dev)$/;"	f	typeref:typename:uint	file:
 balloc	xv6/mkfs/mkfs.c	/^balloc(int used)$/;"	f	typeref:typename:void
 base	xv6/user/umalloc.c	/^static Header base;$/;"	v	typeref:typename:Header	file:
+bb0	obj/vnode.asm	/^ bb0:	60a2                	ld	ra,8(sp)$/;"	l
+bb2	obj/vnode.asm	/^ bb2:	6402                	ld	s0,0(sp)$/;"	l
+bb4	obj/vnode.asm	/^ bb4:	0141                	add	sp,sp,16$/;"	l
+bb6	obj/vnode.asm	/^ bb6:	8082                	ret$/;"	l
+bc	obj/exec.asm	/^  bc:	020b3603          	ld	a2,32(s6)$/;"	l
+bc	obj/kpagetable.asm	/^  bc:	e822                	sd	s0,16(sp)$/;"	l
+bc	obj/syscall.asm	/^  bc:	000080e7          	jalr	ra # b8 <.LVL17+0x8>$/;"	l
+bc	obj/umemory.asm	/^  bc:	8c36                	mv	s8,a3$/;"	l
+bc	obj/usertrap.asm	/^  bc:	000080e7          	jalr	ra # b8 <.L4>$/;"	l
+bc	obj/vnode.asm	/^  bc:	8552                	mv	a0,s4$/;"	l
 bcache	xv6/kernel/bio.c	/^} bcache;$/;"	v	typeref:struct:__anondd6f5ed30108
+be	obj/create.asm	/^  be:	f088                	sd	a0,32(s1)$/;"	l
+be	obj/diskio.asm	/^  be:	00000097          	auipc	ra,0x0$/;"	l
+be	obj/file.asm	/^  be:	973e                	add	a4,a4,a5$/;"	l
+be	obj/kerneltrap.asm	/^  be:	000080e7          	jalr	ra # ba <.L6+0x8>$/;"	l
+be	obj/kmemory.asm	/^  be:	77fd                	lui	a5,0xfffff$/;"	l
+be	obj/kpagetable.asm	/^  be:	e426                	sd	s1,8(sp)$/;"	l
+be	obj/start.asm	/^  be:	00078793          	mv	a5,a5$/;"	l
+be	obj/umemory.asm	/^  be:	4481                	li	s1,0$/;"	l
+be	obj/util.asm	/^  be:	00050513          	mv	a0,a0$/;"	l
+be	obj/vnode.asm	/^  be:	00000097          	auipc	ra,0x0$/;"	l
 begin_op	xv6/kernel/log.c	/^begin_op(void)$/;"	f	typeref:typename:void
 bfree	xv6/kernel/fs.c	/^bfree(int dev, uint b)$/;"	f	typeref:typename:void	file:
 bget	xv6/kernel/bio.c	/^bget(uint dev, uint blockno)$/;"	f	typeref:struct:buf *	file:
+bid	obj/kernel.asm	/^			bid = allocate_block();$/;"	d
+bid	obj/vnode.asm	/^			bid = allocate_block();$/;"	d
 big	xv6/user/usertests.c	/^void *big = (void*) 0xeaeb0b5b00002f5e;$/;"	v	typeref:typename:void *
 bigargtest	xv6/user/usertests.c	/^bigargtest(char *s)$/;"	f	typeref:typename:void
 bigdir	xv6/user/usertests.c	/^bigdir(char *s)$/;"	f	typeref:typename:void
@@ -548,7 +907,92 @@ buf	xv6/user/wc.c	/^char buf[512];$/;"	v	typeref:typename:char[512]
 bunpin	xv6/kernel/bio.c	/^bunpin(struct buf *b) {$/;"	f	typeref:typename:void
 bwrite	xv6/kernel/bio.c	/^bwrite(struct buf *b)$/;"	f	typeref:typename:void
 bzero	xv6/kernel/fs.c	/^bzero(int dev, int bno)$/;"	f	typeref:typename:void	file:
+c	obj/_entry.asm	/^   c:	00000097          	auipc	ra,0x0$/;"	l
+c	obj/block.asm	/^   c:	00000097          	auipc	ra,0x0$/;"	l
+c	obj/exec.asm	/^   c:	8b89                	and	a5,a5,2$/;"	l
+c	obj/file.asm	/^   c:	c0048613          	add	a2,s1,-1024 # c00 <.LLST0+0x67>$/;"	l
+c	obj/kernelvec.asm	/^   c:	f016                	sd	t0,32(sp)$/;"	l
+c	obj/kpagetable.asm	/^   c:	e852                	sd	s4,16(sp)$/;"	l
+c	obj/main.asm	/^   c:	000080e7          	jalr	ra # 8 <.LCFI1>$/;"	l
+c	obj/plic.asm	/^   c:	d798                	sw	a4,40(a5)$/;"	l
+c	obj/schedular.asm	/^   c:	f052                	sd	s4,32(sp)$/;"	l
+c	obj/start.asm	/^   c:	1141                	add	sp,sp,-16$/;"	l
+c	obj/swtch.asm	/^   c:	03253023          	sd	s2,32(a0)$/;"	l
+c	obj/syscall.asm	/^   c:	8082                	ret$/;"	l
+c	obj/umemory.asm	/^   c:	f44e                	sd	s3,40(sp)$/;"	l
+c	obj/usertrap.asm	/^   c:	100027f3          	csrr	a5,sstatus$/;"	l
+c	obj/util.asm	/^   c:	84aa                	mv	s1,a0$/;"	l
+c	obj/vnode.asm	/^   c:	e852                	sd	s4,16(sp)$/;"	l
+c0	obj/create.asm	/^  c0:	00000097          	auipc	ra,0x0$/;"	l
+c0	obj/exec.asm	/^  c0:	020005b7          	lui	a1,0x2000$/;"	l
+c0	obj/file.asm	/^  c0:	4785                	li	a5,1$/;"	l
+c0	obj/kmemory.asm	/^  c0:	00f97933          	and	s2,s2,a5$/;"	l
+c0	obj/kpagetable.asm	/^  c0:	1000                	add	s0,sp,32$/;"	l
+c0	obj/syscall.asm	/^  c0:	557d                	li	a0,-1$/;"	l
+c0	obj/umemory.asm	/^  c0:	6a05                	lui	s4,0x1$/;"	l
+c0	obj/usertrap.asm	/^  c0:	14202773          	csrr	a4,scause$/;"	l
+c2	obj/diskio.asm	/^  c2:	000080e7          	jalr	ra # be <.LVL8+0x8>$/;"	l
+c2	obj/file.asm	/^  c2:	c31c                	sw	a5,0(a4)$/;"	l
+c2	obj/kerneltrap.asm	/^  c2:	bf85                	j	32 <.L4>$/;"	l
+c2	obj/kpagetable.asm	/^  c2:	84ae                	mv	s1,a1$/;"	l
+c2	obj/start.asm	/^  c2:	30579073          	csrw	mtvec,a5$/;"	l
+c2	obj/syscall.asm	/^  c2:	bf55                	j	76 <.L7>$/;"	l
+c2	obj/umemory.asm	/^  c2:	1a7d                	add	s4,s4,-1 # fff <.LLST6+0x36b>$/;"	l
+c2	obj/util.asm	/^  c2:	00000097          	auipc	ra,0x0$/;"	l
+c2	obj/vnode.asm	/^  c2:	000080e7          	jalr	ra # be <.L2+0x2>$/;"	l
+c4	obj/create.asm	/^  c4:	000080e7          	jalr	ra # c0 <.LVL9+0x2>$/;"	l
+c4	obj/exec.asm	/^  c4:	15fd                	add	a1,a1,-1 # 1ffffff <.LLST2+0x1fffc17>$/;"	l
+c4	obj/file.asm	/^  c4:	c35c                	sw	a5,4(a4)$/;"	l
+c4	obj/kmemory.asm	/^  c4:	000877b7          	lui	a5,0x87$/;"	l
+c4	obj/kpagetable.asm	/^  c4:	4601                	li	a2,0$/;"	l
+c4	obj/syscall.asm	/^  c4:	7135                	add	sp,sp,-160$/;"	l
+c4	obj/umemory.asm	/^  c4:	6b05                	lui	s6,0x1$/;"	l
+c4	obj/usertrap.asm	/^  c4:	47a1                	li	a5,8$/;"	l
+c6	obj/diskio.asm	/^  c6:	b75d                	j	6c <.L10>$/;"	l
+c6	obj/exec.asm	/^  c6:	05b6                	sll	a1,a1,0xd$/;"	l
+c6	obj/file.asm	/^  c6:	004a1793          	sll	a5,s4,0x4$/;"	l
+c6	obj/kpagetable.asm	/^  c6:	00000097          	auipc	ra,0x0$/;"	l
+c6	obj/start.asm	/^  c6:	300027f3          	csrr	a5,mstatus$/;"	l
+c6	obj/syscall.asm	/^  c6:	ed06                	sd	ra,152(sp)$/;"	l
+c6	obj/umemory.asm	/^  c6:	8be2                	mv	s7,s8$/;"	l
+c6	obj/usertrap.asm	/^  c6:	08f70263          	beq	a4,a5,14a <.L9>$/;"	l
+c6	obj/util.asm	/^  c6:	000080e7          	jalr	ra # c2 <.LVL11>$/;"	l
+c6	obj/vnode.asm	/^  c6:	00000517          	auipc	a0,0x0$/;"	l
+c8	obj/create.asm	/^  c8:	892a                	mv	s2,a0$/;"	l
+c8	obj/diskio.asm	/^  c8:	1101                	add	sp,sp,-32$/;"	l
+c8	obj/exec.asm	/^  c8:	8556                	mv	a0,s5$/;"	l
+c8	obj/kmemory.asm	/^  c8:	7ff78793          	add	a5,a5,2047 # 877ff <.LLST1+0x87568>$/;"	l
+c8	obj/syscall.asm	/^  c8:	e922                	sd	s0,144(sp)$/;"	l
+c8	obj/umemory.asm	/^  c8:	85e2                	mv	a1,s8$/;"	l
+ca	obj/create.asm	/^  ca:	6605                	lui	a2,0x1$/;"	l
+ca	obj/diskio.asm	/^  ca:	ec06                	sd	ra,24(sp)$/;"	l
+ca	obj/exec.asm	/^  ca:	00000097          	auipc	ra,0x0$/;"	l
+ca	obj/file.asm	/^  ca:	97d2                	add	a5,a5,s4$/;"	l
+ca	obj/kpagetable.asm	/^  ca:	000080e7          	jalr	ra # c6 <.LCFI5+0x4>$/;"	l
+ca	obj/start.asm	/^  ca:	0087e793          	or	a5,a5,8$/;"	l
+ca	obj/syscall.asm	/^  ca:	e526                	sd	s1,136(sp)$/;"	l
+ca	obj/umemory.asm	/^  ca:	8556                	mv	a0,s5$/;"	l
+ca	obj/usertrap.asm	/^  ca:	410c                	lw	a1,0(a0)$/;"	l
+ca	obj/util.asm	/^  ca:	03c00493          	li	s1,60$/;"	l
+ca	obj/vnode.asm	/^  ca:	00050513          	mv	a0,a0$/;"	l
 cat	xv6/user/cat.c	/^cat(int fd)$/;"	f	typeref:typename:void
+cc	obj/create.asm	/^  cc:	4581                	li	a1,0$/;"	l
+cc	obj/diskio.asm	/^  cc:	e822                	sd	s0,16(sp)$/;"	l
+cc	obj/file.asm	/^  cc:	078a                	sll	a5,a5,0x2$/;"	l
+cc	obj/kmemory.asm	/^  cc:	07b2                	sll	a5,a5,0xc$/;"	l
+cc	obj/syscall.asm	/^  cc:	1100                	add	s0,sp,160$/;"	l
+cc	obj/umemory.asm	/^  cc:	00000097          	auipc	ra,0x0$/;"	l
+cc	obj/usertrap.asm	/^  cc:	00000517          	auipc	a0,0x0$/;"	l
+ce	obj/create.asm	/^  ce:	00000097          	auipc	ra,0x0$/;"	l
+ce	obj/diskio.asm	/^  ce:	e426                	sd	s1,8(sp)$/;"	l
+ce	obj/exec.asm	/^  ce:	000080e7          	jalr	ra # ca <.LVL17+0x12>$/;"	l
+ce	obj/file.asm	/^  ce:	00000697          	auipc	a3,0x0$/;"	l
+ce	obj/kmemory.asm	/^  ce:	0127ec63          	bltu	a5,s2,e6 <.L11>$/;"	l
+ce	obj/kpagetable.asm	/^  ce:	c909                	beqz	a0,e0 <.L17>$/;"	l
+ce	obj/start.asm	/^  ce:	30079073          	csrw	mstatus,a5$/;"	l
+ce	obj/syscall.asm	/^  ce:	00000797          	auipc	a5,0x0$/;"	l
+ce	obj/util.asm	/^  ce:	59f1                	li	s3,-4$/;"	l
+ce	obj/vnode.asm	/^  ce:	00000097          	auipc	ra,0x0$/;"	l
 chan	xv6/kernel/proc.h	/^  void *chan;                  \/\/ If non-zero, sleeping on chan$/;"	m	struct:proc	typeref:typename:void *
 checkdisk	Makefile	/^checkdisk:mkfs\/checkdisk.c$/;"	t
 clean	Makefile	/^clean:$/;"	t
@@ -594,15 +1038,86 @@ createdelete	xv6/user/usertests.c	/^createdelete(char *s)$/;"	f	typeref:typename
 createtest	xv6/user/usertests.c	/^createtest(char *s)$/;"	f	typeref:typename:void
 current_proc	kernel/process/userproc.c	/^struct proc *current_proc() {$/;"	f	typeref:struct:proc *
 currentp	kernel/process/create.c	/^struct proc *currentp;$/;"	v	typeref:struct:proc *
+currentp	obj/kernel.asm	/^				currentp = NULL;$/;"	d
+currentp	obj/kernel.asm	/^				currentp = p;$/;"	d
+currentp	obj/schedular.asm	/^				currentp = NULL;$/;"	d
+currentp	obj/schedular.asm	/^				currentp = p;$/;"	d
 cwd	kernel/process/process.h	/^	struct inode *cwd;$/;"	m	struct:proc	typeref:struct:inode *
 cwd	xv6/kernel/proc.h	/^  struct inode *cwd;           \/\/ Current directory$/;"	m	struct:proc	typeref:struct:inode *
+d0	obj/diskio.asm	/^  d0:	e04a                	sd	s2,0(sp)$/;"	l
+d0	obj/kpagetable.asm	/^  d0:	6108                	ld	a0,0(a0)$/;"	l
+d0	obj/umemory.asm	/^  d0:	000080e7          	jalr	ra # cc <.L20+0x6>$/;"	l
+d0	obj/usertrap.asm	/^  d0:	00050513          	mv	a0,a0$/;"	l
+d0	obj/util.asm	/^  d0:	009957b3          	srl	a5,s2,s1$/;"	l
+d2	obj/create.asm	/^  d2:	000080e7          	jalr	ra # ce <.LVL11+0x4>$/;"	l
+d2	obj/diskio.asm	/^  d2:	1000                	add	s0,sp,32$/;"	l
+d2	obj/exec.asm	/^  d2:	f9043783          	ld	a5,-112(s0)$/;"	l
+d2	obj/file.asm	/^  d2:	00068693          	mv	a3,a3$/;"	l
+d2	obj/kmemory.asm	/^  d2:	84be                	mv	s1,a5$/;"	l
+d2	obj/kpagetable.asm	/^  d2:	8129                	srl	a0,a0,0xa$/;"	l
+d2	obj/start.asm	/^  d2:	304027f3          	csrr	a5,mie$/;"	l
+d2	obj/syscall.asm	/^  d2:	0007a783          	lw	a5,0(a5) # ce <.LCFI18>$/;"	l
+d2	obj/vnode.asm	/^  d2:	000080e7          	jalr	ra # ce <.LVL17+0x8>$/;"	l
+d4	obj/diskio.asm	/^  d4:	892a                	mv	s2,a0$/;"	l
+d4	obj/kmemory.asm	/^  d4:	79fd                	lui	s3,0xfffff$/;"	l
+d4	obj/kpagetable.asm	/^  d4:	0532                	sll	a0,a0,0xc$/;"	l
+d4	obj/umemory.asm	/^  d4:	c149                	beqz	a0,156 <.L21>$/;"	l
+d4	obj/usertrap.asm	/^  d4:	00000097          	auipc	ra,0x0$/;"	l
+d4	obj/util.asm	/^  d4:	8bbd                	and	a5,a5,15$/;"	l
+d6	obj/create.asm	/^  d6:	4729                	li	a4,10$/;"	l
+d6	obj/diskio.asm	/^  d6:	84ae                	mv	s1,a1$/;"	l
+d6	obj/exec.asm	/^  d6:	0007849b          	sext.w	s1,a5$/;"	l
+d6	obj/file.asm	/^  d6:	97b6                	add	a5,a5,a3$/;"	l
+d6	obj/kmemory.asm	/^  d6:	8526                	mv	a0,s1$/;"	l
+d6	obj/kpagetable.asm	/^  d6:	60e2                	ld	ra,24(sp)$/;"	l
+d6	obj/start.asm	/^  d6:	0807e793          	or	a5,a5,128$/;"	l
+d6	obj/syscall.asm	/^  d6:	e7a9                	bnez	a5,120 <.L23>$/;"	l
+d6	obj/umemory.asm	/^  d6:	014c7733          	and	a4,s8,s4$/;"	l
+d6	obj/util.asm	/^  d6:	fd078793          	add	a5,a5,-48$/;"	l
+d6	obj/vnode.asm	/^  d6:	54fd                	li	s1,-1$/;"	l
+d8	obj/create.asm	/^  d8:	6685                	lui	a3,0x1$/;"	l
+d8	obj/diskio.asm	/^  d8:	10f00793          	li	a5,271$/;"	l
+d8	obj/file.asm	/^  d8:	e71c                	sd	a5,8(a4)$/;"	l
+d8	obj/kmemory.asm	/^  d8:	00000097          	auipc	ra,0x0$/;"	l
+d8	obj/kpagetable.asm	/^  d8:	6442                	ld	s0,16(sp)$/;"	l
+d8	obj/syscall.asm	/^  d8:	4501                	li	a0,0$/;"	l
+d8	obj/usertrap.asm	/^  d8:	000080e7          	jalr	ra # d4 <.LVL18>$/;"	l
+d8	obj/vnode.asm	/^  d8:	bf69                	j	72 <.L4>$/;"	l
+da	obj/create.asm	/^  da:	00000617          	auipc	a2,0x0$/;"	l
+da	obj/exec.asm	/^  da:	85be                	mv	a1,a5$/;"	l
+da	obj/file.asm	/^  da:	4009f793          	and	a5,s3,1024$/;"	l
+da	obj/kpagetable.asm	/^  da:	64a2                	ld	s1,8(sp)$/;"	l
+da	obj/start.asm	/^  da:	30479073          	csrw	mie,a5$/;"	l
+da	obj/syscall.asm	/^  da:	00000097          	auipc	ra,0x0$/;"	l
+da	obj/umemory.asm	/^  da:	40eb0c3b          	subw	s8,s6,a4$/;"	l
+da	obj/util.asm	/^  da:	97a2                	add	a5,a5,s0$/;"	l
+da	obj/vnode.asm	/^  da:	7179                	add	sp,sp,-48$/;"	l
 data	mkfs/mkfs.c	/^	uint8 *data;$/;"	m	struct:DISK	typeref:typename:uint8 *	file:
 data	xv6/kernel/buf.h	/^  uchar data[BSIZE];$/;"	m	struct:buf	typeref:typename:uchar[]
 data	xv6/kernel/pipe.c	/^  char data[PIPESIZE];$/;"	m	struct:pipe	typeref:typename:char[]	file:
 data_startb	kernel/filesystem/filesystem.h	/^	uint32 data_startb;$/;"	m	struct:superblock	typeref:typename:uint32
+dc	obj/diskio.asm	/^  dc:	07de                	sll	a5,a5,0x17$/;"	l
+dc	obj/exec.asm	/^  dc:	00000517          	auipc	a0,0x0$/;"	l
+dc	obj/kmemory.asm	/^  dc:	000080e7          	jalr	ra # d8 <.L13+0x2>$/;"	l
+dc	obj/kpagetable.asm	/^  dc:	6105                	add	sp,sp,32$/;"	l
+dc	obj/usertrap.asm	/^  dc:	142025f3          	csrr	a1,scause$/;"	l
+dc	obj/util.asm	/^  dc:	fe87c503          	lbu	a0,-24(a5)$/;"	l
+dc	obj/vnode.asm	/^  dc:	f406                	sd	ra,40(sp)$/;"	l
+de	obj/create.asm	/^  de:	00060613          	mv	a2,a2$/;"	l
+de	obj/diskio.asm	/^  de:	bff78793          	add	a5,a5,-1025$/;"	l
+de	obj/file.asm	/^  de:	4681                	li	a3,0$/;"	l
+de	obj/kpagetable.asm	/^  de:	8082                	ret$/;"	l
+de	obj/start.asm	/^  de:	6422                	ld	s0,8(sp)$/;"	l
+de	obj/syscall.asm	/^  de:	000080e7          	jalr	ra # da <.LCFI18+0xc>$/;"	l
+de	obj/umemory.asm	/^  de:	00e507b3          	add	a5,a0,a4$/;"	l
+de	obj/vnode.asm	/^  de:	f022                	sd	s0,32(sp)$/;"	l
 debug_print	kernel/initial/_entry.S	/^debug_print:$/;"	l
+debug_print	obj/_entry.asm	/^debug_print:$/;"	l
+debug_print	obj/kernel.asm	/^debug_print:$/;"	l
 debug_print_addr	kernel/util.c	/^void debug_print_addr(uint64 p) {$/;"	f	typeref:typename:void
 debug_print_char	kernel/initial/_entry.S	/^debug_print_char:$/;"	l
+debug_print_char	obj/_entry.asm	/^debug_print_char:$/;"	l
+debug_print_char	obj/kernel.asm	/^debug_print_char:$/;"	l
 debug_print_int	kernel/util.c	/^void debug_print_int(long d, int jinzhi) {$/;"	f	typeref:typename:void
 debug_printf	kernel/util.c	/^int debug_printf(char *fmt, ...) {$/;"	f	typeref:typename:int
 debug_println	kernel/util.c	/^void debug_println(char *s) {$/;"	f	typeref:typename:void
@@ -638,8 +1153,82 @@ dpf1	kernel/defs.h	/^#define dpf1(/;"	d
 dpf2	kernel/defs.h	/^#define dpf2(/;"	d
 dpln	kernel/defs.h	/^#define dpln(/;"	d
 drivetests	xv6/user/usertests.c	/^drivetests(int quick, int continuous, char *justone) {$/;"	f	typeref:typename:int
+e	obj/create.asm	/^   e:	4781                	li	a5,0$/;"	l
+e	obj/diskio.asm	/^   e:	00e6b023          	sd	a4,0(a3) # a <init_disk+0xa>$/;"	l
+e	obj/exec.asm	/^   e:	c399                	beqz	a5,14 <.L2>$/;"	l
+e	obj/kerneltrap.asm	/^   e:	10579073          	csrw	stvec,a5$/;"	l
+e	obj/kernelvec.asm	/^   e:	f41a                	sd	t1,40(sp)$/;"	l
+e	obj/kmemory.asm	/^   e:	0004b483          	ld	s1,0(s1) # a <.LCFI1>$/;"	l
+e	obj/kpagetable.asm	/^   e:	e456                	sd	s5,8(sp)$/;"	l
+e	obj/plic.asm	/^   e:	c3d8                	sw	a4,4(a5)$/;"	l
+e	obj/schedular.asm	/^   e:	ec56                	sd	s5,24(sp)$/;"	l
+e	obj/start.asm	/^   e:	e422                	sd	s0,8(sp)$/;"	l
+e	obj/syscall.asm	/^   e:	1141                	add	sp,sp,-16$/;"	l
+e	obj/umemory.asm	/^   e:	f052                	sd	s4,32(sp)$/;"	l
+e	obj/userproc.asm	/^   e:	00053503          	ld	a0,0(a0) # a <current_proc+0xa>$/;"	l
+e	obj/util.asm	/^   e:	892e                	mv	s2,a1$/;"	l
+e	obj/vnode.asm	/^   e:	e456                	sd	s5,8(sp)$/;"	l
 e	xv6/kernel/console.c	/^  uint e;  \/\/ Edit index$/;"	m	struct:__anon03efc82c0108	typeref:typename:uint	file:
+e0	obj/exec.asm	/^  e0:	00050513          	mv	a0,a0$/;"	l
+e0	obj/file.asm	/^  e0:	cb99                	beqz	a5,f6 <.L10>$/;"	l
+e0	obj/kmemory.asm	/^  e0:	94ce                	add	s1,s1,s3$/;"	l
+e0	obj/kpagetable.asm	/^  e0:	85a6                	mv	a1,s1$/;"	l
+e0	obj/start.asm	/^  e0:	0141                	add	sp,sp,16$/;"	l
+e0	obj/usertrap.asm	/^  e0:	00000517          	auipc	a0,0x0$/;"	l
+e0	obj/util.asm	/^  e0:	00000097          	auipc	ra,0x0$/;"	l
+e0	obj/vnode.asm	/^  e0:	ec26                	sd	s1,24(sp)$/;"	l
+e2	obj/create.asm	/^  e2:	040005b7          	lui	a1,0x4000$/;"	l
+e2	obj/diskio.asm	/^  e2:	02a7ea63          	bltu	a5,a0,116 <.L18>$/;"	l
+e2	obj/file.asm	/^  e2:	004a1793          	sll	a5,s4,0x4$/;"	l
+e2	obj/kmemory.asm	/^  e2:	ff24fae3          	bgeu	s1,s2,d6 <.L13>$/;"	l
+e2	obj/kpagetable.asm	/^  e2:	00000517          	auipc	a0,0x0$/;"	l
+e2	obj/start.asm	/^  e2:	8082                	ret$/;"	l
+e2	obj/syscall.asm	/^  e2:	84aa                	mv	s1,a0$/;"	l
+e2	obj/umemory.asm	/^  e2:	0007c603          	lbu	a2,0(a5)$/;"	l
+e2	obj/vnode.asm	/^  e2:	e84a                	sd	s2,16(sp)$/;"	l
+e4	obj/exec.asm	/^  e4:	00000097          	auipc	ra,0x0$/;"	l
+e4	obj/syscall.asm	/^  e4:	00000097          	auipc	ra,0x0$/;"	l
+e4	obj/usertrap.asm	/^  e4:	00050513          	mv	a0,a0$/;"	l
+e4	obj/util.asm	/^  e4:	000080e7          	jalr	ra # e0 <.L9+0x10>$/;"	l
+e4	obj/vnode.asm	/^  e4:	e44e                	sd	s3,8(sp)$/;"	l
+e6	obj/create.asm	/^  e6:	15fd                	add	a1,a1,-1 # 3ffffff <.LLST1+0x3fffd78>$/;"	l
+e6	obj/diskio.asm	/^  e6:	0004879b          	sext.w	a5,s1$/;"	l
+e6	obj/file.asm	/^  e6:	97d2                	add	a5,a5,s4$/;"	l
+e6	obj/kmemory.asm	/^  e6:	70a2                	ld	ra,40(sp)$/;"	l
+e6	obj/kpagetable.asm	/^  e6:	00050513          	mv	a0,a0$/;"	l
+e6	obj/umemory.asm	/^  e6:	02049793          	sll	a5,s1,0x20$/;"	l
+e6	obj/vnode.asm	/^  e6:	1800                	add	s0,sp,48$/;"	l
+e8	obj/create.asm	/^  e8:	05b2                	sll	a1,a1,0xc$/;"	l
+e8	obj/exec.asm	/^  e8:	000080e7          	jalr	ra # e4 <.LVL19+0xa>$/;"	l
+e8	obj/file.asm	/^  e8:	078a                	sll	a5,a5,0x2$/;"	l
+e8	obj/kmemory.asm	/^  e8:	7402                	ld	s0,32(sp)$/;"	l
+e8	obj/syscall.asm	/^  e8:	000080e7          	jalr	ra # e4 <.LVL20>$/;"	l
+e8	obj/usertrap.asm	/^  e8:	00000097          	auipc	ra,0x0$/;"	l
+e8	obj/util.asm	/^  e8:	34f1                	addw	s1,s1,-4$/;"	l
+e8	obj/vnode.asm	/^  e8:	89aa                	mv	s3,a0$/;"	l
+ea	obj/create.asm	/^  ea:	854a                	mv	a0,s2$/;"	l
+ea	obj/diskio.asm	/^  ea:	6709                	lui	a4,0x2$/;"	l
+ea	obj/file.asm	/^  ea:	00000717          	auipc	a4,0x0$/;"	l
+ea	obj/kmemory.asm	/^  ea:	64e2                	ld	s1,24(sp)$/;"	l
+ea	obj/kpagetable.asm	/^  ea:	00000097          	auipc	ra,0x0$/;"	l
+ea	obj/umemory.asm	/^  ea:	9381                	srl	a5,a5,0x20$/;"	l
+ea	obj/util.asm	/^  ea:	ff3493e3          	bne	s1,s3,d0 <.L9>$/;"	l
+ea	obj/vnode.asm	/^  ea:	84ae                	mv	s1,a1$/;"	l
 eargv	xv6/user/sh.c	/^  char *eargv[MAXARGS];$/;"	m	struct:execcmd	typeref:typename:char * []	file:
+ec	obj/create.asm	/^  ec:	00000097          	auipc	ra,0x0$/;"	l
+ec	obj/diskio.asm	/^  ec:	02e7fe63          	bgeu	a5,a4,128 <.L19>$/;"	l
+ec	obj/exec.asm	/^  ec:	fa845583          	lhu	a1,-88(s0)$/;"	l
+ec	obj/kmemory.asm	/^  ec:	6942                	ld	s2,16(sp)$/;"	l
+ec	obj/syscall.asm	/^  ec:	86a6                	mv	a3,s1$/;"	l
+ec	obj/umemory.asm	/^  ec:	97ce                	add	a5,a5,s3$/;"	l
+ec	obj/usertrap.asm	/^  ec:	000080e7          	jalr	ra # e8 <.LBE62+0x8>$/;"	l
+ec	obj/vnode.asm	/^  ec:	00000097          	auipc	ra,0x0$/;"	l
+ee	obj/file.asm	/^  ee:	00070713          	mv	a4,a4$/;"	l
+ee	obj/kmemory.asm	/^  ee:	69a2                	ld	s3,8(sp)$/;"	l
+ee	obj/kpagetable.asm	/^  ee:	000080e7          	jalr	ra # ea <.LVL24>$/;"	l
+ee	obj/syscall.asm	/^  ee:	6d10                	ld	a2,24(a0)$/;"	l
+ee	obj/umemory.asm	/^  ee:	00c78023          	sb	a2,0(a5)$/;"	l
+ee	obj/util.asm	/^  ee:	60a6                	ld	ra,72(sp)$/;"	l
 efile	xv6/user/sh.c	/^  char *efile;$/;"	m	struct:redircmd	typeref:typename:char *	file:
 ehsize	kernel/process/load/elf.h	/^  ushort ehsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
 ehsize	xv6/kernel/elf.h	/^  ushort ehsize;$/;"	m	struct:elfhdr	typeref:typename:ushort
@@ -674,10 +1263,100 @@ exit	xv6/kernel/proc.c	/^exit(int status)$/;"	f	typeref:typename:void
 exit	xv6/user/initcode.S	/^exit:$/;"	l
 exitiputtest	xv6/user/usertests.c	/^exitiputtest(char *s)$/;"	f	typeref:typename:void
 exitwait	xv6/user/usertests.c	/^exitwait(char *s)$/;"	f	typeref:typename:void
+extern	obj/block.asm	/^extern struct superblock *sb;$/;"	t
+extern	obj/exec.asm	/^extern char trampoline[];$/;"	l
+extern	obj/exec.asm	/^extern int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);$/;"	l
+extern	obj/file.asm	/^extern int vnode_delete(char *path);$/;"	l
+extern	obj/file.asm	/^extern int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);$/;"	l
+extern	obj/file.asm	/^extern int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);$/;"	l
+extern	obj/file.asm	/^extern int vnodelist_delete(int v);$/;"	l
+extern	obj/file.asm	/^extern struct vnode vnodelist[VNODE_COUNT];$/;"	t
+extern	obj/kernel.asm	/^extern char trampoline[];$/;"	l
+extern	obj/kernel.asm	/^extern int allocate_block();$/;"	l
+extern	obj/kernel.asm	/^extern int vnode_delete(char *path);$/;"	l
+extern	obj/kernel.asm	/^extern int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);$/;"	l
+extern	obj/kernel.asm	/^extern int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr);$/;"	l
+extern	obj/kernel.asm	/^extern int vnodelist_delete(int v);$/;"	l
+extern	obj/kernel.asm	/^extern struct proc *allocate_proc();$/;"	t
+extern	obj/kernel.asm	/^extern struct proc *currentp;$/;"	t
+extern	obj/kernel.asm	/^extern struct proc processes[NPROC];$/;"	t
+extern	obj/kernel.asm	/^extern struct superblock *sb;$/;"	t
+extern	obj/kernel.asm	/^extern struct vnode vnodelist[VNODE_COUNT];$/;"	t
+extern	obj/kernel.asm	/^extern void kernelvec();$/;"	l
+extern	obj/kernel.asm	/^extern void schedular();$/;"	l
+extern	obj/kernel.asm	/^extern void swtch(struct context *old, struct context *new);$/;"	l
+extern	obj/kernel.asm	/^extern void usertrap_return();$/;"	l
+extern	obj/kerneltrap.asm	/^extern void kernelvec();$/;"	l
+extern	obj/kpagetable.asm	/^extern struct proc processes[NPROC];$/;"	t
+extern	obj/main.asm	/^extern void schedular();$/;"	l
+extern	obj/schedular.asm	/^extern struct proc *currentp;$/;"	t
+extern	obj/schedular.asm	/^extern struct proc processes[NPROC];$/;"	t
+extern	obj/schedular.asm	/^extern void swtch(struct context *old, struct context *new);$/;"	l
+extern	obj/userproc.asm	/^extern struct proc *allocate_proc();$/;"	t
+extern	obj/userproc.asm	/^extern struct proc *currentp;$/;"	t
+extern	obj/userproc.asm	/^extern void usertrap_return();$/;"	l
+extern	obj/vnode.asm	/^extern int allocate_block();$/;"	l
+extern	obj/vnode.asm	/^extern struct superblock *sb;$/;"	t
 f	xv6/user/usertests.c	/^  void (*f)(char *);$/;"	m	struct:test	typeref:typename:void (*)(char *)	file:
+f0	obj/create.asm	/^  f0:	000080e7          	jalr	ra # ec <.LVL12+0x16>$/;"	l
+f0	obj/diskio.asm	/^  f0:	00a4949b          	sllw	s1,s1,0xa$/;"	l
+f0	obj/exec.asm	/^  f0:	00000517          	auipc	a0,0x0$/;"	l
+f0	obj/kmemory.asm	/^  f0:	6145                	add	sp,sp,48$/;"	l
+f0	obj/syscall.asm	/^  f0:	08000593          	li	a1,128$/;"	l
+f0	obj/usertrap.asm	/^  f0:	143025f3          	csrr	a1,stval$/;"	l
+f0	obj/util.asm	/^  f0:	6406                	ld	s0,64(sp)$/;"	l
+f0	obj/vnode.asm	/^  f0:	000080e7          	jalr	ra # ec <.LCFI6+0x4>$/;"	l
+f2	obj/file.asm	/^  f2:	97ba                	add	a5,a5,a4$/;"	l
+f2	obj/kmemory.asm	/^  f2:	8082                	ret$/;"	l
+f2	obj/kpagetable.asm	/^  f2:	4501                	li	a0,0$/;"	l
+f2	obj/umemory.asm	/^  f2:	0014879b          	addw	a5,s1,1$/;"	l
+f2	obj/util.asm	/^  f2:	74e2                	ld	s1,56(sp)$/;"	l
 f2p	kernel/process/load/exec.c	/^int f2p(int f) {$/;"	f	typeref:typename:int
+f4	obj/create.asm	/^  f4:	4719                	li	a4,6$/;"	l
+f4	obj/diskio.asm	/^  f4:	40000613          	li	a2,1024$/;"	l
+f4	obj/exec.asm	/^  f4:	00050513          	mv	a0,a0$/;"	l
+f4	obj/file.asm	/^  f4:	47d4                	lw	a3,12(a5)$/;"	l
+f4	obj/kpagetable.asm	/^  f4:	b7cd                	j	d6 <.L13>$/;"	l
+f4	obj/syscall.asm	/^  f4:	f6040513          	add	a0,s0,-160$/;"	l
+f4	obj/usertrap.asm	/^  f4:	00000517          	auipc	a0,0x0$/;"	l
+f4	obj/util.asm	/^  f4:	7942                	ld	s2,48(sp)$/;"	l
+f4	obj/vnode.asm	/^  f4:	892a                	mv	s2,a0$/;"	l
+f6	obj/create.asm	/^  f6:	6685                	lui	a3,0x1$/;"	l
+f6	obj/file.asm	/^  f6:	00191793          	sll	a5,s2,0x1$/;"	l
+f6	obj/kpagetable.asm	/^  f6:	711d                	add	sp,sp,-96$/;"	l
+f6	obj/umemory.asm	/^  f6:	02f90563          	beq	s2,a5,120 <.L16>$/;"	l
+f6	obj/util.asm	/^  f6:	79a2                	ld	s3,40(sp)$/;"	l
+f6	obj/vnode.asm	/^  f6:	02048593          	add	a1,s1,32$/;"	l
+f8	obj/create.asm	/^  f8:	7090                	ld	a2,32(s1)$/;"	l
+f8	obj/diskio.asm	/^  f8:	85ca                	mv	a1,s2$/;"	l
+f8	obj/exec.asm	/^  f8:	00000097          	auipc	ra,0x0$/;"	l
+f8	obj/kpagetable.asm	/^  f8:	ec86                	sd	ra,88(sp)$/;"	l
+f8	obj/syscall.asm	/^  f8:	00000097          	auipc	ra,0x0$/;"	l
+f8	obj/usertrap.asm	/^  f8:	00050513          	mv	a0,a0$/;"	l
+f8	obj/util.asm	/^  f8:	6161                	add	sp,sp,80$/;"	l
+fa	obj/create.asm	/^  fa:	020005b7          	lui	a1,0x2000$/;"	l
+fa	obj/diskio.asm	/^  fa:	10f00513          	li	a0,271$/;"	l
+fa	obj/file.asm	/^  fa:	97ca                	add	a5,a5,s2$/;"	l
+fa	obj/kpagetable.asm	/^  fa:	e8a2                	sd	s0,80(sp)$/;"	l
+fa	obj/umemory.asm	/^  fa:	0505                	add	a0,a0,1 # 2b <.L13+0x1>$/;"	l
+fa	obj/util.asm	/^  fa:	8082                	ret$/;"	l
+fa	obj/vnode.asm	/^  fa:	00659493          	sll	s1,a1,0x6$/;"	l
+fc	obj/exec.asm	/^  fc:	000080e7          	jalr	ra # f8 <.LVL20+0xc>$/;"	l
+fc	obj/file.asm	/^  fc:	078e                	sll	a5,a5,0x3$/;"	l
+fc	obj/kpagetable.asm	/^  fc:	e4a6                	sd	s1,72(sp)$/;"	l
+fc	obj/syscall.asm	/^  fc:	000080e7          	jalr	ra # f8 <.LVL22>$/;"	l
+fc	obj/umemory.asm	/^  fc:	972a                	add	a4,a4,a0$/;"	l
+fc	obj/usertrap.asm	/^  fc:	00000097          	auipc	ra,0x0$/;"	l
+fc	obj/util.asm	/^  fc:	1101                	add	sp,sp,-32$/;"	l
 fd	xv6/user/sh.c	/^  int fd;$/;"	m	struct:redircmd	typeref:typename:int	file:
 fdalloc	xv6/kernel/sysfile.c	/^fdalloc(struct file *f)$/;"	f	typeref:typename:int	file:
+fe	obj/create.asm	/^  fe:	15fd                	add	a1,a1,-1 # 1ffffff <.LLST1+0x1fffd78>$/;"	l
+fe	obj/diskio.asm	/^  fe:	055e                	sll	a0,a0,0x17$/;"	l
+fe	obj/file.asm	/^  fe:	00000717          	auipc	a4,0x0$/;"	l
+fe	obj/kpagetable.asm	/^  fe:	e0ca                	sd	s2,64(sp)$/;"	l
+fe	obj/umemory.asm	/^  fe:	009c04bb          	addw	s1,s8,s1$/;"	l
+fe	obj/util.asm	/^  fe:	ec06                	sd	ra,24(sp)$/;"	l
+fe	obj/vnode.asm	/^  fe:	8591                	sra	a1,a1,0x4$/;"	l
 fetchaddr	xv6/kernel/syscall.c	/^fetchaddr(uint64 addr, uint64 *ip)$/;"	f	typeref:typename:int
 fetchstr	xv6/kernel/syscall.c	/^fetchstr(uint64 addr, char *buf, int max)$/;"	f	typeref:typename:int
 file	kernel/filesystem/file.h	/^struct file {$/;"	s
@@ -691,6 +1370,8 @@ fileclose	xv6/kernel/file.c	/^fileclose(struct file *f)$/;"	f	typeref:typename:v
 filedelete	kernel/filesystem/file.c	/^int filedelete(char *path) {$/;"	f	typeref:typename:int
 filedup	xv6/kernel/file.c	/^filedup(struct file *f)$/;"	f	typeref:struct:file *
 fileinit	xv6/kernel/file.c	/^fileinit(void)$/;"	f	typeref:typename:void
+filename	obj/kernel.asm	/^			filename = path + i + 1;$/;"	d
+filename	obj/vnode.asm	/^			filename = path + i + 1;$/;"	d
 fileread	kernel/filesystem/file.c	/^int fileread(int fd, uint64 uaddr, uint n) {$/;"	f	typeref:typename:int
 fileread	xv6/kernel/file.c	/^fileread(struct file *f, uint64 addr, int n)$/;"	f	typeref:typename:int
 filestat	xv6/kernel/file.c	/^filestat(struct file *f, uint64 addr)$/;"	f	typeref:typename:int
@@ -703,6 +1384,8 @@ fillvnode	kernel/filesystem/vnode.c	/^int fillvnode(struct vnode *vp, char *path
 fillvnodei	kernel/filesystem/vnode.c	/^void fillvnodei(struct vnode *v, int inum) {$/;"	f	typeref:typename:void
 finddir	kernel/filesystem/vnode.c	/^int finddir(struct vnode *v, char *name) {$/;"	f	typeref:typename:int
 first	kernel/syscall/syscall.c	/^int first = 1;$/;"	v	typeref:typename:int
+first	obj/kernel.asm	/^		first = 0;$/;"	d
+first	obj/syscall.asm	/^		first = 0;$/;"	d
 flags	kernel/process/load/elf.h	/^  uint flags;$/;"	m	struct:elfhdr	typeref:typename:uint
 flags	kernel/process/load/elf.h	/^  uint32 flags;$/;"	m	struct:proghdr	typeref:typename:uint32
 flags	xv6/kernel/elf.h	/^  uint flags;$/;"	m	struct:elfhdr	typeref:typename:uint
@@ -723,6 +1406,8 @@ forktest	xv6/user/usertests.c	/^forktest(char *s)$/;"	f	typeref:typename:void
 fourfiles	xv6/user/usertests.c	/^fourfiles(char *s)$/;"	f	typeref:typename:void
 fourteen	xv6/user/usertests.c	/^fourteen(char *s)$/;"	f	typeref:typename:void
 fp	lib/usys.py	/^fp = open(sys.argv[1], "w");$/;"	v
+fp	obj/kernel.asm	/^		fp = *(uint64 *)(fp - 16);$/;"	d
+fp	obj/util.asm	/^		fp = *(uint64 *)(fp - 16);$/;"	d
 fprintf	xv6/user/printf.c	/^fprintf(int fd, const char *fmt, ...)$/;"	f	typeref:typename:void
 free	xv6/kernel/virtio_disk.c	/^  char free[NUM];  \/\/ is a descriptor free?$/;"	m	struct:disk	typeref:typename:char[]	file:
 free	xv6/user/umalloc.c	/^free(void *ap)$/;"	f	typeref:typename:void
@@ -794,6 +1479,68 @@ inode	xv6/kernel/fs.c	/^  struct inode inode[NINODE];$/;"	m	struct:__anon44c7a45
 inode_startb	kernel/filesystem/filesystem.h	/^	uint32 inode_startb;$/;"	m	struct:superblock	typeref:typename:uint32
 inodestart	xv6/kernel/fs.h	/^  uint inodestart;   \/\/ Block number of first inode block$/;"	m	struct:superblock	typeref:typename:uint
 install_trans	xv6/kernel/log.c	/^install_trans(int recovering)$/;"	f	typeref:typename:void	file:
+int	obj/block.asm	/^int allocate_block() {$/;"	l
+int	obj/create.asm	/^int allocate_pid() {$/;"	l
+int	obj/create.asm	/^int usable_pid = 1;$/;"	l
+int	obj/exec.asm	/^int exec(char *path, char **argv) {$/;"	l
+int	obj/exec.asm	/^int f2p(int f) {$/;"	l
+int	obj/file.asm	/^int fileadd(char *path, int flags) {$/;"	l
+int	obj/file.asm	/^int fileclose(int fd) {$/;"	l
+int	obj/file.asm	/^int filedelete(char *path) {$/;"	l
+int	obj/file.asm	/^int fileread(int fd, uint64 uaddr, uint n) {$/;"	l
+int	obj/file.asm	/^int filewrite(int fd, uint64 uaddr, uint n) {$/;"	l
+int	obj/kernel.asm	/^int allocate_block() {$/;"	l
+int	obj/kernel.asm	/^int allocate_inode() {$/;"	l
+int	obj/kernel.asm	/^int allocate_pid() {$/;"	l
+int	obj/kernel.asm	/^int blockmap(struct vnode *v, uint off) {$/;"	l
+int	obj/kernel.asm	/^int blockmap_alloc(struct vnode *v, uint off) {$/;"	l
+int	obj/kernel.asm	/^int copyin(uint64 ka, uint64 *upt, uint64 ua, uint n) {$/;"	l
+int	obj/kernel.asm	/^int copyin_string(char *ka, uint max, uint64 *upt, char *s) {$/;"	l
+int	obj/kernel.asm	/^int copyout(uint64 ka, uint64 *upt, uint64 ua, uint n) {$/;"	l
+int	obj/kernel.asm	/^int cpuid() {$/;"	l
+int	obj/kernel.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+int	obj/kernel.asm	/^int exec(char *path, char **argv) {$/;"	l
+int	obj/kernel.asm	/^int f2p(int f) {$/;"	l
+int	obj/kernel.asm	/^int fileadd(char *path, int flags) {$/;"	l
+int	obj/kernel.asm	/^int fileclose(int fd) {$/;"	l
+int	obj/kernel.asm	/^int filedelete(char *path) {$/;"	l
+int	obj/kernel.asm	/^int fileread(int fd, uint64 uaddr, uint n) {$/;"	l
+int	obj/kernel.asm	/^int filewrite(int fd, uint64 uaddr, uint n) {$/;"	l
+int	obj/kernel.asm	/^int fillinode(struct inode *buf, int i) {$/;"	l
+int	obj/kernel.asm	/^int fillvnode(struct vnode *vp, char *path) {$/;"	l
+int	obj/kernel.asm	/^int finddir(struct vnode *v, char *name) {$/;"	l
+int	obj/kernel.asm	/^int getint_a(int n) {$/;"	l
+int	obj/kernel.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
+int	obj/kernel.asm	/^int strcmp(char *a, char *b) {$/;"	l
+int	obj/kernel.asm	/^int usable_pid = 1;$/;"	l
+int	obj/kernel.asm	/^int vnode_create(char *path, int flags) {$/;"	l
+int	obj/kernel.asm	/^int vnode_delete(char *path) {$/;"	l
+int	obj/kernel.asm	/^int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {$/;"	l
+int	obj/kernel.asm	/^int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {$/;"	l
+int	obj/kernel.asm	/^int vnodelist_add(char *path) {$/;"	l
+int	obj/kernel.asm	/^int vnodelist_delete(int v) {$/;"	l
+int	obj/kernel.asm	/^int$/;"	l
+int	obj/kpagetable.asm	/^int mappage(uint64 *pagetable, uint64 v_addr,$/;"	l
+int	obj/plic.asm	/^int$/;"	l
+int	obj/syscall.asm	/^int getint_a(int n) {$/;"	l
+int	obj/umemory.asm	/^int copyin(uint64 ka, uint64 *upt, uint64 ua, uint n) {$/;"	l
+int	obj/umemory.asm	/^int copyin_string(char *ka, uint max, uint64 *upt, char *s) {$/;"	l
+int	obj/umemory.asm	/^int copyout(uint64 ka, uint64 *upt, uint64 ua, uint n) {$/;"	l
+int	obj/util.asm	/^int cpuid() {$/;"	l
+int	obj/util.asm	/^int debug_printf(char *fmt, ...) {$/;"	l
+int	obj/util.asm	/^int strcmp(char *a, char *b) {$/;"	l
+int	obj/vnode.asm	/^int allocate_inode() {$/;"	l
+int	obj/vnode.asm	/^int blockmap(struct vnode *v, uint off) {$/;"	l
+int	obj/vnode.asm	/^int blockmap_alloc(struct vnode *v, uint off) {$/;"	l
+int	obj/vnode.asm	/^int fillinode(struct inode *buf, int i) {$/;"	l
+int	obj/vnode.asm	/^int fillvnode(struct vnode *vp, char *path) {$/;"	l
+int	obj/vnode.asm	/^int finddir(struct vnode *v, char *name) {$/;"	l
+int	obj/vnode.asm	/^int vnode_create(char *path, int flags) {$/;"	l
+int	obj/vnode.asm	/^int vnode_delete(char *path) {$/;"	l
+int	obj/vnode.asm	/^int vnode_read(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {$/;"	l
+int	obj/vnode.asm	/^int vnode_write(struct vnode *v, uint off, uint n, uint64 *upt, uint64 uaddr) {$/;"	l
+int	obj/vnode.asm	/^int vnodelist_add(char *path) {$/;"	l
+int	obj/vnode.asm	/^int vnodelist_delete(int v) {$/;"	l
 intena	xv6/kernel/proc.h	/^  int intena;                 \/\/ Were interrupts enabled before push_off()?$/;"	m	struct:cpu	typeref:typename:int
 intr_get	kernel/include/basic_riscv.h	/^intr_get()$/;"	f	typeref:typename:int
 intr_get	xv6/kernel/riscv.h	/^intr_get()$/;"	f	typeref:typename:int
@@ -801,6 +1548,8 @@ intr_off	kernel/include/basic_riscv.h	/^intr_off()$/;"	f	typeref:typename:void
 intr_off	xv6/kernel/riscv.h	/^intr_off()$/;"	f	typeref:typename:void
 intr_on	kernel/include/basic_riscv.h	/^intr_on()$/;"	f	typeref:typename:void
 intr_on	xv6/kernel/riscv.h	/^intr_on()$/;"	f	typeref:typename:void
+inum	obj/kernel.asm	/^		inum = finddir(vp, name);$/;"	d
+inum	obj/vnode.asm	/^		inum = finddir(vp, name);$/;"	d
 inum	xv6/kernel/file.h	/^  uint inum;          \/\/ Inode number$/;"	m	struct:inode	typeref:typename:uint
 inum	xv6/kernel/fs.h	/^  ushort inum;$/;"	m	struct:dirent	typeref:typename:ushort
 inum	xv6/user/usertests.c	/^    ushort inum;$/;"	m	struct:concreate::__anon72204ae90b08	typeref:typename:ushort	file:
@@ -826,6 +1575,8 @@ kernel_trap	xv6/kernel/proc.h	/^  \/*  16 *\/ uint64 kernel_trap;   \/\/ usertra
 kerneltrap	kernel/interrupt/kerneltrap.c	/^void kerneltrap() {$/;"	f	typeref:typename:void
 kerneltrap	xv6/kernel/trap.c	/^kerneltrap()$/;"	f	typeref:typename:void
 kernelvec	kernel/interrupt/kernelvec.S	/^kernelvec:$/;"	l
+kernelvec	obj/kernel.asm	/^kernelvec:$/;"	l
+kernelvec	obj/kernelvec.asm	/^kernelvec:$/;"	l
 kernelvec	xv6/kernel/kernelvec.S	/^kernelvec:$/;"	l
 kernmem	xv6/user/usertests.c	/^kernmem(char *s)$/;"	f	typeref:typename:void
 kfree	kernel/memory/kmemory.c	/^void kfree(void *p_addr) {$/;"	f	typeref:typename:void
@@ -836,6 +1587,8 @@ killed	xv6/kernel/proc.h	/^  int killed;                  \/\/ If non-zero, have
 killstatus	xv6/user/usertests.c	/^killstatus(char *s)$/;"	f	typeref:typename:void
 kinit	xv6/kernel/kalloc.c	/^kinit()$/;"	f	typeref:typename:void
 kmem	xv6/kernel/kalloc.c	/^} kmem;$/;"	v	typeref:struct:__anonb2f79d2f0108
+kpt	obj/kernel.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
+kpt	obj/kpagetable.asm	/^	kpt = (uint64 *)kalloc();$/;"	d
 ksatp	kernel/process/process.h	/^	uint64 ksatp;$/;"	m	struct:trapframe	typeref:typename:uint64
 ksp	kernel/process/process.h	/^	uint64 ksp;$/;"	m	struct:trapframe	typeref:typename:uint64
 kstack	kernel/process/process.h	/^	uint64 kstack;		\/\/ init_processes$/;"	m	struct:proc	typeref:typename:uint64
@@ -846,6 +1599,7 @@ kvminithart	xv6/kernel/vm.c	/^kvminithart()$/;"	f	typeref:typename:void
 kvmmake	xv6/kernel/vm.c	/^kvmmake(void)$/;"	f	typeref:typename:pagetable_t
 kvmmap	xv6/kernel/vm.c	/^kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm)$/;"	f	typeref:typename:void
 kvnode_read	kernel/filesystem/vnode.c	/^void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	f	typeref:typename:void
+kvnode_write	kernel/filesystem/vnode.c	/^void kvnode_write(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	f	typeref:typename:void
 left	xv6/user/sh.c	/^  struct cmd *left;$/;"	m	struct:listcmd	typeref:struct:cmd *	file:
 left	xv6/user/sh.c	/^  struct cmd *left;$/;"	m	struct:pipecmd	typeref:struct:cmd *	file:
 len	xv6/kernel/virtio.h	/^  uint32 len;$/;"	m	struct:virtq_desc	typeref:typename:uint32
@@ -878,8 +1632,22 @@ log_write	xv6/kernel/log.c	/^log_write(struct buf *b)$/;"	f	typeref:typename:voi
 logheader	xv6/kernel/log.c	/^struct logheader {$/;"	s	file:
 logstart	xv6/kernel/fs.h	/^  uint logstart;     \/\/ Block number of first log block$/;"	m	struct:superblock	typeref:typename:uint
 loop	kernel/initial/_entry.S	/^loop:$/;"	l
+loop	obj/_entry.asm	/^loop:$/;"	l
+loop	obj/kernel.asm	/^loop:$/;"	l
 loop	user/test.S	/^loop:$/;"	l
 ls	xv6/user/ls.c	/^ls(char *path)$/;"	f	typeref:typename:void
+m	obj/kernel.asm	/^		m = MIN(BSIZE - off % BSIZE, n);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(PGSIZE - ua % PGSIZE, n);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(m, n);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(m, v->size - off);$/;"	d
+m	obj/kernel.asm	/^		m = MIN(n, BSIZE - off % BSIZE);$/;"	d
+m	obj/umemory.asm	/^		m = MIN(PGSIZE - ua % PGSIZE, n);$/;"	d
+m	obj/vnode.asm	/^		m = MIN(BSIZE - off % BSIZE, n);$/;"	d
+m	obj/vnode.asm	/^		m = MIN(PGSIZE - uaddr % PGSIZE, BSIZE - off % BSIZE);$/;"	d
+m	obj/vnode.asm	/^		m = MIN(m, n);$/;"	d
+m	obj/vnode.asm	/^		m = MIN(m, v->size - off);$/;"	d
+m	obj/vnode.asm	/^		m = MIN(n, BSIZE - off % BSIZE);$/;"	d
 machine	kernel/process/load/elf.h	/^  ushort machine;$/;"	m	struct:elfhdr	typeref:typename:ushort
 machine	xv6/kernel/elf.h	/^  ushort machine;$/;"	m	struct:elfhdr	typeref:typename:ushort
 magic	kernel/filesystem/filesystem.h	/^	uint32 magic;$/;"	m	struct:superblock	typeref:typename:uint32
@@ -892,6 +1660,7 @@ main	mkfs/mkfs.c	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 main	user/init.c	/^int main() {$/;"	f	typeref:typename:int
 main	user/test.S	/^main:$/;"	l
 main	user/whoi.c	/^int main() {$/;"	f	typeref:typename:int
+main	user/writ.c	/^int main() {$/;"	f	typeref:typename:int
 main	xv6/kernel/main.c	/^main()$/;"	f	typeref:typename:void
 main	xv6/mkfs/mkfs.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
 main	xv6/user/cat.c	/^main(int argc, char *argv[])$/;"	f	typeref:typename:int
@@ -992,6 +1761,10 @@ off	xv6/kernel/elf.h	/^  uint64 off;$/;"	m	struct:proghdr	typeref:typename:uint6
 off	xv6/kernel/file.h	/^  uint off;          \/\/ FD_INODE$/;"	m	struct:file	typeref:typename:uint
 offset	kernel/filesystem/file.h	/^	uint offset;$/;"	m	struct:file	typeref:typename:uint
 ofile	xv6/kernel/proc.h	/^  struct file *ofile[NOFILE];  \/\/ Open files$/;"	m	struct:proc	typeref:struct:file * []
+oldsz	obj/exec.asm	/^		oldsz = newsz;$/;"	d
+oldsz	obj/exec.asm	/^	oldsz = PGROUNDUP(oldsz);$/;"	d
+oldsz	obj/kernel.asm	/^		oldsz = newsz;$/;"	d
+oldsz	obj/kernel.asm	/^	oldsz = PGROUNDUP(oldsz);$/;"	d
 open	lib/usys.S	/^open:$/;"	l
 open_files	kernel/process/process.h	/^	struct file *open_files[FD_COUNT];	\/\/ These are fds$/;"	m	struct:proc	typeref:struct:file * []
 openfilelist	kernel/filesystem/file.c	/^struct file openfilelist[OPENFILE_COUNT];$/;"	v	typeref:struct:file[]
@@ -1000,9 +1773,15 @@ opentest	xv6/user/usertests.c	/^opentest(char *s)$/;"	f	typeref:typename:void
 ops	xv6/kernel/virtio_disk.c	/^  struct virtio_blk_req ops[NUM];$/;"	m	struct:disk	typeref:struct:virtio_blk_req[]	file:
 outofinodes	xv6/user/usertests.c	/^outofinodes(char *s)$/;"	f	typeref:typename:void
 outstanding	xv6/kernel/log.c	/^  int outstanding; \/\/ how many FS sys calls are executing.$/;"	m	struct:log	typeref:typename:int	file:
+p	obj/exec.asm	/^		p = PTE_X;$/;"	d
+p	obj/kernel.asm	/^		p = PTE_X;$/;"	d
 paddr	kernel/process/load/elf.h	/^  uint64 paddr;$/;"	m	struct:proghdr	typeref:typename:uint64
 paddr	xv6/kernel/elf.h	/^  uint64 paddr;$/;"	m	struct:proghdr	typeref:typename:uint64
 pagetable	kernel/process/process.h	/^	uint64 *pagetable;	\/\/ allocate_proc$/;"	m	struct:proc	typeref:typename:uint64 *
+pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
+pagetable	obj/kernel.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
+pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)PTE2PA(*pte);$/;"	d
+pagetable	obj/kpagetable.asm	/^			pagetable = (uint64 *)kalloc();$/;"	d
 pagetable	xv6/kernel/proc.h	/^  pagetable_t pagetable;       \/\/ User page table$/;"	m	struct:proc	typeref:typename:pagetable_t
 pagetable_t	kernel/include/basic_riscv.h	/^typedef uint64 *pagetable_t; \/\/ 512 PTEs$/;"	t	typeref:typename:uint64 *
 pagetable_t	xv6/kernel/riscv.h	/^typedef uint64 *pagetable_t; \/\/ 512 PTEs$/;"	t	typeref:typename:uint64 *
@@ -1152,6 +1931,8 @@ reparent	xv6/kernel/proc.c	/^reparent(struct proc *p)$/;"	f	typeref:typename:voi
 reparent	xv6/user/usertests.c	/^reparent(char *s)$/;"	f	typeref:typename:void
 reparent2	xv6/user/usertests.c	/^reparent2(char *s)$/;"	f	typeref:typename:void
 reserved	xv6/kernel/virtio.h	/^  uint32 reserved;$/;"	m	struct:virtio_blk_req	typeref:typename:uint32
+ret	obj/kernel.asm	/^				ret = allocate_block();$/;"	d
+ret	obj/vnode.asm	/^				ret = allocate_block();$/;"	d
 right	xv6/user/sh.c	/^  struct cmd *right;$/;"	m	struct:listcmd	typeref:struct:cmd *	file:
 right	xv6/user/sh.c	/^  struct cmd *right;$/;"	m	struct:pipecmd	typeref:struct:cmd *	file:
 ring	xv6/kernel/virtio.h	/^  struct virtq_used_elem ring[NUM];$/;"	m	struct:virtq_used	typeref:struct:virtq_used_elem[]
@@ -1164,6 +1945,8 @@ run	xv6/user/usertests.c	/^run(void f(char *), char *s) {$/;"	f	typeref:typename
 runcmd	xv6/user/sh.c	/^runcmd(struct cmd *cmd)$/;"	f	typeref:typename:void
 runtests	xv6/user/usertests.c	/^runtests(struct test *tests, char *justone) {$/;"	f	typeref:typename:int
 rwsbrk	xv6/user/usertests.c	/^rwsbrk()$/;"	f	typeref:typename:void
+s	obj/kernel.asm	/^		s = (char *)((uint64)s + m);$/;"	d
+s	obj/umemory.asm	/^		s = (char *)((uint64)s + m);$/;"	d
 s	xv6/user/umalloc.c	/^  } s;$/;"	m	union:header	typeref:struct:header::__anon6797c5240108	file:
 s	xv6/user/usertests.c	/^  char *s;$/;"	m	struct:test	typeref:typename:char *	file:
 s0	kernel/process/process.h	/^	uint64 s0;$/;"	m	struct:context	typeref:typename:uint64
@@ -1216,6 +1999,8 @@ s9	xv6/kernel/proc.h	/^  \/* 232 *\/ uint64 s9;$/;"	m	struct:trapframe	typeref:t
 s9	xv6/kernel/proc.h	/^  uint64 s9;$/;"	m	struct:context	typeref:typename:uint64
 safestrcpy	xv6/kernel/string.c	/^safestrcpy(char *s, const char *t, int n)$/;"	f	typeref:typename:char *
 sb	kernel/filesystem/diskio.c	/^struct superblock *sb;$/;"	v	typeref:struct:superblock *
+sb	obj/diskio.asm	/^	sb = (struct superblock *)(PHYSTOP + BSIZE);$/;"	d
+sb	obj/kernel.asm	/^	sb = (struct superblock *)(PHYSTOP + BSIZE);$/;"	d
 sb	xv6/kernel/fs.c	/^struct superblock sb; $/;"	v	typeref:struct:superblock
 sb	xv6/mkfs/mkfs.c	/^struct superblock sb;$/;"	v	typeref:struct:superblock
 sbrk8000	xv6/user/usertests.c	/^sbrk8000(char *s)$/;"	f	typeref:typename:void
@@ -1275,21 +2060,55 @@ stat	xv6/user/ulib.c	/^stat(const char *n, struct stat *st)$/;"	f	typeref:typena
 state	kernel/process/process.h	/^	int state;		\/\/ allocate_proc\/..$/;"	m	struct:proc	typeref:typename:int
 state	xv6/kernel/proc.h	/^  enum procstate state;        \/\/ Process state$/;"	m	struct:proc	typeref:enum:procstate
 stati	xv6/kernel/fs.c	/^stati(struct inode *ip, struct stat *st)$/;"	f	typeref:typename:void
+static	obj/kernel.asm	/^static inline uint64$/;"	l
+static	obj/kernel.asm	/^static inline void $/;"	l
+static	obj/kernel.asm	/^static inline void$/;"	l
+static	obj/kerneltrap.asm	/^static inline uint64$/;"	l
+static	obj/kerneltrap.asm	/^static inline void $/;"	l
+static	obj/kpagetable.asm	/^static inline void$/;"	l
+static	obj/start.asm	/^static inline uint64$/;"	l
+static	obj/start.asm	/^static inline void $/;"	l
+static	obj/usertrap.asm	/^static inline uint64$/;"	l
+static	obj/usertrap.asm	/^static inline void$/;"	l
+static	obj/util.asm	/^static inline uint64$/;"	l
 static_assert	xv6/mkfs/mkfs.c	/^#define static_assert(/;"	d	file:
 status	xv6/kernel/virtio_disk.c	/^    char status;$/;"	m	struct:disk::__anon1c2856c00108	typeref:typename:char	file:
 strchr	xv6/user/ulib.c	/^strchr(const char *s, char c)$/;"	f	typeref:typename:char *
 strcmp	kernel/util.c	/^int strcmp(char *a, char *b) {$/;"	f	typeref:typename:int
 strcmp	xv6/user/ulib.c	/^strcmp(const char *p, const char *q)$/;"	f	typeref:typename:int
 strcpy	xv6/user/ulib.c	/^strcpy(char *s, const char *t)$/;"	f	typeref:typename:char *
+strlen	kernel/util.c	/^uint strlen(char *s) {$/;"	f	typeref:typename:uint
 strlen	xv6/kernel/string.c	/^strlen(const char *s)$/;"	f	typeref:typename:int
 strlen	xv6/user/ulib.c	/^strlen(const char *s)$/;"	f	typeref:typename:uint
 strncmp	xv6/kernel/string.c	/^strncmp(const char *p, const char *q, uint n)$/;"	f	typeref:typename:int
 strncpy	xv6/kernel/string.c	/^strncpy(char *s, const char *t, int n)$/;"	f	typeref:typename:char *
+struct	obj/create.asm	/^	struct proc *p = processes;$/;"	l
+struct	obj/create.asm	/^struct proc *allocate_proc() {$/;"	l
+struct	obj/create.asm	/^struct proc *currentp;$/;"	l
+struct	obj/create.asm	/^struct proc processes[NPROC];$/;"	l
+struct	obj/exec.asm	/^	struct proc *p = current_proc();$/;"	l
+struct	obj/file.asm	/^	struct proc *p = current_proc();$/;"	l
+struct	obj/kernel.asm	/^	struct proc *p = allocate_proc();$/;"	l
+struct	obj/kernel.asm	/^	struct proc *p = current_proc();$/;"	l
+struct	obj/kernel.asm	/^	struct proc *p = processes;$/;"	l
+struct	obj/kernel.asm	/^	struct proc *p;$/;"	l
+struct	obj/kernel.asm	/^struct proc *allocate_proc() {$/;"	l
+struct	obj/kernel.asm	/^struct proc *current_proc() {$/;"	l
+struct	obj/kernel.asm	/^struct proc *currentp;$/;"	l
+struct	obj/kernel.asm	/^struct proc processes[NPROC];$/;"	l
+struct	obj/kpagetable.asm	/^	struct proc *p = processes;$/;"	l
+struct	obj/schedular.asm	/^	struct proc *p;$/;"	l
+struct	obj/syscall.asm	/^	struct proc *p = current_proc();$/;"	l
+struct	obj/userproc.asm	/^	struct proc *p = allocate_proc();$/;"	l
+struct	obj/userproc.asm	/^struct proc *current_proc() {$/;"	l
+struct	obj/usertrap.asm	/^	struct proc *p = current_proc();$/;"	l
 structure	README.md	/^#### structure$/;"	t
 subdir	xv6/user/usertests.c	/^subdir(char *s)$/;"	f	typeref:typename:void
 superblock	kernel/filesystem/filesystem.h	/^struct superblock {$/;"	s
 superblock	xv6/kernel/fs.h	/^struct superblock {$/;"	s
 swtch	kernel/process/swtch.S	/^swtch:$/;"	l
+swtch	obj/kernel.asm	/^swtch:$/;"	l
+swtch	obj/swtch.asm	/^swtch:$/;"	l
 swtch	xv6/kernel/swtch.S	/^swtch:$/;"	l
 symbols	xv6/user/sh.c	/^char symbols[] = "<|>&;()";$/;"	v	typeref:typename:char[]
 synch_vnode	kernel/filesystem/vnode.c	/^void synch_vnode(struct vnode *v) {$/;"	f	typeref:typename:void
@@ -1326,6 +2145,8 @@ syscall	kernel/syscall/syscall.c	/^void syscall() {$/;"	f	typeref:typename:void
 syscall	xv6/kernel/syscall.c	/^syscall(void)$/;"	f	typeref:typename:void
 syscalls	xv6/kernel/syscall.c	/^static uint64 (*syscalls[])(void) = {$/;"	v	typeref:typename:uint64 (* [])(void)	file:
 system_calls	kernel/syscall/syscall.c	/^uint64 (*system_calls[])(void) = {$/;"	v	typeref:typename:uint64 (* [])(void)
+sz	obj/kernel.asm	/^	sz = PGROUNDUP(sz);$/;"	d
+sz	obj/umemory.asm	/^	sz = PGROUNDUP(sz);$/;"	d
 sz	xv6/kernel/proc.h	/^  uint64 sz;                   \/\/ Size of process memory (bytes)$/;"	m	struct:proc	typeref:typename:uint64
 t0	kernel/process/process.h	/^	uint64 t0;$/;"	m	struct:trapframe	typeref:typename:uint64
 t0	xv6/kernel/proc.h	/^  \/*  72 *\/ uint64 t0;$/;"	m	struct:trapframe	typeref:typename:uint64
@@ -1399,6 +2220,8 @@ uchar	kernel/include/basic_types.h	/^typedef unsigned char  uchar;$/;"	t	typeref
 uchar	xv6/kernel/types.h	/^typedef unsigned char  uchar;$/;"	t	typeref:typename:unsigned char
 ugrow_memory	kernel/memory/umemory.c	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	f	typeref:typename:void
 uint	kernel/include/basic_types.h	/^typedef unsigned int   uint;$/;"	t	typeref:typename:unsigned int
+uint	obj/kernel.asm	/^uint strlen(char *s) {$/;"	l
+uint	obj/util.asm	/^uint strlen(char *s) {$/;"	l
 uint	xv6/kernel/types.h	/^typedef unsigned int   uint;$/;"	t	typeref:typename:unsigned int
 uint16	kernel/include/basic_types.h	/^typedef unsigned short	uint16;$/;"	t	typeref:typename:unsigned short
 uint16	xv6/kernel/types.h	/^typedef unsigned short uint16;$/;"	t	typeref:typename:unsigned short
@@ -1407,6 +2230,30 @@ uint32	kernel/include/basic_types.h	/^typedef unsigned int	uint32;$/;"	t	typeref
 uint32	xv6/kernel/types.h	/^typedef unsigned int  uint32;$/;"	t	typeref:typename:unsigned int
 uint32_t	user/stdint.h	/^typedef unsigned int	uint32_t;$/;"	t	typeref:typename:unsigned int
 uint64	kernel/include/basic_types.h	/^typedef unsigned long	uint64;$/;"	t	typeref:typename:unsigned long
+uint64	obj/kernel.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 getreg_a(int n) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_close(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_exec(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_exit(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_fork(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_getpid(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_open(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_read(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 sys_write(void) {$/;"	l
+uint64	obj/kernel.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint64	obj/kernel.asm	/^uint64 walkpaalign(uint64 *pagetable, uint64 va) {$/;"	l
+uint64	obj/kpagetable.asm	/^uint64 *walk(uint64 *pagetable, uint64 v_addr, int alloc) {$/;"	l
+uint64	obj/kpagetable.asm	/^uint64 walkpaalign(uint64 *pagetable, uint64 va) {$/;"	l
+uint64	obj/start.asm	/^uint64 timer_scratch[NCPU][5];$/;"	l
+uint64	obj/syscall.asm	/^uint64 getreg_a(int n) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_close(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_exec(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_exit(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_fork(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_getpid(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_open(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_read(void) {$/;"	l
+uint64	obj/syscall.asm	/^uint64 sys_write(void) {$/;"	l
 uint64	xv6/kernel/types.h	/^typedef unsigned long uint64;$/;"	t	typeref:typename:unsigned long
 uint64_t	user/stdint.h	/^typedef unsigned long	uint64_t;$/;"	t	typeref:typename:unsigned long
 uint8	kernel/include/basic_types.h	/^typedef unsigned char	uint8;$/;"	t	typeref:typename:unsigned char
@@ -1462,6 +2309,71 @@ vnode_write	kernel/filesystem/vnode.c	/^int vnode_write(struct vnode *v, uint of
 vnodelist	kernel/filesystem/vnode.c	/^struct vnode vnodelist[VNODE_COUNT];$/;"	v	typeref:struct:vnode[]
 vnodelist_add	kernel/filesystem/vnode.c	/^int vnodelist_add(char *path) {$/;"	f	typeref:typename:int
 vnodelist_delete	kernel/filesystem/vnode.c	/^int vnodelist_delete(int v) {$/;"	f	typeref:typename:int
+void	obj/create.asm	/^void init_processes() {$/;"	l
+void	obj/diskio.asm	/^void disk_read_block(void *dst, int blockid) {$/;"	l
+void	obj/diskio.asm	/^void disk_write_block(void *src, int blockid) {$/;"	l
+void	obj/diskio.asm	/^void init_disk() {$/;"	l
+void	obj/file.asm	/^void init_file() {$/;"	l
+void	obj/kernel.asm	/^void *kalloc(void) {$/;"	l
+void	obj/kernel.asm	/^void *memcpy(void *dst, void *src, uint n) {$/;"	l
+void	obj/kernel.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
+void	obj/kernel.asm	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	l
+void	obj/kernel.asm	/^void backtrace() {$/;"	l
+void	obj/kernel.asm	/^void debug_print_addr(uint64 p) {$/;"	l
+void	obj/kernel.asm	/^void debug_print_int(long d, int jinzhi) {$/;"	l
+void	obj/kernel.asm	/^void debug_println(char *s) {$/;"	l
+void	obj/kernel.asm	/^void disk_read_block(void *dst, int blockid) {$/;"	l
+void	obj/kernel.asm	/^void disk_write_block(void *src, int blockid) {$/;"	l
+void	obj/kernel.asm	/^void fillvnodei(struct vnode *v, int inum) {$/;"	l
+void	obj/kernel.asm	/^void init_disk() {$/;"	l
+void	obj/kernel.asm	/^void init_file() {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_freememory() {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_pagetable() {$/;"	l
+void	obj/kernel.asm	/^void init_kernel_trap() {$/;"	l
+void	obj/kernel.asm	/^void init_processes() {$/;"	l
+void	obj/kernel.asm	/^void init_userprocess() {$/;"	l
+void	obj/kernel.asm	/^void kerneltrap() {$/;"	l
+void	obj/kernel.asm	/^void kfree(void *p_addr) {$/;"	l
+void	obj/kernel.asm	/^void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	l
+void	obj/kernel.asm	/^void kvnode_write(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	l
+void	obj/kernel.asm	/^void main() {$/;"	l
+void	obj/kernel.asm	/^void panic(char *s) {$/;"	l
+void	obj/kernel.asm	/^void schedular() {$/;"	l
+void	obj/kernel.asm	/^void synch_vnode(struct vnode *v) {$/;"	l
+void	obj/kernel.asm	/^void syscall() {$/;"	l
+void	obj/kernel.asm	/^void timervec() {}$/;"	l
+void	obj/kernel.asm	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
+void	obj/kernel.asm	/^void usertrap() {$/;"	l
+void	obj/kernel.asm	/^void usertrap_return() {$/;"	l
+void	obj/kernel.asm	/^void$/;"	l
+void	obj/kerneltrap.asm	/^void init_kernel_trap() {$/;"	l
+void	obj/kerneltrap.asm	/^void kerneltrap() {$/;"	l
+void	obj/kmemory.asm	/^void *kalloc(void) {$/;"	l
+void	obj/kmemory.asm	/^void init_kernel_freememory() {$/;"	l
+void	obj/kmemory.asm	/^void kfree(void *p_addr) {$/;"	l
+void	obj/kpagetable.asm	/^void allocate_kernel_stacks(uint64 *kpt) {$/;"	l
+void	obj/kpagetable.asm	/^void init_kernel_pagetable() {$/;"	l
+void	obj/main.asm	/^void main() {$/;"	l
+void	obj/plic.asm	/^void$/;"	l
+void	obj/schedular.asm	/^void schedular() {$/;"	l
+void	obj/start.asm	/^void timervec() {}$/;"	l
+void	obj/start.asm	/^void$/;"	l
+void	obj/syscall.asm	/^void syscall() {$/;"	l
+void	obj/umemory.asm	/^void ugrow_memory(uint64 *upt, uint64 sz, uint64 sz1, int xperm) {$/;"	l
+void	obj/userproc.asm	/^void init_userprocess() {$/;"	l
+void	obj/usertrap.asm	/^void usertrap() {$/;"	l
+void	obj/usertrap.asm	/^void usertrap_return() {$/;"	l
+void	obj/util.asm	/^void *memcpy(void *dst, void *src, uint n) {$/;"	l
+void	obj/util.asm	/^void *memset(void *dst, char c, uint n) {$/;"	l
+void	obj/util.asm	/^void backtrace() {$/;"	l
+void	obj/util.asm	/^void debug_print_addr(uint64 p) {$/;"	l
+void	obj/util.asm	/^void debug_print_int(long d, int jinzhi) {$/;"	l
+void	obj/util.asm	/^void debug_println(char *s) {$/;"	l
+void	obj/util.asm	/^void panic(char *s) {$/;"	l
+void	obj/vnode.asm	/^void fillvnodei(struct vnode *v, int inum) {$/;"	l
+void	obj/vnode.asm	/^void kvnode_read(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	l
+void	obj/vnode.asm	/^void kvnode_write(struct vnode *v, uint off, uint n, uint64 ka) {$/;"	l
+void	obj/vnode.asm	/^void synch_vnode(struct vnode *v) {$/;"	l
 vprintf	xv6/user/printf.c	/^vprintf(int fd, const char *fmt, va_list ap)$/;"	f	typeref:typename:void
 w	xv6/kernel/console.c	/^  uint w;  \/\/ Write index$/;"	m	struct:__anon03efc82c0108	typeref:typename:uint	file:
 w_mcounteren	kernel/include/basic_riscv.h	/^w_mcounteren(uint64 x)$/;"	f	typeref:typename:void
